@@ -1,6 +1,8 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
+import com.example.khaledsabry.entertainment.Items.Artist;
+import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
@@ -40,6 +42,11 @@ public class MovieController {
     private String adult = "adult";
     private String budget = "budget";
     private String genres = "genres";
+    private String cast = "cast";
+    private String gender = "gender";
+    private String order = "order";
+    private String profile_path = "profile_path";
+    private String character ="character";
 
     private MainActivity mainActivity;
     private BlankFragment blankFragment;
@@ -49,6 +56,7 @@ public class MovieController {
     private ArrayList<Movie> movies = new ArrayList<>();
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
     private ArrayList<Genre> genre = new ArrayList<>();
+    private ArrayList<Character> characters = new ArrayList<>();
     private static final MovieController ourInstance = new MovieController();
 
     public static MovieController getInstance() {
@@ -116,6 +124,89 @@ public class MovieController {
             movie.setProductionCompanies(productionCompanies);
             genre.clear();
             productionCompanies.clear();
+            blankFragment.loadMovieDetails(movie);
+            // mainActivity.show(movie);
+
+        }
+        catch (JSONException e)
+        {
+
+        }
+    }
+
+    public void showMovie(JSONObject movieDetails,JSONObject cast)
+    {
+        try {
+
+            Movie movie = new Movie();
+            movie.setTitle(movieDetails.getString(title));
+            movie.setBudget(movieDetails.getInt(budget));
+            movie.setLanguage(movieDetails.getString(original_language));
+            movie.setOverView(movieDetails.getString(overview));
+            movie.setMovieImdbId(movieDetails.getString(imdb_id));
+            movie.setMovieId( movieDetails.getInt(id));
+            movie.setRevneue(movieDetails.getInt(revenue));
+            movie.setPopularity(movieDetails.getDouble(popularity));
+            movie.setPosterImage(movieDetails.getString(poster_path));
+            movie.setTmdbRate(movieDetails.getInt(vote_average));
+            movie.setStatus(movieDetails.getString(status));
+            movie.setRunTime(movieDetails.getInt(runtime));
+            JSONArray jsonArray = movieDetails.getJSONArray(production_companies);
+            int i = 0;
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids =  object.getInt(id);
+                String logo = object.getString(logo_path);
+                String nam = object.getString(name);
+                String countr = object.getString(origin_country);
+                ProductionCompany productionCompany = new ProductionCompany(ids,logo,nam,countr);
+                productionCompanies.add(productionCompany);
+                i++;
+            }
+            jsonArray = movieDetails.getJSONArray(genres);
+            i = 0;
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids =  object.getInt(id);
+                String nam = object.getString(name);
+
+                Genre genre = new Genre(ids,nam);
+                this.genre.add(genre);
+                i++;
+            }
+
+
+
+            jsonArray = cast.getJSONArray(this.cast);
+            i= 0;
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids =  object.getInt(id);
+                String nam = object.getString(name);
+                String profilePath = object.getString(profile_path);
+                int gend = object.getInt(gender);
+                String characterName = object.getString(this.character);
+                Artist artist = new Artist(nam,ids,gend,profilePath);
+                Character character = new Character(artist,characterName);
+
+
+                this.characters.add(character);
+                i++;
+            }
+            i = 0;
+            movie.setCharacters(this.characters);
+            movie.setGenres(genre);
+            movie.setProductionCompanies(productionCompanies);
+            genre.clear();
+            productionCompanies.clear();
+            characters.clear();
+
+
+
+
             blankFragment.loadMovieDetails(movie);
             // mainActivity.show(movie);
 

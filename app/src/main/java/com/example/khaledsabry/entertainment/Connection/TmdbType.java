@@ -24,11 +24,10 @@ public class TmdbType {
         controller = MovieController.getInstance();
     }
 
-    public String getMovieCast(String movieID) {
-       movieCast =  movieGetDetails+"/credits";
+   /* public String getMovieCast(String movieID) {
         return makeBaseUrl(movieCast);
     }
-
+*/
     private String makeBaseUrl(String type)
     {
         TmdbConnection.getInstance().setUrl(TmdbConnection.getInstance().getBaseUrl()+ type+TmdbConnection.getInstance().getApiKey());
@@ -41,9 +40,24 @@ public class TmdbType {
         connection.connect(makeBaseUrl(movieGetDetails), new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                controller.showMovie(jsonObject);
+                getMovieCast(jsonObject);
+            //    controller.showMovie(jsonObject);
 
             }
         });
+    }
+
+
+    public void getMovieCast(final JSONObject movieDetails)
+    {
+        movieCast =  movieGetDetails+"/credits";
+        connection.connect(makeBaseUrl(movieCast), new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                controller.showMovie(movieDetails,jsonObject);
+            }
+        });
+
+
     }
 }

@@ -20,13 +20,14 @@ public class Movie {
     private String tagLine;
     private float tmdbRate;
     private float imdbRate;
-    private ArrayList<Genre> genres = new ArrayList<>();
     private int budget;
     private int revneue;
     private int runTime;
+    private Double popularity;
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
-    private ImageView imageView;
-private Double popularity;
+    private ArrayList<Genre> genres = new ArrayList<>();
+    private ArrayList<Character>characters = new ArrayList<>();
+
 
 
     public Movie() {
@@ -170,5 +171,12 @@ private Double popularity;
     }
 
 
+    public ArrayList<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(ArrayList<Character> characters) {
+        this.characters = characters;
+    }
 
 }
