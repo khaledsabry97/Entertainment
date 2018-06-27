@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     {
         MovieDetailFragment movieDetailFragment = MovieDetailFragment.newInstance(movie);
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,movieDetailFragment).addToBackStack(null).commit();
+
     }
 
 

@@ -43,6 +43,7 @@ public class CastFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         RecyclerAdapter adapter;/*
+
         if (stationType == stationType1) {
             adapter = new RecyclerAdapter(DataService.getInstance().getStationType1());
         } else if (stationType == stationType2) {
@@ -53,7 +54,7 @@ public class CastFragment extends Fragment {
 
         }
 */
-        recyclerView.setAdapter(adapter);
+       // recyclerView.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);

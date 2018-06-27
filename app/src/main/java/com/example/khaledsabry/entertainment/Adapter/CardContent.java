@@ -25,9 +25,9 @@ public class CardContent extends RecyclerView.ViewHolder {
         textView = itemView.findViewById(R.id.card_text);
         cardView = itemView.findViewById(R.id.card_card);
     }
-
+/*
     public void updateUi(Station station) {
         textView.setText(station.getTitle());
         imageView.setImageResource(station.getResource());}
-
+*/
 }

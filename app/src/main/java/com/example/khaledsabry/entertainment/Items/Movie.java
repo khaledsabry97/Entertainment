@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Items;
 
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class Movie {
     private int revneue;
     private int runTime;
     private Double popularity;
+    private Bitmap Poster;
+
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
     private ArrayList<Genre> genres = new ArrayList<>();
     private ArrayList<Character>characters = new ArrayList<>();
@@ -179,4 +182,11 @@ public class Movie {
         this.characters = characters;
     }
 
+    public Bitmap getPoster() {
+        return Poster;
+    }
+
+    public void setPoster(Bitmap poster) {
+        Poster = poster;
+    }
 }

@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +23,7 @@ public class MovieDetailFragment extends Fragment {
     ImageView posterImage;
     TextView title;
     TextView overview;
-    Movie movie;
-    MainActivity mainActivity;
+    static Movie movie;
 
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment fragment = new MovieDetailFragment();
@@ -35,7 +35,7 @@ public class MovieDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v  = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        View v = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         posterImage = v.findViewById(R.id.posterid);
         title = v.findViewById(R.id.titleId);
         overview = v.findViewById(R.id.overviewID);
@@ -48,29 +48,26 @@ public class MovieDetailFragment extends Fragment {
         });
 
 
-
-
-
-
-
         return v;
     }
 
 
-    private void setObjects()
-    {
+    public void setObjects() {
         title.setText(movie.getTitle());
         overview.setText(movie.getOverView());
 
-        ImageController.getPostorImageLowQuality(movie.getPosterImage(), new OnImageConvertedSuccess() {
-            @Override
-            public void onImageConvertedSuccess(Bitmap bitmap) {
-                posterImage.setImageBitmap(bitmap);
+        if (movie.getPoster() == null)
+            ImageController.getPostorImageLowQuality(movie.getPosterImage(), new OnImageConvertedSuccess() {
+                @Override
+                public void onImageConvertedSuccess(Bitmap bitmap) {
+                    movie.setPoster(bitmap);
+                    posterImage.setImageBitmap(bitmap);
 
-            }
-        });
+                }
+            });
+        else
+            posterImage.setImageBitmap(movie.getPoster());
     }
-
 
 
 }
