@@ -71,12 +71,18 @@ private Double popularity;
         this.overView = overView;
     }
 
-    public String getPostorImage() {
-        return postorImage;
+    public void setPostorImage(String postorImage) {
+         this.postorImage = postorImage;
     }
 
-    public void setPostorImage(String postorImage) {
-        this.postorImage = "https://image.tmdb.org/t/p/original"+postorImage;
+    public String getPostorImageHighQuality() {
+      return  "https://image.tmdb.org/t/p/original"+postorImage;
+    }
+    public String getPostorImageMidQuality() {
+      return  "https://image.tmdb.org/t/p/w500"+postorImage;
+    }
+    public String getPostorImageLowQuality() {
+      return "https://image.tmdb.org/t/p/w185"+postorImage;
     }
 
     public String getReleaseDate() {

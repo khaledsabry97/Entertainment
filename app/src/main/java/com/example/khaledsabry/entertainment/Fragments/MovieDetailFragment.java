@@ -13,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.MainActivity;
+import com.example.khaledsabry.entertainment.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.R;
 
 import java.io.InputStream;
@@ -26,6 +29,7 @@ public class MovieDetailFragment extends Fragment {
     TextView title;
     TextView overview;
     Movie movie;
+    MainActivity mainActivity;
 
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment fragment = new MovieDetailFragment();
@@ -41,6 +45,13 @@ public class MovieDetailFragment extends Fragment {
         posterImage = v.findViewById(R.id.posterid);
         title = v.findViewById(R.id.titleId);
         overview = v.findViewById(R.id.overviewID);
+        setObjects();
+        posterImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.getActivity().loadFullPosterFragment(movie);
+            }
+        });
 
 
 
@@ -56,37 +67,14 @@ public class MovieDetailFragment extends Fragment {
     {
         title.setText(movie.getTitle());
         overview.setText(movie.getOverView());
-        po
-    }
-
-    public void show(final Movie movie)
-    {
-        AsyncTask.execute(new Runnable() {
+        Controller.getInstance().show(movie.getPostorImageLowQuality(), new OnImageConvertedSuccess() {
             @Override
-            public void run() {
-
-                String urlOfImage = movie.getPostorImage();
-                Bitmap logo = null;
-                try{
-                    InputStream is = new URL(urlOfImage).openStream();
-                    logo = BitmapFactory.decodeStream(is);
-                }catch(Exception e){
-                    // Catch the download exception
-                    e.printStackTrace();
-                }
-
-                final Bitmap finalLogo = logo;
-
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        imageView.setImageBitmap(finalLogo);
-                    }
-                });
-
+            public void onImageConvertedSuccess(Bitmap bitmap) {
+                posterImage.setImageBitmap(bitmap);
             }
         });
     }
+
+
 
 }

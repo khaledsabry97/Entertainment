@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
 import com.example.khaledsabry.entertainment.Connection.TmdbType;
 import com.example.khaledsabry.entertainment.Controllers.Controller;
+import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
+import com.example.khaledsabry.entertainment.Fragments.FullPoster;
 import com.example.khaledsabry.entertainment.Fragments.MovieDetailFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 
@@ -28,27 +30,40 @@ import static java.nio.file.Files.copy;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imageView;
-    private static final int IO_BUFFER_SIZE = 4 * 1024;
+    private static MainActivity mainActivity;
+    public MainActivity() {
+        mainActivity = this;
+    }
+
+    public static MainActivity getActivity()
+    {
+        return mainActivity;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        MovieDetailFragment movieDetailFragment = MovieDetailFragment.newInstance();
-        if(movieDetailFragment == null)
-        {movieDetailFragment = MovieDetailFragment.newInstance();
+        BlankFragment blankFragment = BlankFragment.newInstance();
+        if(blankFragment == null)
+        {blankFragment = BlankFragment.newInstance();
         }
-        fm.beginTransaction().add(R.id.mainContainer,movieDetailFragment).commit();
+        fm.beginTransaction().add(R.id.mainContainer,blankFragment).commit();
+    }
+
+    public void loadMovieDetailFragment(Movie movie)
+    {
+        MovieDetailFragment movieDetailFragment = MovieDetailFragment.newInstance(movie);
+        getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,movieDetailFragment).addToBackStack(null).commit();
+    }
 
 
-        /*
-        TmdbConnection.getInstance().setContext(this);
-        TmdbType tmdbType = new TmdbType();
-        tmdbType.getMovieGetDetails(351286);
-        Controller.getInstance().setMainActivity(this);
-        imageView = findViewById(R.id.imageView);*/
+    public  void loadFullPosterFragment(Movie movie)
+    {
+        FullPoster fullPoster = FullPoster.newInstance(movie);
+        getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
     }
 
 

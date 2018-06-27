@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Connection;
 
 import com.example.khaledsabry.entertainment.Controllers.Controller;
+import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.OnSuccess;
 
 import org.json.JSONObject;
@@ -16,11 +17,11 @@ public class TmdbType {
     private String movieCast;
     private TmdbConnection connection;
 
-    private Controller controller;
+    private MovieController controller;
 
     public TmdbType() {
         connection = TmdbConnection.getInstance();
-        controller = Controller.getInstance();
+        controller = MovieController.getInstance();
     }
 
     public String getMovieCast(String movieID) {

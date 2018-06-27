@@ -7,11 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
+import com.example.khaledsabry.entertainment.Connection.TmdbType;
+import com.example.khaledsabry.entertainment.Controllers.Controller;
+import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.MainActivity;
 import com.example.khaledsabry.entertainment.R;
 
 
 public class BlankFragment extends Fragment {
 
+    MainActivity mainActivity;
     public static BlankFragment newInstance() {
         BlankFragment fragment = new BlankFragment();
         return fragment;
@@ -22,13 +29,24 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v  = inflater.inflate(R.layout.fragment_blank, container, false);
-
+        TmdbConnection.getInstance().setContext(getContext());
+        TmdbType tmdbType = new TmdbType();
+        MovieController.getInstance().setBlankFragment(this);
+        tmdbType.getMovieGetDetails(351286);
 
 
 
 
 
         return v;
+    }
+
+
+    public void loadMovieDetails(Movie movie)
+    {
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.loadMovieDetailFragment(movie);
+
     }
 
 }

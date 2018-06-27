@@ -1,14 +1,23 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.widget.ImageView;
+
 import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.MainActivity;
+import com.example.khaledsabry.entertainment.OnImageConvertedSuccess;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -16,106 +25,49 @@ import java.util.ArrayList;
  */
 
 public class Controller {
-    private String original_title="original_title";
-    private String id = "id";
-    private String imdb_id = "imdb_id";
-    private String original_language = "original_language";
-    private String overview = "overview";
-    private String popularity = "popularity";
-    private String poster_path = "poster_path";
-    private String production_companies = "production_companies";
-    private String logo_path = "logo_path";
-    private String name = "name";
-    private String origin_country = "origin_country";
-    private String revenue = "revenue";
-    private String runtime = "runtime";
-    private String status = "status";
-    private String tagline = "tagline";
-    private String title = "title";
-    private String vote_average = "vote_average";
-    private String adult = "adult";
-    private String budget = "budget";
-   private String genres = "genres";
-
-
-
-   private MainActivity mainActivity;
-
-    public MainActivity getMainActivity() {
-        return mainActivity;
-    }
-
-    public void setMainActivity(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-
-    private ArrayList<Movie> movies = new ArrayList<>();
-    private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
-    private ArrayList<Genre> genre = new ArrayList<>();
-    private static final Controller ourInstance = new Controller();
-
-    public static Controller getInstance() {
-        return ourInstance;
-    }
+    private static Controller instance = null;
 
     private Controller() {
+
+    }
+
+    public static Controller getInstance() {
+        if (instance == null)
+            instance = new Controller();
+        return instance;
+    }
+
+    public void show(final String posterUrl, final OnImageConvertedSuccess listener) {
+
+         AsyncTask<String,String,Bitmap> R = new AsyncTask<String, String, Bitmap>() {
+
+             @Override
+             protected Bitmap doInBackground(String... strings) {
+                 String urlOfImage = posterUrl;
+                 Bitmap logo = null;
+                 try {
+                     InputStream is = new URL(urlOfImage).openStream();
+                     logo = BitmapFactory.decodeStream(is);
+                 } catch (Exception e) {
+                     // Catch the download exception
+                     e.printStackTrace();
+                 }
+
+                 final Bitmap finalLogo = logo;
+                 return finalLogo;
+             }
+
+             @Override
+             protected void onPostExecute(Bitmap s) {
+                 super.onPostExecute(s);
+                 listener.onImageConvertedSuccess(s);
+
+             }
+         };
+R.execute();
+
+
     }
 
 
-
-    public void showMovie(JSONObject jsonObject)
-    {
-        try {
-
-            Movie movie = new Movie();
-            movie.setTitle(jsonObject.getString(title));
-            movie.setBudget(jsonObject.getInt(budget));
-            movie.setLanguage(jsonObject.getString(original_language));
-            movie.setOverView(jsonObject.getString(overview));
-            movie.setMovieImdbId(jsonObject.getString(imdb_id));
-            movie.setMovieId( jsonObject.getInt(id));
-            movie.setRevneue(jsonObject.getInt(revenue));
-            movie.setPopularity(jsonObject.getDouble(popularity));
-            movie.setPostorImage(jsonObject.getString(poster_path));
-            movie.setTmdbRate(jsonObject.getInt(vote_average));
-            movie.setStatus(jsonObject.getString(status));
-            movie.setRunTime(jsonObject.getInt(runtime));
-            JSONArray jsonArray = jsonObject.getJSONArray(production_companies);
-            int i = 0;
-         while(!jsonArray.isNull(i))
-         {
-             JSONObject object = jsonArray.getJSONObject(i);
-             int ids =  object.getInt(id);
-             String logo = object.getString(logo_path);
-             String nam = object.getString(name);
-             String countr = object.getString(origin_country);
-             ProductionCompany productionCompany = new ProductionCompany(ids,logo,nam,countr);
-             productionCompanies.add(productionCompany);
-             i++;
-         }
-            jsonArray = jsonObject.getJSONArray(genres);
-             i = 0;
-            while(!jsonArray.isNull(i))
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                int ids =  object.getInt(id);
-                String nam = object.getString(name);
-
-                Genre genre = new Genre(ids,nam);
-                this.genre.add(genre);
-                i++;
-            }
-
-            movie.setGenres(genre);
-            movie.setProductionCompanies(productionCompanies);
-            genre.clear();
-            productionCompanies.clear();
-           // mainActivity.show(movie);
-
-        }
-        catch (JSONException e)
-        {
-
-        }
-    }
 }
