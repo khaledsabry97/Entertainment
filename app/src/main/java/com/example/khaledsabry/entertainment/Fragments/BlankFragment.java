@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
 import com.example.khaledsabry.entertainment.Connection.TmdbType;
-import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.MainActivity;
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
 
 

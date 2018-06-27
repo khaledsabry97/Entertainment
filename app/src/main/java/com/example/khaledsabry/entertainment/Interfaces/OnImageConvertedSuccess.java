@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment;
+package com.example.khaledsabry.entertainment.Interfaces;
 
 import android.graphics.Bitmap;
 

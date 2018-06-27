@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
-import com.example.khaledsabry.entertainment.OnImageConvertedSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 
 import java.io.InputStream;
 import java.net.URL;

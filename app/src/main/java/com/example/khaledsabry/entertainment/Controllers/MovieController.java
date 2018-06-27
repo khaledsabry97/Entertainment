@@ -6,7 +6,7 @@ import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
-import com.example.khaledsabry.entertainment.MainActivity;
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

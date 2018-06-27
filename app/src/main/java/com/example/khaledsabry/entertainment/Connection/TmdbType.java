@@ -1,8 +1,7 @@
 package com.example.khaledsabry.entertainment.Connection;
 
-import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
-import com.example.khaledsabry.entertainment.OnSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 
 import org.json.JSONObject;
 

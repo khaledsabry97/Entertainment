@@ -1,30 +1,13 @@
-package com.example.khaledsabry.entertainment;
+package com.example.khaledsabry.entertainment.Activities;
 
-import android.app.FragmentManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
-import com.example.khaledsabry.entertainment.Connection.TmdbType;
-import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
 import com.example.khaledsabry.entertainment.Fragments.MovieDetailFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Path;
+import com.example.khaledsabry.entertainment.R;
 
 import static java.nio.file.Files.copy;
 

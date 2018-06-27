@@ -3,17 +3,15 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.OnImageConvertedSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.R;
 
 

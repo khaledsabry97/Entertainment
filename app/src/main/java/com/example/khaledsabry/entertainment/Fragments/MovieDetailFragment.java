@@ -2,8 +2,6 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,17 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.MainActivity;
-import com.example.khaledsabry.entertainment.OnImageConvertedSuccess;
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.R;
-
-import java.io.InputStream;
-import java.net.URL;
 
 
 public class MovieDetailFragment extends Fragment {
