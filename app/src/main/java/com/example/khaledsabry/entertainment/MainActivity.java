@@ -56,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
     public void loadMovieDetailFragment(Movie movie)
     {
         MovieDetailFragment movieDetailFragment = MovieDetailFragment.newInstance(movie);
-        getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,movieDetailFragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,movieDetailFragment).addToBackStack(null).commit();
     }
 
 
     public  void loadFullPosterFragment(Movie movie)
     {
         FullPoster fullPoster = FullPoster.newInstance(movie);
-        getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
     }
 
 

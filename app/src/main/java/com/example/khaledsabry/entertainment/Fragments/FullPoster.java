@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.khaledsabry.entertainment.Controllers.Controller;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.R;
@@ -39,12 +40,14 @@ public class FullPoster extends Fragment {
 
     private void setPoster()
     {
-        Controller.getInstance().show(movie.getPostorImageHighQuality(), new OnImageConvertedSuccess() {
+        ImageController.getImageHighQuality(movie.getPosterImage(), new OnImageConvertedSuccess() {
             @Override
             public void onImageConvertedSuccess(Bitmap bitmap) {
                 fullPoster.setImageBitmap(bitmap);
+
             }
         });
+
     }
 
 }

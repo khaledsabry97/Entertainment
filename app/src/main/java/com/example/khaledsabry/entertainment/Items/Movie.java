@@ -1,13 +1,7 @@
 package com.example.khaledsabry.entertainment.Items;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import java.io.InputStream;
-import java.math.BigInteger;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +13,7 @@ public class Movie {
     private String movieImdbId;
     private String title;
     private String overView;
-    private String postorImage;
+    private String posterImage;
     private String releaseDate;
     private String language;
     private String status;
@@ -71,18 +65,12 @@ private Double popularity;
         this.overView = overView;
     }
 
-    public void setPostorImage(String postorImage) {
-         this.postorImage = postorImage;
+    public void setPosterImage(String posterImage) {
+         this.posterImage = posterImage;
     }
 
-    public String getPostorImageHighQuality() {
-      return  "https://image.tmdb.org/t/p/original"+postorImage;
-    }
-    public String getPostorImageMidQuality() {
-      return  "https://image.tmdb.org/t/p/w500"+postorImage;
-    }
-    public String getPostorImageLowQuality() {
-      return "https://image.tmdb.org/t/p/w185"+postorImage;
+    public String getPosterImage() {
+      return posterImage;
     }
 
     public String getReleaseDate() {

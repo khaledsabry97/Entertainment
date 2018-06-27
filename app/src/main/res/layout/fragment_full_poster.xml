@@ -11,8 +11,9 @@
         android:id="@+id/fullposterid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:scaleType="centerInside"
+        android:layout_margin="0dp"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Controllers.Controller;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.MainActivity;
 import com.example.khaledsabry.entertainment.OnImageConvertedSuccess;
@@ -67,10 +68,12 @@ public class MovieDetailFragment extends Fragment {
     {
         title.setText(movie.getTitle());
         overview.setText(movie.getOverView());
-        Controller.getInstance().show(movie.getPostorImageLowQuality(), new OnImageConvertedSuccess() {
+
+        ImageController.getPostorImageLowQuality(movie.getPosterImage(), new OnImageConvertedSuccess() {
             @Override
             public void onImageConvertedSuccess(Bitmap bitmap) {
                 posterImage.setImageBitmap(bitmap);
+
             }
         });
     }

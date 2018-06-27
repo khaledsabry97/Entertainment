@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.khaledsabry.entertainment.Items.Genre;
@@ -19,6 +20,8 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by KhALeD SaBrY on 27-Jun-18.
@@ -37,37 +40,7 @@ public class Controller {
         return instance;
     }
 
-    public void show(final String posterUrl, final OnImageConvertedSuccess listener) {
 
-         AsyncTask<String,String,Bitmap> R = new AsyncTask<String, String, Bitmap>() {
-
-             @Override
-             protected Bitmap doInBackground(String... strings) {
-                 String urlOfImage = posterUrl;
-                 Bitmap logo = null;
-                 try {
-                     InputStream is = new URL(urlOfImage).openStream();
-                     logo = BitmapFactory.decodeStream(is);
-                 } catch (Exception e) {
-                     // Catch the download exception
-                     e.printStackTrace();
-                 }
-
-                 final Bitmap finalLogo = logo;
-                 return finalLogo;
-             }
-
-             @Override
-             protected void onPostExecute(Bitmap s) {
-                 super.onPostExecute(s);
-                 listener.onImageConvertedSuccess(s);
-
-             }
-         };
-R.execute();
-
-
-    }
 
 
 }

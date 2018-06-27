@@ -1,2 +1,9 @@
 
 *.suml
+*.rawproto
+*.json
+volley/
+*.bin
+*.bin
+*.lock
+*.lock

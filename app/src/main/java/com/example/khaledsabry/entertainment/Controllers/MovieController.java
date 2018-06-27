@@ -82,7 +82,7 @@ public class MovieController {
             movie.setMovieId( jsonObject.getInt(id));
             movie.setRevneue(jsonObject.getInt(revenue));
             movie.setPopularity(jsonObject.getDouble(popularity));
-            movie.setPostorImage(jsonObject.getString(poster_path));
+            movie.setPosterImage(jsonObject.getString(poster_path));
             movie.setTmdbRate(jsonObject.getInt(vote_average));
             movie.setStatus(jsonObject.getString(status));
             movie.setRunTime(jsonObject.getInt(runtime));

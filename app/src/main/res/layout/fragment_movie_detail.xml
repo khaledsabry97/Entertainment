@@ -67,6 +67,21 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/ratingsid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/castid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </FrameLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
