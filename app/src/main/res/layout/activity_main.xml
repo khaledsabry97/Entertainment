@@ -7,10 +7,10 @@
     tools:context="com.example.khaledsabry.entertainment.MainActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
+    <FrameLayout
+        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 </RelativeLayout>

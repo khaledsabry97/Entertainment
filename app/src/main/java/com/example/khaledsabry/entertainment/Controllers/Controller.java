@@ -110,7 +110,7 @@ public class Controller {
             movie.setProductionCompanies(productionCompanies);
             genre.clear();
             productionCompanies.clear();
-            mainActivity.show(movie);
+           // mainActivity.show(movie);
 
         }
         catch (JSONException e)
