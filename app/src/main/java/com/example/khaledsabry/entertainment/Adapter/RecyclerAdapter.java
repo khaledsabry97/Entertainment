@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.CharacterCard;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -17,24 +18,31 @@ import java.util.ArrayList;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<CardContent> {
-    ArrayList<CharacterCard> list = new ArrayList<>();
+    ArrayList<Character> list = new ArrayList<>();
     @Override
     public CardContent onCreateViewHolder(ViewGroup parent, int viewType) {
-        View cardContent;// = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview,parent,false);
+        View cardContent = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_cardview,parent,false);
 
-        return new CardContent(null);
+        return new CardContent(cardContent);
     }
 
-    public RecyclerAdapter(ArrayList<CharacterCard> list) {
+    public RecyclerAdapter(ArrayList<Character> list) {
         this.list = list;
     }
 
     @Override
     public void onBindViewHolder(final CardContent holder, int position) {
-        final CharacterCard station = list.get(position);
-     //   holder.updateUi(station);
+        final Character character = list.get(position);
+        holder.updateUi(character);
 
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.getActivity().loadFullPosterFragment(character.getArtist().getPosterImage());
+
+            }
+        });
 
 
 

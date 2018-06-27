@@ -16,6 +16,7 @@ import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.R;
+import com.squareup.picasso.Picasso;
 
 
 public class MovieDetailFragment extends Fragment {
@@ -40,13 +41,15 @@ public class MovieDetailFragment extends Fragment {
         title = v.findViewById(R.id.titleId);
         overview = v.findViewById(R.id.overviewID);
         setObjects();
+       // Picasso.get().load(ImageController.getImageHighQualityUrl(movie.getPosterImage())).into(posterImage);
         posterImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().loadFullPosterFragment(movie);
+                MainActivity.getActivity().loadFullPosterFragment(movie.getPosterImage());
             }
         });
 
+        setCast();
 
         return v;
     }
@@ -56,18 +59,15 @@ public class MovieDetailFragment extends Fragment {
         title.setText(movie.getTitle());
         overview.setText(movie.getOverView());
 
-        if (movie.getPoster() == null)
-            ImageController.getPostorImageLowQuality(movie.getPosterImage(), new OnImageConvertedSuccess() {
-                @Override
-                public void onImageConvertedSuccess(Bitmap bitmap) {
-                    movie.setPoster(bitmap);
-                    posterImage.setImageBitmap(bitmap);
+        ImageController.putImageMidQuality(movie.getPosterImage(), posterImage);
 
-                }
-            });
-        else
-            posterImage.setImageBitmap(movie.getPoster());
+
     }
 
 
+    private void setCast()
+    {
+        CastFragment castFragment = CastFragment.newInstance(movie);
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.castid,castFragment).commit();
+    }
 }

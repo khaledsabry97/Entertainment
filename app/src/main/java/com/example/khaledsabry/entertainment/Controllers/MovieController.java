@@ -151,6 +151,10 @@ public class MovieController {
             movie.setTmdbRate(movieDetails.getInt(vote_average));
             movie.setStatus(movieDetails.getString(status));
             movie.setRunTime(movieDetails.getInt(runtime));
+
+            genre.clear();
+            productionCompanies.clear();
+            characters.clear();
             JSONArray jsonArray = movieDetails.getJSONArray(production_companies);
             int i = 0;
             while(!jsonArray.isNull(i))
@@ -200,9 +204,7 @@ public class MovieController {
             movie.setCharacters(this.characters);
             movie.setGenres(genre);
             movie.setProductionCompanies(productionCompanies);
-            genre.clear();
-            productionCompanies.clear();
-            characters.clear();
+
 
 
 

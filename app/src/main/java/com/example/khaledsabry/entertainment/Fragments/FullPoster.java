@@ -13,15 +13,16 @@ import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.R;
+import com.squareup.picasso.Picasso;
 
 
 public class FullPoster extends Fragment {
-    Movie movie;
+    static String poster;
     ImageView fullPoster;
 
-    public static FullPoster newInstance(Movie movie) {
+    public static FullPoster newInstance(String poster) {
         FullPoster fragment = new FullPoster();
-        fragment.movie = movie;
+        fragment.poster = poster;
 
         return fragment;
     }
@@ -38,14 +39,16 @@ public class FullPoster extends Fragment {
 
     private void setPoster()
     {
-        ImageController.getImageHighQuality(movie.getPosterImage(), new OnImageConvertedSuccess() {
+ImageController.putImageHighQuality(poster,fullPoster);
+        /*
+        ImageController.getImageHighQuality(poster, new OnImageConvertedSuccess() {
             @Override
             public void onImageConvertedSuccess(Bitmap bitmap) {
                 fullPoster.setImageBitmap(bitmap);
 
             }
         });
-
+*/
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Activities;
 
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -44,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public  void loadFullPosterFragment(Movie movie)
+    public  void loadFullPosterFragment(String poster)
     {
-        FullPoster fullPoster = FullPoster.newInstance(movie);
+        FullPoster fullPoster = FullPoster.newInstance(poster);
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
     }
 

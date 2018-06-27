@@ -1,5 +1,7 @@
 package com.example.khaledsabry.entertainment.Items;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by KhALeD SaBrY on 27-Jun-18.
  */
@@ -9,6 +11,7 @@ public class Artist {
     private int id;
     private char gender;
     private String posterImage;
+    private Bitmap bmPosterImage;
 
     public Artist(String name, int id, int gender, String posterImage) {
         this.name = name;
@@ -52,5 +55,13 @@ public class Artist {
 
     public void setPosterImage(String posterImage) {
         this.posterImage = posterImage;
+    }
+
+    public Bitmap getBmPosterImage() {
+        return bmPosterImage;
+    }
+
+    public void setBmPosterImage(Bitmap bmPosterImage) {
+        this.bmPosterImage = bmPosterImage;
     }
 }

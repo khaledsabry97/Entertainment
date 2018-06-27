@@ -3,8 +3,10 @@ package com.example.khaledsabry.entertainment.Controllers;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 
 import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -27,7 +29,7 @@ public class ImageController {
     }
 
 
-
+/*
     private static void show(final String posterUrl, final OnImageConvertedSuccess listener) {
 
         AsyncTask<String,Bitmap,Bitmap> R = new AsyncTask<String, Bitmap, Bitmap>() {
@@ -47,7 +49,7 @@ public class ImageController {
                 final Bitmap finalLogo = logo;
                 return finalLogo;
             }
-
+/*
 
             @Override
             protected void onPostExecute(Bitmap s) {
@@ -60,8 +62,8 @@ public class ImageController {
 
 
     }
-
-
+*/
+/*
 
     public static void getImageHighQuality(String posterImage,OnImageConvertedSuccess listener) {
        String url =  "https://image.tmdb.org/t/p/"+highQuality+posterImage;
@@ -75,7 +77,22 @@ public class ImageController {
         String url =  "https://image.tmdb.org/t/p/"+lowQuality+posterImage;
         show(url,listener);
     }
+*/
 
+    public static void putImageHighQuality(String posterImage, ImageView image) {
+        String url =  "https://image.tmdb.org/t/p/"+highQuality+posterImage;
+        Picasso.get().load(url).into(image);
+    }
+
+    public static void putImageMidQuality(String posterImage, ImageView image) {
+        String url =  "https://image.tmdb.org/t/p/"+midQuality+posterImage;
+        Picasso.get().load(url).into(image);
+    }
+
+    public static void putImageLowQuality(String posterImage, ImageView image) {
+        String url =  "https://image.tmdb.org/t/p/"+lowQuality+posterImage;
+        Picasso.get().load(url).into(image);
+    }
 
 
 
