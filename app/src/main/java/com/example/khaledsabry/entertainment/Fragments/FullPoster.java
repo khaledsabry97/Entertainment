@@ -22,7 +22,7 @@ public class FullPoster extends Fragment {
 
     public static FullPoster newInstance(String poster) {
         FullPoster fragment = new FullPoster();
-        fragment.poster = poster;
+        FullPoster.poster = poster;
 
         return fragment;
     }
@@ -33,22 +33,9 @@ public class FullPoster extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_full_poster, container, false);
         fullPoster = v.findViewById(R.id.fullposterid);
-        setPoster();
+        ImageController.putImageHighQuality(poster,fullPoster);
+
         return v;
-    }
-
-    private void setPoster()
-    {
-ImageController.putImageHighQuality(poster,fullPoster);
-        /*
-        ImageController.getImageHighQuality(poster, new OnImageConvertedSuccess() {
-            @Override
-            public void onImageConvertedSuccess(Bitmap bitmap) {
-                fullPoster.setImageBitmap(bitmap);
-
-            }
-        });
-*/
     }
 
 }

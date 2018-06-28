@@ -36,17 +36,19 @@ public class TmdbType {
 
     public void getMovieGetDetails(int movieID) {
         movieGetDetails = "movie/"+movieID;
-        connection.connect(makeBaseUrl(movieGetDetails), new OnSuccess() {
+        String URL = makeBaseUrl(movieGetDetails)+"&append_to_response=credits,images,videos";
+
+        connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                getMovieCast(jsonObject);
-            //    controller.showMovie(jsonObject);
+               // getMovieCast(jsonObject);
+                controller.showMovie(jsonObject);
 
             }
         });
     }
 
-
+/*
     public void getMovieCast(final JSONObject movieDetails)
     {
         movieCast =  movieGetDetails+"/credits";
@@ -59,4 +61,6 @@ public class TmdbType {
 
 
     }
+
+    */
 }

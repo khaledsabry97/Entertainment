@@ -11,7 +11,8 @@ public class Artist {
     private int id;
     private char gender;
     private String posterImage;
-    private Bitmap bmPosterImage;
+    private String job;
+
 
     public Artist(String name, int id, int gender, String posterImage) {
         this.name = name;
@@ -57,11 +58,11 @@ public class Artist {
         this.posterImage = posterImage;
     }
 
-    public Bitmap getBmPosterImage() {
-        return bmPosterImage;
+    public String getJob() {
+        return job;
     }
 
-    public void setBmPosterImage(Bitmap bmPosterImage) {
-        this.bmPosterImage = bmPosterImage;
+    public void setJob(String job) {
+        this.job = job;
     }
 }

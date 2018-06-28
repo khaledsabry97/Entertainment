@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Controllers;
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
+import com.example.khaledsabry.entertainment.Items.Crew;
 import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
@@ -21,8 +22,7 @@ import java.util.ArrayList;
 public class MovieController {
 
 
-
-    private String original_title="original_title";
+    private String original_title = "original_title";
     private String id = "id";
     private String imdb_id = "imdb_id";
     private String original_language = "original_language";
@@ -46,17 +46,15 @@ public class MovieController {
     private String gender = "gender";
     private String order = "order";
     private String profile_path = "profile_path";
-    private String character ="character";
+    private String character = "character";
+    private String credits = "credits";
+    private String crew = "crew";
+    private String job = "job";
 
     private MainActivity mainActivity;
     private BlankFragment blankFragment;
 
 
-
-    private ArrayList<Movie> movies = new ArrayList<>();
-    private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
-    private ArrayList<Genre> genre = new ArrayList<>();
-    private ArrayList<Character> characters = new ArrayList<>();
     private static final MovieController ourInstance = new MovieController();
 
     public static MovieController getInstance() {
@@ -65,6 +63,7 @@ public class MovieController {
 
     private MovieController() {
     }
+
     public MainActivity getMainActivity() {
         return mainActivity;
     }
@@ -72,149 +71,168 @@ public class MovieController {
     public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
+
     public void setBlankFragment(BlankFragment blankFragment) {
         this.blankFragment = blankFragment;
     }
 
+    /*
+        public void showMovie(JSONObject jsonObject)
+        {
+            try {
 
-    public void showMovie(JSONObject jsonObject)
-    {
+                Movie movie = new Movie();
+                movie.setTitle(jsonObject.getString(title));
+                movie.setBudget(jsonObject.getInt(budget));
+                movie.setLanguage(jsonObject.getString(original_language));
+                movie.setOverView(jsonObject.getString(overview));
+                movie.setMovieImdbId(jsonObject.getString(imdb_id));
+                movie.setMovieId( jsonObject.getInt(id));
+                movie.setRevneue(jsonObject.getInt(revenue));
+                movie.setPopularity(jsonObject.getDouble(popularity));
+                movie.setPosterImage(jsonObject.getString(poster_path));
+                movie.setTmdbRate(jsonObject.getInt(vote_average));
+                movie.setStatus(jsonObject.getString(status));
+                movie.setRunTime(jsonObject.getInt(runtime));
+                JSONArray jsonArray = jsonObject.getJSONArray(production_companies);
+                int i = 0;
+                while(!jsonArray.isNull(i))
+                {
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    int ids =  object.getInt(id);
+                    String logo = object.getString(logo_path);
+                    String nam = object.getString(name);
+                    String countr = object.getString(origin_country);
+                    ProductionCompany productionCompany = new ProductionCompany(ids,logo,nam,countr);
+                    productionCompanies.add(productionCompany);
+                    i++;
+                }
+                jsonArray = jsonObject.getJSONArray(genres);
+                i = 0;
+                while(!jsonArray.isNull(i))
+                {
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    int ids =  object.getInt(id);
+                    String nam = object.getString(name);
+
+                    Genre genre = new Genre(ids,nam);
+                    this.genre.add(genre);
+                    i++;
+                }
+
+                movie.setGenres(genre);
+                movie.setProductionCompanies(productionCompanies);
+                genre.clear();
+                productionCompanies.clear();
+                blankFragment.loadMovieDetails(movie);
+                // mainActivity.show(movie);
+
+            }
+            catch (JSONException e)
+            {
+
+            }
+        }
+    */
+    public void showMovie(JSONObject movieDetails) {
         try {
 
+            JSONObject cast = movieDetails.getJSONObject(credits);
             Movie movie = new Movie();
-            movie.setTitle(jsonObject.getString(title));
-            movie.setBudget(jsonObject.getInt(budget));
-            movie.setLanguage(jsonObject.getString(original_language));
-            movie.setOverView(jsonObject.getString(overview));
-            movie.setMovieImdbId(jsonObject.getString(imdb_id));
-            movie.setMovieId( jsonObject.getInt(id));
-            movie.setRevneue(jsonObject.getInt(revenue));
-            movie.setPopularity(jsonObject.getDouble(popularity));
-            movie.setPosterImage(jsonObject.getString(poster_path));
-            movie.setTmdbRate(jsonObject.getInt(vote_average));
-            movie.setStatus(jsonObject.getString(status));
-            movie.setRunTime(jsonObject.getInt(runtime));
-            JSONArray jsonArray = jsonObject.getJSONArray(production_companies);
-            int i = 0;
-            while(!jsonArray.isNull(i))
-            {
+            JSONArray jsonArray;
+            int i;
+            ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
+            ArrayList<Genre> genre = new ArrayList<>();
+            ArrayList<Character> characters = new ArrayList<>();
+            ArrayList<Crew> crews = new ArrayList<>();
+
+            jsonArray = movieDetails.getJSONArray(production_companies);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
                 JSONObject object = jsonArray.getJSONObject(i);
-                int ids =  object.getInt(id);
+                int ids = object.getInt(id);
                 String logo = object.getString(logo_path);
                 String nam = object.getString(name);
                 String countr = object.getString(origin_country);
-                ProductionCompany productionCompany = new ProductionCompany(ids,logo,nam,countr);
+                ProductionCompany productionCompany = new ProductionCompany(ids, logo, nam, countr);
                 productionCompanies.add(productionCompany);
                 i++;
             }
-            jsonArray = jsonObject.getJSONArray(genres);
+            jsonArray = movieDetails.getJSONArray(genres);
             i = 0;
-            while(!jsonArray.isNull(i))
-            {
+
+            while (!jsonArray.isNull(i)) {
                 JSONObject object = jsonArray.getJSONObject(i);
-                int ids =  object.getInt(id);
+                int ids = object.getInt(id);
                 String nam = object.getString(name);
 
-                Genre genre = new Genre(ids,nam);
-                this.genre.add(genre);
+                Genre gen = new Genre(ids, nam);
+                genre.add(gen);
                 i++;
             }
 
-            movie.setGenres(genre);
-            movie.setProductionCompanies(productionCompanies);
-            genre.clear();
-            productionCompanies.clear();
-            blankFragment.loadMovieDetails(movie);
-            // mainActivity.show(movie);
 
-        }
-        catch (JSONException e)
-        {
+            jsonArray = cast.getJSONArray(this.cast);
+            i = 0;
 
-        }
-    }
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids = object.getInt(id);
+                String nam = object.getString(name);
+                String profilePath = object.getString(profile_path);
+                int gend = object.getInt(gender);
+                String characterName = object.getString(this.character);
+                Artist artist = new Artist(nam, ids, gend, profilePath);
+                Character character = new Character(artist, characterName);
 
-    public void showMovie(JSONObject movieDetails,JSONObject cast)
-    {
-        try {
 
-            Movie movie = new Movie();
+                characters.add(character);
+                i++;
+            }
+            i = 0;
+
+
+            jsonArray = cast.getJSONArray(crew);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids = object.getInt(id);
+                String nam = object.getString(name);
+                String jobtitle = object.getString(job);
+                String profilePath = object.getString(profile_path);
+                int gend = object.getInt(gender);
+
+                Artist artist = new Artist(nam, ids, gend, profilePath);
+                Crew crew = new Crew(artist, jobtitle);
+                crews.add(crew);
+
+
+                i++;
+            }
             movie.setTitle(movieDetails.getString(title));
             movie.setBudget(movieDetails.getInt(budget));
             movie.setLanguage(movieDetails.getString(original_language));
             movie.setOverView(movieDetails.getString(overview));
             movie.setMovieImdbId(movieDetails.getString(imdb_id));
-            movie.setMovieId( movieDetails.getInt(id));
+            movie.setMovieId(movieDetails.getInt(id));
             movie.setRevneue(movieDetails.getInt(revenue));
             movie.setPopularity(movieDetails.getDouble(popularity));
             movie.setPosterImage(movieDetails.getString(poster_path));
             movie.setTmdbRate(movieDetails.getInt(vote_average));
             movie.setStatus(movieDetails.getString(status));
             movie.setRunTime(movieDetails.getInt(runtime));
-
-            genre.clear();
-            productionCompanies.clear();
-            characters.clear();
-            JSONArray jsonArray = movieDetails.getJSONArray(production_companies);
-            int i = 0;
-            while(!jsonArray.isNull(i))
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                int ids =  object.getInt(id);
-                String logo = object.getString(logo_path);
-                String nam = object.getString(name);
-                String countr = object.getString(origin_country);
-                ProductionCompany productionCompany = new ProductionCompany(ids,logo,nam,countr);
-                productionCompanies.add(productionCompany);
-                i++;
-            }
-            jsonArray = movieDetails.getJSONArray(genres);
-            i = 0;
-            while(!jsonArray.isNull(i))
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                int ids =  object.getInt(id);
-                String nam = object.getString(name);
-
-                Genre genre = new Genre(ids,nam);
-                this.genre.add(genre);
-                i++;
-            }
-
-
-
-            jsonArray = cast.getJSONArray(this.cast);
-            i= 0;
-            while(!jsonArray.isNull(i))
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                int ids =  object.getInt(id);
-                String nam = object.getString(name);
-                String profilePath = object.getString(profile_path);
-                int gend = object.getInt(gender);
-                String characterName = object.getString(this.character);
-                Artist artist = new Artist(nam,ids,gend,profilePath);
-                Character character = new Character(artist,characterName);
-
-
-                this.characters.add(character);
-                i++;
-            }
-            i = 0;
-            movie.setCharacters(this.characters);
+            movie.setAdult(movieDetails.getBoolean(adult));
+            movie.setCharacters(characters);
             movie.setGenres(genre);
             movie.setProductionCompanies(productionCompanies);
-
-
-
+            movie.setCrews(crews);
 
 
             blankFragment.loadMovieDetails(movie);
             // mainActivity.show(movie);
 
-        }
-        catch (JSONException e)
-        {
+        } catch (JSONException e) {
+            String s = e.toString();
 
         }
     }

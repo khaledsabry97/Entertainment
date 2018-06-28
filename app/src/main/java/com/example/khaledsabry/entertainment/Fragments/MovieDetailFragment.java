@@ -45,7 +45,9 @@ public class MovieDetailFragment extends Fragment {
         posterImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().loadFullPosterFragment(movie.getPosterImage());
+                FullPoster fullPoster = FullPoster.newInstance(movie.getPosterImage());
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
+            //    MainActivity.getActivity().loadFullPosterFragment(movie.getPosterImage());
             }
         });
 

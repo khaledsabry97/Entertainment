@@ -1,7 +1,6 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
-import com.example.khaledsabry.entertainment.Adapter.RecyclerAdapter;
+import com.example.khaledsabry.entertainment.Adapter.CastRecyclerAdapter;
 
 
 public class CastFragment extends Fragment {
@@ -37,8 +36,8 @@ CastFragment.movie = movie;
         recyclerView = v.findViewById(R.id.contentPanel);
         recyclerView.setHasFixedSize(true);
 
-        RecyclerAdapter adapter;
-        adapter = new RecyclerAdapter(movie.getCharacters());
+        CastRecyclerAdapter adapter;
+        adapter = new CastRecyclerAdapter(movie.getCharacters());
 
         recyclerView.setAdapter(adapter);
 

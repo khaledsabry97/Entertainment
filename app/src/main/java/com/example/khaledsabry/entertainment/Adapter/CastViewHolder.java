@@ -17,13 +17,13 @@ import com.example.khaledsabry.entertainment.R;
  * Created by KhALeD SaBrY on 23-Jun-18.
  */
 
-public class CardContent extends RecyclerView.ViewHolder {
+public class CastViewHolder extends RecyclerView.ViewHolder {
 
     ImageView posterImage;
     TextView characterName;
     TextView actorName;
 
-    public CardContent(View itemView) {
+    public CastViewHolder(View itemView) {
         super(itemView);
 
         posterImage = itemView.findViewById(R.id.profileImageid);

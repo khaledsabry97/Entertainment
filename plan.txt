@@ -1,0 +1,11 @@
+***Entertainment Project**
+the plan :
+27/6/2018 : finish importing data for movies and some gui in it
+28/6/2018 : learn how you play a video from youtube and how to display it
+29/6/2018 : add the trailer to the app and display it
+30/6/2018 to 2/7/2018 : learn the navigation slider and how you put items in
+3/7/2018 : put in the navigation slider (status,original language, runtime,budget, Revenue,Release date, adult)
+4/7/2018 : add posters and images to the movie
+5/7/2018 : try to find better interface
+6/7/2018: add recommendations
+7/7/2018: 

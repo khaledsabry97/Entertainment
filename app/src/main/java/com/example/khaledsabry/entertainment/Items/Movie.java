@@ -25,11 +25,20 @@ public class Movie {
     private int revneue;
     private int runTime;
     private Double popularity;
-    private Bitmap Poster;
+    private boolean isAdult;
+
+    public boolean isAdult() {
+        return isAdult;
+    }
+
+    public void setAdult(boolean adult) {
+        isAdult = adult;
+    }
 
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
     private ArrayList<Genre> genres = new ArrayList<>();
     private ArrayList<Character>characters = new ArrayList<>();
+    private ArrayList<Crew> crews = new ArrayList<>();
 
 
 
@@ -182,11 +191,12 @@ public class Movie {
         this.characters = characters;
     }
 
-    public Bitmap getPoster() {
-        return Poster;
+
+    public ArrayList<Crew> getCrews() {
+        return crews;
     }
 
-    public void setPoster(Bitmap poster) {
-        Poster = poster;
+    public void setCrews(ArrayList<Crew> crews) {
+        this.crews = crews;
     }
 }
