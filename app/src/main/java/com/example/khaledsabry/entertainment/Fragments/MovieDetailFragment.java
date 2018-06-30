@@ -1,9 +1,7 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +12,18 @@ import android.widget.TextView;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.R;
-import com.squareup.picasso.Picasso;
 
 
 public class MovieDetailFragment extends Fragment {
 
     ImageView posterImage;
     TextView title;
-    TextView overview;
-    TextView movieInfo;
     static Movie movie;
+
+    TextView overviewText;
+    TextView releaseDate;
+    TextView runTimeText;
 
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment fragment = new MovieDetailFragment();
@@ -40,8 +38,10 @@ public class MovieDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.movie_detail_v3, container, false);
         posterImage = v.findViewById(R.id.posterid);
         title = v.findViewById(R.id.titleId);
-        overview = v.findViewById(R.id.overviewID);
-        movieInfo  = v.findViewById(R.id.movieinfoid);
+        overviewText = v.findViewById(R.id.overviewID);
+        releaseDate = v.findViewById(R.id.releasetimeid);
+        runTimeText = v.findViewById(R.id.timeid);
+
         setObjects();
         posterImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,25 +51,21 @@ public class MovieDetailFragment extends Fragment {
             }
         });
 
-    //    setCast();
 
         return v;
     }
 
 
-    public void setObjects() {
+    private void setObjects() {
+        overviewText.setText(movie.getOverView());
+        releaseDate.setText(movie.getReleaseDate());
+        runTimeText.setText(movie.getRunTime()+" min");
+
         title.setText(movie.getTitle());
-        overview.setText(movie.getOverView());
-movieInfo.setText(movie.getReleaseDate()+" "+movie.getRunTime() + " "+movie.getGenreList());
+
         ImageController.putImageHighQuality(movie.getPosterImage(), posterImage);
 
-
     }
 
 
-    private void setCast()
-    {
-        CastFragment castFragment = CastFragment.newInstance(movie);
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.castid,castFragment).commit();
-    }
 }
