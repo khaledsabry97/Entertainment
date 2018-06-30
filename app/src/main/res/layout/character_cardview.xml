@@ -4,8 +4,8 @@
     android:id="@+id/card_card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:layout_marginLeft="5dp"
+    android:layout_margin="3dp"
+    android:layout_marginLeft="3dp"
     app:cardBackgroundColor="@color/cardview_dark_background"
     app:cardCornerRadius="5dp"
     app:contentPadding="5dp">
@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/profileImageid"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:adjustViewBounds="false"
 
             android:scaleType="fitXY"

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 public class Main2Activity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
@@ -33,6 +34,7 @@ public class Main2Activity extends YouTubeBaseActivity implements YouTubePlayer.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
         YouTubePlayerView youTubePlayerView = findViewById(R.id.youtubeid);
         youTubePlayerView.initialize(YoutubeApiKey,this);
 

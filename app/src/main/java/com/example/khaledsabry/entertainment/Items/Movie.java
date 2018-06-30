@@ -199,4 +199,17 @@ public class Movie {
     public void setCrews(ArrayList<Crew> crews) {
         this.crews = crews;
     }
+
+    public String  getGenreList()
+    {
+        String s = "";
+        for(int i = 0 ;i < genres.size();i++)
+        {
+            s +=genres.get(i).getName();
+            if(i+1 !=genres.size())
+                s+= ", ";
+
+        }
+        return s;
+    }
 }

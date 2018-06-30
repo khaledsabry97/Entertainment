@@ -50,6 +50,7 @@ public class MovieController {
     private String credits = "credits";
     private String crew = "crew";
     private String job = "job";
+    private String release_date = "release_date";
 
     private MainActivity mainActivity;
     private BlankFragment blankFragment;
@@ -222,6 +223,8 @@ public class MovieController {
             movie.setStatus(movieDetails.getString(status));
             movie.setRunTime(movieDetails.getInt(runtime));
             movie.setAdult(movieDetails.getBoolean(adult));
+            movie.setReleaseDate(movieDetails.getString(release_date));
+
             movie.setCharacters(characters);
             movie.setGenres(genre);
             movie.setProductionCompanies(productionCompanies);
@@ -229,7 +232,6 @@ public class MovieController {
 
 
             blankFragment.loadMovieDetails(movie);
-            // mainActivity.show(movie);
 
         } catch (JSONException e) {
             String s = e.toString();

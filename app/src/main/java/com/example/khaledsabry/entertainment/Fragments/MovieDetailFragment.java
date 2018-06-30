@@ -24,6 +24,7 @@ public class MovieDetailFragment extends Fragment {
     ImageView posterImage;
     TextView title;
     TextView overview;
+    TextView movieInfo;
     static Movie movie;
 
     public static MovieDetailFragment newInstance(Movie movie) {
@@ -36,22 +37,21 @@ public class MovieDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        View v = inflater.inflate(R.layout.movie_detail_v3, container, false);
         posterImage = v.findViewById(R.id.posterid);
         title = v.findViewById(R.id.titleId);
         overview = v.findViewById(R.id.overviewID);
+        movieInfo  = v.findViewById(R.id.movieinfoid);
         setObjects();
-       // Picasso.get().load(ImageController.getImageHighQualityUrl(movie.getPosterImage())).into(posterImage);
         posterImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FullPoster fullPoster = FullPoster.newInstance(movie.getPosterImage());
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
-            //    MainActivity.getActivity().loadFullPosterFragment(movie.getPosterImage());
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
             }
         });
 
-        setCast();
+    //    setCast();
 
         return v;
     }
@@ -60,8 +60,8 @@ public class MovieDetailFragment extends Fragment {
     public void setObjects() {
         title.setText(movie.getTitle());
         overview.setText(movie.getOverView());
-
-        ImageController.putImageMidQuality(movie.getPosterImage(), posterImage);
+movieInfo.setText(movie.getReleaseDate()+" "+movie.getRunTime() + " "+movie.getGenreList());
+        ImageController.putImageHighQuality(movie.getPosterImage(), posterImage);
 
 
     }

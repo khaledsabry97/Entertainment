@@ -8,3 +8,5 @@ volley/
 *.lock
 *.lock
 *.bin
+*.json
+*.json
