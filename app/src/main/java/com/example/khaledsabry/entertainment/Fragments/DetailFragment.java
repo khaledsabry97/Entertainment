@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
@@ -45,8 +46,7 @@ static int id = -200 ;
 
     void loadFragment(Fragment fragment)
     {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, fragment).addToBackStack(null).commit();
-
+        MainActivity.getActivity().loadFragment(fragment);
     }
 
     @Override
@@ -59,6 +59,8 @@ static int id = -200 ;
         }
         else if(item.getItemId() == R.id.navigation_dashboard)
             loadFragment(CastAndCrewFragment.newInstance(movie));
+        else if(item.getItemId() == R.id.navigation_notifications)
+            loadFragment(PosterFragment.newInstance(movie));
         return true;
     }
 

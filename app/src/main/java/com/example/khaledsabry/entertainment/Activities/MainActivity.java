@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Activities;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,5 +79,15 @@ public class MainActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+
+    }
+
+
+
+    public void loadFragment(android.support.v4.app.Fragment fragment)
+    {
+
+       getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,fragment).addToBackStack(null).commit();
     }
 }
