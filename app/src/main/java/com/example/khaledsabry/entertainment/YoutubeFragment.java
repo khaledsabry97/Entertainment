@@ -1,35 +1,36 @@
-
-
-
-
-
-
 package com.example.khaledsabry.entertainment;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.khaledsabry.entertainment.Items.Movie;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
+
 
 public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitializedListener {
-
-    String YoutubeApiKey = "AIzaSyDyMlMX1NEZJUggZdxiFErwuocJSYm7Wp4";
     String videoId = "aJ7BoNG-r2c";
-    public static YoutubeFragment newInstance() {
+
+    private YouTubePlayer YPlayer;
+    private static final int RECOVERY_DIALOG_REQUEST = 1;
+
+
+    static Movie movie;
+    public static YoutubeFragment newInstance(Movie movie) {
         YoutubeFragment fragment = new YoutubeFragment();
+        YoutubeFragment.movie = movie;
         return fragment;
 
     }
+
+
 
 
     @Override
@@ -37,16 +38,17 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_youtube, container, false);
-        //YouTubePlayerView youTubePlayerView = v.findViewById(R.id.youtubeid);
-     //   youTubePlayerView.initialize(YoutubeApiKey,this);
+        YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
+getChildFragmentManager().beginTransaction().replace(R.id.youtube_fragment,youTubePlayerFragment).addToBackStack(null).commit();
 
+        youTubePlayerFragment.initialize(Settings.YoutubeApiKey,this);
         return v;
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         if(!b)
-        youTubePlayer.cueVideo(videoId);
+            youTubePlayer.cueVideo(videoId);
     }
 
     @Override
@@ -58,8 +60,9 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
                     "YouTubePlayer.onInitializationFailure(): " + youTubeInitializationResult.toString(),
                     Toast.LENGTH_LONG).show();
         }
-{
+        {
 
-}
+        }
     }
+
 }

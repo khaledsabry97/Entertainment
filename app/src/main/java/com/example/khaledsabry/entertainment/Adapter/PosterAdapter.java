@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
 
     public ArrayList<String> imgs = new ArrayList<>();
+
     public PosterAdapter(ArrayList<String> imgs) {
         this.imgs = imgs;
     }
@@ -26,7 +27,7 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
     @NonNull
     @Override
     public PosterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.poster_cardview,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.poster_cardview, parent, false);
 
         return new PosterViewHolder(v);
     }
@@ -34,14 +35,14 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PosterViewHolder holder, int position) {
-final String posterurl = imgs.get(position);
-holder.updateUi(posterurl);
-holder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        MainActivity.getActivity().loadFragment(R.id.mainContainer,FullPoster.newInstance(posterurl));
-    }
-});
+        final String posterurl = imgs.get(position);
+        holder.updateUi(posterurl);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.getActivity().loadFragment(R.id.mainContainer, FullPoster.newInstance(posterurl));
+            }
+        });
 
     }
 

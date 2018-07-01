@@ -1,5 +1,7 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
+import com.example.khaledsabry.entertainment.YoutubeFragment;
 
 
 public class DetailFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
@@ -37,6 +40,7 @@ static int id = -200 ;
 
 
         bottomNavigationView.setSelectedItemId(id);
+bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
 
 
 
@@ -52,7 +56,6 @@ static int id = -200 ;
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DetailFragment.id = item.getItemId();
-
         if(item.getItemId() == R.id.navigation_home) {
             loadFragment(MovieDetailFragment.newInstance(movie));
 
@@ -61,6 +64,8 @@ static int id = -200 ;
             loadFragment(CastAndCrewFragment.newInstance(movie));
         else if(item.getItemId() == R.id.navigation_notifications)
             loadFragment(PosterFragment.newInstance(movie));
+        else if(item.getItemId() == R.id.navigation_trailers)
+            loadFragment(YoutubeFragment.newInstance(movie));
         return true;
     }
 

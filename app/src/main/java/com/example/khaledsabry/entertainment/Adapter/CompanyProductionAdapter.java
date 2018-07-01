@@ -1,0 +1,53 @@
+package com.example.khaledsabry.entertainment.Adapter;
+
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Fragments.FullPoster;
+import com.example.khaledsabry.entertainment.Items.ProductionCompany;
+import com.example.khaledsabry.entertainment.R;
+
+import java.util.ArrayList;
+
+/**
+ * Created by KhALeD SaBrY on 01-Jul-18.
+ */
+
+public class CompanyProductionAdapter extends RecyclerView.Adapter<CompanyProductionViewHolder> {
+
+    private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
+
+    public CompanyProductionAdapter(ArrayList<ProductionCompany> productionCompanies) {
+        this.productionCompanies = productionCompanies;
+    }
+
+    @NonNull
+    @Override
+    public CompanyProductionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.production_company_cardview,parent,false);
+        return new CompanyProductionViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CompanyProductionViewHolder holder, int position) {
+        final ProductionCompany productionCompany = productionCompanies.get(position);
+        holder.updateUi(productionCompany);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.getActivity().loadFragment(R.id.mainContainer, FullPoster.newInstance(productionCompany.getCompanyImage()));
+            }
+        });
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return productionCompanies.size();
+    }
+}
