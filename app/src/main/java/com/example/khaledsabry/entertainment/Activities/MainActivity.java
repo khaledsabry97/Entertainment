@@ -1,12 +1,12 @@
 package com.example.khaledsabry.entertainment.Activities;
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.khaledsabry.entertainment.Fragments.DetailFragment;
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
+import com.example.khaledsabry.entertainment.Fragments.DetailFragment;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;

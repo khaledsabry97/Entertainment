@@ -25,8 +25,9 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Main3Activity"
-            android:label="@string/title_activity_main3"></activity>
+            android:name=".Main4Activity"
+            android:label="@string/title_activity_main4"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

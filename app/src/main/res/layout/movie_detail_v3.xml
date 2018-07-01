@@ -19,15 +19,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5">
 
-            <ImageView
-                android:id="@+id/posterid"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPagerid"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:src="@drawable/batman"
-                tools:layout_editor_absoluteX="641dp"
-                tools:layout_editor_absoluteY="130dp"></ImageView>
+                android:layout_height="0dp"></android.support.v4.view.ViewPager>
 
             <TextView
                 android:id="@+id/titleId"
@@ -53,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="3dp"
-                android:layout_weight="1"
+                android:layout_weight=".8"
                 android:orientation="vertical">
 
                 <TextView
@@ -104,7 +99,7 @@
                     android:id="@+id/timeid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:text="Cast"
                     android:textColor="@color/cardview_light_background"
@@ -131,13 +126,149 @@
                     android:id="@+id/releasetimeid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:text="Cast"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="17sp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Genres :"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/genresid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="Cast"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Budget :"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/budgetid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="Cast"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="adult :"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/adultid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="Cast"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Status :"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/statusid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="Cast"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rate :"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/rateid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="Cast"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

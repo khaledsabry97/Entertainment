@@ -51,6 +51,14 @@ public class MovieController {
     private String crew = "crew";
     private String job = "job";
     private String release_date = "release_date";
+    private String images = "images";
+    private String posters = "posters";
+    private String backdrops  ="backdrops";
+    private String file_path = "file_path";
+    private String videos= "videos";
+    private String results= "results";
+    private String key = "key";
+
 
     private MainActivity mainActivity;
     private BlankFragment blankFragment;
@@ -139,6 +147,10 @@ public class MovieController {
         try {
 
             JSONObject cast = movieDetails.getJSONObject(credits);
+            JSONObject images = movieDetails.getJSONObject(this.images);
+            JSONObject videos = movieDetails.getJSONObject(this.videos);
+
+
             Movie movie = new Movie();
             JSONArray jsonArray;
             int i;
@@ -146,6 +158,9 @@ public class MovieController {
             ArrayList<Genre> genre = new ArrayList<>();
             ArrayList<Character> characters = new ArrayList<>();
             ArrayList<Crew> crews = new ArrayList<>();
+            ArrayList<String> posters = new ArrayList<>();
+            ArrayList<String> backdrops = new ArrayList<>();
+            ArrayList<String> trailers = new ArrayList<>();
 
             jsonArray = movieDetails.getJSONArray(production_companies);
             i = 0;
@@ -210,6 +225,35 @@ public class MovieController {
 
                 i++;
             }
+
+            jsonArray = images.getJSONArray(this.posters);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+String filepath = object.getString(this.file_path);
+posters.add(filepath);
+                i++;
+            }
+
+
+
+            jsonArray = images.getJSONArray(this.backdrops);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.file_path);
+                backdrops.add(filepath);
+                i++;
+            }
+
+            jsonArray = videos.getJSONArray(this.results);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.key);
+                trailers.add(filepath);
+                i++;
+            }
             movie.setTitle(movieDetails.getString(title));
             movie.setBudget(movieDetails.getInt(budget));
             movie.setLanguage(movieDetails.getString(original_language));
@@ -224,6 +268,9 @@ public class MovieController {
             movie.setRunTime(movieDetails.getInt(runtime));
             movie.setAdult(movieDetails.getBoolean(adult));
             movie.setReleaseDate(movieDetails.getString(release_date));
+            movie.setPosters(posters);
+            movie.setBackdrops(backdrops);
+            movie.setTrailers(trailers);
 
             movie.setCharacters(characters);
             movie.setGenres(genre);

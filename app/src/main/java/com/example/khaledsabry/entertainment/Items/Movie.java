@@ -27,8 +27,11 @@ public class Movie {
     private Double popularity;
     private boolean isAdult;
 
-    public boolean isAdult() {
-        return isAdult;
+    public String isAdult() {
+        if(isAdult)
+            return "this is for adults";
+        else
+            return "you can view it freely";
     }
 
     public void setAdult(boolean adult) {
@@ -39,8 +42,33 @@ public class Movie {
     private ArrayList<Genre> genres = new ArrayList<>();
     private ArrayList<Character>characters = new ArrayList<>();
     private ArrayList<Crew> crews = new ArrayList<>();
+    private ArrayList<String> posters = new ArrayList<>();
+    private ArrayList<String> backdrops = new ArrayList<>();
+    private ArrayList<String> trailers = new ArrayList<>();
 
+    public ArrayList<String> getTrailers() {
+        return trailers;
+    }
 
+    public void setTrailers(ArrayList<String> trailers) {
+        this.trailers = trailers;
+    }
+
+    public ArrayList<String> getPosters() {
+        return posters;
+    }
+
+    public void setPosters(ArrayList<String> posters) {
+        this.posters = posters;
+    }
+
+    public ArrayList<String> getBackdrops() {
+        return backdrops;
+    }
+
+    public void setBackdrops(ArrayList<String> backdrops) {
+        this.backdrops = backdrops;
+    }
 
     public Movie() {
     }
@@ -143,6 +171,7 @@ public class Movie {
     }
 
     public int getBudget() {
+
         return budget;
     }
 

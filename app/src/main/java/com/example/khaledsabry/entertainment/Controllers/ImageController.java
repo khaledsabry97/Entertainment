@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 import com.squareup.picasso.Picasso;
 
@@ -25,73 +27,26 @@ public class ImageController {
         return ourInstance;
     }
 
-    private ImageController() {
-    }
 
-
-/*
-    private static void show(final String posterUrl, final OnImageConvertedSuccess listener) {
-
-        AsyncTask<String,Bitmap,Bitmap> R = new AsyncTask<String, Bitmap, Bitmap>() {
-
-            @Override
-            protected Bitmap doInBackground(String... strings) {
-                String urlOfImage = posterUrl;
-                Bitmap logo = null;
-                try {
-                    InputStream is = new URL(urlOfImage).openStream();
-                    logo = BitmapFactory.decodeStream(is);
-                } catch (Exception e) {
-                    // Catch the download exception
-                    e.printStackTrace();
-                }
-
-                final Bitmap finalLogo = logo;
-                return finalLogo;
-            }
-/*
-
-            @Override
-            protected void onPostExecute(Bitmap s) {
-                super.onPostExecute(s);
-                listener.onImageConvertedSuccess(s);
-
-            }
-        };
-        R.execute();
-
-
-    }
-*/
-/*
-
-    public static void getImageHighQuality(String posterImage,OnImageConvertedSuccess listener) {
-       String url =  "https://image.tmdb.org/t/p/"+highQuality+posterImage;
-       show(url,listener);
-    }
-    public static void getPostorImageMidQuality(String posterImage,OnImageConvertedSuccess listener) {
-        String url =  "https://image.tmdb.org/t/p/"+midQuality+posterImage;
-        show(url,listener);
-    }
-    public static void getPostorImageLowQuality(String posterImage,OnImageConvertedSuccess listener) {
-        String url =  "https://image.tmdb.org/t/p/"+lowQuality+posterImage;
-        show(url,listener);
-    }
-*/
 
     public static void putImageHighQuality(String posterImage, ImageView image) {
         String url =  "https://image.tmdb.org/t/p/"+highQuality+posterImage;
-        Picasso.get().load(url).into(image);
+      //  Picasso.get().load(url).into(image);
+        Glide.with(MainActivity.getActivity()).load(url).into(image);
     }
 
     public static void putImageMidQuality(String posterImage, ImageView image) {
         String url =  "https://image.tmdb.org/t/p/"+midQuality+posterImage;
-        Picasso.get().load(url).into(image);
+       // Picasso.get().load(url).into(image);
+        Glide.with(MainActivity.getActivity()).load(url).into(image);
+
     }
 
     public static void putImageLowQuality(String posterImage, ImageView image) {
         String url =  "https://image.tmdb.org/t/p/"+lowQuality+posterImage;
         Picasso.get().load(url).into(image);
+     //   Glide.with(MainActivity.getActivity()).load(url).into(image);
+
     }
 
 

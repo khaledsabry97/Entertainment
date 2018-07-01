@@ -11,65 +11,54 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp">
+            android:layout_marginLeft="7dp"
+            android:orientation="vertical">
 
-            <TableRow
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Cast"
-                        android:textColor="@color/cardview_light_background"
-                        android:textSize="50sp" />
-
-                    <FrameLayout
-                        android:id="@+id/castId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                    </FrameLayout>
-                </LinearLayout>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:text="Cast"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="50sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Crew"
-                        android:textColor="@color/cardview_light_background"
-                        android:textSize="50sp" />
+                <FrameLayout
+                    android:id="@+id/castId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <FrameLayout
-                        android:id="@+id/crewid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                </FrameLayout>
+            </LinearLayout>
 
-                    </FrameLayout>
-                </LinearLayout>
-            </TableRow>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        </TableLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Crew"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="50sp" />
+
+                <FrameLayout
+                    android:id="@+id/crewid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
 </FrameLayout>

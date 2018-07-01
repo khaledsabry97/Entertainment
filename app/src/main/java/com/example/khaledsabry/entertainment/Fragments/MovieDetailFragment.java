@@ -3,12 +3,14 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.khaledsabry.entertainment.Adapter.ViewPagerAdapter;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -24,7 +26,15 @@ public class MovieDetailFragment extends Fragment {
     TextView overviewText;
     TextView releaseDate;
     TextView runTimeText;
+    TextView genres;
 
+    TextView budget;
+    TextView rate;
+    TextView adult;
+    TextView status;
+
+    ViewPager viewPager;
+    ViewPagerAdapter viewPagerAdapter;
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment fragment = new MovieDetailFragment();
         fragment.movie = movie;
@@ -36,21 +46,28 @@ public class MovieDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.movie_detail_v3, container, false);
-        posterImage = v.findViewById(R.id.posterid);
+     //   posterImage = v.findViewById(R.id.posterid);
         title = v.findViewById(R.id.titleId);
         overviewText = v.findViewById(R.id.overviewID);
         releaseDate = v.findViewById(R.id.releasetimeid);
         runTimeText = v.findViewById(R.id.timeid);
-
+        genres = v.findViewById(R.id.genresid);
+        budget =v.findViewById(R.id.budgetid);
+        rate =  v.findViewById(R.id.rateid);
+        status = v.findViewById(R.id.statusid);
+        adult = v.findViewById(R.id.adultid);
+        viewPager = v.findViewById(R.id.viewPagerid);
+        viewPagerAdapter = new ViewPagerAdapter(movie.getPosters());
+        viewPager.setAdapter(viewPagerAdapter);
         setObjects();
-        posterImage.setOnClickListener(new View.OnClickListener() {
+     /*   posterImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FullPoster fullPoster = FullPoster.newInstance(movie.getPosterImage());
                 MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
             }
         });
-
+*/
 
         return v;
     }
@@ -60,10 +77,15 @@ public class MovieDetailFragment extends Fragment {
         overviewText.setText(movie.getOverView());
         releaseDate.setText(movie.getReleaseDate());
         runTimeText.setText(movie.getRunTime()+" min");
+genres.setText(movie.getGenreList());
 
+adult.setText(( movie.isAdult()));
+budget.setText(movie.getBudget()+"");
+status.setText(movie.getStatus());
+rate.setText(movie.getTmdbRate()+"/10");
         title.setText(movie.getTitle());
 
-        ImageController.putImageHighQuality(movie.getPosterImage(), posterImage);
+       // ImageController.putImageHighQuality(movie.getPosterImage(), posterImage);
 
     }
 
