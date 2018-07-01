@@ -96,4 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
        getSupportFragmentManager().beginTransaction().replace(idContainer,fragment).addToBackStack(null).commit();
     }
+
+
 }

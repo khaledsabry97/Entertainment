@@ -31,6 +31,8 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     public ViewPagerAdapter(ArrayList<String> posters) {
 images = posters;
+        while (images.size() >10)
+            this.images.remove(this.images.size()-1);
     }
 
     @Override

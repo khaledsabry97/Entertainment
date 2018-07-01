@@ -1,7 +1,9 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,6 +17,11 @@ import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 
 public class MovieDetailFragment extends Fragment {
@@ -33,6 +40,7 @@ public class MovieDetailFragment extends Fragment {
     TextView adult;
     TextView status;
 
+    int counterPosters = 0;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     public static MovieDetailFragment newInstance(Movie movie) {
@@ -46,7 +54,6 @@ public class MovieDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.movie_detail_v3, container, false);
-     //   posterImage = v.findViewById(R.id.posterid);
         title = v.findViewById(R.id.titleId);
         overviewText = v.findViewById(R.id.overviewID);
         releaseDate = v.findViewById(R.id.releasetimeid);
@@ -59,6 +66,9 @@ public class MovieDetailFragment extends Fragment {
         viewPager = v.findViewById(R.id.viewPagerid);
         viewPagerAdapter = new ViewPagerAdapter(movie.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
+        final CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
+
         setObjects();
      /*   posterImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +78,27 @@ public class MovieDetailFragment extends Fragment {
             }
         });
 */
+
+final Handler handler = new Handler();
+final Runnable runnable = new Runnable() {
+    @Override
+    public void run() {
+        if(viewPagerAdapter.getCount() == viewPager.getCurrentItem()+1)
+            viewPager.setCurrentItem(0,true);
+        else
+        viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
+    }
+};
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+              handler.post(runnable);
+
+            }
+        },2000,2000);
+
 
         return v;
     }

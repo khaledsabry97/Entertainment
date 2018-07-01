@@ -16,6 +16,8 @@ import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class PosterFragment extends Fragment {
@@ -43,13 +45,15 @@ public class PosterFragment extends Fragment {
         imgs.addAll(movie.getPosters());
         PosterAdapter posterAdapter = new PosterAdapter(imgs);
         recyclerView.setAdapter(posterAdapter);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
 
-int spancount = (int) (MainActivity.getActivity().width/(1.95*200));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),spancount,GridLayoutManager.VERTICAL,false);
+//int spancount = (int) (MainActivity.getActivity().height/(2*200));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),4,GridLayoutManager.VERTICAL,false);
       //  LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
       //  linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+
 
 
         return view;
