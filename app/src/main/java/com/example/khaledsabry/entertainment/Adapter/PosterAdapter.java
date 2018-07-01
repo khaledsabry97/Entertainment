@@ -31,6 +31,7 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
         return new PosterViewHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull PosterViewHolder holder, int position) {
 final String posterurl = imgs.get(position);
@@ -38,7 +39,7 @@ holder.updateUi(posterurl);
 holder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        MainActivity.getActivity().loadFragment(FullPoster.newInstance(posterurl));
+        MainActivity.getActivity().loadFragment(R.id.mainContainer,FullPoster.newInstance(posterurl));
     }
 });
 

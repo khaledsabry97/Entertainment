@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.R;
 
@@ -28,6 +29,7 @@ public class FullPoster extends Fragment {
 View v = inflater.inflate(R.layout.fragment_full_poster, container, false);
         fullPoster = v.findViewById(R.id.fullposterid);
         ImageController.putImageHighQuality(poster,fullPoster);
+
         return v;
     }
 

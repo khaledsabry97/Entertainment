@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         mainActivity = this;
     }
 
+    public int width;
+    public int height;
     public static MainActivity getActivity()
     {
         return mainActivity;
@@ -31,8 +34,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+         height = displayMetrics.heightPixels;
+         width = displayMetrics.widthPixels;
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         BlankFragment blankFragment = BlankFragment.newInstance();
         if(blankFragment == null)
         {blankFragment = BlankFragment.newInstance();
@@ -43,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     public  void loadMovieDetailFragment(Movie movie)
     {
-        DetailFragment movieDetailFragment = DetailFragment.newInstance(movie);
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,movieDetailFragment).addToBackStack(null).commit();
+        DetailFragment detailFragment = DetailFragment.newInstance(movie);
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,detailFragment).addToBackStack(null).commit();
 
     }
 
@@ -85,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void loadFragment(android.support.v4.app.Fragment fragment)
+    public void loadFragment(int idContainer,android.support.v4.app.Fragment fragment)
     {
 
-       getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,fragment).addToBackStack(null).commit();
+       getSupportFragmentManager().beginTransaction().replace(idContainer,fragment).addToBackStack(null).commit();
     }
 }

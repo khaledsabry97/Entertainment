@@ -37,8 +37,8 @@ public class ImageController {
 
     public static void putImageMidQuality(String posterImage, ImageView image) {
         String url =  "https://image.tmdb.org/t/p/"+midQuality+posterImage;
-       // Picasso.get().load(url).into(image);
-        Glide.with(MainActivity.getActivity()).load(url).into(image);
+        Picasso.get().load(url).into(image);
+     //   Glide.with(MainActivity.getActivity()).load(url).into(image);
 
     }
 

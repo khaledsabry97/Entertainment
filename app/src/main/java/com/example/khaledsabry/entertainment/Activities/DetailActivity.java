@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 
 import com.example.khaledsabry.entertainment.Fragments.CastAndCrewFragment;
@@ -30,6 +31,7 @@ public class DetailActivity extends AppCompatActivity implements BottomNavigatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_detail);
+
         movie = MainActivity.movie;
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -57,4 +59,13 @@ public class DetailActivity extends AppCompatActivity implements BottomNavigatio
     public void onNavigationItemReselected(@NonNull MenuItem item) {
 
     }
+
+
+    int getwidth()
+    {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+    return height;}
 }

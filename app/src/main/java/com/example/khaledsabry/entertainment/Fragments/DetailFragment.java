@@ -46,7 +46,7 @@ static int id = -200 ;
 
     void loadFragment(Fragment fragment)
     {
-        MainActivity.getActivity().loadFragment(fragment);
+        MainActivity.getActivity().loadFragment(R.id.moviedetailid,fragment);
     }
 
     @Override
