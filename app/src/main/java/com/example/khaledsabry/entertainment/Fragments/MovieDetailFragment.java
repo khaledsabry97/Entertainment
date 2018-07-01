@@ -105,7 +105,7 @@ public class MovieDetailFragment extends Fragment {
         genres.setText(movie.getGenreList());
 
         adult.setText((movie.isAdult()));
-        budget.setText(movie.getBudget() + "");
+        budget.setText("$"+movie.getBudget());
         status.setText(movie.getStatus());
         rate.setText(movie.getTmdbRate() + "/10");
         title.setText(movie.getTitle());

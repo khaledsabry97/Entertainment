@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Items;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -170,9 +171,12 @@ public class Movie {
         this.genres = genres;
     }
 
-    public int getBudget() {
+    public String getBudget() {
 
-        return budget;
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+        String numberAsString = decimalFormat.format(budget);
+        return numberAsString;
+      //  return budget;
     }
 
     public void setBudget(int budget) {
@@ -240,5 +244,15 @@ public class Movie {
 
         }
         return s;
+    }
+
+
+    public String formatDecimal(float number) {
+        float epsilon = 0.004f; // 4 tenths of a cent
+        if (Math.abs(Math.round(number) - number) < epsilon) {
+            return String.format("%10.0f", number); // sdb
+        } else {
+            return String.format("%10.2f", number); // dj_segfault
+        }
     }
 }
