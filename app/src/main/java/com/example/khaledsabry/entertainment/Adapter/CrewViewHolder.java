@@ -27,7 +27,7 @@ public class CrewViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateUi(final Crew crew) {
-        crewName.setText("Crew Name : "+crew.getArtist().getName());
+        crewName.setText(crew.getArtist().getName());
         jobName.setText(crew.getJobTitle());
         ImageController.putImageLowQuality(crew.getArtist().getPosterImage(), posterImage);
     }

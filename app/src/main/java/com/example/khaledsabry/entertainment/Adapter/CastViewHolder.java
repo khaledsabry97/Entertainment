@@ -31,7 +31,7 @@ public class CastViewHolder extends RecyclerView.ViewHolder {
         actorName = itemView.findViewById(R.id.actorNamID);
     }
     public void updateUi(final Character character) {
-        actorName.setText("Actor Name : "+character.getArtist().getName());
+        actorName.setText(character.getArtist().getName());
         characterName.setText(character.getCharacterName());
         ImageController.putImageLowQuality(character.getArtist().getPosterImage(), posterImage);
     }

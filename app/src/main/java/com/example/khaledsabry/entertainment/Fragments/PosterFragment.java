@@ -47,6 +47,7 @@ public class PosterFragment extends Fragment {
         recyclerView.setAdapter(posterAdapter);
         //recyclerView.setHasFixedSize(true);
 
+
 //int spancount = (int) (MainActivity.getActivity().height/(2*200));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),4,GridLayoutManager.VERTICAL,false);
       //  LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);

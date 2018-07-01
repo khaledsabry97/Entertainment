@@ -31,7 +31,7 @@ public class BlankFragment extends Fragment {
         TmdbConnection.getInstance().setContext(getContext());
         TmdbType tmdbType = new TmdbType();
         MovieController.getInstance().setBlankFragment(this);
-        tmdbType.getMovieGetDetails(299536);
+        tmdbType.getMovieGetDetails(157336);
 
 
 

@@ -43,6 +43,7 @@ public class MovieDetailFragment extends Fragment {
     int counterPosters = 0;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
+
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment fragment = new MovieDetailFragment();
         fragment.movie = movie;
@@ -59,8 +60,8 @@ public class MovieDetailFragment extends Fragment {
         releaseDate = v.findViewById(R.id.releasetimeid);
         runTimeText = v.findViewById(R.id.timeid);
         genres = v.findViewById(R.id.genresid);
-        budget =v.findViewById(R.id.budgetid);
-        rate =  v.findViewById(R.id.rateid);
+        budget = v.findViewById(R.id.budgetid);
+        rate = v.findViewById(R.id.rateid);
         status = v.findViewById(R.id.statusid);
         adult = v.findViewById(R.id.adultid);
         viewPager = v.findViewById(R.id.viewPagerid);
@@ -70,34 +71,27 @@ public class MovieDetailFragment extends Fragment {
         indicator.setViewPager(viewPager);
 
         setObjects();
-     /*   posterImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FullPoster fullPoster = FullPoster.newInstance(movie.getPosterImage());
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
-            }
-        });
-*/
 
-final Handler handler = new Handler();
-final Runnable runnable = new Runnable() {
-    @Override
-    public void run() {
-        if(viewPagerAdapter.getCount() == viewPager.getCurrentItem()+1)
-            viewPager.setCurrentItem(0,true);
-        else
-        viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
-    }
-};
+
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (viewPagerAdapter.getCount() == viewPager.getCurrentItem() + 1)
+                    viewPager.setCurrentItem(0, true);
+                else
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+            }
+        };
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
 
-              handler.post(runnable);
+                handler.post(runnable);
 
             }
-        },2000,2000);
+        }, 2000, 2000);
 
 
         return v;
@@ -107,16 +101,16 @@ final Runnable runnable = new Runnable() {
     private void setObjects() {
         overviewText.setText(movie.getOverView());
         releaseDate.setText(movie.getReleaseDate());
-        runTimeText.setText(movie.getRunTime()+" min");
-genres.setText(movie.getGenreList());
+        runTimeText.setText(movie.getRunTime() + " min");
+        genres.setText(movie.getGenreList());
 
-adult.setText(( movie.isAdult()));
-budget.setText(movie.getBudget()+"");
-status.setText(movie.getStatus());
-rate.setText(movie.getTmdbRate()+"/10");
+        adult.setText((movie.isAdult()));
+        budget.setText(movie.getBudget() + "");
+        status.setText(movie.getStatus());
+        rate.setText(movie.getTmdbRate() + "/10");
         title.setText(movie.getTitle());
 
-       // ImageController.putImageHighQuality(movie.getPosterImage(), posterImage);
+        MainActivity.getActivity().loadFragment(R.id.productionframelayoutid,ProductionCompanyFragment.newInstance(movie));
 
     }
 
