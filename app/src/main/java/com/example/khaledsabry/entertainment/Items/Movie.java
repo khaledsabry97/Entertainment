@@ -27,6 +27,15 @@ public class Movie {
     private int runTime;
     private Double popularity;
     private boolean isAdult;
+    private int collectionId;
+
+    public int getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(int collectionId) {
+        this.collectionId = collectionId;
+    }
 
     public String isAdult() {
         if(isAdult)

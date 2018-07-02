@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
-import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;

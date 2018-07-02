@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Connection;
 
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
+import com.example.khaledsabry.entertainment.Fragments.SimilarFragment;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Crew;
@@ -63,6 +64,7 @@ public class Tmdb {
     private String reviews = "reviews";
     private String author = "author";
     private String content = "content";
+    private String belongs_to_collection = "belongs_to_collection";
 
 
     private static final Tmdb ourInstance = new Tmdb();
@@ -297,5 +299,104 @@ public class Tmdb {
         }
     }
 
+
+    public Movie getMovieVideosCreditsCategories(JSONObject movieDetails)
+    {
+        Movie movie = new Movie();
+        try {
+
+            JSONObject cast = movieDetails.getJSONObject(credits);
+            JSONObject videos = movieDetails.getJSONObject(this.videos);
+
+
+            JSONArray jsonArray;
+            int i;
+            ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
+            ArrayList<Character> characters = new ArrayList<>();
+            ArrayList<Crew> crews = new ArrayList<>();
+            ArrayList<String> trailers = new ArrayList<>();
+
+
+            jsonArray = movieDetails.getJSONArray(production_companies);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids = object.getInt(id);
+                String logo = object.getString(logo_path);
+                String nam = object.getString(name);
+                String countr = object.getString(origin_country);
+                ProductionCompany productionCompany = new ProductionCompany(ids, logo, nam, countr);
+                productionCompanies.add(productionCompany);
+                i++;
+            }
+
+
+            jsonArray = cast.getJSONArray(this.cast);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids = object.getInt(id);
+                String nam = object.getString(name);
+                String profilePath = object.getString(profile_path);
+                int gend = object.getInt(gender);
+                String characterName = object.getString(this.character);
+                Artist artist = new Artist(nam, ids, gend, profilePath);
+                Character character = new Character(artist, characterName);
+
+
+                characters.add(character);
+                i++;
+            }
+
+
+            jsonArray = cast.getJSONArray(crew);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                int ids = object.getInt(id);
+                String nam = object.getString(name);
+                String jobtitle = object.getString(job);
+                String profilePath = object.getString(profile_path);
+                int gend = object.getInt(gender);
+
+                Artist artist = new Artist(nam, ids, gend, profilePath);
+                Crew crew = new Crew(artist, jobtitle);
+                crews.add(crew);
+
+
+                i++;
+            }
+
+
+
+
+
+
+            jsonArray = videos.getJSONArray(this.results);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.key);
+                trailers.add(filepath);
+                i++;
+            }
+
+
+
+            movie.setMovieId(movieDetails.getInt(id));
+            movie.setPopularity(movieDetails.getDouble(popularity));
+            movie.setTrailers(trailers);
+
+            movie.setCharacters(characters);
+            movie.setProductionCompanies(productionCompanies);
+            movie.setCrews(crews);
+
+        } catch (JSONException e) {
+            String s = e.toString();
+
+        }
+        return movie;
+    }
 
 }

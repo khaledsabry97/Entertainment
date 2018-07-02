@@ -79,4 +79,17 @@ public class MovieController {
 
     }
 
+    public void getMovieVideosCreditsCategories(int movieID, final OnMovieDataSuccess listener) {
+        movieGetDetails = "movie/"+movieID;
+        String URL = makeBaseUrl(movieGetDetails)+"&append_to_response=credits,videos";
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getMovieVideosCreditsCategories(jsonObject));
+
+            }
+        });
+    }
+
 }

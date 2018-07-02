@@ -61,8 +61,8 @@ bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
             loadFragment(MovieDetailFragment.newInstance(movieId));
 
         }
-     //  else if(item.getItemId() == R.id.navigation_dashboard)
-     //       loadFragment(CastAndCrewFragment.newInstance(movie));
+       else if(item.getItemId() == R.id.navigation_dashboard)
+            loadFragment(MovieMoreDetailsFragment.newInstance(movieId));
        // else if(item.getItemId() == R.id.navigation_notifications)
           //  loadFragment(PosterFragment.newInstance(movie));
       //  else if(item.getItemId() == R.id.navigation_trailers)

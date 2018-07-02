@@ -9,3 +9,13 @@ the plan :
 5/7/2018 : try to find better interface
 6/7/2018: add recommendations
 7/7/2018: 
+
+
+
+
+- put recommend text on recommendations
+- put similar text on similar movies
+- put Actor and crew in the main movie info
+- change the tmdb to best handling for the main movie info
+- run the images
+- put youtube in a recyclar view
