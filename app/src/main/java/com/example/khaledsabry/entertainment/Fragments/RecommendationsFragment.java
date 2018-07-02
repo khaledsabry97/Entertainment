@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.RecommendationsPagerAdapter;
-import com.example.khaledsabry.entertainment.Connection.TmdbType;
+import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
@@ -30,7 +30,11 @@ public class RecommendationsFragment extends Fragment {
     ViewPager viewPager;
     CircleIndicator indicator;
     static int id;
+    static int currentId = -1;
     RecommendationsPagerAdapter recommendationsPagerAdapter;
+    MovieController movieController = new MovieController();
+   static ArrayList<Movie> movies = new ArrayList<>();
+
     public static RecommendationsFragment newInstance(int id) {
         RecommendationsFragment fragment = new RecommendationsFragment();
 RecommendationsFragment.id = id;
@@ -48,19 +52,28 @@ RecommendationsFragment.id = id;
          viewPager = v.findViewById(R.id.recoviewPagerid);
          indicator = v.findViewById(R.id.recoindicatorid);
 
-        TmdbType tmdbType = new TmdbType();
-        tmdbType.getRecommondations(id, new OnMovieList() {
-            @Override
-            public void onMovieList(ArrayList<Movie> movies) {
-                setObjects(movies);
-            }
-        });
+         loadRecommendations();
+
 
 
         moveImage();
 
 
         return v;
+    }
+
+    private void loadRecommendations() {
+        if(id != currentId)
+            movieController.getRecommondations(id, new OnMovieList() {
+                @Override
+                public void onMovieList(ArrayList<Movie> movies) {
+                    currentId = id;
+                    RecommendationsFragment.movies = movies;
+                    setObjects(movies);
+                }
+            });
+        else
+            setObjects(movies);
     }
 
     private void setObjects(ArrayList<Movie> movies)

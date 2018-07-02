@@ -4,7 +4,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
-import com.example.khaledsabry.entertainment.YoutubeFragment;
 
 
-public class DetailFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
+public class DetailFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
 
 static int movieId;
 static int id = -200 ;
@@ -39,7 +36,8 @@ static int id = -200 ;
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         BottomNavigationView bottomNavigationView = v.findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setOnNavigationItemReselectedListener(this);
+     //   bottomNavigationView.setOnNavigationItemReselectedListener(this);
+      //  bottomNavigationView.animate().rotationYBy(100);
 
 
         bottomNavigationView.setSelectedItemId(id);
@@ -63,24 +61,15 @@ bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
             loadFragment(MovieDetailFragment.newInstance(movieId));
 
         }
-        else if(item.getItemId() == R.id.navigation_dashboard)
-            loadFragment(CastAndCrewFragment.newInstance(movie));
-        else if(item.getItemId() == R.id.navigation_notifications)
-            loadFragment(PosterFragment.newInstance(movie));
-        else if(item.getItemId() == R.id.navigation_trailers)
-            loadFragment(YoutubeFragment.newInstance(movie));
+     //  else if(item.getItemId() == R.id.navigation_dashboard)
+     //       loadFragment(CastAndCrewFragment.newInstance(movie));
+       // else if(item.getItemId() == R.id.navigation_notifications)
+          //  loadFragment(PosterFragment.newInstance(movie));
+      //  else if(item.getItemId() == R.id.navigation_trailers)
+      //      loadFragment(YoutubeFragment.newInstance(movie));
         else if(item.getItemId() == R.id.navigation_reco_simi)
-            loadFragment(RecommendedAndSimilerFragment.newInstance(movie));
+            loadFragment(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;
     }
 
-    @Override
-    public void onNavigationItemReselected(@NonNull MenuItem item) {
-        DetailFragment.id = item.getItemId();
-
-        if(item.getItemId() == R.id.navigation_home)
-            loadFragment(MovieDetailFragment.newInstance(movie));
-        else if(item.getItemId() == R.id.navigation_dashboard)
-            loadFragment(CastAndCrewFragment.newInstance(movie));
-    }
 }

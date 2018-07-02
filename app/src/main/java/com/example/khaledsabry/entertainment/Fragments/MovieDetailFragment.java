@@ -8,10 +8,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
+import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
@@ -24,34 +25,34 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class MovieDetailFragment extends Fragment {
 
-    ImageView posterImage;
+    static int movieId;
     TextView title;
-    static Movie movie;
+    static Movie movie = null;
 
+    static int currentMovieId = -1;
     TextView overviewText;
     TextView releaseDate;
     TextView runTimeText;
     TextView genres;
-
     TextView budget;
+    TextView revenue;
     TextView rate;
     TextView adult;
     TextView status;
-
-    int counterPosters = 0;
+    CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
 
-    public static MovieDetailFragment newInstance(Movie movie) {
+    public static MovieDetailFragment newInstance(int movieId) {
         MovieDetailFragment fragment = new MovieDetailFragment();
-        fragment.movie = movie;
+        MovieDetailFragment.movieId = movieId;
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             // Inflate the layout for this fragment
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.movie_detail_v3, container, false);
         title = v.findViewById(R.id.titleId);
         overviewText = v.findViewById(R.id.overviewID);
@@ -63,18 +64,43 @@ public class MovieDetailFragment extends Fragment {
         status = v.findViewById(R.id.statusid);
         adult = v.findViewById(R.id.adultid);
         viewPager = v.findViewById(R.id.viewPagerid);
+        indicator = v.findViewById(R.id.indicator);
+        revenue = v.findViewById(R.id.revenueid);
+
+        getMovieDetails();
+
+        return v;
+    }
+
+
+    private void setObjects(Movie movie) {
+        overviewText.setText(movie.getOverView());
+        releaseDate.setText(movie.getReleaseDate());
+        runTimeText.setText(movie.getRunTime() + " min");
+        genres.setText(movie.getGenreList());
+        revenue.setText(movie.getRevneue());
+        adult.setText((movie.isAdult()));
+        budget.setText(movie.getBudget());
+        status.setText(movie.getStatus());
+        rate.setText(movie.getTmdbRate() + "/10");
+        title.setText(movie.getTitle());
+        movePoster();
         viewPagerAdapter = new MainPosterViewPager(movie.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
-        final CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);
 
-        setObjects();
+        MainActivity.getActivity().loadFragment(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie));
+
+    }
 
 
+    private void movePoster() {
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                if (viewPagerAdapter == null)
+                    return;
                 if (viewPagerAdapter.getCount() == viewPager.getCurrentItem() + 1)
                     viewPager.setCurrentItem(0, true);
                 else
@@ -90,27 +116,21 @@ public class MovieDetailFragment extends Fragment {
 
             }
         }, 2000, 2000);
-
-
-        return v;
     }
 
 
-    private void setObjects() {
-        overviewText.setText(movie.getOverView());
-        releaseDate.setText(movie.getReleaseDate());
-        runTimeText.setText(movie.getRunTime() + " min");
-        genres.setText(movie.getGenreList());
-
-        adult.setText((movie.isAdult()));
-        budget.setText("$"+movie.getBudget());
-        status.setText(movie.getStatus());
-        rate.setText(movie.getTmdbRate() + "/10");
-        title.setText(movie.getTitle());
-
-        MainActivity.getActivity().loadFragment(R.id.productionframelayoutid,ProductionCompanyFragment.newInstance(movie));
-
+    public void getMovieDetails() {
+        MovieController movieController = new MovieController();
+        if (movieId != currentMovieId)
+            movieController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
+                @Override
+                public void onSuccess(Movie movie) {
+                    currentMovieId = movie.getMovieId();
+                    MovieDetailFragment.movie = movie;
+                    setObjects(movie);
+                }
+            });
+        else
+            setObjects(movie);
     }
-
-
 }

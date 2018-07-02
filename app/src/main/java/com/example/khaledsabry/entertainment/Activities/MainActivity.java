@@ -9,6 +9,7 @@ import android.transition.Transition;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
 import com.example.khaledsabry.entertainment.Fragments.DetailFragment;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
@@ -43,23 +44,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Settings.getInstance().setWidthAndHeight(getWindowManager());
+        TmdbConnection.getInstance().setContext(getApplicationContext());
 
-        loadBlankFragment();
+       // loadBlankFragment();
 
 
         periodicHideNavigation();
-
+        loadMovieDetailFragment(68735);
 
     }
 
     public void loadBlankFragment()
     {
 
-        getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,BlankFragment.newInstance()).addToBackStack(null).commit();
+        //getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,BlankFragment.newInstance()).addToBackStack(null).commit();
     }
 
-    public void loadMovieDetailFragment(Movie movie) {
-        DetailFragment detailFragment = DetailFragment.newInstance(movie, true);
+    public void loadMovieDetailFragment(int movieId) {
+        DetailFragment detailFragment = DetailFragment.newInstance(movieId, true);
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, detailFragment).addToBackStack(null).commit();
 
     }

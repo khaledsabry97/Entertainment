@@ -184,16 +184,19 @@ public class Movie {
 
         DecimalFormat decimalFormat = new DecimalFormat("#,##0");
         String numberAsString = decimalFormat.format(budget);
+        numberAsString = "$"+numberAsString;
         return numberAsString;
-      //  return budget;
     }
 
     public void setBudget(int budget) {
         this.budget = budget;
     }
 
-    public int getRevneue() {
-        return revneue;
+    public String getRevneue() {
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+        String numberAsString = decimalFormat.format(revneue);
+        numberAsString = "$"+numberAsString;
+        return numberAsString;
     }
 
     public void setRevneue(int revneue) {

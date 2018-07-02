@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.RecommendationsPagerAdapter;
-import com.example.khaledsabry.entertainment.Connection.TmdbType;
+import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
@@ -30,10 +30,15 @@ public class SimilarFragment extends Fragment {
     ViewPager viewPager;
     CircleIndicator indicator;
     static int id;
+    static int currentId = -1;
+
     RecommendationsPagerAdapter recommendationsPagerAdapter;
+    static ArrayList<Movie> movies = new ArrayList<>();
+    MovieController movieController = new MovieController();
+
     public static SimilarFragment newInstance(int id) {
         SimilarFragment fragment = new SimilarFragment();
-SimilarFragment.id = id;
+        SimilarFragment.id = id;
         return fragment;
     }
 
@@ -47,13 +52,8 @@ SimilarFragment.id = id;
         viewPager = v.findViewById(R.id.simiviewPagerid);
         indicator = v.findViewById(R.id.simiindicatorid);
 
-        TmdbType tmdbType = new TmdbType();
-        tmdbType.getSimilar(id, new OnMovieList() {
-            @Override
-            public void onMovieList(ArrayList<Movie> movies) {
-                setObjects(movies);
-            }
-        });
+
+        loadSimilars();
 
 
         moveImage();
@@ -62,21 +62,33 @@ SimilarFragment.id = id;
         return v;
     }
 
-    private void setObjects(ArrayList<Movie> movies)
-    {
-         recommendationsPagerAdapter = new RecommendationsPagerAdapter(movies);
+    private void loadSimilars() {
+        if (currentId != id)
+            movieController.getSimilar(id, new OnMovieList() {
+                @Override
+                public void onMovieList(ArrayList<Movie> movies) {
+                    currentId = id;
+                    SimilarFragment.movies = movies;
+                    setObjects(movies);
+                }
+            });
+        else
+            setObjects(movies);
+    }
+
+    private void setObjects(ArrayList<Movie> movies) {
+        recommendationsPagerAdapter = new RecommendationsPagerAdapter(movies);
 
         viewPager.setAdapter(recommendationsPagerAdapter);
         indicator.setViewPager(viewPager);
     }
 
-    private void moveImage()
-    {
+    private void moveImage() {
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if(recommendationsPagerAdapter ==null)
+                if (recommendationsPagerAdapter == null)
                     return;
                 if (recommendationsPagerAdapter.getCount() == viewPager.getCurrentItem() + 1)
                     viewPager.setCurrentItem(0, true);

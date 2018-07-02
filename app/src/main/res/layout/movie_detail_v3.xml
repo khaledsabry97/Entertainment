@@ -57,15 +57,14 @@
                 <TextView
                     android:id="@+id/titleId"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/background2"
+                    android:background="@color/cardview_dark_background"
                     android:fontFamily="@font/carterone"
                     android:includeFontPadding="true"
                     android:shadowColor="#000"
                     android:shadowDx="5"
                     android:shadowDy="5"
-                    android:text="Avenger Infinity: War"
                     android:textAlignment="center"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="30sp" />
@@ -107,7 +106,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
-                                android:text="Cast"
                                 android:textColor="@color/cardview_light_background"
                                 android:textSize="17sp" />
                         </LinearLayout>
@@ -144,7 +142,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
-                            android:text="Cast"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -172,7 +169,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
-                            android:text="Cast"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -202,7 +198,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:text="Cast"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="17sp" />
 
@@ -230,7 +225,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:text="Cast"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="17sp" />
 
@@ -257,7 +251,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
-                            android:text="Cast"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -285,7 +278,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:text="Cast"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="17sp" />
 
@@ -313,7 +305,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:text="Cast"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="17sp" />
 
@@ -341,7 +332,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:text="Cast"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="17sp" />
 

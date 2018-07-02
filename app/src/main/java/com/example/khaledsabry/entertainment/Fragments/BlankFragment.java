@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
-import com.example.khaledsabry.entertainment.Connection.TmdbType;
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Connection.Tmdb;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -30,12 +30,11 @@ public class BlankFragment extends Fragment {
         // Inflate the layout for this fragment
         View v  = inflater.inflate(R.layout.fragment_blank, container, false);
         TmdbConnection.getInstance().setContext(getContext());
-        TmdbType tmdbType = new TmdbType();
-        MovieController.getInstance().setBlankFragment(this);
-        tmdbType.getMovieGetDetails(68735, new OnMovieDataSuccess() {
+        MovieController movieController = new MovieController();
+        movieController.getMovieGetDetails(68735, new OnMovieDataSuccess() {
             @Override
             public void onSuccess(Movie movie) {
-                loadMovieDetails(movie);
+             //   loadMovieDetails(movie);
             }
         });
 
@@ -46,12 +45,12 @@ public class BlankFragment extends Fragment {
         return v;
     }
 
-
+/*
     public void loadMovieDetails(Movie movie)
     {
         mainActivity = (MainActivity) getActivity();
         mainActivity.loadMovieDetailFragment(movie);
 
-    }
+    }*/
 
 }

@@ -1,9 +1,7 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Connection.TmdbType;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.Fragments.DetailFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
@@ -43,20 +38,23 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
         TextView rate = view.findViewById(R.id.rateid);
         TextView title = view.findViewById(R.id.titleid);
 
-        ImageController.putImageHighQuality(movie.getPosterImage(), poster);
+        ImageController.putImageMidQuality(movie.getPosterImage(), poster);
         rate.setText(movie.getTmdbRate() + "");
         title.setText(movie.getTitle());
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TmdbType tmdbType = new TmdbType();
+                MainActivity.getActivity().loadFragment(R.id.mainContainer, DetailFragment.newInstance(movie.getMovieId(), true));
+
+                /*
+                MovieController tmdbType = new MovieController();
                 tmdbType.getMovieGetDetails(movie.getMovieId(), new OnMovieDataSuccess() {
                             @Override
                             public void onSuccess(Movie movie) {
                                 MainActivity.getActivity().loadFragment(R.id.mainContainer, DetailFragment.newInstance(movie, true));
 
                             }
-                        });
+                        });*/
             }
         });
 
