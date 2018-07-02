@@ -20,11 +20,11 @@ import com.example.khaledsabry.entertainment.YoutubeFragment;
 
 public class DetailFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
 
-static Movie movie;
+static int movieId;
 static int id = -200 ;
-    public static DetailFragment newInstance(Movie movie, boolean reset) {
+    public static DetailFragment newInstance(int movieId, boolean reset) {
         DetailFragment fragment = new DetailFragment();
-        DetailFragment.movie = movie;
+        DetailFragment.movieId = movieId;
         if(reset)
             DetailFragment.id = -200;
         if(DetailFragment.id == -200)
@@ -60,7 +60,7 @@ bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DetailFragment.id = item.getItemId();
         if(item.getItemId() == R.id.navigation_home) {
-            loadFragment(MovieDetailFragment.newInstance(movie));
+            loadFragment(MovieDetailFragment.newInstance(movieId));
 
         }
         else if(item.getItemId() == R.id.navigation_dashboard)

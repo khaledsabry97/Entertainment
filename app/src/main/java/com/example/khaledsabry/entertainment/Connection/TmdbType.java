@@ -38,7 +38,7 @@ public class TmdbType {
 
     public void getMovieGetDetails(int movieID, final OnMovieDataSuccess listener) {
         movieGetDetails = "movie/"+movieID;
-        String URL = makeBaseUrl(movieGetDetails)+"&append_to_response=credits,images,videos";
+        String URL = makeBaseUrl(movieGetDetails)+"&append_to_response=credits,images,videos,reviews";
 
         connection.connect(URL, new OnSuccess() {
             @Override

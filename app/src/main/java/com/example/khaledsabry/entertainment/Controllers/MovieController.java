@@ -8,6 +8,7 @@ import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Items.Review;
 import com.example.khaledsabry.entertainment.Settings;
 
 import org.json.JSONArray;
@@ -60,6 +61,9 @@ public class MovieController {
     private String results = "results";
     private String key = "key";
     private String genre_ids = "genre_ids";
+    private String reviews = "reviews";
+    private String author = "author";
+    private String content = "content";
 
 
     private MainActivity mainActivity;
@@ -88,6 +92,7 @@ public class MovieController {
             JSONObject cast = movieDetails.getJSONObject(credits);
             JSONObject images = movieDetails.getJSONObject(this.images);
             JSONObject videos = movieDetails.getJSONObject(this.videos);
+            JSONObject reviews = movieDetails.getJSONObject(this.reviews);
 
 
             JSONArray jsonArray;
@@ -99,6 +104,8 @@ public class MovieController {
             ArrayList<String> posters = new ArrayList<>();
             ArrayList<String> backdrops = new ArrayList<>();
             ArrayList<String> trailers = new ArrayList<>();
+            ArrayList<Review> reviews1 = new ArrayList<>();
+
 
             jsonArray = movieDetails.getJSONArray(production_companies);
             i = 0;
@@ -191,6 +198,18 @@ public class MovieController {
                 trailers.add(filepath);
                 i++;
             }
+
+            jsonArray = reviews.getJSONArray(this.results);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.key);
+                String name = object.getString(this.author);
+                String content = object.getString(this.content);
+                Review review = new Review(content,name);
+                reviews1.add(review);
+                i++;
+            }
             movie.setTitle(movieDetails.getString(title));
             movie.setBudget(movieDetails.getInt(budget));
             movie.setLanguage(movieDetails.getString(original_language));
@@ -209,6 +228,7 @@ public class MovieController {
             movie.setBackdrops(backdrops);
             movie.setTrailers(trailers);
 
+            movie.setReviews(reviews1);
             movie.setCharacters(characters);
             movie.setGenres(genre);
             movie.setProductionCompanies(productionCompanies);

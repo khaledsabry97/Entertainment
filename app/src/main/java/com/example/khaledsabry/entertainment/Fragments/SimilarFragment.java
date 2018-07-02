@@ -76,6 +76,8 @@ SimilarFragment.id = id;
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                if(recommendationsPagerAdapter ==null)
+                    return;
                 if (recommendationsPagerAdapter.getCount() == viewPager.getCurrentItem() + 1)
                     viewPager.setCurrentItem(0, true);
                 else

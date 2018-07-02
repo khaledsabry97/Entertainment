@@ -46,6 +46,15 @@ public class Movie {
     private ArrayList<String> posters = new ArrayList<>();
     private ArrayList<String> backdrops = new ArrayList<>();
     private ArrayList<String> trailers = new ArrayList<>();
+    private ArrayList<Review> reviews = new ArrayList<>();
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public ArrayList<String> getTrailers() {
         return trailers;
