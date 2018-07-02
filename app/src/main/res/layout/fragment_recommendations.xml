@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.khaledsabry.entertainment.Fragments.RecommendationsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/recoviewPagerid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></android.support.v4.view.ViewPager>
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/recoindicatorid"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:id="@+id/titleIds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/carterone"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textSize="40sp"
+            android:typeface="normal"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="43dp" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

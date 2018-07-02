@@ -21,15 +21,14 @@ import java.util.ArrayList;
 public class CrewRecyclerAdapter extends RecyclerView.Adapter<CrewViewHolder> {
 
     ArrayList<Crew> crews = new ArrayList<>();
+
     public CrewRecyclerAdapter(ArrayList<Crew> crews) {
         this.crews = crews;
-        while (crews.size() >20)
-        this.crews.remove(this.crews.size()-1);
     }
 
     @Override
     public CrewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View cardContent = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_cardview,parent,false);
+        View cardContent = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_cardview, parent, false);
 
         return new CrewViewHolder(cardContent);
     }
@@ -50,6 +49,8 @@ public class CrewRecyclerAdapter extends RecyclerView.Adapter<CrewViewHolder> {
 
     @Override
     public int getItemCount() {
+        if (crews.size() > 20)
+            return 20;
         return crews.size();
     }
 }

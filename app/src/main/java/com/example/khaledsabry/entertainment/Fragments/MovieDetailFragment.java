@@ -1,7 +1,6 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -12,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.khaledsabry.entertainment.Adapter.ViewPagerAdapter;
-import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
@@ -42,7 +40,7 @@ public class MovieDetailFragment extends Fragment {
 
     int counterPosters = 0;
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+    MainPosterViewPager viewPagerAdapter;
 
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment fragment = new MovieDetailFragment();
@@ -65,7 +63,7 @@ public class MovieDetailFragment extends Fragment {
         status = v.findViewById(R.id.statusid);
         adult = v.findViewById(R.id.adultid);
         viewPager = v.findViewById(R.id.viewPagerid);
-        viewPagerAdapter = new ViewPagerAdapter(movie.getPosters());
+        viewPagerAdapter = new MainPosterViewPager(movie.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
         final CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);

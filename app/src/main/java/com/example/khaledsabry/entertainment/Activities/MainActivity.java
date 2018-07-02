@@ -10,8 +10,12 @@ import android.view.View;
 import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
 import com.example.khaledsabry.entertainment.Fragments.DetailFragment;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
+import com.example.khaledsabry.entertainment.Fragments.RecommendationsFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
+import com.example.khaledsabry.entertainment.Settings;
+
+import java.util.ArrayList;
 
 import static java.nio.file.Files.copy;
 
@@ -23,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivity = this;
     }
 
-    public int width;
-    public int height;
+
     public static MainActivity getActivity()
     {
         return mainActivity;
@@ -34,10 +37,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-         height = displayMetrics.heightPixels;
-         width = displayMetrics.widthPixels;
+        Settings.getInstance().setWidthAndHeight(getWindowManager());
+
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         BlankFragment blankFragment = BlankFragment.newInstance();
         if(blankFragment == null)
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
        getSupportFragmentManager().beginTransaction().replace(idContainer,fragment).addToBackStack(null).commit();
     }
+
+
+
+
 
 
 }

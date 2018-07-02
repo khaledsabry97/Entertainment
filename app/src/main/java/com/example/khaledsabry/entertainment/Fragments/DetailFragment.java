@@ -66,6 +66,8 @@ bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
             loadFragment(PosterFragment.newInstance(movie));
         else if(item.getItemId() == R.id.navigation_trailers)
             loadFragment(YoutubeFragment.newInstance(movie));
+        else if(item.getItemId() == R.id.navigation_reco_simi)
+            loadFragment(RecommendedAndSimilerFragment.newInstance(movie));
         return true;
     }
 

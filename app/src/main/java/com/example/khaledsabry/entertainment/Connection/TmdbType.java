@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Connection;
 
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 
 import org.json.JSONObject;
@@ -46,6 +47,40 @@ public class TmdbType {
 
             }
         });
+    }
+
+
+    public void getRecommondations(int movieId, final OnMovieList listener)
+    {
+        movieGetDetails = "movie/"+movieId+"/recommendations";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+              listener.onMovieList(controller.showRecommendationsAndSimilar(jsonObject));
+
+            }
+        });
+
+
+    }
+
+
+    public void getSimilar(int movieId, final OnMovieList listener)
+    {
+        movieGetDetails = "movie/"+movieId+"/similar";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+                listener.onMovieList(controller.showRecommendationsAndSimilar(jsonObject));
+
+            }
+        });
+
+
     }
 
 /*

@@ -8,6 +8,7 @@ import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Settings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,11 +54,12 @@ public class MovieController {
     private String release_date = "release_date";
     private String images = "images";
     private String posters = "posters";
-    private String backdrops  ="backdrops";
+    private String backdrops = "backdrops";
     private String file_path = "file_path";
-    private String videos= "videos";
-    private String results= "results";
+    private String videos = "videos";
+    private String results = "results";
     private String key = "key";
+    private String genre_ids = "genre_ids";
 
 
     private MainActivity mainActivity;
@@ -73,76 +75,11 @@ public class MovieController {
     private MovieController() {
     }
 
-    public MainActivity getMainActivity() {
-        return mainActivity;
-    }
-
-    public void setMainActivity(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
 
     public void setBlankFragment(BlankFragment blankFragment) {
         this.blankFragment = blankFragment;
     }
 
-    /*
-        public void showMovie(JSONObject jsonObject)
-        {
-            try {
-
-                Movie movie = new Movie();
-                movie.setTitle(jsonObject.getString(title));
-                movie.setBudget(jsonObject.getInt(budget));
-                movie.setLanguage(jsonObject.getString(original_language));
-                movie.setOverView(jsonObject.getString(overview));
-                movie.setMovieImdbId(jsonObject.getString(imdb_id));
-                movie.setMovieId( jsonObject.getInt(id));
-                movie.setRevneue(jsonObject.getInt(revenue));
-                movie.setPopularity(jsonObject.getDouble(popularity));
-                movie.setPosterImage(jsonObject.getString(poster_path));
-                movie.setTmdbRate(jsonObject.getInt(vote_average));
-                movie.setStatus(jsonObject.getString(status));
-                movie.setRunTime(jsonObject.getInt(runtime));
-                JSONArray jsonArray = jsonObject.getJSONArray(production_companies);
-                int i = 0;
-                while(!jsonArray.isNull(i))
-                {
-                    JSONObject object = jsonArray.getJSONObject(i);
-                    int ids =  object.getInt(id);
-                    String logo = object.getString(logo_path);
-                    String nam = object.getString(name);
-                    String countr = object.getString(origin_country);
-                    ProductionCompany productionCompany = new ProductionCompany(ids,logo,nam,countr);
-                    productionCompanies.add(productionCompany);
-                    i++;
-                }
-                jsonArray = jsonObject.getJSONArray(genres);
-                i = 0;
-                while(!jsonArray.isNull(i))
-                {
-                    JSONObject object = jsonArray.getJSONObject(i);
-                    int ids =  object.getInt(id);
-                    String nam = object.getString(name);
-
-                    Genre genre = new Genre(ids,nam);
-                    this.genre.add(genre);
-                    i++;
-                }
-
-                movie.setGenres(genre);
-                movie.setProductionCompanies(productionCompanies);
-                genre.clear();
-                productionCompanies.clear();
-                blankFragment.loadMovieDetails(movie);
-                // mainActivity.show(movie);
-
-            }
-            catch (JSONException e)
-            {
-
-            }
-        }
-    */
     public void showMovie(JSONObject movieDetails) {
         try {
 
@@ -230,11 +167,10 @@ public class MovieController {
             i = 0;
             while (!jsonArray.isNull(i)) {
                 JSONObject object = jsonArray.getJSONObject(i);
-String filepath = object.getString(this.file_path);
-posters.add(filepath);
+                String filepath = object.getString(this.file_path);
+                posters.add(filepath);
                 i++;
             }
-
 
 
             jsonArray = images.getJSONArray(this.backdrops);
@@ -285,4 +221,72 @@ posters.add(filepath);
 
         }
     }
+
+
+    public ArrayList<Movie> showRecommendationsAndSimilar(JSONObject movieDetails) {
+        ArrayList<Movie> movies = new ArrayList<>();
+        JSONArray jsonArray = null;
+        try {
+            int i;
+            jsonArray = movieDetails.getJSONArray(this.results);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                getMovies(object, movies);
+
+
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+return movies;
+    }
+
+
+    private void getMovies(JSONObject movieDetails, ArrayList<Movie> movies) {
+        try {
+
+            Movie movie = new Movie();
+            JSONArray jsonArray;
+            int i;
+
+            ArrayList<Genre> genre = new ArrayList<>();
+
+
+
+            jsonArray = movieDetails.getJSONArray(genre_ids);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                int ids =jsonArray.getInt(i);
+
+                Genre gen = new Genre(ids);
+                genre.add(gen);
+                i++;
+            }
+
+
+            movie.setTitle(movieDetails.getString(title));
+            movie.setLanguage(movieDetails.getString(original_language));
+            movie.setOverView(movieDetails.getString(overview));
+            movie.setMovieId(movieDetails.getInt(id));
+            movie.setPosterImage(movieDetails.getString(poster_path));
+            movie.setTmdbRate(movieDetails.getInt(vote_average));
+            movie.setAdult(movieDetails.getBoolean(adult));
+            movie.setReleaseDate(movieDetails.getString(release_date));
+
+            movie.setGenres(genre);
+            movies.add(movie);
+
+        } catch (JSONException e) {
+            String s = e.toString();
+
+        }
+    }
+
+
 }
