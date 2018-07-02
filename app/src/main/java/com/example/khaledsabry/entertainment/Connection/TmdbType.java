@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Connection;
 
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 
@@ -35,7 +36,7 @@ public class TmdbType {
     }
 
 
-    public void getMovieGetDetails(int movieID) {
+    public void getMovieGetDetails(int movieID, final OnMovieDataSuccess listener) {
         movieGetDetails = "movie/"+movieID;
         String URL = makeBaseUrl(movieGetDetails)+"&append_to_response=credits,images,videos";
 
@@ -43,7 +44,7 @@ public class TmdbType {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                // getMovieCast(jsonObject);
-                controller.showMovie(jsonObject);
+               listener.onSuccess(controller.showMovie(jsonObject));
 
             }
         });

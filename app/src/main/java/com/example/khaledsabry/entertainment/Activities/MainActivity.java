@@ -2,8 +2,10 @@ package com.example.khaledsabry.entertainment.Activities;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Transition;
 import android.util.DisplayMetrics;
 import android.view.View;
 
@@ -16,6 +18,8 @@ import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Settings;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.nio.file.Files.copy;
 
@@ -23,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
     static Movie movie;
     private static MainActivity mainActivity;
+
     public MainActivity() {
         mainActivity = this;
     }
 
+    int i = 0;
 
-    public static MainActivity getActivity()
-    {
+    public static MainActivity getActivity() {
         return mainActivity;
     }
 
@@ -39,34 +44,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Settings.getInstance().setWidthAndHeight(getWindowManager());
 
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        BlankFragment blankFragment = BlankFragment.newInstance();
-        if(blankFragment == null)
-        {blankFragment = BlankFragment.newInstance();
-        }
-        fm.beginTransaction().add(R.id.mainContainer,blankFragment).commit();
+        loadBlankFragment();
+
+
+        periodicHideNavigation();
+
 
     }
 
-    public  void loadMovieDetailFragment(Movie movie)
+    public void loadBlankFragment()
     {
-        DetailFragment detailFragment = DetailFragment.newInstance(movie);
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,detailFragment).addToBackStack(null).commit();
+
+        getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,BlankFragment.newInstance()).addToBackStack(null).commit();
+    }
+
+    public void loadMovieDetailFragment(Movie movie) {
+        DetailFragment detailFragment = DetailFragment.newInstance(movie, true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, detailFragment).addToBackStack(null).commit();
 
     }
 
 
-    public  void loadFullPosterFragment(String poster)
-    {
+    public void loadFullPosterFragment(String poster) {
         FullPoster fullPoster = FullPoster.newInstance(poster);
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,fullPoster).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, fullPoster).addToBackStack(null).commit();
     }
 
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(hasFocus)
+        if (hasFocus)
             hideSystemUI();
 
     }
@@ -87,20 +95,33 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
-
     }
 
 
+    public void loadFragment(int idContainer, android.support.v4.app.Fragment fragment) {
 
-    public void loadFragment(int idContainer,android.support.v4.app.Fragment fragment)
+        getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).addToBackStack(null).commit();
+    }
+
+
+    private void periodicHideNavigation()
     {
+        final Handler handler = new Handler();
 
-       getSupportFragmentManager().beginTransaction().replace(idContainer,fragment).addToBackStack(null).commit();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideSystemUI();
+
+                    }
+                });
+
+            }
+        }, 1000, 2000);
     }
-
-
-
-
-
 
 }

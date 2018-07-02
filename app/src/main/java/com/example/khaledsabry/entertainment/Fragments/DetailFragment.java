@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,9 +22,11 @@ public class DetailFragment extends Fragment implements BottomNavigationView.OnN
 
 static Movie movie;
 static int id = -200 ;
-    public static DetailFragment newInstance(Movie movie) {
+    public static DetailFragment newInstance(Movie movie, boolean reset) {
         DetailFragment fragment = new DetailFragment();
         DetailFragment.movie = movie;
+        if(reset)
+            DetailFragment.id = -200;
         if(DetailFragment.id == -200)
         DetailFragment.id = R.id.navigation_home;
         return fragment;

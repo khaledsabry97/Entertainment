@@ -48,7 +48,7 @@ images = posters;
                 MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(images.get(position))).addToBackStack(null).commit();
             }
         });
-        container.addView(view, position);
+        container.addView(view, 0);
 
         return view;
 

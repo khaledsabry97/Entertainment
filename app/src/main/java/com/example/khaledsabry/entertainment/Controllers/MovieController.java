@@ -80,7 +80,9 @@ public class MovieController {
         this.blankFragment = blankFragment;
     }
 
-    public void showMovie(JSONObject movieDetails) {
+    public Movie showMovie(JSONObject movieDetails) {
+
+        Movie movie = new Movie();
         try {
 
             JSONObject cast = movieDetails.getJSONObject(credits);
@@ -88,7 +90,6 @@ public class MovieController {
             JSONObject videos = movieDetails.getJSONObject(this.videos);
 
 
-            Movie movie = new Movie();
             JSONArray jsonArray;
             int i;
             ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
@@ -213,13 +214,12 @@ public class MovieController {
             movie.setProductionCompanies(productionCompanies);
             movie.setCrews(crews);
 
-
-            blankFragment.loadMovieDetails(movie);
-
         } catch (JSONException e) {
             String s = e.toString();
 
         }
+        return movie;
+
     }
 
 
