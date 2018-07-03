@@ -479,4 +479,45 @@ public class Tmdb {
         return movie;
 
     }
+
+    public Movie getReviews(JSONObject movieDetails,Movie movie)
+    {
+
+        try {
+
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            ArrayList<Review> reviews = new ArrayList<>();
+
+
+            jsonArray = movieDetails.getJSONArray(this.results);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String author = object.getString(this.author);
+                String content = object.getString(this.content);
+                Review review = new Review(content,author);
+
+                reviews.add(review);
+                i++;
+            }
+
+
+
+
+
+            movie.setReviews(reviews);
+
+
+        } catch (JSONException e) {
+            String s = e.toString();
+
+        }
+        return movie;
+
+    }
 }

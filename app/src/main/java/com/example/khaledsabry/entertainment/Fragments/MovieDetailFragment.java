@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
+import com.example.khaledsabry.entertainment.Adapter.ReviewPageAdapter;
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -46,7 +47,6 @@ public class MovieDetailFragment extends Fragment {
     MainPosterViewPager viewPagerAdapter;
     Button actorButton;
     Button crewButton;
-
     NestedScrollView scrollView;
 
     public static MovieDetailFragment newInstance(int movieId) {
@@ -74,10 +74,10 @@ public class MovieDetailFragment extends Fragment {
         revenue = v.findViewById(R.id.revenueid);
         actorButton = v.findViewById(R.id.button_actors_id);
         crewButton = v.findViewById(R.id.button_crew_id);
-scrollView = v.findViewById(R.id.sideid);
-scrollView.setVisibility(View.INVISIBLE);
-        getMovieDetails();
+        scrollView = v.findViewById(R.id.sideid);
+        scrollView.setVisibility(View.INVISIBLE);
 
+        getMovieDetails();
         return v;
     }
 
@@ -98,8 +98,8 @@ scrollView.setVisibility(View.INVISIBLE);
         indicator.setViewPager(viewPager);
 
 
-
         loadActorFragment();
+        loadReviewFragment();
         movePoster();
         scrollView.setVisibility(View.VISIBLE);
 
@@ -165,12 +165,17 @@ scrollView.setVisibility(View.INVISIBLE);
 
     private void loadActorFragment() {
         CastFragment castFragment = CastFragment.newInstance(movie);
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.actors_crews_id,castFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, castFragment).commit();
     }
 
     private void loadCrewFragment() {
         CrewFragment crewFragment = CrewFragment.newInstance(movie);
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.actors_crews_id,crewFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, crewFragment).commit();
     }
+
+    private void loadReviewFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ReviewLayoutid, ReviewFragment.newInstance(movieId)).commit();
+    }
+
 
 }

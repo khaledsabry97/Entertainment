@@ -105,4 +105,17 @@ public class MovieController {
             }
         });
     }
+
+    public void getReviews(int movieID, final OnMovieDataSuccess listener) {
+        movieGetDetails = "movie/"+movieID+"/reviews";
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getReviews(jsonObject,new Movie()));
+
+            }
+        });
+    }
 }
