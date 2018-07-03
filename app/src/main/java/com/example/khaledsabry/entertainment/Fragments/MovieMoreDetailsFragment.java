@@ -108,7 +108,7 @@ static Movie movie;
     }
 
     private void loadTrailersFragment() {
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.trailerid, YoutubeFragment.newInstance(movie)).commit();
+ //       getActivity().getSupportFragmentManager().beginTransaction().add(R.id.trailerid, YoutubeFragment.newInstance(movie)).commit();
 
     }
 

@@ -22,15 +22,14 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
 
-    static Movie movie;
-    public static YoutubeFragment newInstance(Movie movie) {
+    static String trailerId;
+
+    public static YoutubeFragment newInstance(String trailerId) {
         YoutubeFragment fragment = new YoutubeFragment();
-        YoutubeFragment.movie = movie;
+        YoutubeFragment.trailerId = trailerId;
         return fragment;
 
     }
-
-
 
 
     @Override
@@ -39,22 +38,22 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_youtube, container, false);
         YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
-getChildFragmentManager().beginTransaction().replace(R.id.youtube_fragment,youTubePlayerFragment).addToBackStack(null).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.youtube_fragment, youTubePlayerFragment).addToBackStack(null).commit();
 
-        youTubePlayerFragment.initialize(Settings.YoutubeApiKey,this);
+        youTubePlayerFragment.initialize(Settings.YoutubeApiKey, this);
         return v;
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        if(!b)
-            youTubePlayer.cueVideo(videoId);
+        if (!b)
+            youTubePlayer.cueVideo(trailerId);
     }
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         if (youTubeInitializationResult.isUserRecoverableError()) {
-            youTubeInitializationResult.getErrorDialog(this.getActivity(),1).show();
+            youTubeInitializationResult.getErrorDialog(this.getActivity(), 1).show();
         } else {
             Toast.makeText(this.getActivity(),
                     "YouTubePlayer.onInitializationFailure(): " + youTubeInitializationResult.toString(),
