@@ -36,11 +36,9 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
         final Movie movie = movies.get(position);
         ImageView poster = view.findViewById(R.id.posterid);
         TextView rate = view.findViewById(R.id.rateid);
-        TextView title = view.findViewById(R.id.titleid);
 
         ImageController.putImageMidQuality(movie.getPosterImage(), poster);
         rate.setText(movie.getTmdbRate() + "");
-        title.setText(movie.getTitle());
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

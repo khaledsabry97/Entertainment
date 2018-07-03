@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
@@ -42,6 +43,8 @@ public class MovieDetailFragment extends Fragment {
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
+    Button actorButton;
+    Button crewButton;
 
     public static MovieDetailFragment newInstance(int movieId) {
         MovieDetailFragment fragment = new MovieDetailFragment();
@@ -66,6 +69,8 @@ public class MovieDetailFragment extends Fragment {
         viewPager = v.findViewById(R.id.viewPagerid);
         indicator = v.findViewById(R.id.indicator);
         revenue = v.findViewById(R.id.revenueid);
+        actorButton = v.findViewById(R.id.button_actors_id);
+        crewButton = v.findViewById(R.id.button_crew_id);
 
         getMovieDetails();
 
@@ -84,11 +89,30 @@ public class MovieDetailFragment extends Fragment {
         status.setText(movie.getStatus());
         rate.setText(movie.getTmdbRate() + "/10");
         title.setText(movie.getTitle());
-        movePoster();
         viewPagerAdapter = new MainPosterViewPager(movie.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(viewPager);
 
+
+
+        loadActorFragment();
+        movePoster();
+
+
+        actorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadActorFragment();
+
+            }
+        });
+
+        crewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCrewFragment();
+            }
+        });
         MainActivity.getActivity().loadFragment(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie));
 
     }
@@ -133,4 +157,15 @@ public class MovieDetailFragment extends Fragment {
         else
             setObjects(movie);
     }
+
+    private void loadActorFragment() {
+        CastFragment castFragment = CastFragment.newInstance(movie);
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.actors_crews_id,castFragment).commit();
+    }
+
+    private void loadCrewFragment() {
+        CrewFragment crewFragment = CrewFragment.newInstance(movie);
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.actors_crews_id,crewFragment).commit();
+    }
+
 }
