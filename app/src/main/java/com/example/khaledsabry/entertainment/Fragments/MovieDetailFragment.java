@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class MovieDetailFragment extends Fragment {
     Button actorButton;
     Button crewButton;
 
+    NestedScrollView scrollView;
+
     public static MovieDetailFragment newInstance(int movieId) {
         MovieDetailFragment fragment = new MovieDetailFragment();
         MovieDetailFragment.movieId = movieId;
@@ -71,7 +74,8 @@ public class MovieDetailFragment extends Fragment {
         revenue = v.findViewById(R.id.revenueid);
         actorButton = v.findViewById(R.id.button_actors_id);
         crewButton = v.findViewById(R.id.button_crew_id);
-
+scrollView = v.findViewById(R.id.sideid);
+scrollView.setVisibility(View.INVISIBLE);
         getMovieDetails();
 
         return v;
@@ -97,6 +101,7 @@ public class MovieDetailFragment extends Fragment {
 
         loadActorFragment();
         movePoster();
+        scrollView.setVisibility(View.VISIBLE);
 
 
         actorButton.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +128,7 @@ public class MovieDetailFragment extends Fragment {
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (viewPagerAdapter == null)
+                if (viewPagerAdapter == null || viewPager == null)
                     return;
                 if (viewPagerAdapter.getCount() == viewPager.getCurrentItem() + 1)
                     viewPager.setCurrentItem(0, true);

@@ -5,6 +5,7 @@ import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
+import com.example.khaledsabry.entertainment.Items.Movie;
 
 import org.json.JSONObject;
 
@@ -92,4 +93,16 @@ public class MovieController {
         });
     }
 
+    public void getImages(int movieID, final OnMovieDataSuccess listener) {
+        movieGetDetails = "movie/"+movieID+"/images";
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getPostersBackdrops(jsonObject,new Movie()));
+
+            }
+        });
+    }
 }

@@ -27,14 +27,14 @@ public class Movie {
     private int runTime;
     private Double popularity;
     private boolean isAdult;
-    private int collectionId;
+    private Collection collection;
 
-    public int getCollectionId() {
-        return collectionId;
+    public Collection getCollection() {
+        return collection;
     }
 
-    public void setCollectionId(int collectionId) {
-        this.collectionId = collectionId;
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 
     public String isAdult() {

@@ -4,6 +4,7 @@ import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
 import com.example.khaledsabry.entertainment.Fragments.SimilarFragment;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
+import com.example.khaledsabry.entertainment.Items.Collection;
 import com.example.khaledsabry.entertainment.Items.Crew;
 import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -65,6 +66,7 @@ public class Tmdb {
     private String author = "author";
     private String content = "content";
     private String belongs_to_collection = "belongs_to_collection";
+    private String backdrop_path = "backdrop_path";
 
 
     private static final Tmdb ourInstance = new Tmdb();
@@ -83,21 +85,32 @@ public class Tmdb {
         try {
 
             JSONObject cast = movieDetails.getJSONObject(credits);
-            JSONObject images = movieDetails.getJSONObject(this.images);
             JSONObject videos = movieDetails.getJSONObject(this.videos);
             JSONObject reviews = movieDetails.getJSONObject(this.reviews);
+            JSONObject collection;
+            if(!movieDetails.isNull(this.belongs_to_collection)) {
+                collection = movieDetails.getJSONObject(this.belongs_to_collection);
 
 
+
+
+                    int id = collection.getInt(this.id);
+                    String name = collection.getString(this.name);
+                    String poster = collection.getString(this.poster_path);
+                    String background = collection.getString(this.backdrop_path);
+                Collection  collection1 = new Collection(id, name, poster, background);
+                    movie.setCollection(collection1);
+
+            }
             JSONArray jsonArray;
             int i;
             ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
             ArrayList<Genre> genre = new ArrayList<>();
             ArrayList<Character> characters = new ArrayList<>();
             ArrayList<Crew> crews = new ArrayList<>();
-            ArrayList<String> posters = new ArrayList<>();
-            ArrayList<String> backdrops = new ArrayList<>();
             ArrayList<String> trailers = new ArrayList<>();
             ArrayList<Review> reviews1 = new ArrayList<>();
+
 
 
             jsonArray = movieDetails.getJSONArray(production_companies);
@@ -164,24 +177,7 @@ public class Tmdb {
                 i++;
             }
 
-            jsonArray = images.getJSONArray(this.posters);
-            i = 0;
-            while (!jsonArray.isNull(i)) {
-                JSONObject object = jsonArray.getJSONObject(i);
-                String filepath = object.getString(this.file_path);
-                posters.add(filepath);
-                i++;
-            }
 
-
-            jsonArray = images.getJSONArray(this.backdrops);
-            i = 0;
-            while (!jsonArray.isNull(i)) {
-                JSONObject object = jsonArray.getJSONObject(i);
-                String filepath = object.getString(this.file_path);
-                backdrops.add(filepath);
-                i++;
-            }
 
             jsonArray = videos.getJSONArray(this.results);
             i = 0;
@@ -216,16 +212,14 @@ public class Tmdb {
             movie.setRunTime(movieDetails.getInt(runtime));
             movie.setAdult(movieDetails.getBoolean(adult));
             movie.setReleaseDate(movieDetails.getString(release_date));
-            movie.setPosters(posters);
-            movie.setBackdrops(backdrops);
             movie.setTrailers(trailers);
-
             movie.setReviews(reviews1);
             movie.setCharacters(characters);
             movie.setGenres(genre);
             movie.setProductionCompanies(productionCompanies);
             movie.setCrews(crews);
 
+         movie =   getPosters(movieDetails,movie);
         } catch (JSONException e) {
             String s = e.toString();
 
@@ -399,4 +393,90 @@ public class Tmdb {
         return movie;
     }
 
+
+    public Movie getPostersBackdrops(JSONObject images,Movie movie)
+    {
+
+        try {
+
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            ArrayList<String> posters = new ArrayList<>();
+            ArrayList<String> backdrops = new ArrayList<>();
+
+
+            jsonArray = images.getJSONArray(this.posters);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.file_path);
+                posters.add(filepath);
+                i++;
+            }
+
+
+            jsonArray = images.getJSONArray(this.backdrops);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.file_path);
+                backdrops.add(filepath);
+                i++;
+            }
+
+
+            movie.setPosters(posters);
+            movie.setBackdrops(backdrops);
+
+
+        } catch (JSONException e) {
+            String s = e.toString();
+
+        }
+        return movie;
+
+    }
+
+    public Movie getPosters(JSONObject movieDetails,Movie movie)
+    {
+
+        try {
+
+            JSONObject images = movieDetails.getJSONObject(this.images);
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            ArrayList<String> posters = new ArrayList<>();
+
+
+            jsonArray = images.getJSONArray(this.posters);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.file_path);
+                posters.add(filepath);
+                i++;
+            }
+
+
+
+
+
+            movie.setPosters(posters);
+
+
+        } catch (JSONException e) {
+            String s = e.toString();
+
+        }
+        return movie;
+
+    }
 }
