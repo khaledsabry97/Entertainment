@@ -18,7 +18,6 @@ import org.json.JSONObject;
 
 public class TmdbConnection {
     private String baseUrl = "https://api.themoviedb.org/3/";
-    private String apiKey = "?api_key=3628f9974c19710b3a434cf958458799";
     private Context context;
     private String url;
     private static final TmdbConnection ourInstance = new TmdbConnection();

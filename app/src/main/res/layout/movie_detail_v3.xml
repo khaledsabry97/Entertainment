@@ -41,7 +41,8 @@
                 android:typeface="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="43dp" />
+                tools:layout_editor_absoluteX="43dp"
+                />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -146,7 +147,8 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="1"
                                 android:textColor="@color/cardview_light_background"
-                                android:textSize="17sp" />
+                                android:textSize="17sp"
+                                />
 
                         </LinearLayout>
 

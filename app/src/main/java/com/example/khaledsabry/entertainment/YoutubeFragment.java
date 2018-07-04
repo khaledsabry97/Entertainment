@@ -16,7 +16,6 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitializedListener {
     String videoId = "aJ7BoNG-r2c";
-
     private YouTubePlayer YPlayer;
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
@@ -26,6 +25,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
     public static YoutubeFragment newInstance(String trailerId) {
         YoutubeFragment fragment = new YoutubeFragment();
         YoutubeFragment.trailerId = trailerId;
+
         return fragment;
 
     }
@@ -48,6 +48,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
         if (!b)
             youTubePlayer.cueVideo(trailerId);
     }
+
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
