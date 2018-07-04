@@ -6,10 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Fragments.SearchFragment;
-import com.example.khaledsabry.entertainment.Fragments.SearchResultItemFragment;
-import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -20,10 +17,10 @@ import java.util.ArrayList;
 
 public class ResultItemRecyclarView extends RecyclerView.Adapter<ResultItemViewHolder> {
 
-    ArrayList<Movie> movies = new ArrayList<>();
+    ArrayList<SearchItem> searchItems = new ArrayList<>();
 
-    public ResultItemRecyclarView(ArrayList<Movie> movies) {
-        this.movies = movies;
+    public ResultItemRecyclarView(ArrayList<SearchItem> movies) {
+        this.searchItems = movies;
     }
 
     @NonNull
@@ -38,20 +35,13 @@ public class ResultItemRecyclarView extends RecyclerView.Adapter<ResultItemViewH
 
     @Override
     public void onBindViewHolder(@NonNull ResultItemViewHolder holder, int position) {
-        final Movie movie = movies.get(position);
-        holder.updateUi(movie);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchResultItemFragment.newInstance(movie)).commit();
-            }
-        });
+        final SearchItem searchItem = searchItems.get(position);
+        holder.updateUi(searchItem);
 
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return searchItems.size();
     }
 }

@@ -8,6 +8,8 @@ import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.Items.Review;
+import com.example.khaledsabry.entertainment.Items.SearchItem;
+import com.example.khaledsabry.entertainment.Items.Tv;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +66,11 @@ public class Tmdb {
     private String content = "content";
     private String belongs_to_collection = "belongs_to_collection";
     private String backdrop_path = "backdrop_path";
+    private String media_type="media_type";
+    private String person = "person";
+    private String movie = "movie";
+    private String tv ="tv";
+    private String known_for = "known_for";
 
 
     private static final Tmdb ourInstance = new Tmdb();
@@ -495,5 +502,134 @@ public class Tmdb {
         }
         return movie;
 
+    }
+
+
+    public ArrayList<SearchItem> getSearchDone(JSONObject jsonObject)
+    {
+        ArrayList<SearchItem> searchItems = new ArrayList<>();
+
+        try {
+            JSONArray result = jsonObject.getJSONArray(this.results);
+            int i = 0;
+
+            while(!result.isNull(i))
+            {
+                JSONObject object = result.getJSONObject(i);
+                SearchItem searchItem = new SearchItem();
+                String type = object.getString(this.media_type);
+                searchItem.setType(type);
+                if(type.equals(this.movie))
+                   searchItem.setMovie(getSearchMovie(object));
+                else if(type.equals(this.tv))
+                    searchItem.setTv(getSearchTv(object));
+                else if(type.equals(this.person))
+                    searchItem.setArtist(getSearchArtist(object));
+
+                searchItems.add(searchItem);
+                i++;
+            }
+
+
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return  searchItems;
+    }
+
+    private Tv getSearchTv(JSONObject object) {
+        Tv tv = new Tv();
+
+        return tv;
+    }
+
+    private Movie getSearchMovie(JSONObject object) {
+        Movie movie = new Movie();
+
+        try {
+
+            JSONObject movieDetails = object;
+
+            JSONArray jsonArray;
+            int i;
+
+            ArrayList<Genre> genre = new ArrayList<>();
+
+
+
+            jsonArray = movieDetails.getJSONArray(genres);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                JSONObject objects = jsonArray.getJSONObject(i);
+                int ids = objects.getInt(id);
+
+                Genre gen = new Genre();
+                gen.setId(ids);
+                genre.add(gen);
+                i++;
+            }
+
+
+            movie.setTitle(movieDetails.getString(title));
+            movie.setLanguage(movieDetails.getString(original_language));
+            movie.setOverView(movieDetails.getString(overview));
+            movie.setMovieId(movieDetails.getInt(id));
+            movie.setPopularity(movieDetails.getDouble(popularity));
+            movie.setPosterImage(movieDetails.getString(poster_path));
+            movie.setTmdbRate(movieDetails.getInt(vote_average));
+            movie.setAdult(movieDetails.getBoolean(adult));
+            movie.setReleaseDate(movieDetails.getString(release_date));
+            movie.setGenres(genre);
+            movie.setBackDropPoster(this.backdrop_path);
+
+        } catch (JSONException e) {
+            String s = e.toString();
+
+        }
+        return movie;
+    }
+
+    private Artist getSearchArtist(JSONObject object) {
+        Artist artist = new Artist();
+        ArrayList<Movie> movies = new ArrayList<>();
+        ArrayList<Tv> tvs = new ArrayList<>();
+        try {
+
+            JSONArray jsonArray = object.getJSONArray(this.known_for);
+            int i = 0;
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject object1 = jsonArray.getJSONObject(i);
+                String type = object1.getString(this.media_type);
+
+                if(type.equals(this.movie))
+                    movies.add(getSearchMovie(object));
+                else if(type.equals(this.tv))
+                    tvs.add(getSearchTv(object));
+                i++;
+            }
+
+            artist.setId(object.getInt(this.id));
+            artist.setName(object.getString(this.name));
+            artist.setPosterImage(object.getString(this.profile_path));
+            artist.setPopularity(object.getDouble(this.popularity));
+
+            artist.setMovies(movies);
+            artist.setTvs(tvs);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return artist;
     }
 }

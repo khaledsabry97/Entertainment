@@ -1,6 +1,5 @@
 package com.example.khaledsabry.entertainment.Activities;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +7,7 @@ import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.DetailFragment;
-import com.example.khaledsabry.entertainment.Fragments.SearchFragment;
-import com.example.khaledsabry.entertainment.NavigationDrawer;
+import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 

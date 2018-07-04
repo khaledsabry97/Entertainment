@@ -28,6 +28,15 @@ public class Movie {
     private Double popularity;
     private boolean isAdult;
     private Collection collection;
+    private String backDropPoster;
+
+    public String getBackDropPoster() {
+        return backDropPoster;
+    }
+
+    public void setBackDropPoster(String backDropPoster) {
+        this.backDropPoster = backDropPoster;
+    }
 
     public Collection getCollection() {
         return collection;

@@ -4,6 +4,7 @@ import com.example.khaledsabry.entertainment.Connection.Tmdb;
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
+import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 
@@ -116,14 +117,14 @@ public class MovieController {
         });
     }
 
-    public void search(String query, final OnMovieList listener) {
+    public void search(String query, final OnSearchSuccess listener) {
         movieGetDetails = "search/multi";
         String URL = makeBaseUrl(movieGetDetails)+"&query="+query;
 
         connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                listener.onMovieList(controller.showRecommendationsAndSimilar(jsonObject));
+                listener.onSuccess(controller.getSearchDone(jsonObject));
 
             }
         });
