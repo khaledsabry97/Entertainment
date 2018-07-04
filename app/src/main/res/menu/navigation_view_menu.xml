@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group >
+        <item
+            android:id="@+id/a"
+            android:title="firstite," />
+    </group>
+    <item android:title="hello">
+        <menu>
+            <item
+                android:id="@+id/b"
+                android:title="Item" />
+        </menu>
+    </item>
+</menu>

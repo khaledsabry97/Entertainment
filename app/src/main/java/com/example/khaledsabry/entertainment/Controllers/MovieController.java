@@ -115,4 +115,19 @@ public class MovieController {
             }
         });
     }
+
+    public void search(String query, final OnMovieList listener) {
+        movieGetDetails = "search/multi";
+        String URL = makeBaseUrl(movieGetDetails)+"&query="+query;
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onMovieList(controller.showRecommendationsAndSimilar(jsonObject));
+
+            }
+        });
+    }
+
+
 }
