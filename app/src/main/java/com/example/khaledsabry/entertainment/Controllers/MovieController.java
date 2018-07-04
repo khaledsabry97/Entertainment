@@ -27,35 +27,33 @@ public class MovieController {
         controller = Tmdb.getInstance();
     }
 
-    private String makeBaseUrl(String type)
-    {
-        TmdbConnection.getInstance().setUrl(TmdbConnection.getInstance().getBaseUrl()+ type+TmdbConnection.getInstance().getApiKey());
-       return TmdbConnection.getInstance().getUrl();
+    private String makeBaseUrl(String type) {
+        TmdbConnection.getInstance().setUrl(TmdbConnection.getInstance().getBaseUrl() + type + TmdbConnection.getInstance().getApiKey());
+        return TmdbConnection.getInstance().getUrl();
     }
 
 
     public void getMovieGetDetails(int movieID, final OnMovieDataSuccess listener) {
-        movieGetDetails = "movie/"+movieID;
-        String URL = makeBaseUrl(movieGetDetails)+"&append_to_response=credits,images,videos,reviews";
+        movieGetDetails = "movie/" + movieID;
+        String URL = makeBaseUrl(movieGetDetails) + "&append_to_response=credits,images,videos,reviews";
 
         connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-               listener.onSuccess(controller.showMovie(jsonObject));
+                listener.onSuccess(controller.showMovie(jsonObject));
 
             }
         });
     }
 
 
-    public void getRecommondations(int movieId, final OnMovieList listener)
-    {
-        movieGetDetails = "movie/"+movieId+"/recommendations";
+    public void getRecommendations(int movieId, final OnMovieList listener) {
+        movieGetDetails = "movie/" + movieId + "/recommendations";
         String URL = makeBaseUrl(movieGetDetails);
         connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-              listener.onMovieList(controller.showRecommendationsAndSimilar(jsonObject));
+                listener.onMovieList(controller.showRecommendationsAndSimilar(jsonObject));
 
             }
         });
@@ -64,9 +62,8 @@ public class MovieController {
     }
 
 
-    public void getSimilar(int movieId, final OnMovieList listener)
-    {
-        movieGetDetails = "movie/"+movieId+"/similar";
+    public void getSimilar(int movieId, final OnMovieList listener) {
+        movieGetDetails = "movie/" + movieId + "/similar";
         String URL = makeBaseUrl(movieGetDetails);
         connection.connect(URL, new OnSuccess() {
             @Override
@@ -81,8 +78,8 @@ public class MovieController {
     }
 
     public void getMovieVideosCreditsCategories(int movieID, final OnMovieDataSuccess listener) {
-        movieGetDetails = "movie/"+movieID;
-        String URL = makeBaseUrl(movieGetDetails)+"&append_to_response=credits,videos";
+        movieGetDetails = "movie/" + movieID;
+        String URL = makeBaseUrl(movieGetDetails) + "&append_to_response=credits,videos";
 
         connection.connect(URL, new OnSuccess() {
             @Override
@@ -94,26 +91,26 @@ public class MovieController {
     }
 
     public void getImages(int movieID, final OnMovieDataSuccess listener) {
-        movieGetDetails = "movie/"+movieID+"/images";
+        movieGetDetails = "movie/" + movieID + "/images";
         String URL = makeBaseUrl(movieGetDetails);
 
         connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                listener.onSuccess(controller.getPostersBackdrops(jsonObject,new Movie()));
+                listener.onSuccess(controller.getPostersBackdrops(jsonObject, new Movie()));
 
             }
         });
     }
 
     public void getReviews(int movieID, final OnMovieDataSuccess listener) {
-        movieGetDetails = "movie/"+movieID+"/reviews";
+        movieGetDetails = "movie/" + movieID + "/reviews";
         String URL = makeBaseUrl(movieGetDetails);
 
         connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                listener.onSuccess(controller.getReviews(jsonObject,new Movie()));
+                listener.onSuccess(controller.getReviews(jsonObject, new Movie()));
 
             }
         });

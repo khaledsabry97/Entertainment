@@ -18,6 +18,7 @@ public class FullPoster extends Fragment {
     static String poster;
     ImageView fullPoster;
     int i = 0;
+
     public static FullPoster newInstance(String poster) {
         FullPoster fragment = new FullPoster();
         FullPoster.poster = poster;
@@ -29,9 +30,9 @@ public class FullPoster extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-View v = inflater.inflate(R.layout.fragment_full_poster, container, false);
+        View v = inflater.inflate(R.layout.fragment_full_poster, container, false);
         fullPoster = v.findViewById(R.id.fullposterid);
-        ImageController.putImageHighQuality(poster,fullPoster);
+        ImageController.putImageHighQuality(poster, fullPoster);
 
 
         v.setOnClickListener(new View.OnClickListener() {
@@ -43,12 +44,12 @@ View v = inflater.inflate(R.layout.fragment_full_poster, container, false);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(i >1)
+                        if (i > 1)
                             getActivity().getSupportFragmentManager().popBackStack();
-                        i= 0;
+                        i = 0;
 
                     }
-                },400);
+                }, 400);
 
             }
         });

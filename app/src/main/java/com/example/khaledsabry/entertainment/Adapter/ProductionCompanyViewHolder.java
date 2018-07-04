@@ -17,6 +17,7 @@ import com.example.khaledsabry.entertainment.R;
 public class ProductionCompanyViewHolder extends RecyclerView.ViewHolder {
     TextView companyName;
     ImageView poster;
+
     public ProductionCompanyViewHolder(View itemView) {
         super(itemView);
         companyName = itemView.findViewById(R.id.companyid);

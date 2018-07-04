@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.khaledsabry.entertainment.Controllers.Settings;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 
 import org.json.JSONObject;
@@ -20,6 +21,7 @@ public class TmdbConnection {
     private String apiKey = "?api_key=3628f9974c19710b3a434cf958458799";
     private Context context;
     private String url;
+    private static final TmdbConnection ourInstance = new TmdbConnection();
 
     public String getUrl() {
         return url;
@@ -38,16 +40,12 @@ public class TmdbConnection {
     }
 
     public String getApiKey() {
-        return apiKey;
+        return "?api_key="+ Settings.TmdbApiKey;
     }
 
-    private static final TmdbConnection ourInstance = new TmdbConnection();
 
     public static TmdbConnection getInstance() {
         return ourInstance;
-    }
-
-    private TmdbConnection() {
     }
 
     public void connect(String url, final OnSuccess listener) {

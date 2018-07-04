@@ -1,7 +1,5 @@
 package com.example.khaledsabry.entertainment.Connection;
 
-import com.example.khaledsabry.entertainment.Fragments.BlankFragment;
-import com.example.khaledsabry.entertainment.Fragments.SimilarFragment;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Collection;
@@ -9,7 +7,6 @@ import com.example.khaledsabry.entertainment.Items.Crew;
 import com.example.khaledsabry.entertainment.Items.Genre;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
-import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Items.Review;
 
 import org.json.JSONArray;
@@ -88,18 +85,16 @@ public class Tmdb {
             JSONObject videos = movieDetails.getJSONObject(this.videos);
             JSONObject reviews = movieDetails.getJSONObject(this.reviews);
             JSONObject collection;
-            if(!movieDetails.isNull(this.belongs_to_collection)) {
+            if (!movieDetails.isNull(this.belongs_to_collection)) {
                 collection = movieDetails.getJSONObject(this.belongs_to_collection);
 
 
-
-
-                    int id = collection.getInt(this.id);
-                    String name = collection.getString(this.name);
-                    String poster = collection.getString(this.poster_path);
-                    String background = collection.getString(this.backdrop_path);
-                Collection  collection1 = new Collection(id, name, poster, background);
-                    movie.setCollection(collection1);
+                int id = collection.getInt(this.id);
+                String name = collection.getString(this.name);
+                String poster = collection.getString(this.poster_path);
+                String background = collection.getString(this.backdrop_path);
+                Collection collection1 = new Collection(id, name, poster, background);
+                movie.setCollection(collection1);
 
             }
             JSONArray jsonArray;
@@ -110,7 +105,6 @@ public class Tmdb {
             ArrayList<Crew> crews = new ArrayList<>();
             ArrayList<String> trailers = new ArrayList<>();
             ArrayList<Review> reviews1 = new ArrayList<>();
-
 
 
             jsonArray = movieDetails.getJSONArray(production_companies);
@@ -178,7 +172,6 @@ public class Tmdb {
             }
 
 
-
             jsonArray = videos.getJSONArray(this.results);
             i = 0;
             while (!jsonArray.isNull(i)) {
@@ -219,7 +212,7 @@ public class Tmdb {
             movie.setProductionCompanies(productionCompanies);
             movie.setCrews(crews);
 
-         movie =   getPosters(movieDetails,movie);
+            movie = getPosters(movieDetails, movie);
         } catch (JSONException e) {
             String s = e.toString();
 
@@ -294,8 +287,7 @@ public class Tmdb {
     }
 
 
-    public Movie getMovieVideosCreditsCategories(JSONObject movieDetails)
-    {
+    public Movie getMovieVideosCreditsCategories(JSONObject movieDetails) {
         Movie movie = new Movie();
         try {
 
@@ -363,10 +355,6 @@ public class Tmdb {
             }
 
 
-
-
-
-
             jsonArray = videos.getJSONArray(this.results);
             i = 0;
             while (!jsonArray.isNull(i)) {
@@ -375,7 +363,6 @@ public class Tmdb {
                 trailers.add(filepath);
                 i++;
             }
-
 
 
             movie.setMovieId(movieDetails.getInt(id));
@@ -394,11 +381,9 @@ public class Tmdb {
     }
 
 
-    public Movie getPostersBackdrops(JSONObject images,Movie movie)
-    {
+    public Movie getPostersBackdrops(JSONObject images, Movie movie) {
 
         try {
-
 
 
             JSONArray jsonArray;
@@ -441,8 +426,7 @@ public class Tmdb {
 
     }
 
-    public Movie getPosters(JSONObject movieDetails,Movie movie)
-    {
+    public Movie getPosters(JSONObject movieDetails, Movie movie) {
 
         try {
 
@@ -466,9 +450,6 @@ public class Tmdb {
             }
 
 
-
-
-
             movie.setPosters(posters);
 
 
@@ -480,11 +461,9 @@ public class Tmdb {
 
     }
 
-    public Movie getReviews(JSONObject movieDetails,Movie movie)
-    {
+    public Movie getReviews(JSONObject movieDetails, Movie movie) {
 
         try {
-
 
 
             JSONArray jsonArray;
@@ -500,14 +479,11 @@ public class Tmdb {
                 JSONObject object = jsonArray.getJSONObject(i);
                 String author = object.getString(this.author);
                 String content = object.getString(this.content);
-                Review review = new Review(content,author);
+                Review review = new Review(content, author);
 
                 reviews.add(review);
                 i++;
             }
-
-
-
 
 
             movie.setReviews(reviews);

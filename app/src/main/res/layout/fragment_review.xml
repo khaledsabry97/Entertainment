@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="com.example.khaledsabry.entertainment.Fragments.ReviewFragment">
+    tools:context="com.example.khaledsabry.entertainment.Fragments.MovieView.ReviewFragment">
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -14,14 +14,14 @@ import com.example.khaledsabry.entertainment.R;
 
 public class PosterViewHolder extends RecyclerView.ViewHolder {
     ImageView posterImg;
+
     public PosterViewHolder(View itemView) {
         super(itemView);
         posterImg = itemView.findViewById(R.id.posterimgid);
     }
 
 
-    public void updateUi(String posterUrl)
-    {
-        ImageController.putImageMidQuality(posterUrl,posterImg);
+    public void updateUi(String posterUrl) {
+        ImageController.putImageMidQuality(posterUrl, posterImg);
     }
 }

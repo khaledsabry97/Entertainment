@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Fragments.FullPoster;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.R;
 
@@ -18,9 +19,10 @@ import java.util.ArrayList;
 
 public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
     ArrayList<Character> list = new ArrayList<>();
+
     @Override
     public CastViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View cardContent = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_cardview,parent,false);
+        View cardContent = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_cardview, parent, false);
 
         return new CastViewHolder(cardContent);
     }
@@ -38,11 +40,11 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().loadFullPosterFragment(character.getArtist().getPosterImage());
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(character.getArtist().getPosterImage())).addToBackStack(null).commit();
+
 
             }
         });
-
 
 
     }

@@ -3,16 +3,9 @@ package com.example.khaledsabry.entertainment.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.R;
-import com.example.khaledsabry.entertainment.Settings;
 import com.example.khaledsabry.entertainment.YoutubeFragment;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.util.ArrayList;
 
@@ -22,7 +15,6 @@ import java.util.ArrayList;
 
 public class TrailerAdapter extends FragmentPagerAdapter {
     ArrayList<String> videosId = new ArrayList<>();
-
 
 
     public TrailerAdapter(FragmentManager fm, ArrayList<String> videosId) {
@@ -42,6 +34,6 @@ public class TrailerAdapter extends FragmentPagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return  view.equals(object);
+        return view.equals(object);
     }
 }

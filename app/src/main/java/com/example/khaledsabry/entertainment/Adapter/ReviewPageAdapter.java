@@ -26,7 +26,7 @@ public class ReviewPageAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View v = LayoutInflater.from(container.getContext()).inflate(R.layout.review,container,false);
+        View v = LayoutInflater.from(container.getContext()).inflate(R.layout.review, container, false);
         TextView name = v.findViewById(R.id.authorid);
         TextView content = v.findViewById(R.id.contentid);
 
@@ -34,7 +34,7 @@ public class ReviewPageAdapter extends PagerAdapter {
         content.setText(reviews.get(position).getContent());
 
 
-        container.addView(v,0);
+        container.addView(v, 0);
         return v;
     }
 

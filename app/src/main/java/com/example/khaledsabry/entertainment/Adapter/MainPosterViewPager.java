@@ -26,22 +26,20 @@ import java.util.ArrayList;
 
 public class MainPosterViewPager extends PagerAdapter {
 
-    public ArrayList<String> images =  new ArrayList<>();
+    public ArrayList<String> images = new ArrayList<>();
 
 
     public MainPosterViewPager(ArrayList<String> posters) {
-images = posters;
+        images = posters;
 
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
 
-        //View view = layoutInflater.inflate(R.layout.slideshowimage,container,false);
-
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.slideshowimage,container,false);
+        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.slideshowimage, container, false);
         ImageView imageView = view.findViewById(R.id.imageids);
-        ImageController.putImageHighQuality(images.get(position),imageView);
+        ImageController.putImageHighQuality(images.get(position), imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

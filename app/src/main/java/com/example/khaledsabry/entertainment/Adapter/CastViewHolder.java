@@ -30,6 +30,7 @@ public class CastViewHolder extends RecyclerView.ViewHolder {
         characterName = itemView.findViewById(R.id.characterID);
         actorName = itemView.findViewById(R.id.actorNamID);
     }
+
     public void updateUi(final Character character) {
         actorName.setText(character.getArtist().getName());
         characterName.setText(character.getCharacterName());

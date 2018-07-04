@@ -28,7 +28,7 @@ public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCom
     @NonNull
     @Override
     public ProductionCompanyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.production_company_cardview,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.production_company_cardview, parent, false);
         return new ProductionCompanyViewHolder(v);
     }
 

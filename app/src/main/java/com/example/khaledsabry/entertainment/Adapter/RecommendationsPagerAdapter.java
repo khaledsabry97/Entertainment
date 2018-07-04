@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.DetailFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.DetailFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
@@ -43,16 +43,6 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 MainActivity.getActivity().loadFragment(R.id.mainContainer, DetailFragment.newInstance(movie.getMovieId(), true));
-
-                /*
-                MovieController tmdbType = new MovieController();
-                tmdbType.getMovieGetDetails(movie.getMovieId(), new OnMovieDataSuccess() {
-                            @Override
-                            public void onSuccess(Movie movie) {
-                                MainActivity.getActivity().loadFragment(R.id.mainContainer, DetailFragment.newInstance(movie, true));
-
-                            }
-                        });*/
             }
         });
 
