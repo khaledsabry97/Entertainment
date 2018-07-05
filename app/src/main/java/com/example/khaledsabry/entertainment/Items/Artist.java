@@ -117,6 +117,8 @@ private ArrayList<Tv> tvs = new ArrayList<>();
     }
 
     public String getDeathDay() {
+        if(deathDay == "null")
+            return "-";
         return deathDay;
     }
 

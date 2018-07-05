@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Fragments.ArtistView.PersonDetailFragment;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.R;
@@ -32,7 +33,7 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final CastViewHolder holder, int position) {
+    public void onBindViewHolder(final CastViewHolder holder, final int position) {
         final Character character = list.get(position);
         holder.updateUi(character);
 
@@ -40,7 +41,7 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(character.getArtist().getPosterImage())).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, PersonDetailFragment.newInstance(list.get(position).getArtist().getId(),true)).addToBackStack(null).commit();
 
 
             }

@@ -60,8 +60,9 @@ public class MainPosterViewPager extends PagerAdapter {
 
     @Override
     public int getCount() {
-
-        return 10;
+        if(images.size() >10)
+            return 10;
+        return images.size();
     }
 
     @Override

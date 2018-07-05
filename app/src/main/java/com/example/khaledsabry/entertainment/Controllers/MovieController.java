@@ -19,10 +19,7 @@ import java.sql.Connection;
  */
 
 public class MovieController {
-    private String Movie;
-    private String MovieID;
     private String movieGetDetails;
-    private String movieCast;
     private TmdbConnection connection;
 
     private Tmdb controller;
