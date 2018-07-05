@@ -40,7 +40,7 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(character.getArtist().getPosterImage())).addToBackStack(null).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(character.getArtist().getPosterImage())).commit();
 
 
             }

@@ -40,7 +40,7 @@ public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCom
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().loadFragment(R.id.mainContainer, FullPoster.newInstance(productionCompany.getCompanyImage()));
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(productionCompany.getCompanyImage())).commit();
             }
         });
 

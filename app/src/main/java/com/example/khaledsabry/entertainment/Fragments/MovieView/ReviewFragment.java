@@ -67,7 +67,7 @@ public class ReviewFragment extends Fragment {
 
     private void setObjects() {
         if (movie.getReviews().size() == 0) {
-            //load anther fragment
+            MovieDetailFragment.hideReviewView();
 
         } else {
             ReviewPageAdapter reviewPageAdapter = new ReviewPageAdapter(movie.getReviews());

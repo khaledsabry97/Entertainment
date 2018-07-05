@@ -34,8 +34,10 @@ RecommendedAndSimilarFragment.movieId = movieId;
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_recommended_and_similer, container, false);
 
-        MainActivity.getActivity().loadFragment(R.id.recommendedid,RecommendationsFragment.newInstance(movieId));
-        MainActivity.getActivity().loadFragment(R.id.similarid,SimilarFragment.newInstance(movieId));
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.recommendedid,RecommendationsFragment.newInstance(movieId)).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.similarid,SimilarFragment.newInstance(movieId)).commit();
+
+
 
         return v;
     }

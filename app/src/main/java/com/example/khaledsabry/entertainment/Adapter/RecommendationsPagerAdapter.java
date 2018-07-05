@@ -42,7 +42,7 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().loadFragment(R.id.mainContainer, DetailFragment.newInstance(movie.getMovieId(), true));
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, DetailFragment.newInstance(movie.getMovieId(), true)).commit();
             }
         });
 

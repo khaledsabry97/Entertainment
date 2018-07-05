@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
@@ -44,6 +45,7 @@ public class MovieDetailFragment extends Fragment {
     Button actorButton;
     Button crewButton;
     NestedScrollView scrollView;
+    static FrameLayout reviewLayout;
 
     public static MovieDetailFragment newInstance(int movieId) {
         MovieDetailFragment fragment = new MovieDetailFragment();
@@ -72,7 +74,7 @@ public class MovieDetailFragment extends Fragment {
         crewButton = v.findViewById(R.id.button_crew_id);
         scrollView = v.findViewById(R.id.sideid);
         scrollView.setVisibility(View.INVISIBLE);
-
+        reviewLayout = v.findViewById(R.id.ReviewLayoutid);
         getMovieDetails();
         return v;
     }
@@ -96,6 +98,7 @@ public class MovieDetailFragment extends Fragment {
 
         loadActorFragment();
         loadReviewFragment();
+        loadProductionFragment();
 
         Functions functions = new Functions();
         functions.movePoster(viewPager,viewPagerAdapter,3000,2000);
@@ -116,7 +119,11 @@ public class MovieDetailFragment extends Fragment {
                 loadCrewFragment();
             }
         });
-        MainActivity.getActivity().loadFragment(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie));
+
+    }
+
+    private void loadProductionFragment() {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie)).commit();
 
     }
 
@@ -150,5 +157,9 @@ public class MovieDetailFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ReviewLayoutid, ReviewFragment.newInstance(movieId)).commit();
     }
 
+public static void hideReviewView()
+{
+    reviewLayout.setVisibility(View.GONE);
+}
 
 }

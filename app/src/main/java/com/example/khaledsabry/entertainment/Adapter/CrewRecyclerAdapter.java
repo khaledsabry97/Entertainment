@@ -41,7 +41,7 @@ public class CrewRecyclerAdapter extends RecyclerView.Adapter<CrewViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(crew.getArtist().getPosterImage())).addToBackStack(null).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(crew.getArtist().getPosterImage())).commit();
             }
         });
 

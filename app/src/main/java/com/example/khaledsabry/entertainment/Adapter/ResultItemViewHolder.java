@@ -50,7 +50,7 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchMovieFragment.newInstance(searchItem.getMovie())).commit();
+                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchMovieFragment.newInstance(searchItem.getMovie())).addToBackStack(null).commit();
                 }
             });
         }

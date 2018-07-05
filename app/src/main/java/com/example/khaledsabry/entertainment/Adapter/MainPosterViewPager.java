@@ -43,7 +43,7 @@ public class MainPosterViewPager extends PagerAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(images.get(position))).addToBackStack(null).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(images.get(position))).commit();
             }
         });
         container.addView(view, 0);

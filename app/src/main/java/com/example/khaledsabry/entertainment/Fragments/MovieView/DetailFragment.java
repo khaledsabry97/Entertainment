@@ -47,7 +47,7 @@ public class DetailFragment extends Fragment implements BottomNavigationView.OnN
     }
 
     void loadFragment(Fragment fragment) {
-        MainActivity.getActivity().loadFragment(R.id.moviedetailid, fragment);
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, fragment).commit();
     }
 
     @Override
