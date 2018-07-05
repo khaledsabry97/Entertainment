@@ -57,7 +57,7 @@ public class DetailFragment extends Fragment implements BottomNavigationView.OnN
             loadFragment(MovieDetailFragment.newInstance(movieId));
 
         } else if (item.getItemId() == R.id.navigation_dashboard)
-            loadFragment(MovieMoreDetailsFragment.newInstance(movieId));
+getActivity().getSupportFragmentManager().popBackStack();
         else if (item.getItemId() == R.id.navigation_notifications)
             loadFragment(PosterFragment.newInstance(movieId));
         else if (item.getItemId() == R.id.navigation_trailers)

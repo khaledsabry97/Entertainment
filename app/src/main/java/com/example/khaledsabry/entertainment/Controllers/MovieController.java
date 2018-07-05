@@ -2,6 +2,7 @@ package com.example.khaledsabry.entertainment.Controllers;
 
 import com.example.khaledsabry.entertainment.Connection.Tmdb;
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
+import com.example.khaledsabry.entertainment.Interfaces.MapListener;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
@@ -9,6 +10,8 @@ import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 
 import org.json.JSONObject;
+
+import java.sql.Connection;
 
 /**
  * Created by KhALeD SaBrY on 26-Jun-18.
@@ -119,7 +122,7 @@ public class MovieController {
 
     public void search(String query, final OnSearchSuccess listener) {
         movieGetDetails = "search/multi";
-        String URL = makeBaseUrl(movieGetDetails)+"&query="+query;
+        String URL = makeBaseUrl(movieGetDetails)+"&query="+query+"&page=1";
 
         connection.connect(URL, new OnSuccess() {
             @Override
@@ -129,6 +132,21 @@ public class MovieController {
             }
         });
     }
+
+    public void getGenres(final OnMovieDataSuccess listener) {
+        movieGetDetails = "genre/movie/list";
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getGenres(jsonObject));
+
+            }
+        });
+    }
+
+
 
 
 }

@@ -26,9 +26,9 @@ public class SearchResult extends Fragment {
     ResultItemRecyclarView resultItemRecyclarView;
     static ArrayList<SearchItem> searchItems = new ArrayList<>();
 
-    public static SearchResult newInstance(ArrayList<SearchItem> movies) {
+    public static SearchResult newInstance(ArrayList<SearchItem> searchItems) {
         SearchResult fragment = new SearchResult();
-        SearchResult.searchItems = movies;
+        SearchResult.searchItems = searchItems;
 
         return fragment;
     }
@@ -41,7 +41,7 @@ public class SearchResult extends Fragment {
         recyclerView = view.findViewById(R.id.resultitemsid);
         resultItemRecyclarView = new ResultItemRecyclarView(searchItems);
         recyclerView.setAdapter(resultItemRecyclarView);
-
+recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);

@@ -11,6 +11,12 @@ public class SearchItem {
     private Artist artist;
     private Tv tv;
 
+    public SearchItem() {
+        movie = new Movie();
+        artist = new Artist();
+        tv = new Tv();
+    }
+
     public Tv getTv() {
         return tv;
     }

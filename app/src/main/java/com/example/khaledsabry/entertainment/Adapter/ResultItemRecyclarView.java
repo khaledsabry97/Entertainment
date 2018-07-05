@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Fragments.Search.SearchArtistFragment;
+import com.example.khaledsabry.entertainment.Fragments.Search.SearchMovieFragment;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 
@@ -37,6 +41,7 @@ public class ResultItemRecyclarView extends RecyclerView.Adapter<ResultItemViewH
     public void onBindViewHolder(@NonNull ResultItemViewHolder holder, int position) {
         final SearchItem searchItem = searchItems.get(position);
         holder.updateUi(searchItem);
+
 
     }
 

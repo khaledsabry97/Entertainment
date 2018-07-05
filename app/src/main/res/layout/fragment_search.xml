@@ -1,14 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background3"
     tools:context="com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<include layout="@layout/fragment_navigation_drawer"></include>
+
+        <include layout="@layout/fragment_navigation_drawer"></include>
+
         <SearchView
             android:id="@+id/searchid"
             android:layout_width="match_parent"

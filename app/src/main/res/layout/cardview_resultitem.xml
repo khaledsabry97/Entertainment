@@ -12,7 +12,7 @@
 
         <ImageView
             android:id="@+id/posterid"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:scaleType="fitXY"
@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/background3"
             android:orientation="vertical">
 
             <TextView
@@ -30,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/carterone"
                 android:text="TextView"
-                android:textSize="24sp" />
+                android:textColor="@color/cardview_light_background"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

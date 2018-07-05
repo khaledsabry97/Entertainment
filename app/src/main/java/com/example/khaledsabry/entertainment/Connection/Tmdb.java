@@ -1,5 +1,8 @@
 package com.example.khaledsabry.entertainment.Connection;
 
+import android.support.annotation.NonNull;
+
+import com.example.khaledsabry.entertainment.Fragments.Search.SearchTvFragment;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Collection;
@@ -16,6 +19,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by KhALeD SaBrY on 27-Jun-18.
@@ -66,10 +73,10 @@ public class Tmdb {
     private String content = "content";
     private String belongs_to_collection = "belongs_to_collection";
     private String backdrop_path = "backdrop_path";
-    private String media_type="media_type";
+    private String media_type = "media_type";
     private String person = "person";
     private String movie = "movie";
-    private String tv ="tv";
+    private String tv = "tv";
     private String known_for = "known_for";
 
 
@@ -505,25 +512,23 @@ public class Tmdb {
     }
 
 
-    public ArrayList<SearchItem> getSearchDone(JSONObject jsonObject)
-    {
+    public ArrayList<SearchItem> getSearchDone(JSONObject jsonObject) {
         ArrayList<SearchItem> searchItems = new ArrayList<>();
 
         try {
             JSONArray result = jsonObject.getJSONArray(this.results);
             int i = 0;
 
-            while(!result.isNull(i))
-            {
+            while (!result.isNull(i)) {
                 JSONObject object = result.getJSONObject(i);
                 SearchItem searchItem = new SearchItem();
                 String type = object.getString(this.media_type);
                 searchItem.setType(type);
-                if(type.equals(this.movie))
-                   searchItem.setMovie(getSearchMovie(object));
-                else if(type.equals(this.tv))
+                if (type.equals(this.movie))
+                    searchItem.setMovie(getSearchMovie(object));
+                else if (type.equals(this.tv))
                     searchItem.setTv(getSearchTv(object));
-                else if(type.equals(this.person))
+                else if (type.equals(this.person))
                     searchItem.setArtist(getSearchArtist(object));
 
                 searchItems.add(searchItem);
@@ -531,16 +536,12 @@ public class Tmdb {
             }
 
 
-
-
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        return  searchItems;
+        return searchItems;
     }
 
     private Tv getSearchTv(JSONObject object) {
@@ -562,13 +563,11 @@ public class Tmdb {
             ArrayList<Genre> genre = new ArrayList<>();
 
 
-
-            jsonArray = movieDetails.getJSONArray(genres);
+            jsonArray = movieDetails.getJSONArray(this.genre_ids);
             i = 0;
 
             while (!jsonArray.isNull(i)) {
-                JSONObject objects = jsonArray.getJSONObject(i);
-                int ids = objects.getInt(id);
+                int ids = jsonArray.getInt(i);
 
                 Genre gen = new Genre();
                 gen.setId(ids);
@@ -587,11 +586,10 @@ public class Tmdb {
             movie.setAdult(movieDetails.getBoolean(adult));
             movie.setReleaseDate(movieDetails.getString(release_date));
             movie.setGenres(genre);
-            movie.setBackDropPoster(this.backdrop_path);
+            movie.setBackDropPoster(movieDetails.getString(this.backdrop_path));
 
         } catch (JSONException e) {
-            String s = e.toString();
-
+e.printStackTrace();
         }
         return movie;
     }
@@ -604,14 +602,13 @@ public class Tmdb {
 
             JSONArray jsonArray = object.getJSONArray(this.known_for);
             int i = 0;
-            while(!jsonArray.isNull(i))
-            {
+            while (!jsonArray.isNull(i)) {
                 JSONObject object1 = jsonArray.getJSONObject(i);
                 String type = object1.getString(this.media_type);
 
-                if(type.equals(this.movie))
+                if (type.equals(this.movie))
                     movies.add(getSearchMovie(object));
-                else if(type.equals(this.tv))
+                else if (type.equals(this.tv))
                     tvs.add(getSearchTv(object));
                 i++;
             }
@@ -631,5 +628,34 @@ public class Tmdb {
 
 
         return artist;
+    }
+
+    public Movie getGenres(JSONObject jsonObject)
+    {
+        Movie movie = new Movie();
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray(this.genres);
+            int i = 0;
+            ArrayList<Genre> genres = new ArrayList<>();
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                        int id = object.getInt(this.id);
+                String name = object.getString(this.name);
+
+                Genre genre = new Genre(id,name);
+
+genres.add(genre);
+i++;
+
+            }
+
+
+            movie.setGenres(genres);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return movie;
     }
 }

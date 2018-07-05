@@ -24,7 +24,7 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
 
     public ResultItemViewHolder(View itemView) {
         super(itemView);
-        title = itemView.findViewById(R.id.titleId);
+        title = itemView.findViewById(R.id.titleid);
         poster = itemView.findViewById(R.id.posterid);
     }
 
@@ -32,8 +32,21 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
     {
         if(searchItem.getType().equals("movie"))
         {
-            title.setText(searchItem.getMovie().getTitle());
+            if(!searchItem.getMovie().getReleaseDate().equals("")) {
+                String date = searchItem.getMovie().getReleaseDate();
+                char[] d = new char[4];
+                d[0] = date.charAt(0);
+                d[1] = date.charAt(1);
+                d[2] = date.charAt(2);
+                d[3] = date.charAt(3);
+                date = String.copyValueOf(d);
+
+                title.setText(searchItem.getMovie().getTitle() + " (" + date + ")");
+            }
+            else
+                title.setText(searchItem.getMovie().getTitle());
             ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(),poster);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -43,14 +56,14 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
         }
         else if(searchItem.getType().equals("tv"))
         {
-            title.setText(searchItem.getTv().getTitle());
+           /* title.setText(searchItem.getTv().getTitle());
             ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(),poster);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchTvFragment.newInstance(searchItem.getTv())).commit();
                 }
-            });
+            });*/
         }
 
         else if(searchItem.getType().equals("person"))

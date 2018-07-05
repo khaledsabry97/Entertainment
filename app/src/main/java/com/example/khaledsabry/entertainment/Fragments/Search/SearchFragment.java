@@ -41,6 +41,7 @@ public class SearchFragment extends Fragment {
 
         drawerLayout = v.findViewById(R.id.drawer_layout);
         navigationView = v.findViewById(R.id.nav_view);
+        searchView = v.findViewById(R.id.searchid);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -60,9 +61,17 @@ public class SearchFragment extends Fragment {
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                movieController.search(query, new OnSearchSuccess() {
+                    @Override
+                    public void onSuccess(ArrayList<SearchItem> searchItems) {
+                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid,SearchResult.newInstance(searchItems)).commit();
+                    }
+                });
+                return true;
             }
 
             @Override
