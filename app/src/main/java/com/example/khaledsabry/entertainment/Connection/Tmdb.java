@@ -1,8 +1,5 @@
 package com.example.khaledsabry.entertainment.Connection;
 
-import android.support.annotation.NonNull;
-
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchTvFragment;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Collection;
@@ -19,10 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by KhALeD SaBrY on 27-Jun-18.
@@ -78,6 +72,11 @@ public class Tmdb {
     private String movie = "movie";
     private String tv = "tv";
     private String known_for = "known_for";
+    private String birthday = "birthday";
+    private String deathday = "deathday";
+    private String place_of_birth = "place_of_birth";
+    private String biography = "biography";
+    private String profiles = "profiles";
 
 
     private static final Tmdb ourInstance = new Tmdb();
@@ -589,7 +588,7 @@ public class Tmdb {
             movie.setBackDropPoster(movieDetails.getString(this.backdrop_path));
 
         } catch (JSONException e) {
-e.printStackTrace();
+            e.printStackTrace();
         }
         return movie;
     }
@@ -630,23 +629,21 @@ e.printStackTrace();
         return artist;
     }
 
-    public Movie getGenres(JSONObject jsonObject)
-    {
+    public Movie getGenres(JSONObject jsonObject) {
         Movie movie = new Movie();
         try {
             JSONArray jsonArray = jsonObject.getJSONArray(this.genres);
             int i = 0;
             ArrayList<Genre> genres = new ArrayList<>();
-            while(!jsonArray.isNull(i))
-            {
+            while (!jsonArray.isNull(i)) {
                 JSONObject object = jsonArray.getJSONObject(i);
-                        int id = object.getInt(this.id);
+                int id = object.getInt(this.id);
                 String name = object.getString(this.name);
 
-                Genre genre = new Genre(id,name);
+                Genre genre = new Genre(id, name);
 
-genres.add(genre);
-i++;
+                genres.add(genre);
+                i++;
 
             }
 
@@ -658,4 +655,89 @@ i++;
         }
         return movie;
     }
+
+
+    public Artist getPersonDetails(JSONObject object) {
+        Artist artist = new Artist();
+        try {
+            artist.setId(object.getInt(this.id));
+            artist.setPopularity(object.getDouble(this.popularity));
+            artist.setPosterImage(object.getString(this.profile_path));
+            artist.setBirthDay(object
+                    .getString(this.birthday));
+            artist.setDeathDay(object.getString(this.deathday));
+            artist.setName(object.getString(this.name));
+            artist.setGender(object.getInt(this.gender));
+            artist.setBiography(object.getString(this.biography));
+            artist.setPlaceOfBirth(object.getString(this.place_of_birth));
+            artist.setImdbId(object.getString(this.imdb_id));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return artist;
+    }
+
+
+    public Artist getPersonRoles(JSONObject obj) {
+        Artist artist = new Artist();
+
+        try {
+            ArrayList<Character> characters = new ArrayList<>();
+            ArrayList<Movie> movies = new ArrayList<>();
+            ArrayList<Tv> tvs = new ArrayList<>();
+            JSONArray result = obj.getJSONArray(this.cast);
+            int i = 0;
+
+            while (!result.isNull(i)) {
+                JSONObject object = result.getJSONObject(i);
+                Movie movie = new Movie();
+                Tv tv = new Tv();
+                Character character = new Character();
+                character.setCharacterName(object.getString(this.character));
+                String type = object.getString(this.media_type);
+                if (type.equals(this.movie)) {
+                    movie = getSearchMovie(object);
+                    movies.add(movie);
+                } else if (type.equals(this.tv)) {
+                    tv = getSearchTv(object);
+                    tvs.add(tv);
+                }
+
+                i++;
+            }
+            artist.setMovies(movies);
+            artist.setTvs(tvs);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return artist;
+    }
+
+    public Artist getPersonImages(JSONObject obj) {
+        Artist artist = new Artist();
+
+        try {
+      ArrayList<String> images = new ArrayList<>();
+            JSONArray result = obj.getJSONArray(this.profiles);
+            int i = 0;
+
+            while (!result.isNull(i)) {
+                JSONObject object = result.getJSONObject(i);
+               images.add(object.getString(this.file_path));
+                i++;
+            }
+            artist.setImages(images);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return artist;
+    }
+
 }

@@ -15,7 +15,14 @@ public class Artist {
     private String posterImage;
     private String job;
     private double popularity;
-
+    private String birthDay;
+    private String deathDay;
+    private String placeOfBirth;
+    private String imdbId;
+    private String biography;
+    private ArrayList<Character> moviesCharacters = new ArrayList<>();
+    private ArrayList<Character> tvCharacters = new ArrayList<>();
+    private ArrayList<String> images = new ArrayList<>();
 
     private ArrayList<Movie> movies = new ArrayList<>();
 private ArrayList<Tv> tvs = new ArrayList<>();
@@ -99,5 +106,69 @@ private ArrayList<Tv> tvs = new ArrayList<>();
 
     public void setJob(String job) {
         this.job = job;
+    }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public String getDeathDay() {
+        return deathDay;
+    }
+
+    public void setDeathDay(String deathDay) {
+        this.deathDay = deathDay;
+    }
+
+    public String getPlaceOfBirth() {
+        return placeOfBirth;
+    }
+
+    public void setPlaceOfBirth(String placeOfBirth) {
+        this.placeOfBirth = placeOfBirth;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public ArrayList<Character> getMoviesCharacters() {
+        return moviesCharacters;
+    }
+
+    public void setMoviesCharacters(ArrayList<Character> moviesCharacters) {
+        this.moviesCharacters = moviesCharacters;
+    }
+
+    public ArrayList<Character> getTvCharacters() {
+        return tvCharacters;
+    }
+
+    public void setTvCharacters(ArrayList<Character> tvCharacters) {
+        this.tvCharacters = tvCharacters;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
     }
 }

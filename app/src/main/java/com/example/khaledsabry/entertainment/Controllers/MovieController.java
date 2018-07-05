@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Controllers;
 import com.example.khaledsabry.entertainment.Connection.Tmdb;
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
 import com.example.khaledsabry.entertainment.Interfaces.MapListener;
+import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
@@ -145,6 +146,49 @@ public class MovieController {
             }
         });
     }
+
+    public void getPersonDetails(int personId,final OnArtistDataSuccess listener) {
+        movieGetDetails = "person/"+personId;
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getPersonDetails(jsonObject));
+
+            }
+        });
+    }
+
+    public void getPersonRoles(int personId,final OnArtistDataSuccess listener) {
+        movieGetDetails = "person/"+personId+"/combined_credits";
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getPersonRoles(jsonObject));
+
+            }
+        });
+    }
+
+    public void getPersonImages(int personId,final OnArtistDataSuccess listener) {
+        movieGetDetails = "person/"+personId+"/images";
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getPersonImages(jsonObject));
+
+            }
+        });
+    }
+
+
+
+
 
 
 

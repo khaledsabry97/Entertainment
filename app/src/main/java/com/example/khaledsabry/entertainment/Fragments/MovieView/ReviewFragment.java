@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.ReviewPageAdapter;
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
@@ -46,7 +47,12 @@ public class ReviewFragment extends Fragment {
 
         viewPager = v.findViewById(R.id.viewPagerid);
         //    circleIndicator = v.findViewById(R.id.circleIndicatorid);
-
+v.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid,ReviewFragment.newInstance(movieId)).commit();
+    }
+});
         loadFragment();
         return v;
     }
