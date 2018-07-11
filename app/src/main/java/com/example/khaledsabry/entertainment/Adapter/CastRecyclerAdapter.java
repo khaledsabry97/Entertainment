@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 23-Jun-18.
  */
 
+//the recycler adapter for the actors
 public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
     ArrayList<Character> list = new ArrayList<>();
 

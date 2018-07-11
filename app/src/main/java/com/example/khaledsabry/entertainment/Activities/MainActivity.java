@@ -18,6 +18,7 @@ import static java.nio.file.Files.copy;
 
 public class MainActivity extends AppCompatActivity {
 
+    //to get the main activity in the app
     private static MainActivity mainActivity;
 
     public MainActivity() {
@@ -32,14 +33,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //get width and height for the mobile and tablet
         Settings.getInstance().setWidthAndHeight(getWindowManager());
+        //set the context for the volley library
         TmdbConnection.getInstance().setContext(getApplicationContext());
 
-
+// hide the navigation bar and the status bar
         periodicHideNavigation();
   //      loadMovieDetailFragment(68735);
 
         //startActivity(new Intent(this,ANOTHER.class));
+
        loadFragment(R.id.mainContainer, SearchFragment.newInstance());
 
     }

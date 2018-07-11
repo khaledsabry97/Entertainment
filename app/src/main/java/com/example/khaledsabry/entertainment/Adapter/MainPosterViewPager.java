@@ -24,6 +24,7 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 01-Jul-18.
  */
 
+//pager adapter for the main image slide show
 public class MainPosterViewPager extends PagerAdapter {
 
     public ArrayList<String> images = new ArrayList<>();

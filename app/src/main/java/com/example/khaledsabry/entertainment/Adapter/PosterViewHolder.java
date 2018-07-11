@@ -12,6 +12,7 @@ import com.example.khaledsabry.entertainment.R;
  * Created by KhALeD SaBrY on 01-Jul-18.
  */
 
+//view holder for the images
 public class PosterViewHolder extends RecyclerView.ViewHolder {
     ImageView posterImg;
 

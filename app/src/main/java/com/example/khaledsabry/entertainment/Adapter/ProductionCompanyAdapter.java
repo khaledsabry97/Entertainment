@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 01-Jul-18.
  */
 
+//recycler view adapter for the production company
 public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCompanyViewHolder> {
 
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();

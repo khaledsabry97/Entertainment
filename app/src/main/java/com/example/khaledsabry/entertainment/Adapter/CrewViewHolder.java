@@ -14,6 +14,7 @@ import com.example.khaledsabry.entertainment.R;
  * Created by KhALeD SaBrY on 29-Jun-18.
  */
 
+//view holder card for the crew
 public class CrewViewHolder extends RecyclerView.ViewHolder {
     ImageView posterImage;
     TextView jobName;

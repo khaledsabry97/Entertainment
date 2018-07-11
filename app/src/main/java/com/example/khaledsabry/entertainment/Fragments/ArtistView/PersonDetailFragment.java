@@ -66,13 +66,11 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             getActivity().getSupportFragmentManager().popBackStack();
          else if (id == mainView)
             loadFragment(ArtistMainFragment.newInstance(artistId));
-       /* else if (id == images)
+        else if (id == images)
         loadFragment(PosterFragment.newInstance(artistId));
-        else if (item.getItemId() == R.id.navigation_trailers)
-        //   loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
-        loadFragment(ReviewFragment.newInstance(movieId));
-        else if (item.getItemId() == R.id.navigation_reco_simi)
-        loadFragment(RecommendedAndSimilarFragment.newInstance(movieId));*/
+        else if (id == roles)
+           loadFragment(RolesFragment.newInstance(artistId));
+
         return true;
         }
 

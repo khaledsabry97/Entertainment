@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 01-Jul-18.
  */
 
+// for the posters and bacdrop for artist or movie or tv
 public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
 
     public ArrayList<String> imgs = new ArrayList<>();

@@ -17,6 +17,7 @@ import com.example.khaledsabry.entertainment.R;
  * Created by KhALeD SaBrY on 23-Jun-18.
  */
 
+//view holder card for the actor
 public class CastViewHolder extends RecyclerView.ViewHolder {
 
     ImageView posterImage;

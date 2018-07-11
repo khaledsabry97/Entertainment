@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 29-Jun-18.
  */
 
+//the recycler adapter for the crew
 public class CrewRecyclerAdapter extends RecyclerView.Adapter<CrewViewHolder> {
 
     ArrayList<Crew> crews = new ArrayList<>();

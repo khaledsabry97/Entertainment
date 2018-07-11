@@ -1,5 +1,7 @@
 package com.example.khaledsabry.entertainment.Items;
 
+import java.util.ArrayList;
+
 /**
  * Created by KhALeD SaBrY on 04-Jul-18.
  */
@@ -8,6 +10,10 @@ public class Tv {
     private int id;
     private String title;
     private String posterImage;
+
+
+    private ArrayList<Review> reviews = new ArrayList<>();
+
 
     public int getId() {
         return id;
