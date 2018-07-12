@@ -1006,4 +1006,50 @@ return seasons;
         }
         return networks;
     }
+
+
+    public Tv getPostersBackdrops(JSONObject images, Tv tv) {
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            ArrayList<String> posters = new ArrayList<>();
+            ArrayList<String> backdrops = new ArrayList<>();
+
+
+            jsonArray = images.getJSONArray(this.posters);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.file_path);
+                posters.add(filepath);
+                i++;
+            }
+
+
+            jsonArray = images.getJSONArray(this.backdrops);
+            i = 0;
+            while (!jsonArray.isNull(i)) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String filepath = object.getString(this.file_path);
+                backdrops.add(filepath);
+                i++;
+            }
+
+
+            tv.setPosters(posters);
+            tv.setBackdrops(backdrops);
+
+
+        } catch (JSONException e) {
+            String s = e.toString();
+
+        }
+        return tv;
+
+    }
 }

@@ -94,7 +94,7 @@ public class MovieController {
         });
     }
 
-    public void getImages(int movieID, final OnMovieDataSuccess listener) {
+    public void getMovieImages(int movieID, final OnMovieDataSuccess listener) {
         movieGetDetails = "movie/" + movieID + "/images";
         String URL = makeBaseUrl(movieGetDetails);
 
@@ -196,6 +196,19 @@ public class MovieController {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getTv(jsonObject,new Tv()));
+
+            }
+        });
+    }
+
+    public void getTvImages(int tvId, final OnTvSuccess listener) {
+        movieGetDetails = "tv/" + tvId + "/images";
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getPostersBackdrops(jsonObject, new Tv()));
 
             }
         });
