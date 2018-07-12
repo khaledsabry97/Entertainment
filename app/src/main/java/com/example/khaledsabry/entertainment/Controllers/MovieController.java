@@ -7,6 +7,7 @@ import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnSeasonSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -209,6 +210,19 @@ public class MovieController {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getPostersBackdrops(jsonObject, new Tv()));
+
+            }
+        });
+    }
+
+    public void getTvSeason(int tvId,int seasonNo, final OnSeasonSuccess listener) {
+        movieGetDetails = "tv/" + tvId + "/season/"+seasonNo;
+        String URL = makeBaseUrl(movieGetDetails);
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getSeason(jsonObject));
 
             }
         });

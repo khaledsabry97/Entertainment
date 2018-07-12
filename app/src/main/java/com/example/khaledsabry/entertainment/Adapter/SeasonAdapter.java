@@ -9,7 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Fragments.Tv.SeasonRecyclerFragment;
+import com.example.khaledsabry.entertainment.Fragments.Tv.TvContentFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnSeasonSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
+import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Season;
+import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
 import org.w3c.dom.Text;
@@ -20,7 +28,7 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 12-Jul-18.
  */
 
-public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonCardView>  {
+public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonCardView> {
 
     ArrayList<Season> seasons = new ArrayList<>();
 
@@ -31,7 +39,7 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonCard
     @NonNull
     @Override
     public SeasonCardView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_seasons,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_seasons, parent, false);
 
 
         return new SeasonCardView(view);
@@ -50,29 +58,36 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonCard
         return seasons.size();
     }
 
-    class SeasonCardView extends RecyclerView.ViewHolder
-    {
+    class SeasonCardView extends RecyclerView.ViewHolder {
         ImageView poster;
         TextView seasonText;
-View view;
+        View view;
+
         public SeasonCardView(View itemView) {
             super(itemView);
             seasonText = itemView.findViewById(R.id.seasonid);
             poster = itemView.findViewById(R.id.posterid);
-            view  = itemView;
+            view = itemView;
         }
 
-        public void updateUi(Season season)
-        {
-            ImageController.putImageLowQuality(season.getPoster(),poster);
-            seasonText.setText("Season "+season.getName());
+        public void updateUi(final Season season) {
+            ImageController.putImageLowQuality(season.getPoster(), poster);
+            seasonText.setText(season.getName());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    MovieController movieController = new MovieController();
+                    movieController.getTvSeason(SeasonRecyclerFragment.tvId, season.getSeasonNumber(), new OnSeasonSuccess() {
+                                @Override
+                                public void onSuccess(Season season) {
+                                    TvContentFragment.loadEpisodesFragment(season.getEpisodes());
+                                }
+
+                            }
+                    );
 
                 }
             });
-
         }
     }
 }

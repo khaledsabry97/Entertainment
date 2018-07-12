@@ -29,7 +29,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeC
     @NonNull
     @Override
     public EpisodeCardView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_seasons,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_episodes,parent,false);
 
 
         return new EpisodeCardView(view);
@@ -62,7 +62,7 @@ holder.updateUi(episode);
         public void updateUi(Episode episode)
         {
             ImageController.putImageLowQuality(episode.getPoster(),poster);
-            episodeText.setText(episode.getName());
+            episodeText.setText("Episode "+episode.getEpisodeNumber());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

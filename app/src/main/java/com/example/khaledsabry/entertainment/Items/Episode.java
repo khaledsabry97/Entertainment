@@ -19,7 +19,7 @@ public class Episode {
     private double rateTmdb;
     private int id;
     private ArrayList<Artist> crews = new ArrayList<>();
-    private ArrayList<Artist> guests = new ArrayList<>();
+    private ArrayList<Character> guests = new ArrayList<>();
     private ArrayList<Character> actors = new ArrayList<>();
     private ArrayList<String> images = new ArrayList<>();
     private ArrayList<String> videos = new ArrayList<>();
@@ -105,11 +105,11 @@ public class Episode {
         this.crews = crews;
     }
 
-    public ArrayList<Artist> getGuests() {
+    public ArrayList<Character> getGuests() {
         return guests;
     }
 
-    public void setGuests(ArrayList<Artist> guests) {
+    public void setGuests(ArrayList<Character> guests) {
         this.guests = guests;
     }
 }

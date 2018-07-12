@@ -64,7 +64,7 @@ public class TvDetailFragment extends Fragment implements BottomNavigationView.O
         else if (id == images)
             loadFragment(PosterFragment.newInstance(tvId, PosterFragment.Type.tv));
         else if (id == seasons)
-            loadFragment(RolesFragment.newInstance(tvId));
+            loadFragment(TvContentFragment.newInstance(tvId));
 
         return true;
     }

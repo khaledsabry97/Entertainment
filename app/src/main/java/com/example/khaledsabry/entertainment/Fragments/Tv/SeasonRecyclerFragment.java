@@ -19,10 +19,12 @@ public class SeasonRecyclerFragment extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<Season> seasons = new ArrayList<>();
+    public static int tvId;
 
-    public static SeasonRecyclerFragment newInstance(ArrayList<Season> seasons) {
+    public static SeasonRecyclerFragment newInstance(ArrayList<Season> seasons, int tvId) {
         SeasonRecyclerFragment fragment = new SeasonRecyclerFragment();
         fragment.seasons = seasons;
+        SeasonRecyclerFragment.tvId = tvId;
         return fragment;
     }
 
@@ -39,8 +41,8 @@ public class SeasonRecyclerFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-recyclerView.setAdapter(seasonAdapter);
-recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(seasonAdapter);
+        recyclerView.setHasFixedSize(true);
         return view;
     }
 

@@ -14,7 +14,7 @@
     <item
         android:id="@+id/seasons"
         android:icon="@drawable/bookopenpagevariant"
-        android:title="Roles" />
+        android:title="Seasons" />
     <item
         android:id="@+id/images"
         android:icon="@drawable/images"
