@@ -13,15 +13,14 @@ import com.example.khaledsabry.entertainment.Adapter.ReviewPageAdapter;
 import com.example.khaledsabry.entertainment.Controllers.MovieController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Review;
 import com.example.khaledsabry.entertainment.R;
+
+import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ReviewFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ReviewFragment extends Fragment {
 
     static int movieId;
@@ -31,10 +30,11 @@ public class ReviewFragment extends Fragment {
     ViewPager viewPager;
     CircleIndicator circleIndicator;
     MovieController movieController = new MovieController();
-
-    public static ReviewFragment newInstance(int movieId) {
+    View v;
+    private static ArrayList<Review> reviews = new ArrayList<>();
+    public static ReviewFragment newInstance(ArrayList<Review> reviews) {
         ReviewFragment fragment = new ReviewFragment();
-        ReviewFragment.movieId = movieId;
+        ReviewFragment.reviews = reviews;
         return fragment;
     }
 
@@ -43,14 +43,14 @@ public class ReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_review, container, false);
+         v = inflater.inflate(R.layout.fragment_review, container, false);
 
         viewPager = v.findViewById(R.id.viewPagerid);
         //    circleIndicator = v.findViewById(R.id.circleIndicatorid);
 v.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid,ReviewFragment.newInstance(movieId)).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid,ReviewFragment.newInstance(reviews)).commit();
     }
 });
         loadFragment();
@@ -72,11 +72,10 @@ v.setOnClickListener(new View.OnClickListener() {
     }
 
     private void setObjects() {
-        if (movie.getReviews().size() == 0) {
-            MovieDetailFragment.hideReviewView();
-
+        if (reviews.size() == 0) {
+            v.setVisibility(View.GONE);
         } else {
-            ReviewPageAdapter reviewPageAdapter = new ReviewPageAdapter(movie.getReviews());
+            ReviewPageAdapter reviewPageAdapter = new ReviewPageAdapter(reviews);
             viewPager.setAdapter(reviewPageAdapter);
             //   circleIndicator.setViewPager(viewPager);
 

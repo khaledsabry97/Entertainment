@@ -781,6 +781,7 @@ tv.setRunTime(jsonArray.getInt(0));
 tv.setGenres(getGenre(obj));
 tv.setId(obj.getInt(this.id));
 tv.setInProduction(obj.getBoolean(this.in_production));
+tv.setFirstAirDate(obj.getString(this.first_air_date));
 tv.setLastAirDate(obj.getString(this.last_air_date));
 tv.setTitle(obj.getString(this.name));
 

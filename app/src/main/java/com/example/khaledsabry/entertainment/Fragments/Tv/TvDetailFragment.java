@@ -27,9 +27,9 @@ public class TvDetailFragment extends Fragment implements BottomNavigationView.O
     int seasons = R.id.seasons;
     int backButtonid = R.id.backButtonid;
 
-    public static TvDetailFragment newInstance(int artistId, boolean reset) {
+    public static TvDetailFragment newInstance(int tvId, boolean reset) {
         TvDetailFragment fragment = new TvDetailFragment();
-        TvDetailFragment.tvId = artistId;
+        TvDetailFragment.tvId = tvId;
         if (reset)
             TvDetailFragment.id = -200;
         if (TvDetailFragment.id == -200)
@@ -60,7 +60,7 @@ public class TvDetailFragment extends Fragment implements BottomNavigationView.O
         if (id==backButtonid)
             getActivity().getSupportFragmentManager().popBackStack();
         else if (id == mainView)
-            loadFragment(ArtistMainFragment.newInstance(tvId));
+            loadFragment(TvMainFragment.newInstance(tvId));
         else if (id == images)
             loadFragment(PosterFragment.newInstance(tvId));
         else if (id == seasons)

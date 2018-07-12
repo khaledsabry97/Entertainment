@@ -91,12 +91,12 @@ public class MovieMoreDetailsFragment extends Fragment {
     }
 
     private void loadActorFragment() {
-        CastFragment castFragment = CastFragment.newInstance(movie);
+        CastFragment castFragment = CastFragment.newInstance(movie.getCharacters());
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.actors_crews_id, castFragment).commit();
     }
 
     private void loadCrewFragment() {
-        CrewFragment crewFragment = CrewFragment.newInstance(movie);
+        CrewFragment crewFragment = CrewFragment.newInstance(movie.getCrews());
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.actors_crews_id, crewFragment).commit();
     }
 

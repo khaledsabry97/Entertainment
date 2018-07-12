@@ -8,7 +8,9 @@ import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Tv;
 
 import org.json.JSONObject;
 
@@ -180,6 +182,20 @@ public class MovieController {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getPersonImages(jsonObject));
+
+            }
+        });
+    }
+
+
+    public void getTv(int tvId, final OnTvSuccess listener) {
+        movieGetDetails = "tv/" + tvId;
+        String URL = makeBaseUrl(movieGetDetails) + "&append_to_response=credits,images,videos,reviews";
+
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getTv(jsonObject,new Tv()));
 
             }
         });

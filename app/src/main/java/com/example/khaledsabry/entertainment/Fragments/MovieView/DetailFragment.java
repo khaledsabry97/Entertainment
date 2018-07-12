@@ -60,9 +60,9 @@ public class DetailFragment extends Fragment implements BottomNavigationView.OnN
 getActivity().getSupportFragmentManager().popBackStack();
         else if (item.getItemId() == R.id.navigation_notifications)
             loadFragment(PosterFragment.newInstance(movieId));
-        else if (item.getItemId() == R.id.navigation_trailers)
+      //  else if (item.getItemId() == R.id.navigation_trailers)
             //   loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
-            loadFragment(ReviewFragment.newInstance(movieId));
+         //   loadFragment(ReviewFragment.newInstance(movieId));
         else if (item.getItemId() == R.id.navigation_reco_simi)
             loadFragment(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;

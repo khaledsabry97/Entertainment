@@ -11,16 +11,20 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.ProductionCompanyAdapter;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.R;
+
+import java.util.ArrayList;
 
 public class ProductionCompanyFragment extends Fragment {
     RecyclerView recyclerView;
     ProductionCompanyAdapter productionCompanyAdapter;
     static Movie movie;
+    private static ArrayList<ProductionCompany> productionCompanies;
 
-    public static ProductionCompanyFragment newInstance(Movie movie) {
+    public static ProductionCompanyFragment newInstance(ArrayList<ProductionCompany> productionCompanies) {
         ProductionCompanyFragment fragment = new ProductionCompanyFragment();
-        ProductionCompanyFragment.movie = movie;
+        ProductionCompanyFragment.productionCompanies = productionCompanies;
         return fragment;
     }
 
@@ -31,7 +35,7 @@ public class ProductionCompanyFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_production_company, container, false);
         recyclerView = v.findViewById(R.id.recyclerid);
-        productionCompanyAdapter = new ProductionCompanyAdapter(movie.getProductionCompanies());
+        productionCompanyAdapter = new ProductionCompanyAdapter(productionCompanies);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(productionCompanyAdapter);
 

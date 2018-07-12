@@ -8,19 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
 import com.example.khaledsabry.entertainment.Adapter.CastRecyclerAdapter;
 
+import java.util.ArrayList;
+
 
 public class CastFragment extends Fragment {
     RecyclerView recyclerView;
-    private static Movie movie;
+    private static  ArrayList<Character> characters;
 
-    public static CastFragment newInstance(Movie movie) {
+    public static CastFragment newInstance(ArrayList<Character> characters) {
         CastFragment fragment = new CastFragment();
-        CastFragment.movie = movie;
+        CastFragment.characters = characters;
         return fragment;
     }
 
@@ -34,7 +37,7 @@ public class CastFragment extends Fragment {
         recyclerView = v.findViewById(R.id.contentPanel);
         recyclerView.setHasFixedSize(true);
 
-        CastRecyclerAdapter adapter = adapter = new CastRecyclerAdapter(movie.getCharacters());
+        CastRecyclerAdapter adapter = adapter = new CastRecyclerAdapter(characters);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);

@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.CrewRecyclerAdapter;
+import com.example.khaledsabry.entertainment.Items.Artist;
+import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by KhALeD SaBrY on 29-Jun-18.
@@ -18,11 +22,10 @@ import com.example.khaledsabry.entertainment.R;
 
 public class CrewFragment extends Fragment {
     RecyclerView recyclerView;
-    private static Movie movie;
-
-    public static CrewFragment newInstance(Movie movie) {
+    private static  ArrayList<Artist> crew;
+    public static CrewFragment newInstance(ArrayList<Artist> crew) {
         CrewFragment fragment = new CrewFragment();
-        CrewFragment.movie = movie;
+        CrewFragment.crew = crew;
         return fragment;
     }
 
@@ -38,7 +41,7 @@ public class CrewFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
 
-        CrewRecyclerAdapter adapter = new CrewRecyclerAdapter(movie.getCrews());
+        CrewRecyclerAdapter adapter = new CrewRecyclerAdapter(crew);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);

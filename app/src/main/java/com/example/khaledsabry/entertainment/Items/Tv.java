@@ -217,4 +217,17 @@ private String status;
     public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
     }
+
+    public String  getGenreList()
+    {
+        String s = "";
+        for(int i = 0 ;i < genres.size();i++)
+        {
+            s +=genres.get(i).getName();
+            if(i+1 !=genres.size())
+                s+= "| ";
+
+        }
+        return s;
+    }
 }

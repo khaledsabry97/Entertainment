@@ -123,7 +123,7 @@ public class MovieDetailFragment extends Fragment {
     }
 
     private void loadProductionFragment() {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie)).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie.getProductionCompanies())).commit();
 
     }
 
@@ -144,17 +144,17 @@ public class MovieDetailFragment extends Fragment {
     }
 
     private void loadActorFragment() {
-        CastFragment castFragment = CastFragment.newInstance(movie);
+        CastFragment castFragment = CastFragment.newInstance(movie.getCharacters());
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, castFragment).commit();
     }
 
     private void loadCrewFragment() {
-        CrewFragment crewFragment = CrewFragment.newInstance(movie);
+        CrewFragment crewFragment = CrewFragment.newInstance(movie.getCrews());
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, crewFragment).commit();
     }
 
     private void loadReviewFragment() {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ReviewLayoutid, ReviewFragment.newInstance(movieId)).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ReviewLayoutid, ReviewFragment.newInstance(movie.getReviews())).commit();
     }
 
 public static void hideReviewView()
