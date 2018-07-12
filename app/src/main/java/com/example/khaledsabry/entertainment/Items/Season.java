@@ -13,12 +13,52 @@ public class Season {
     private String name;
     private String overView;
     private int seasonNumber;
+    private int episodeCount;
     private ArrayList<Episode> episodes = new ArrayList<>();
     private ArrayList<Artist> crews = new ArrayList<>();
     private ArrayList<Character> actors = new ArrayList<>();
     private ArrayList<String> images = new ArrayList<>();
     private ArrayList<String> videos = new ArrayList<>();
 
+    public int getEpisodeCount() {
+        return episodeCount;
+    }
+
+    public void setEpisodeCount(int episodeCount) {
+        this.episodeCount = episodeCount;
+    }
+
+    public ArrayList<Artist> getCrews() {
+        return crews;
+    }
+
+    public void setCrews(ArrayList<Artist> crews) {
+        this.crews = crews;
+    }
+
+    public ArrayList<Character> getActors() {
+        return actors;
+    }
+
+    public void setActors(ArrayList<Character> actors) {
+        this.actors = actors;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
+
+    public ArrayList<String> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(ArrayList<String> videos) {
+        this.videos = videos;
+    }
 
     public int getId() {
         return id;

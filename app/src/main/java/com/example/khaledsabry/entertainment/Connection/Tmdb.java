@@ -9,6 +9,7 @@ import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.Items.Review;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
+import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
 
 import org.json.JSONArray;
@@ -77,6 +78,19 @@ public class Tmdb {
     private String place_of_birth = "place_of_birth";
     private String biography = "biography";
     private String profiles = "profiles";
+    private String episode_run_time = "episode_run_time";
+    private String first_air_date = "first_air_date";
+    private String last_air_date = "last_air_date";
+    private String number_of_episodes = "number_of_episodes";
+    private String number_of_seasons = "number_of_seasons";
+    private String in_production = "in_production";
+    private String seasons = "seasons";
+    private String season_number = "season_number";
+    private String air_date  = "air_date";
+    private String episode_count  = "episode_count";
+    private String networks ="networks";
+
+
 
 
     private static final Tmdb ourInstance = new Tmdb();
@@ -145,7 +159,7 @@ public class Tmdb {
                 i++;
             }
 
-
+/*
             jsonArray = cast.getJSONArray(this.cast);
             i = 0;
 
@@ -162,10 +176,10 @@ public class Tmdb {
 
                 characters.add(character);
                 i++;
-            }
+            }*/
             i = 0;
 
-
+/*
             jsonArray = cast.getJSONArray(crew);
             i = 0;
             while (!jsonArray.isNull(i)) {
@@ -183,7 +197,7 @@ public class Tmdb {
 
                 i++;
             }
-
+*/
 
             jsonArray = videos.getJSONArray(this.results);
             i = 0;
@@ -219,13 +233,16 @@ public class Tmdb {
             movie.setAdult(movieDetails.getBoolean(adult));
             movie.setReleaseDate(movieDetails.getString(release_date));
             movie.setTrailers(trailers);
-            movie.setReviews(reviews1);
-            movie.setCharacters(characters);
+        //    movie.setReviews(reviews1);
+            movie.setReviews(getReviews(movieDetails));
+           // movie.setCharacters(characters);
+            movie.setCharacters(getCharacters(movieDetails));
             movie.setGenres(genre);
             movie.setProductionCompanies(productionCompanies);
-            movie.setCrews(crews);
+           // movie.setCrews(crews);
+            movie.setCrews(getCrew(movieDetails));
 
-            movie = getPosters(movieDetails, movie);
+            getPosters(movieDetails, movie);
         } catch (JSONException e) {
             String s = e.toString();
 
@@ -384,7 +401,7 @@ public class Tmdb {
 
             movie.setCharacters(characters);
             movie.setProductionCompanies(productionCompanies);
-            movie.setCrews(crews);
+            movie.setCrews(getCrew(movieDetails));
 
         } catch (JSONException e) {
             String s = e.toString();
@@ -439,7 +456,8 @@ public class Tmdb {
 
     }
 
-    public Movie getPosters(JSONObject movieDetails, Movie movie) {
+    public ArrayList<String> getPosters(JSONObject movieDetails, Movie movie) {
+        ArrayList<String> posters = new ArrayList<>();
 
         try {
 
@@ -450,7 +468,6 @@ public class Tmdb {
             int i;
 
 
-            ArrayList<String> posters = new ArrayList<>();
 
 
             jsonArray = images.getJSONArray(this.posters);
@@ -470,11 +487,12 @@ public class Tmdb {
             String s = e.toString();
 
         }
-        return movie;
+        return posters;
 
     }
 
-    public Movie getReviews(JSONObject movieDetails, Movie movie) {
+    public ArrayList<Review>  getReviews(JSONObject movieDetails) {
+        ArrayList<Review> reviews = new ArrayList<>();
 
         try {
 
@@ -483,7 +501,6 @@ public class Tmdb {
             int i;
 
 
-            ArrayList<Review> reviews = new ArrayList<>();
 
 
             jsonArray = movieDetails.getJSONArray(this.results);
@@ -499,14 +516,12 @@ public class Tmdb {
             }
 
 
-            movie.setReviews(reviews);
-
 
         } catch (JSONException e) {
             String s = e.toString();
 
         }
-        return movie;
+        return reviews;
 
     }
 
@@ -722,13 +737,13 @@ public class Tmdb {
         Artist artist = new Artist();
 
         try {
-      ArrayList<String> images = new ArrayList<>();
+            ArrayList<String> images = new ArrayList<>();
             JSONArray result = obj.getJSONArray(this.profiles);
             int i = 0;
 
             while (!result.isNull(i)) {
                 JSONObject object = result.getJSONObject(i);
-               images.add(object.getString(this.file_path));
+                images.add(object.getString(this.file_path));
                 i++;
             }
             artist.setImages(images);
@@ -740,4 +755,254 @@ public class Tmdb {
         return artist;
     }
 
+
+    public Tv getTv(JSONObject obj,Tv tv) {
+
+        try {
+
+
+            //get the credits
+            tv.setCrew(getCrew(obj));
+            tv.setActors(getCharacters(obj));
+
+            tv.setReviews(getReviews(obj));
+            tv.setPosters(getPosters(obj,new Movie()));
+tv.setSeasons(getSeasons(obj));
+tv.setProductionCompanies(getProductionCompanies(obj));
+tv.setNetworks(getNetworks(obj));
+
+JSONArray jsonArray = obj.getJSONArray(this.episode_run_time);
+
+tv.setRunTime(jsonArray.getInt(0));
+            tv.setBackDrop(obj.getString(this.backdrop_path));
+
+            tv.setFirstAirDate(obj.getString(this.first_air_date));
+
+tv.setGenres(getGenre(obj));
+tv.setId(obj.getInt(this.id));
+tv.setInProduction(obj.getBoolean(this.in_production));
+tv.setLastAirDate(obj.getString(this.last_air_date));
+tv.setTitle(obj.getString(this.name));
+
+
+tv.setNumberOfEpisodes(obj.getInt(this.number_of_episodes));
+tv.setNumberOfSeasons(obj.getInt(this.number_of_seasons));
+tv.setOverView(obj.getString(this.overview));
+tv.setPopularity(obj.getDouble(this.popularity));
+tv.setPosterImage(obj.getString(this.poster_path));
+tv.setStatus(obj.getString(this.status));
+tv.setRateTmdb(obj.getDouble(this.vote_average));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return tv;
+    }
+
+
+
+    private ArrayList<Character> getCharacters(JSONObject obj)
+    {
+        int i = 0;
+        JSONArray jsonArray;
+        ArrayList<Character> actors = new ArrayList<>();
+        try {
+            JSONObject credit = obj.getJSONObject(credits);
+
+            jsonArray = credit.getJSONArray(this.cast);
+            i =0;
+
+            while (!jsonArray.isNull(i))
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String charcter = object.getString(this.character);
+                String nam = object.getString(this.name);
+                String poster = object.getString(this.profile_path);
+                int gend = object.getInt(this.gender);
+                int id = object.getInt(this.id);
+                Artist artist = new Artist(nam,id,gend,poster);
+                Character character = new Character(artist,charcter);
+
+                actors.add(character);
+
+                i++;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return actors;
+    }
+
+
+    private ArrayList<Artist> getCrew(JSONObject obj)
+    {
+        int i = 0;
+        JSONArray jsonArray;
+        ArrayList<Artist> crew = new ArrayList<>();
+        try {
+            JSONObject credit = obj.getJSONObject(credits);
+
+
+            jsonArray = credit.getJSONArray(this.crew);
+            i =0;
+
+            while (!jsonArray.isNull(i))
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String job = object.getString(this.job);
+                String nam = object.getString(this.name);
+                String poster = object.getString(this.profile_path);
+                int gend = object.getInt(this.gender);
+                int id = object.getInt(this.id);
+                Artist artist = new Artist(nam,id,gend,poster);
+                artist.setJob(job);
+
+
+                crew.add(artist);
+
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return crew;
+    }
+
+    private ArrayList<Genre> getGenre(JSONObject obj)
+    {
+        JSONArray jsonArray;
+        int i =0;
+        ArrayList<Genre> genre = new ArrayList<>();
+        try {
+        jsonArray = obj.getJSONArray(genres);
+        i = 0;
+
+        while (!jsonArray.isNull(i)) {
+            JSONObject object = null;
+
+                object = jsonArray.getJSONObject(i);
+
+            int ids = object.getInt(id);
+            String nam = object.getString(name);
+
+            Genre gen = new Genre(ids, nam);
+            genre.add(gen);
+            i++;
+        }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return genre;
+    }
+
+
+    private ArrayList<Season> getSeasons(JSONObject obj)
+    {
+        ArrayList<Season> seasons = new ArrayList<>();
+        try {
+            JSONArray jsonArray = obj.getJSONArray(this.seasons);
+            int i =0;
+
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String air = jsonObject.getString(this.air_date);
+                int count = jsonObject.getInt(this.episode_count);
+                int id= jsonObject.getInt(this.id);
+                int no = jsonObject.getInt(this.season_number);
+                String name = jsonObject.getString(this.name);
+                String overview = jsonObject.getString(this.overview);
+                String poster = jsonObject.getString(this.poster_path);
+
+                Season season = new Season();
+                season.setAirDate(air);
+                season.setId(id);
+                season.setName(name);
+                season.setSeasonNumber(no);
+                season.setOverView(overview);
+                season.setPoster(poster);
+                season.setEpisodeCount(count);
+
+                seasons.add(season);
+
+
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+return seasons;
+    }
+
+    private ArrayList<ProductionCompany> getProductionCompanies(JSONObject obj)
+    {
+        ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
+        try {
+            JSONArray jsonArray = obj.getJSONArray(this.production_companies);
+            int i =0;
+
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+             int id = jsonObject.getInt(this.id);
+             String image = jsonObject.getString(this.logo_path);
+             String name = jsonObject.getString(this.name);
+             String country = jsonObject.getString(this.origin_country);
+
+
+                ProductionCompany productionCompany = new ProductionCompany(id,image,name,country);
+                productionCompanies.add(productionCompany);
+
+
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return productionCompanies;
+    }
+
+
+    private ArrayList<ProductionCompany> getNetworks(JSONObject obj)
+    {
+        ArrayList<ProductionCompany> networks = new ArrayList<>();
+        try {
+            JSONArray jsonArray = obj.getJSONArray(this.networks);
+            int i =0;
+
+            while(!jsonArray.isNull(i))
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                int id = jsonObject.getInt(this.id);
+                String image = jsonObject.getString(this.logo_path);
+                String name = jsonObject.getString(this.name);
+                String country = jsonObject.getString(this.origin_country);
+
+
+                ProductionCompany productionCompany = new ProductionCompany(id,image,name,country);
+                networks.add(productionCompany);
+
+
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return networks;
+    }
 }

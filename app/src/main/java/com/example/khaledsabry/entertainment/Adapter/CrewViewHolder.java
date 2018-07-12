@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Crew;
 import com.example.khaledsabry.entertainment.R;
@@ -27,9 +28,9 @@ public class CrewViewHolder extends RecyclerView.ViewHolder {
         crewName = itemView.findViewById(R.id.actorNamID);
     }
 
-    public void updateUi(final Crew crew) {
-        crewName.setText(crew.getArtist().getName());
-        jobName.setText(crew.getJobTitle());
-        ImageController.putImageLowQuality(crew.getArtist().getPosterImage(), posterImage);
+    public void updateUi(final Artist crew) {
+        crewName.setText(crew.getName());
+        jobName.setText(crew.getJob());
+        ImageController.putImageLowQuality(crew.getPosterImage(), posterImage);
     }
 }

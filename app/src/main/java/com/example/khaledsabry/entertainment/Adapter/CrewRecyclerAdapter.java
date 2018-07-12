@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
+import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.Items.Crew;
 import com.example.khaledsabry.entertainment.R;
@@ -21,9 +22,9 @@ import java.util.ArrayList;
 //the recycler adapter for the crew
 public class CrewRecyclerAdapter extends RecyclerView.Adapter<CrewViewHolder> {
 
-    ArrayList<Crew> crews = new ArrayList<>();
+    ArrayList<Artist> crews = new ArrayList<>();
 
-    public CrewRecyclerAdapter(ArrayList<Crew> crews) {
+    public CrewRecyclerAdapter(ArrayList<Artist> crews) {
         this.crews = crews;
     }
 
@@ -36,13 +37,13 @@ public class CrewRecyclerAdapter extends RecyclerView.Adapter<CrewViewHolder> {
 
     @Override
     public void onBindViewHolder(final CrewViewHolder holder, int position) {
-        final Crew crew = crews.get(position);
+        final Artist crew = crews.get(position);
         holder.updateUi(crew);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(crew.getArtist().getPosterImage())).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(crew.getPosterImage())).commit();
             }
         });
 

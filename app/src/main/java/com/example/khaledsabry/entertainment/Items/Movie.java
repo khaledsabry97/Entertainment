@@ -60,7 +60,7 @@ public class Movie {
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
     private ArrayList<Genre> genres = new ArrayList<>();
     private ArrayList<Character>characters = new ArrayList<>();
-    private ArrayList<Crew> crews = new ArrayList<>();
+    private ArrayList<Artist> crews = new ArrayList<>();
     private ArrayList<String> posters = new ArrayList<>();
     private ArrayList<String> backdrops = new ArrayList<>();
     private ArrayList<String> trailers = new ArrayList<>();
@@ -255,11 +255,11 @@ public class Movie {
     }
 
 
-    public ArrayList<Crew> getCrews() {
+    public ArrayList<Artist> getCrews() {
         return crews;
     }
 
-    public void setCrews(ArrayList<Crew> crews) {
+    public void setCrews(ArrayList<Artist> crews) {
         this.crews = crews;
     }
 

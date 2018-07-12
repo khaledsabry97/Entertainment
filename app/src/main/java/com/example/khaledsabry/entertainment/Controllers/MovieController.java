@@ -112,7 +112,9 @@ public class MovieController {
         connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                listener.onSuccess(controller.getReviews(jsonObject, new Movie()));
+                Movie movie = new Movie();
+               movie.setReviews(controller.getReviews(jsonObject));
+                listener.onSuccess(movie);
 
             }
         });
