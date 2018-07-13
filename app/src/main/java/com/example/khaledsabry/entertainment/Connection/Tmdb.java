@@ -561,6 +561,40 @@ public class Tmdb {
 
     private Tv getSearchTv(JSONObject object) {
         Tv tv = new Tv();
+        JSONArray jsonArray;
+        int i;
+
+        ArrayList<Genre> genre = new ArrayList<>();
+
+
+        try {
+            jsonArray = object.getJSONArray(this.genre_ids);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                int ids = jsonArray.getInt(i);
+
+                Genre gen = new Genre();
+                gen.setId(ids);
+                genre.add(gen);
+                i++;
+
+            }
+
+            tv.setId(object.getInt(this.id));
+            tv.setTitle(object.getString(this.name));
+            tv.setRateTmdb(object.getDouble(this.vote_average));
+            tv.setPosterImage(object.getString(this.poster_path));
+            tv.setFirstAirDate(object.getString(this.first_air_date));
+            tv.setPopularity(object.getDouble(this.popularity));
+            tv.setGenres(genre);
+            tv.setBackDrop(object.getString(this.backdrop_path));
+            tv.setOverView(object.getString(this.overview));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         return tv;
     }
@@ -1077,15 +1111,16 @@ public class Tmdb {
         return episodes;
 
     }
+
     public Season getSeason(JSONObject obj) {
-Season season = new Season();
+        Season season = new Season();
         try {
-           season.setEpisodes(getEpisodes(obj));
-           season.setPoster(obj.getString(this.poster_path));
-           season.setOverView(obj.getString(this.overview));
-           season.setSeasonNumber(obj.getInt(this.season_number));
-           season.setName(obj.getString(this.name));
-           season.setAirDate(obj.getString(this.air_date));
+            season.setEpisodes(getEpisodes(obj));
+            season.setPoster(obj.getString(this.poster_path));
+            season.setOverView(obj.getString(this.overview));
+            season.setSeasonNumber(obj.getInt(this.season_number));
+            season.setName(obj.getString(this.name));
+            season.setAirDate(obj.getString(this.air_date));
 
         } catch (JSONException e) {
             e.printStackTrace();

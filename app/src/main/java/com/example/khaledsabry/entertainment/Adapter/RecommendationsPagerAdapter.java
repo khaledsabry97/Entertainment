@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.DetailFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
@@ -42,7 +42,7 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, DetailFragment.newInstance(movie.getMovieId(), true)).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), true)).commit();
             }
         });
 

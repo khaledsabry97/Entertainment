@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistDetailFragment;
+import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistNavigationFragment;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.R;
 
@@ -41,7 +41,7 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, ArtistDetailFragment.newInstance(list.get(position).getArtist().getId(),true)).addToBackStack(null).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, ArtistNavigationFragment.newInstance(list.get(position).getArtist().getId(),true)).addToBackStack(null).commit();
 
 
             }

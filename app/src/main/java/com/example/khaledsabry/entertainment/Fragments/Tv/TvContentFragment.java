@@ -70,4 +70,9 @@ public class TvContentFragment extends Fragment {
 
     }
 
+    public static void loadEpisodePreviewFragment(Episode episode) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodePreviewFragment.newInstance(episode)).commit();
+
+    }
+
 }

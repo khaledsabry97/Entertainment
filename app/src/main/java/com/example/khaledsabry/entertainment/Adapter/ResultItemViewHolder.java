@@ -8,9 +8,8 @@ import android.widget.TextView;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchArtistFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchMovieFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchTvFragment;
-import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment;
+import com.example.khaledsabry.entertainment.Fragments.Tv.TvPreviewFragment;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 
@@ -50,20 +49,20 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchMovieFragment.newInstance(searchItem.getMovie())).addToBackStack(null).commit();
+                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, MoviePreviewFragment.newInstance(searchItem.getMovie())).addToBackStack(null).commit();
                 }
             });
         }
         else if(searchItem.getType().equals("tv"))
         {
-           /* title.setText(searchItem.getTv().getTitle());
-            ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(),poster);
+           title.setText(searchItem.getTv().getTitle());
+            ImageController.putImageLowQuality(searchItem.getTv().getPosterImage(),poster);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchTvFragment.newInstance(searchItem.getTv())).commit();
+                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, TvPreviewFragment.newInstance(searchItem.getTv())).commit();
                 }
-            });*/
+            });
         }
 
         else if(searchItem.getType().equals("person"))

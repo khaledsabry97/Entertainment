@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.DetailFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
-import com.example.khaledsabry.entertainment.Fragments.Tv.TvDetailFragment;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 
@@ -45,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
         //startActivity(new Intent(this,ANOTHER.class));
 
-       //loadFragment(R.id.mainContainer, SearchFragment.newInstance());
-       loadFragment(R.id.mainContainer, TvDetailFragment.newInstance(1399,true));
+       loadFragment(R.id.mainContainer, SearchFragment.newInstance());
+      // loadFragment(R.id.mainContainer, TvNavigationFragment.newInstance(1399,true));
 
     }
 
     public void loadMovieDetailFragment(int movieId) {
-        DetailFragment detailFragment = DetailFragment.newInstance(movieId, true);
+        MovieNavigationFragment detailFragment = MovieNavigationFragment.newInstance(movieId, true);
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, detailFragment).addToBackStack(null).commit();
 
     }

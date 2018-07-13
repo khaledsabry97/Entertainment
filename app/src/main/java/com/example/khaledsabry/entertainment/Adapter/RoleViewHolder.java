@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchArtistFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchMovieFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Tv;
@@ -49,7 +49,7 @@ public class RoleViewHolder extends RecyclerView.ViewHolder {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchMovieFragment.newInstance(searchItem.getMovie())).addToBackStack(null).commit();
+                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, MoviePreviewFragment.newInstance(searchItem.getMovie())).addToBackStack(null).commit();
                 }
             });
         } else if (searchItem.getType().equals("tv")) {
@@ -96,7 +96,7 @@ public class RoleViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchMovieFragment.newInstance(movie)).commit();}
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, MoviePreviewFragment.newInstance(movie)).commit();}
     });
     }
 

@@ -16,6 +16,8 @@ import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 
 public class EpisodeRecyclerFragment extends Fragment {
 
