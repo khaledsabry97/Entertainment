@@ -2,12 +2,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.khaledsabry.entertainment.Fragments.Artist.ArtistPreviewFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/background3">
+
+        <ImageView
+            android:id="@+id/posterid"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_marginBottom="600dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/batman"
+            app:layout_constraintBottom_toTopOf="@+id/titleid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/carterone"
+            android:text="title"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/posterid" />
+
+        <TextView
+            android:id="@+id/rateid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/carterone"
+            android:text=""
+            android:textColor="@color/cardview_light_background"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/posterid" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleid">
+
+            <TextView
+                android:id="@+id/biographyid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/carterone"
+                android:paddingBottom="20dp"
+                android:paddingRight="10dp"
+                android:text="ven if you have never played "
+                android:textColor="@color/cardview_light_background"
+                android:textSize="18sp" />
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/birthdayid"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/carterone"
+            android:text="Birth Date :"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/placeofbirthid"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/carterone"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </FrameLayout>

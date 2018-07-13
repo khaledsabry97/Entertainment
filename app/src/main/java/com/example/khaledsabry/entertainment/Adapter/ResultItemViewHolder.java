@@ -7,9 +7,13 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistPreviewFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchArtistFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment;
 import com.example.khaledsabry.entertainment.Fragments.Tv.TvPreviewFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
+import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 
@@ -72,7 +76,15 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, SearchArtistFragment.newInstance(searchItem.getArtist())).commit();
+
+
+                    MovieController movieController = new MovieController();
+                    movieController.getPersonDetails(searchItem.getArtist().getId(), new OnArtistDataSuccess() {
+                        @Override
+                        public void onSuccess(Artist artist) {
+                            MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, ArtistPreviewFragment.newInstance(artist)).commit();
+                        }
+                    });
                 }
             });
         }
