@@ -7,12 +7,11 @@ package com.example.khaledsabry.entertainment.Items;
 public class Torrent {
     private String title;
     private String magnet;
-    private int size;
-    private int seed;
-    private int leach;
+    private String size;
+    private String seeders;
+    private String leechers;
     private String quailty;
     private String sourceName;
-
 
     public String getTitle() {
         return title;
@@ -30,28 +29,28 @@ public class Torrent {
         this.magnet = magnet;
     }
 
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
-    public int getSeed() {
-        return seed;
+    public String getSeeders() {
+        return seeders;
     }
 
-    public void setSeed(int seed) {
-        this.seed = seed;
+    public void setSeeders(String seeders) {
+        this.seeders = seeders;
     }
 
-    public int getLeach() {
-        return leach;
+    public String getLeechers() {
+        return leechers;
     }
 
-    public void setLeach(int leach) {
-        this.leach = leach;
+    public void setLeechers(String leechers) {
+        this.leechers = leechers;
     }
 
     public String getQuailty() {

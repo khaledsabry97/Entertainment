@@ -1,20 +1,34 @@
 package com.example.khaledsabry.entertainment.Activities;
 
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Controllers.TorrentController;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
+import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static java.nio.file.Files.copy;
+import static java.nio.file.Files.list;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
   //      loadMovieDetailFragment(68735);
 
         //startActivity(new Intent(this,ANOTHER.class));
+
+
+        TorrentController torrentController = new TorrentController();
+        torrentController.downloadSkyTorrent("vikings s02e03", new OnTorrentSearchSuccess() {
+            @Override
+            public void onSuccess(ArrayList<Torrent> torrent) {
+                ArrayList<Torrent> torrents = torrent;
+            }
+        });
+
 
        loadFragment(R.id.mainContainer, SearchFragment.newInstance());
       // loadFragment(R.id.mainContainer, TvNavigationFragment.newInstance(1399,true));
