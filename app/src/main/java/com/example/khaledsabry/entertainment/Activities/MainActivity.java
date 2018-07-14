@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         TorrentController torrentController = new TorrentController();
-        torrentController.downloadSkyTorrent("vikings s02e03", new OnTorrentSearchSuccess() {
+        torrentController.downloadSkyTorrent("LEAN ON PETE", new OnTorrentSearchSuccess() {
             @Override
             public void onSuccess(ArrayList<Torrent> torrent) {
                 ArrayList<Torrent> torrents = torrent;

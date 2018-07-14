@@ -3,8 +3,10 @@ package com.example.khaledsabry.entertainment.Controllers;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSeasonSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
+import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 
 import org.jsoup.Jsoup;
@@ -24,6 +26,33 @@ import static java.lang.Math.log;
 
 public class TorrentController {
 
+
+    public void getRottenTomatoesRate(final String movieName, final OnMovieDataSuccess listener) {
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Movie movie = new Movie();
+                    String item = movieName;
+                    item = item.replace(" ", "_");
+                    item = item.toLowerCase();
+                    ArrayList<Torrent> torrents = new ArrayList<>();
+                    org.jsoup.nodes.Document
+                            doc = Jsoup.connect("https://www.rottentomatoes.com/m/" + item).get();
+
+                    Elements results = doc.getElementsByClass("meter-value superPageFontColor");
+                    String rate = results.get(0).text();
+
+                    listener.onSuccess(movie);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     public void downloadSkyTorrent(final String searchItem, final OnTorrentSearchSuccess listener) {
         AsyncTask.execute(new Runnable() {
@@ -67,4 +96,5 @@ public class TorrentController {
             }
         });
     }
+    
 }
