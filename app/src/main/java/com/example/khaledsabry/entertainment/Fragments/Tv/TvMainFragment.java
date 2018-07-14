@@ -15,14 +15,12 @@ import android.widget.TextView;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.CastFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.CrewFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.ProductionCompanyFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.ReviewFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
-import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
@@ -136,9 +134,9 @@ public class TvMainFragment extends Fragment {
 
 
     public void getMovieDetails() {
-        MovieController movieController = new MovieController();
+        TmdbController tmdbController = new TmdbController();
         if (tvId != currentTvId)
-            movieController.getTv(tvId, new OnTvSuccess() {
+            tmdbController.getTv(tvId, new OnTvSuccess() {
                 @Override
                 public void onSuccess(Tv tv) {
                     TvMainFragment.tv = tv;

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.khaledsabry.entertainment.Connection.TmdbConnection;
+import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.R;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         //get width and height for the mobile and tablet
         Settings.getInstance().setWidthAndHeight(getWindowManager());
         //set the context for the volley library
-        TmdbConnection.getInstance().setContext(getApplicationContext());
+        ApiConnections.getInstance().setContext(getApplicationContext());
 
 // hide the navigation bar and the status bar
         periodicHideNavigation();

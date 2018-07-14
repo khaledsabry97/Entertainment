@@ -15,7 +15,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class SearchFragment extends Fragment {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    MovieController movieController;
+    TmdbController tmdbController;
     SearchView searchView;
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
@@ -57,7 +57,7 @@ public class SearchFragment extends Fragment {
 
             }
         });
-        movieController = new MovieController();
+        tmdbController = new TmdbController();
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -65,7 +65,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                movieController.search(query, new OnSearchSuccess() {
+                tmdbController.search(query, new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {
                         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid,SearchResult.newInstance(searchItems)).commit();
@@ -76,7 +76,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String query) {
-                movieController.search(query, new OnSearchSuccess() {
+                tmdbController.search(query, new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {
                         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid,SearchResult.newInstance(searchItems)).commit();

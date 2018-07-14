@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
@@ -28,7 +28,7 @@ TextView overView;
 TextView releaseDate;
 TextView genres;
 
-MovieController movieController = new MovieController();
+TmdbController tmdbController = new TmdbController();
     public static MoviePreviewFragment newInstance(Movie movie) {
         MoviePreviewFragment fragment = new MoviePreviewFragment();
         MoviePreviewFragment.movie = movie;
@@ -66,7 +66,7 @@ view.setOnClickListener(new View.OnClickListener() {
         ImageController.putImageMidQuality(movie.getBackDropPoster(),poster);
 
         final Movie mov = movie;
-movieController.getGenres(new OnMovieDataSuccess() {
+tmdbController.getGenres(new OnMovieDataSuccess() {
     @Override
     public void onSuccess(Movie movie1) {
 

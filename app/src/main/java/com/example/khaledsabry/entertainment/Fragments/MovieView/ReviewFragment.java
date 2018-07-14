@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.ReviewPageAdapter;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Review;
@@ -29,7 +29,7 @@ public class ReviewFragment extends Fragment {
     static Movie movie;
     ViewPager viewPager;
     CircleIndicator circleIndicator;
-    MovieController movieController = new MovieController();
+    TmdbController tmdbController = new TmdbController();
     View v;
     private static ArrayList<Review> reviews = new ArrayList<>();
     public static ReviewFragment newInstance(ArrayList<Review> reviews) {
@@ -59,7 +59,7 @@ v.setOnClickListener(new View.OnClickListener() {
 
     private void loadFragment() {
         if (currentId != movieId)
-            movieController.getReviews(movieId, new OnMovieDataSuccess() {
+            tmdbController.getReviews(movieId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
                     currentId = movieId;

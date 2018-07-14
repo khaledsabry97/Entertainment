@@ -7,9 +7,8 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistPreviewFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchArtistFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment;
 import com.example.khaledsabry.entertainment.Fragments.Tv.TvPreviewFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
@@ -78,8 +77,8 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
                 public void onClick(View v) {
 
 
-                    MovieController movieController = new MovieController();
-                    movieController.getPersonDetails(searchItem.getArtist().getId(), new OnArtistDataSuccess() {
+                    TmdbController tmdbController = new TmdbController();
+                    tmdbController.getPersonDetails(searchItem.getArtist().getId(), new OnArtistDataSuccess() {
                         @Override
                         public void onSuccess(Artist artist) {
                             MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, ArtistPreviewFragment.newInstance(artist)).commit();

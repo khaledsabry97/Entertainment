@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.CastFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.CrewFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
@@ -27,7 +27,7 @@ public class MovieMoreDetailsFragment extends Fragment {
     Button actorButton;
     Button crewButton;
 
-    MovieController movieController = new MovieController();
+    TmdbController tmdbController = new TmdbController();
 
     public static MovieMoreDetailsFragment newInstance(int movieId) {
         MovieMoreDetailsFragment fragment = new MovieMoreDetailsFragment();
@@ -70,7 +70,7 @@ public class MovieMoreDetailsFragment extends Fragment {
 
     private void getMovieDetails() {
         if (movieId != currentId)
-            movieController.getMovieVideosCreditsCategories(
+            tmdbController.getMovieVideosCreditsCategories(
                     movieId, new OnMovieDataSuccess() {
                         @Override
                         public void onSuccess(Movie movie) {

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -129,9 +129,9 @@ public class MovieMainFragment extends Fragment {
 
 
     public void getMovieDetails() {
-        MovieController movieController = new MovieController();
+        TmdbController tmdbController = new TmdbController();
         if (movieId != currentMovieId)
-            movieController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
+            tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
                     currentMovieId = movie.getMovieId();

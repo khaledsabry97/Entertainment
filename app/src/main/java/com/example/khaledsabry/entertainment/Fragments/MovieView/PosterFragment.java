@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.PosterAdapter;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -29,7 +29,7 @@ public class PosterFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<String> imgs = new ArrayList<>();
     static Type type;
-    MovieController movieController = new MovieController();
+    TmdbController tmdbController = new TmdbController();
     PosterAdapter posterAdapter;
 
     public static PosterFragment newInstance(int contentId, Type type) {
@@ -78,7 +78,7 @@ public class PosterFragment extends Fragment {
 
     private void loadMovie() {
         if (contentId != currentId)
-            movieController.getMovieImages(contentId, new OnMovieDataSuccess() {
+            tmdbController.getMovieImages(contentId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
                     PosterFragment.movie = movie;
@@ -94,7 +94,7 @@ public class PosterFragment extends Fragment {
 
     private void loadTv() {
         if (contentId != currentId)
-            movieController.getTvImages(contentId, new OnTvSuccess() {
+            tmdbController.getTvImages(contentId, new OnTvSuccess() {
                 @Override
                 public void onSuccess(Tv tv) {
                     PosterFragment.tv = tv;

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.RecommendationsPagerAdapter;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
@@ -34,7 +34,7 @@ public class SimilarFragment extends Fragment {
 
     RecommendationsPagerAdapter recommendationsPagerAdapter;
     static ArrayList<Movie> movies = new ArrayList<>();
-    MovieController movieController = new MovieController();
+    TmdbController tmdbController = new TmdbController();
 
     public static SimilarFragment newInstance(int id) {
         SimilarFragment fragment = new SimilarFragment();
@@ -63,7 +63,7 @@ public class SimilarFragment extends Fragment {
 
     private void loadSimilars() {
         if (currentId != id)
-            movieController.getSimilar(id, new OnMovieList() {
+            tmdbController.getSimilar(id, new OnMovieList() {
                 @Override
                 public void onMovieList(ArrayList<Movie> movies) {
                     currentId = id;

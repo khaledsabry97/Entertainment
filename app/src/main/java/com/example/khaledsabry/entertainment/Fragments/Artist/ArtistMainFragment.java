@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.R;
@@ -35,7 +35,7 @@ static int id;
 static int currentId = -1;
 static int currentImagesId =-1;
 static ArrayList<String> images = new ArrayList<>();
-MovieController movieController = new MovieController();
+TmdbController tmdbController = new TmdbController();
     public static ArtistMainFragment newInstance(int artistId) {
         ArtistMainFragment fragment = new ArtistMainFragment();
         ArtistMainFragment.id = artistId;
@@ -82,7 +82,7 @@ loadFragment();
 
         if(id != currentImagesId)
         {
-            movieController.getPersonImages(id, new OnArtistDataSuccess() {
+            tmdbController.getPersonImages(id, new OnArtistDataSuccess() {
                 @Override
                 public void onSuccess(Artist artist) {
                     images.clear();
@@ -114,7 +114,7 @@ loadFragment();
     private void loadFragment() {
         if(id != currentId)
         {
-            movieController.getPersonDetails(id, new OnArtistDataSuccess() {
+            tmdbController.getPersonDetails(id, new OnArtistDataSuccess() {
                 @Override
                 public void onSuccess(Artist artist) {
                     ArtistMainFragment.artist = artist;

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.RecommendationsPagerAdapter;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
@@ -28,7 +28,7 @@ public class RecommendationsFragment extends Fragment {
     static int id;
     static int currentId = -1;
     RecommendationsPagerAdapter recommendationsPagerAdapter;
-    MovieController movieController = new MovieController();
+    TmdbController tmdbController = new TmdbController();
     static ArrayList<Movie> movies = new ArrayList<>();
 
     public static RecommendationsFragment newInstance(int id) {
@@ -56,7 +56,7 @@ public class RecommendationsFragment extends Fragment {
 
     private void loadRecommendations() {
         if (id != currentId)
-            movieController.getRecommendations(id, new OnMovieList() {
+            tmdbController.getRecommendations(id, new OnMovieList() {
                 @Override
                 public void onMovieList(ArrayList<Movie> movies) {
                     currentId = id;

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.khaledsabry.entertainment.Adapter.RoleRecyclarAdapter;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.R;
@@ -24,7 +24,7 @@ public class RolesFragment extends Fragment {
     static int id;
     static boolean newStuff;
     static Artist artist;
-    MovieController movieController = new MovieController();
+    TmdbController tmdbController = new TmdbController();
 
     public static RolesFragment newInstance(int id) {
         RolesFragment fragment = new RolesFragment();
@@ -48,7 +48,7 @@ public class RolesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (newStuff)
-            movieController.getPersonRoles(id, new OnArtistDataSuccess() {
+            tmdbController.getPersonRoles(id, new OnArtistDataSuccess() {
                 @Override
                 public void onSuccess(Artist artist) {
                     RolesFragment.artist = artist;

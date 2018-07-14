@@ -9,18 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Controllers.MovieController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Fragments.Tv.SeasonRecyclerFragment;
 import com.example.khaledsabry.entertainment.Fragments.Tv.TvContentFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSeasonSuccess;
-import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
-import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Season;
-import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -76,8 +70,8 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonCard
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MovieController movieController = new MovieController();
-                    movieController.getTvSeason(SeasonRecyclerFragment.tvId, season.getSeasonNumber(), new OnSeasonSuccess() {
+                    TmdbController tmdbController = new TmdbController();
+                    tmdbController.getTvSeason(SeasonRecyclerFragment.tvId, season.getSeasonNumber(), new OnSeasonSuccess() {
                                 @Override
                                 public void onSuccess(Season season) {
                                     TvContentFragment.loadEpisodesFragment(season.getEpisodes());
