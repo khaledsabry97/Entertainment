@@ -23,6 +23,7 @@ public class Episode {
     private ArrayList<Character> actors = new ArrayList<>();
     private ArrayList<String> images = new ArrayList<>();
     private ArrayList<String> videos = new ArrayList<>();
+    private ArrayList<Torrent> torrents = new ArrayList<>();
 
 
     public String getAirDate() {
@@ -111,5 +112,38 @@ public class Episode {
 
     public void setGuests(ArrayList<Character> guests) {
         this.guests = guests;
+    }
+
+
+    public ArrayList<Character> getActors() {
+        return actors;
+    }
+
+    public void setActors(ArrayList<Character> actors) {
+        this.actors = actors;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
+
+    public ArrayList<String> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(ArrayList<String> videos) {
+        this.videos = videos;
+    }
+
+    public ArrayList<Torrent> getTorrents() {
+        return torrents;
+    }
+
+    public void setTorrents(ArrayList<Torrent> torrents) {
+        this.torrents = torrents;
     }
 }

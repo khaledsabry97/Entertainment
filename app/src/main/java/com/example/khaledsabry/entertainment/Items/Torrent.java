@@ -12,6 +12,7 @@ public class Torrent {
     private String leechers;
     private String quailty;
     private String sourceName;
+    private String date;
 
     public String getTitle() {
         return title;
@@ -67,5 +68,13 @@ public class Torrent {
 
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

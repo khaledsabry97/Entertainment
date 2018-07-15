@@ -119,6 +119,7 @@ public class MovieMainFragment extends Fragment {
                 loadCrewFragment();
             }
         });
+        MovieNavigationFragment.movie = movie;
 
     }
 

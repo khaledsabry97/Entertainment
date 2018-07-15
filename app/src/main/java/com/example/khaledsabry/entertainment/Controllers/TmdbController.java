@@ -123,8 +123,8 @@ public class TmdbController {
     public void search(String query, final OnSearchSuccess listener) {
         movieGetDetails = "search/multi";
         String URL = makeBaseUrl(movieGetDetails)+"&query="+query+"&page=1";
-        URL = "https://oneom.tk/serial/62";
-        connection.connectOneom(URL, new OnSuccess() {
+       // URL = "https://oneom.tk/serial/62";
+        connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getSearchDone(jsonObject));

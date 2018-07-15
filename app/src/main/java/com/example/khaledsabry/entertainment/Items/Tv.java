@@ -29,6 +29,8 @@ private String status;
     private ArrayList<Character> actors = new ArrayList<>();
     private ArrayList<String> posters = new ArrayList<>();
     private ArrayList<String> backdrops = new ArrayList<>();
+    private ArrayList<Torrent> torrents = new ArrayList<>();
+
 
     public String getStatus() {
         return status;
@@ -230,4 +232,14 @@ private String status;
         }
         return s;
     }
+
+    public ArrayList<Torrent> getTorrents() {
+        return torrents;
+    }
+
+    public void setTorrents(ArrayList<Torrent> torrents) {
+        this.torrents = torrents;
+    }
+
+
 }

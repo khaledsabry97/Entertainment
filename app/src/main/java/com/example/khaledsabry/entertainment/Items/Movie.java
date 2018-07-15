@@ -30,6 +30,18 @@ public class Movie {
     private Collection collection;
     private String backDropPoster;
 
+
+    private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
+    private ArrayList<Genre> genres = new ArrayList<>();
+    private ArrayList<Character>characters = new ArrayList<>();
+    private ArrayList<Artist> crews = new ArrayList<>();
+    private ArrayList<String> posters = new ArrayList<>();
+    private ArrayList<String> backdrops = new ArrayList<>();
+    private ArrayList<String> trailers = new ArrayList<>();
+    private ArrayList<Review> reviews = new ArrayList<>();
+    private ArrayList<Torrent> torrents = new ArrayList<>();
+
+
     public String getBackDropPoster() {
         return backDropPoster;
     }
@@ -57,14 +69,7 @@ public class Movie {
         isAdult = adult;
     }
 
-    private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
-    private ArrayList<Genre> genres = new ArrayList<>();
-    private ArrayList<Character>characters = new ArrayList<>();
-    private ArrayList<Artist> crews = new ArrayList<>();
-    private ArrayList<String> posters = new ArrayList<>();
-    private ArrayList<String> backdrops = new ArrayList<>();
-    private ArrayList<String> trailers = new ArrayList<>();
-    private ArrayList<Review> reviews = new ArrayList<>();
+
 
     public ArrayList<Review> getReviews() {
         return reviews;
@@ -284,5 +289,26 @@ public class Movie {
         } else {
             return String.format("%10.2f", number); // dj_segfault
         }
+    }
+
+
+    public ArrayList<Torrent> getTorrents() {
+        return torrents;
+    }
+
+    public void setTorrents(ArrayList<Torrent> torrents) {
+        this.torrents = torrents;
+    }
+
+    public String getYear()
+    {
+        String date = releaseDate;
+        char[] d = new char[4];
+        d[0] = date.charAt(0);
+        d[1] = date.charAt(1);
+        d[2] = date.charAt(2);
+        d[3] = date.charAt(3);
+        date = String.copyValueOf(d);
+        return date;
     }
 }

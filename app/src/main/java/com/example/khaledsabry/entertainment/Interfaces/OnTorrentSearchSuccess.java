@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface OnTorrentSearchSuccess {
-    void onSuccess(ArrayList<Torrent> torrent);
+    void onSuccess(ArrayList<Torrent> torrents);
 }

@@ -102,7 +102,7 @@ public class ApiConnections {
         };
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                20000,
+                10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 

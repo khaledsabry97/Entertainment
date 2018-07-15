@@ -10,7 +10,9 @@ import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Controllers.TorrentController;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
+import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(new Intent(this,ANOTHER.class));
 
 
-        TorrentController torrentController = new TorrentController();
+        /*TorrentController torrentController = new TorrentController();
         torrentController.downloadSkyTorrent("LEAN ON PETE", new OnTorrentSearchSuccess() {
             @Override
             public void onSuccess(ArrayList<Torrent> torrent) {
@@ -67,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        torrentController.getRottenTomatoesRate("inception", new OnMovieDataSuccess() {
+            @Override
+            public void onSuccess(Movie movie) {
+                Movie movie1 = movie;
+            }
+        });
+*/
        loadFragment(R.id.mainContainer, SearchFragment.newInstance());
       // loadFragment(R.id.mainContainer, TvNavigationFragment.newInstance(1399,true));
 

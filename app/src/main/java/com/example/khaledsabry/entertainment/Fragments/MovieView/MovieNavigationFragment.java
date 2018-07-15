@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
+import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
 
@@ -19,6 +21,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
 
     static int movieId;
     static int id = -200;
+   public static Movie movie;
 
     public static MovieNavigationFragment newInstance(int movieId, boolean reset) {
         MovieNavigationFragment fragment = new MovieNavigationFragment();
@@ -59,7 +62,8 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
 getActivity().getSupportFragmentManager().popBackStack();
         else if (item.getItemId() == R.id.navigation_notifications)
             loadFragment(PosterFragment.newInstance(movieId, PosterFragment.Type.movie));
-      //  else if (item.getItemId() == R.id.navigation_trailers)
+        else if (item.getItemId() == R.id.navigation_trailers)
+            loadFragment(TorrentRecyclerFragment.newInstance(movie.getTitle()+ " "+movie.getYear()));
             //   loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
          //   loadFragment(ReviewFragment.newInstance(movieId));
         else if (item.getItemId() == R.id.navigation_reco_simi)
