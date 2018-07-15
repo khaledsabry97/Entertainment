@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Adapter;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
@@ -39,6 +42,7 @@ ArrayList<Torrent> torrents = new ArrayList<>();
     public void onBindViewHolder(@NonNull TorrentViewHolder holder, int position) {
 Torrent torrent = torrents.get(position);
 holder.updateUi(torrent);
+        YoYo.with(Techniques.FadeIn).playOn(holder.itemView);
     }
 
     @Override
@@ -54,6 +58,7 @@ holder.updateUi(torrent);
         TextView leechers;
         TextView size;
         TextView date;
+        CardView cardView;
         public TorrentViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
@@ -62,6 +67,7 @@ holder.updateUi(torrent);
             downloadImage = itemView.findViewById(R.id.download);
             size = itemView.findViewById(R.id.size);
             date = itemView.findViewById(R.id.date);
+            cardView = itemView.findViewById(R.id.cardview);
 
         }
 
