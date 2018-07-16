@@ -2,11 +2,15 @@ package com.example.khaledsabry.entertainment.Controllers;
 
 import android.os.AsyncTask;
 
+import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Connection.TorrentApi;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,7 +23,8 @@ import java.util.ArrayList;
  */
 
 public class TorrentController {
-
+    private ApiConnections connections = ApiConnections.getInstance();
+private TorrentApi torrentApi = TorrentApi.getInstance();
 
     public void getRottenTomatoesRate(final String movieName, final OnMovieDataSuccess listener) {
 
@@ -48,54 +53,35 @@ public class TorrentController {
     }
 
     public void downloadSkyTorrent(final String searchItem, final OnTorrentSearchSuccess listener) {
-        AsyncTask<Void,Void,ArrayList<Torrent>> task = new AsyncTask<Void, Void, ArrayList<Torrent>>() {
+        TorrentApi.getInstance().skyTorrent(searchItem, new OnTorrentSearchSuccess() {
             @Override
-            protected ArrayList<Torrent> doInBackground(Void... voids) {
-                ArrayList<Torrent> torrents = new ArrayList<>();
-                org.jsoup.nodes.Document
-                        doc = null;
-                try {
-                    doc = Jsoup.connect("https://www.skytorrents.lol/?query=" + searchItem).get();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                Elements results = doc.getElementsByClass("result");
-
-                for (Element element : results) {
-                    Torrent torrent = new Torrent();
-                    Elements attributes = element.getElementsByTag("td");
-                    Elements file = attributes.get(0).getElementsByTag("a");
-                    String title = file.get(0).text();
-                    String magnet = file.get(2).attr("href");
-                    String size = attributes.get(1).text();
-                    String seeders = attributes.get(4).text();
-                    String leechers = attributes.get(5).text();
-                    String date = "Uploaded "+attributes.get(3).text();
-                    //    if (seeders.equals("0"))
-                    //    continue;
-                    torrent.setDate(date);
-                    torrent.setTitle(title);
-                    torrent.setMagnet(magnet);
-                    torrent.setLeechers(leechers);
-                    torrent.setSeeders(seeders);
-                    torrent.setSize(size);
-
-
-                    torrents.add(torrent);
-                }
-                return torrents;
-            }
-
-            @Override
-            protected void onPostExecute(ArrayList<Torrent> torrents) {
+            public void onSuccess(ArrayList<Torrent> torrents) {
                 listener.onSuccess(torrents);
-
             }
-        };
-        task.execute();
+        });
 
     }
+
+public void getTv(final String tvTitle, final OnTorrentSearchSuccess listener)
+{
+     String url = "https://oneom.tk/search/serial?title="+tvTitle;
+    connections.connectOneom(url, new OnSuccess() {
+        @Override
+        public void onSuccess(JSONObject jsonObject) {
+            int id = torrentApi.getSerialId(jsonObject,tvTitle);
+            if(id == -1)
+                return;
+            String Url = "https://oneom.tk/serial/"+id;
+            connections.connectOneom(Url, new OnSuccess() {
+                @Override
+                public void onSuccess(JSONObject jsonObject) {
+                    listener.onSuccess(torrentApi.getSerial(jsonObject));
+
+                }
+            });
+        }
+    });
+}
 
 
 

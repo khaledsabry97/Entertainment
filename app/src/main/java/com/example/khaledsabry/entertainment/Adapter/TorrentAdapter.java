@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -83,15 +84,16 @@ holder.updateUi(torrent);
                 @Override
                 public void onClick(View v) {
 String magnet = torrent.getMagnet();
+/*
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setDataAndType(Uri.parse(magnet), "application/x-bittorrent");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    MainActivity.getActivity().startActivity(intent);
-/*
-                    Intent intent = new Intent(Intent.makeMainActivity(.getAction()));
+                    MainActivity.getActivity().startActivity(intent);*/
+
+                    Intent intent = new Intent(Intent.ACTION_ALL_APPS);
                     intent.setData(Uri.parse(magnet));
                     MainActivity.getActivity().startActivity(intent);
-                    */
+
                 }
             });
         }

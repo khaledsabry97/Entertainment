@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Controllers.TorrentController;
+import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
 import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.Items.Season;
+import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
@@ -23,7 +26,7 @@ public class TvContentFragment extends Fragment {
     static boolean loaded = false;
     int tvId;
     static Tv tv;
-
+static ArrayList<Torrent> torrents = new ArrayList<>();
     public static TvContentFragment newInstance(int tvId) {
         TvContentFragment fragment = new TvContentFragment();
         fragment.tvId = tvId;
@@ -51,11 +54,14 @@ public class TvContentFragment extends Fragment {
                 public void onSuccess(Tv tv) {
                     TvContentFragment.tv = tv;
                     loaded = true;
+getTvTorrent();
                     loadSeasonsFragment();
                 }
             });
-        } else
+        } else {
+            getTvTorrent();
             loadSeasonsFragment();
+        }
     }
 
     public static void loadEpisodesFragment(ArrayList<Episode> episodes) {
@@ -73,4 +79,16 @@ public class TvContentFragment extends Fragment {
 
     }
 
+
+    public void getTvTorrent() {
+        TorrentController torrentController = new TorrentController();
+
+        torrentController.getTv(tv.getTitle(), new OnTorrentSearchSuccess() {
+            @Override
+            public void onSuccess(ArrayList<Torrent> torrents) {
+
+               TvContentFragment.torrents  = torrents;
+            }
+        });
+    }
 }

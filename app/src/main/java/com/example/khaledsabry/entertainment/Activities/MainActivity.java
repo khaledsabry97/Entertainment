@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         /*TorrentController torrentController = new TorrentController();
         torrentController.downloadSkyTorrent("LEAN ON PETE", new OnTorrentSearchSuccess() {
             @Override
-            public void onSuccess(ArrayList<Torrent> torrent) {
-                ArrayList<Torrent> torrents = torrent;
+            public void onSuccess(ArrayList<TorrentApi> torrent) {
+                ArrayList<TorrentApi> torrents = torrent;
             }
         });
 
