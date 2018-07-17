@@ -29,12 +29,17 @@ public class ImageController {
 
 
     public static void putImageHighQuality(String posterImage, ImageView image) {
+
+        if(image == null)
+            return;
         String url =  "https://image.tmdb.org/t/p/"+highQuality+posterImage;
       //  Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);
     }
 
     public static void putImageMidQuality(String posterImage, ImageView image) {
+        if(image == null)
+            return;
         String url =  "https://image.tmdb.org/t/p/"+midQuality+posterImage;
        // Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);
@@ -42,6 +47,8 @@ public class ImageController {
     }
 
     public static void putImageLowQuality(String posterImage, ImageView image) {
+        if(image == null)
+            return;
         String url =  "https://image.tmdb.org/t/p/"+lowQuality+posterImage;
        // Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);

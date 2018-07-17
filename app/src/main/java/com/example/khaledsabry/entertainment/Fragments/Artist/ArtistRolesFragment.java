@@ -17,7 +17,7 @@ import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.R;
 
 
-public class RolesFragment extends Fragment {
+public class ArtistRolesFragment extends Fragment {
     RecyclerView recyclerView;
     Button movie;
     Button tv;
@@ -26,9 +26,9 @@ public class RolesFragment extends Fragment {
     static Artist artist;
     TmdbController tmdbController = new TmdbController();
 
-    public static RolesFragment newInstance(int id) {
-        RolesFragment fragment = new RolesFragment();
-        RolesFragment.id = id;
+    public static ArtistRolesFragment newInstance(int id) {
+        ArtistRolesFragment fragment = new ArtistRolesFragment();
+        ArtistRolesFragment.id = id;
         newStuff = true;
         return fragment;
     }
@@ -51,7 +51,7 @@ public class RolesFragment extends Fragment {
             tmdbController.getPersonRoles(id, new OnArtistDataSuccess() {
                 @Override
                 public void onSuccess(Artist artist) {
-                    RolesFragment.artist = artist;
+                    ArtistRolesFragment.artist = artist;
                     newStuff = false;
                     movie.setOnClickListener(new View.OnClickListener() {
                         @Override

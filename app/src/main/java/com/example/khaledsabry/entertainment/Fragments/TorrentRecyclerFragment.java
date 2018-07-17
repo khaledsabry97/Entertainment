@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.TorrentAdapter;
 import com.example.khaledsabry.entertainment.Controllers.TorrentController;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
@@ -137,6 +138,8 @@ public class TorrentRecyclerFragment extends Fragment {
         adapter.add("SPARKS");
         adapter.add("RARBG");
         adapter.add("Ganool");
+        adapter.add("MZABI");
+        adapter.add("Joy");
         adapter.add("YIFY");
 
 
@@ -171,6 +174,12 @@ public class TorrentRecyclerFragment extends Fragment {
             }
         });
 
+        quality.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.getActivity().hideSystemUI();
+            }
+        });
     }
 
     private void setResolution() {

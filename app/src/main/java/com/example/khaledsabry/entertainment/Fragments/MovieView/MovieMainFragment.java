@@ -101,7 +101,7 @@ public class MovieMainFragment extends Fragment {
         loadProductionFragment();
 
         Functions functions = new Functions();
-        functions.movePoster(viewPager,viewPagerAdapter,3000,2000);
+        functions.movePoster(viewPager,viewPagerAdapter,7000,3000);
         scrollView.setVisibility(View.VISIBLE);
 
 

@@ -65,7 +65,7 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         else if (id == images)
         loadFragment(PosterFragment.newInstance(artistId, PosterFragment.Type.artist));
         else if (id == roles)
-           loadFragment(RolesFragment.newInstance(artistId));
+           loadFragment(ArtistRolesFragment.newInstance(artistId));
 
         return true;
         }

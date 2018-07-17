@@ -9,6 +9,7 @@ import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchArtistFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment;
+import com.example.khaledsabry.entertainment.Fragments.Tv.TvPreviewFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Tv;
@@ -100,10 +101,10 @@ public class RoleViewHolder extends RecyclerView.ViewHolder {
     });
     }
 
-    public void updateUi(Tv tv) {
-    /*    if (!movie.getReleaseDate().equals("")) {
+    public void updateUi(final Tv tv) {
+        if (!tv.getFirstAirDate().equals("")) {
 
-            String date = movie.getReleaseDate();
+            String date = tv.getFirstAirDate();
             char[] d = new char[4];
             d[0] = date.charAt(0);
             d[1] = date.charAt(1);
@@ -111,10 +112,16 @@ public class RoleViewHolder extends RecyclerView.ViewHolder {
             d[3] = date.charAt(3);
             date = String.copyValueOf(d);
 
-            title.setText(movie.getTitle() + " (" + date + ")");
+            title.setText(tv.getTitle() + " (" + date + ")");
         } else
-            title.setText(movie.getTitle());
-        ImageController.putImageLowQuality(movie.getPosterImage(), poster);*/
+            title.setText(tv.getTitle());
+        ImageController.putImageLowQuality(tv.getPosterImage(), poster);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, TvPreviewFragment.newInstance(tv)).commit();}
+        });
     }
 
 

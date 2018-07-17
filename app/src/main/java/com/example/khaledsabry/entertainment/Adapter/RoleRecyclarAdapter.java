@@ -38,7 +38,7 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleViewHolder> {
     public void onBindViewHolder(@NonNull RoleViewHolder holder, int position) {
         if(type==0)
             holder.updateUi(movies.get(position));
-        else         if(type==1)
+        else if(type==1)
             holder.updateUi(tvs.get(position));
 
 

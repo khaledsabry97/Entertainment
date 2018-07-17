@@ -50,7 +50,8 @@
                     android:fontFamily="@font/carterone"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="18sp"
-                    app:ms_background_color="@color/cardview_dark_background" />
+                    app:ms_background_color="@color/cardview_dark_background"
+                    app:ms_dropdown_max_height="300dp" />
 
             </LinearLayout>
 
@@ -80,7 +81,8 @@
                     android:fontFamily="@font/carterone"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="18sp"
-                    app:ms_background_color="@color/cardview_dark_background" />
+                    app:ms_background_color="@color/cardview_dark_background"
+                    app:ms_dropdown_max_height="300dp" />
 
             </LinearLayout>
 
@@ -111,7 +113,8 @@
                     android:fontFamily="@font/carterone"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="18sp"
-                    app:ms_background_color="@color/cardview_dark_background" />
+                    app:ms_background_color="@color/cardview_dark_background"
+                    app:ms_dropdown_max_height="300dp" />
 
             </LinearLayout>
 
@@ -143,7 +146,8 @@
                     android:fontFamily="@font/carterone"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="18sp"
-                    app:ms_background_color="@color/cardview_dark_background" />
+                    app:ms_background_color="@color/cardview_dark_background"
+                    app:ms_dropdown_max_height="300dp" />
 
             </LinearLayout>
 
