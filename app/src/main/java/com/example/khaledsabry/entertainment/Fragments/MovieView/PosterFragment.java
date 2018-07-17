@@ -61,7 +61,6 @@ public class PosterFragment extends Fragment {
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false);
-
         recyclerView.setLayoutManager(gridLayoutManager);
         return view;
     }

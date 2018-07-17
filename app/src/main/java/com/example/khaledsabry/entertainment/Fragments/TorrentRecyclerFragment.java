@@ -3,9 +3,13 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,22 +26,29 @@ import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.security.Provider;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class TorrentRecyclerFragment extends Fragment {
 
     RecyclerView recyclerView;
     static String searchName;
-    Spinner provider;
-    Spinner quality;
-    Spinner resolution;
-    EditText searchCustom;
+    // Spinner provider;
+    // Spinner quality;
+    // Spinner resolution;
+
+    MaterialSpinner provider;
+    MaterialSpinner quality;
+    MaterialSpinner resolution;
+    MaterialSpinner codec;
+    SearchView customSearch;
     TorrentController torrentController;
     String search = "";
-
     public static TorrentRecyclerFragment newInstance(String searchName) {
         TorrentRecyclerFragment fragment = new TorrentRecyclerFragment();
         TorrentRecyclerFragment.searchName = searchName;
@@ -53,15 +64,18 @@ public class TorrentRecyclerFragment extends Fragment {
         resolution = view.findViewById(R.id.resolutionspinnerid);
         provider = view.findViewById(R.id.providerspinnerid);
         quality = view.findViewById(R.id.qualityspinnerid);
-        searchCustom = view.findViewById(R.id.customtextid);
+        customSearch = view.findViewById(R.id.customtextid);
+        codec = view.findViewById(R.id.codecspinnerid);
         torrentController = new TorrentController();
 
         setResolution();
         setQuality();
         setProvider();
-
+        setCodec();
+        setCustomSearch();
 
         search();
+
 
 
         return view;
@@ -71,16 +85,19 @@ public class TorrentRecyclerFragment extends Fragment {
         String mprovider = "";
         String mquality = "";
         String mresolution = "";
+        String mcodec = "";
 
-        if (!provider.getSelectedItem().toString().equals("All"))
-            mprovider = " " + provider.getSelectedItem().toString();
-        if (!quality.getSelectedItem().toString().equals("All"))
-            mquality = " " + quality.getSelectedItem().toString();
-        if (!resolution.getSelectedItem().toString().equals("All"))
-            mresolution = " " + resolution.getSelectedItem().toString();
+        if (!resolution.getItems().get(resolution.getSelectedIndex()).toString().equals("All"))
+            mresolution = " " + resolution.getItems().get(resolution.getSelectedIndex()).toString();
+        if (!quality.getItems().get(quality.getSelectedIndex()).toString().equals("All"))
+            mquality = " " + quality.getItems().get(quality.getSelectedIndex()).toString();
+        if (!codec.getItems().get(codec.getSelectedIndex()).toString().equals("All"))
+            mcodec = " " + codec.getItems().get(codec.getSelectedIndex()).toString();
+        if (!provider.getItems().get(provider.getSelectedIndex()).toString().equals("All"))
+            mprovider = " " + provider.getItems().get(provider.getSelectedIndex()).toString();
 
-        if (!search.equals(searchName + mresolution + mquality + mprovider)) {
-            search = searchName + mresolution + mquality + mprovider;
+        if (!search.equals(searchName + mresolution + mquality + mcodec + mprovider)) {
+            search = searchName + mresolution + mquality + mcodec + mprovider;
             torrentController.downloadSkyTorrent(search, new OnTorrentSearchSuccess() {
                 @Override
                 public void onSuccess(ArrayList<Torrent> torrents) {
@@ -93,8 +110,26 @@ public class TorrentRecyclerFragment extends Fragment {
 
     }
 
+    private void setCodec() {
+        ArrayList<String> adapter = new ArrayList<>();
+
+        adapter.add("All");
+        adapter.add("x264");
+        adapter.add("x265");
+        adapter.add("10bit x265");
+
+
+        codec.setItems(adapter);
+        codec.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                search();
+            }
+        });
+    }
+
     private void setProvider() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
+        ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
         adapter.add("PSA");
         adapter.add("YTS");
@@ -105,22 +140,17 @@ public class TorrentRecyclerFragment extends Fragment {
         adapter.add("YIFY");
 
 
-        provider.setAdapter(adapter);
-        provider.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        provider.setItems(adapter);
+        provider.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 search();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
 
     private void setQuality() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
+        ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
         adapter.add("CAM");
         adapter.add("TS");
@@ -133,43 +163,30 @@ public class TorrentRecyclerFragment extends Fragment {
         adapter.add("BRRip");
         adapter.add("BluRay");
 
-        quality.setAdapter(adapter);
-        quality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        quality.setItems(adapter);
+        quality.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 search();
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
-
         });
+
     }
 
     private void setResolution() {
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
+        ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
         adapter.add("480p");
         adapter.add("720p");
         adapter.add("1080p");
         adapter.add("2160p");
-        resolution.setAdapter(adapter);
-        resolution.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        resolution.setItems(adapter);
+        resolution.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 search();
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
-
         });
     }
 
@@ -183,4 +200,34 @@ public class TorrentRecyclerFragment extends Fragment {
 
     }
 
+
+    private void setCustomSearch()
+    {
+        customSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                torrentController.downloadSkyTorrent(query, new OnTorrentSearchSuccess() {
+                    @Override
+                    public void onSuccess(ArrayList<Torrent> torrents) {
+                        setObjects(torrents);
+                    }
+                });
+
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+
+                return false;
+            }
+
+
+
+
+    });
+
+}
 }

@@ -1,8 +1,12 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +23,7 @@ import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by KhALeD SaBrY on 15-Jul-18.
@@ -65,7 +70,7 @@ holder.updateUi(torrent);
             title = itemView.findViewById(R.id.title);
             seeders = itemView.findViewById(R.id.seeders);
             leechers = itemView.findViewById(R.id.leechers);
-            downloadImage = itemView.findViewById(R.id.download);
+            downloadImage = itemView.findViewById(R.id.downloadid);
             size = itemView.findViewById(R.id.size);
             date = itemView.findViewById(R.id.date);
             cardView = itemView.findViewById(R.id.cardview);
@@ -90,13 +95,49 @@ String magnet = torrent.getMagnet();
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     MainActivity.getActivity().startActivity(intent);*/
 
-                    Intent intent = new Intent(Intent.ACTION_ALL_APPS);
-                    intent.setData(Uri.parse(magnet));
-                    MainActivity.getActivity().startActivity(intent);
+               //     Intent intent = new Intent(Intent.ACTION_ALL_APPS);
+                 //   intent.setData(Uri.parse(magnet));
+              //      MainActivity.getActivity().startActivity(intent);
+
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.addCategory(Intent.CATEGORY_DEFAULT);
+                    i.setType("application/x-bittorrent");
+                    i.setData(Uri.parse(torrent.getMagnet()));
+                 Intent intent =    generateTorrentIntent(MainActivity.getActivity().getApplicationContext(),i);
+                 MainActivity.getActivity().startActivity(intent);
 
                 }
             });
         }
 
+
+
+        public Intent generateTorrentIntent(Context context, Intent intent) {
+            final PackageManager packageManager = context.getPackageManager();
+            List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
+                    PackageManager.MATCH_DEFAULT_ONLY);
+            if (resolveInfo.size() > 0) {
+                List<Intent> targetedShareIntents = new ArrayList<Intent>();
+                for (ResolveInfo r : resolveInfo) {
+                    Intent progIntent = (Intent)intent.clone();
+                    String packageName = r.activityInfo.packageName;
+
+                    progIntent.setPackage(packageName);
+                    if (r.activityInfo.packageName.contains("torrent"))
+                        targetedShareIntents.add(progIntent);
+
+                }
+                if (targetedShareIntents.size() > 0) {
+                    Intent chooserIntent = Intent.createChooser(targetedShareIntents.remove(0),
+                            "Select app to download");
+
+                    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
+                            targetedShareIntents.toArray(new Parcelable[] {}));
+
+                    return chooserIntent;
+                }
+            }
+            return null;
+        }
     }
 }

@@ -3,18 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.example.khaledsabry.entertainment.Fragments.TorrentSpecefication">
+    >
 
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background3">
+        android:background="@android:color/background_dark">
 
         <LinearLayout
             android:id="@+id/containerid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,16 +34,23 @@
                     android:id="@+id/resolutionid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rightroundborder"
                     android:fontFamily="@font/carterone"
                     android:text="Resolution"
                     android:textAlignment="center"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="20sp" />
 
-                <Spinner
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/resolutionspinnerid"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/carterone"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="18sp"
+                    app:ms_background_color="@color/cardview_dark_background" />
 
             </LinearLayout>
 
@@ -55,16 +65,22 @@
                     android:id="@+id/qualityid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rightroundborder"
                     android:fontFamily="@font/carterone"
                     android:text="Quality"
                     android:textAlignment="center"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="20sp" />
 
-                <Spinner
+                <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/qualityspinnerid"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/carterone"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="18sp"
+                    app:ms_background_color="@color/cardview_dark_background" />
 
             </LinearLayout>
 
@@ -79,16 +95,55 @@
                     android:id="@+id/providerid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rightroundborder"
                     android:fontFamily="@font/carterone"
                     android:text="Provider"
                     android:textAlignment="center"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="20sp" />
 
-                <Spinner
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/providerspinnerid"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/carterone"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="18sp"
+                    app:ms_background_color="@color/cardview_dark_background" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/codec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rightroundborder"
+                    android:fontFamily="@font/carterone"
+                    android:text="codec"
+                    android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="20sp" />
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/codecspinnerid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/oval"
+                    android:fontFamily="@font/carterone"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="18sp"
+                    app:ms_background_color="@color/cardview_dark_background" />
 
             </LinearLayout>
 
@@ -106,24 +161,19 @@
             android:textAlignment="center"
             android:textColor="@color/cardview_light_background"
             android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/containerid" />
-        " />
 
-        <EditText
+        <android.support.v7.widget.SearchView
             android:id="@+id/customtextid"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="search about any thing"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/customid"
-            app:layout_constraintTop_toBottomOf="@+id/containerid" />
-
+            android:visibility="gone"
+            app:layout_constraintLeft_toRightOf="@+id/customid"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/containerid"
+            app:queryHint="search for any thing" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

@@ -57,7 +57,7 @@ public class MovieMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              // Inflate the layout for this fragment
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.movie_detail_v3, container, false);
+        View v = inflater.inflate(R.layout.fragment_movie_main, container, false);
         title = v.findViewById(R.id.titleId);
         overviewText = v.findViewById(R.id.overviewID);
         releaseDate = v.findViewById(R.id.releasetimeid);

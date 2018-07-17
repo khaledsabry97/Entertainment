@@ -58,11 +58,11 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         if (item.getItemId() == R.id.navigation_home) {
             loadFragment(MovieMainFragment.newInstance(movieId));
 
-        } else if (item.getItemId() == R.id.navigation_dashboard)
+        } else if (item.getItemId() == R.id.navigation_back)
 getActivity().getSupportFragmentManager().popBackStack();
-        else if (item.getItemId() == R.id.navigation_notifications)
+        else if (item.getItemId() == R.id.navigation_images)
             loadFragment(PosterFragment.newInstance(movieId, PosterFragment.Type.movie));
-        else if (item.getItemId() == R.id.navigation_trailers)
+        else if (item.getItemId() == R.id.navigation_download)
             loadFragment(TorrentRecyclerFragment.newInstance(movie.getTitle()+ " "+movie.getYear()));
             //   loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
          //   loadFragment(ReviewFragment.newInstance(movieId));

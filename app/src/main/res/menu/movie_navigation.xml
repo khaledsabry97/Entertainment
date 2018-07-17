@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_back"
+        android:icon="@drawable/arrowleft"
+        android:title="return" />
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/outline_theaters_black_48"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_images"
+        android:icon="@drawable/images"
+        android:title="Images" />
+    <item
+        android:id="@+id/navigation_download"
+        android:icon="@drawable/download"
+        android:title="Download" />
+    <item
+        android:id="@+id/navigation_reco_simi"
+        android:title="Recommendation and Similar" />
+
+</menu>

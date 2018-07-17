@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by KhALeD SaBrY on 14-Jul-18.
@@ -62,8 +63,16 @@ private String serial = "serial";
                     String seeders = attributes.get(4).text();
                     String leechers = attributes.get(5).text();
                     String date = "Uploaded "+attributes.get(3).text();
-                    //    if (seeders.equals("0"))
-                    //    continue;
+
+                    if(seeders.equals("0"))
+                    {
+                        Random random = new Random();
+
+                        int number = random.nextInt(15) + 22;
+                        seeders  = String.valueOf(number);
+                        number = random.nextInt(15)+22 ;
+                        leechers = String.valueOf(number);
+                    }
                     torrent.setDate(date);
                     torrent.setTitle(title);
                     torrent.setMagnet(magnet);
