@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Controllers;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.view.Gravity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -35,6 +36,8 @@ public class ImageController {
         String url =  "https://image.tmdb.org/t/p/"+highQuality+posterImage;
       //  Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);
+
+
     }
 
     public static void putImageMidQuality(String posterImage, ImageView image) {

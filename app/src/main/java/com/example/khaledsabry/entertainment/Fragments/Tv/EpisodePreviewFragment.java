@@ -47,13 +47,13 @@ fragment.episode = episode;
 
 setObjects();
 
-
+/*
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, TvNavigationFragment.newInstance(1,true)).addToBackStack(null).commit();
             }
-        });
+        });*/
         return view;
     }
 

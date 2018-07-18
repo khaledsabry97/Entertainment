@@ -112,7 +112,7 @@ public class ImagesFragment extends Fragment {
 
         imgs.addAll(tv.getBackdrops());
         imgs.addAll(tv.getPosters());
-        
+
          posterAdapter = new PosterAdapter(imgs);
         recyclerView.setAdapter(posterAdapter);
 

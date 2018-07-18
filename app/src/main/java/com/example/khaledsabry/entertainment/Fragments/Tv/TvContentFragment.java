@@ -39,8 +39,7 @@ static ArrayList<Torrent> torrents = new ArrayList<>();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_content, container, false);
         loadFragment();
-//        loadSeasonsFragment();
-        //loadEpisodePreviewFragment();
+
         return view;
 
 
@@ -54,12 +53,10 @@ static ArrayList<Torrent> torrents = new ArrayList<>();
                 public void onSuccess(Tv tv) {
                     TvContentFragment.tv = tv;
                     loaded = true;
-getTvTorrent();
                     loadSeasonsFragment();
                 }
             });
         } else {
-            getTvTorrent();
             loadSeasonsFragment();
         }
     }
@@ -75,20 +72,17 @@ getTvTorrent();
     }
 
     public static void loadEpisodePreviewFragment(Episode episode) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodePreviewFragment.newInstance(episode)).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, TvPreviewFragment.newInstance(null,null,episode,true)).commit();
 
     }
 
 
-    public void getTvTorrent() {
-        TorrentController torrentController = new TorrentController();
 
-        torrentController.getTv(tv.getTitle(), new OnTorrentSearchSuccess() {
-            @Override
-            public void onSuccess(ArrayList<Torrent> torrents) {
+    public static void loadSeasonPreviewFragment(Season season) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, TvPreviewFragment.newInstance(null,season,null,true)).commit();
 
-               TvContentFragment.torrents  = torrents;
-            }
-        });
     }
+
+
+
 }

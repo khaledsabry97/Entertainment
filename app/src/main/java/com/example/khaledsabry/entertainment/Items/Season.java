@@ -14,11 +14,21 @@ public class Season {
     private String overView;
     private int seasonNumber;
     private int episodeCount;
+    private String tvTitle;
     private ArrayList<Episode> episodes = new ArrayList<>();
     private ArrayList<Artist> crews = new ArrayList<>();
     private ArrayList<Character> actors = new ArrayList<>();
     private ArrayList<String> images = new ArrayList<>();
     private ArrayList<String> videos = new ArrayList<>();
+
+
+    public String getTvTitle() {
+        return tvTitle;
+    }
+
+    public void setTvTitle(String tvTitle) {
+        this.tvTitle = tvTitle;
+    }
 
     public int getEpisodeCount() {
         return episodeCount;

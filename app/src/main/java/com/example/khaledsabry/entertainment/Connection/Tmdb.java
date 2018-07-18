@@ -798,14 +798,7 @@ public class Tmdb {
 
             //get the credits
             JSONObject credit = obj.getJSONObject(credits);
-            tv.setCrew(getCrew(credit));
-            tv.setActors(getCharacters(obj));
 
-            tv.setReviews(getReviews(obj));
-            tv.setPosters(getPosters(obj, new Movie()));
-            tv.setSeasons(getSeasons(obj));
-            tv.setProductionCompanies(getProductionCompanies(obj));
-            tv.setNetworks(getNetworks(obj));
 
             JSONArray jsonArray = obj.getJSONArray(this.episode_run_time);
 
@@ -829,6 +822,16 @@ public class Tmdb {
             tv.setPosterImage(obj.getString(this.poster_path));
             tv.setStatus(obj.getString(this.status));
             tv.setRateTmdb(obj.getDouble(this.vote_average));
+
+
+            tv.setCrew(getCrew(credit));
+            tv.setActors(getCharacters(obj));
+
+            tv.setReviews(getReviews(obj));
+            tv.setPosters(getPosters(obj, new Movie()));
+            tv.setSeasons(getSeasons(obj,tv.getTitle()));
+            tv.setProductionCompanies(getProductionCompanies(obj));
+            tv.setNetworks(getNetworks(obj));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -935,7 +938,7 @@ public class Tmdb {
     }
 
 
-    private ArrayList<Season> getSeasons(JSONObject obj) {
+    private ArrayList<Season> getSeasons(JSONObject obj,String tvTitle) {
         ArrayList<Season> seasons = new ArrayList<>();
         try {
             JSONArray jsonArray = obj.getJSONArray(this.seasons);
@@ -959,7 +962,7 @@ public class Tmdb {
                 season.setOverView(overview);
                 season.setPoster(poster);
                 season.setEpisodeCount(count);
-
+season.setTvTitle(tvTitle);
                 seasons.add(season);
 
 

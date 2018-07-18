@@ -47,9 +47,11 @@ public class TorrentRecyclerFragment extends Fragment {
     MaterialSpinner quality;
     MaterialSpinner resolution;
     MaterialSpinner codec;
+    MaterialSpinner features;
     SearchView customSearch;
     TorrentController torrentController;
     String search = "";
+
     public static TorrentRecyclerFragment newInstance(String searchName) {
         TorrentRecyclerFragment fragment = new TorrentRecyclerFragment();
         TorrentRecyclerFragment.searchName = searchName;
@@ -67,6 +69,7 @@ public class TorrentRecyclerFragment extends Fragment {
         quality = view.findViewById(R.id.qualityspinnerid);
         customSearch = view.findViewById(R.id.customtextid);
         codec = view.findViewById(R.id.codecspinnerid);
+        features = view.findViewById(R.id.featuresspinnerid);
         torrentController = new TorrentController();
 
         setResolution();
@@ -74,6 +77,7 @@ public class TorrentRecyclerFragment extends Fragment {
         setProvider();
         setCodec();
         setCustomSearch();
+        setFeatures();
 
         search();
 
@@ -82,23 +86,32 @@ public class TorrentRecyclerFragment extends Fragment {
         return view;
     }
 
+
     private void search() {
         String mprovider = "";
         String mquality = "";
         String mresolution = "";
         String mcodec = "";
+        String mfeatures = "";
+
+        if(features.getItems().get(features.getSelectedIndex()).toString().equals("SoundTrack"))
+            mfeatures = " " + features.getItems().get(features.getSelectedIndex()).toString();
 
         if (!resolution.getItems().get(resolution.getSelectedIndex()).toString().equals("All"))
             mresolution = " " + resolution.getItems().get(resolution.getSelectedIndex()).toString();
+
         if (!quality.getItems().get(quality.getSelectedIndex()).toString().equals("All"))
             mquality = " " + quality.getItems().get(quality.getSelectedIndex()).toString();
+
         if (!codec.getItems().get(codec.getSelectedIndex()).toString().equals("All"))
             mcodec = " " + codec.getItems().get(codec.getSelectedIndex()).toString();
+
         if (!provider.getItems().get(provider.getSelectedIndex()).toString().equals("All"))
             mprovider = " " + provider.getItems().get(provider.getSelectedIndex()).toString();
 
-        if (!search.equals(searchName + mresolution + mquality + mcodec + mprovider)) {
-            search = searchName + mresolution + mquality + mcodec + mprovider;
+        String searchString = searchName + mresolution + mquality + mcodec + mprovider+mfeatures;
+        if (!search.equals(searchString)) {
+            search = searchString;
             torrentController.downloadSkyTorrent(search, new OnTorrentSearchSuccess() {
                 @Override
                 public void onSuccess(ArrayList<Torrent> torrents) {
@@ -110,6 +123,9 @@ public class TorrentRecyclerFragment extends Fragment {
         }
 
     }
+
+
+
 
     private void setCodec() {
         ArrayList<String> adapter = new ArrayList<>();
@@ -124,6 +140,7 @@ public class TorrentRecyclerFragment extends Fragment {
         codec.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                resetFeatures();
                 search();
             }
         });
@@ -147,6 +164,7 @@ public class TorrentRecyclerFragment extends Fragment {
         provider.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                resetFeatures();
                 search();
             }
         });
@@ -170,6 +188,7 @@ public class TorrentRecyclerFragment extends Fragment {
         quality.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                resetFeatures();
                 search();
             }
         });
@@ -194,10 +213,32 @@ public class TorrentRecyclerFragment extends Fragment {
         resolution.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                resetFeatures();
                 search();
             }
         });
     }
+
+    private void setFeatures() {
+        ArrayList<String> adapter = new ArrayList<>();
+
+        adapter.add("None");
+        adapter.add("SoundTrack");
+
+
+        features.setItems(adapter);
+        features.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                resetCodec();
+                resetProvider();
+                resetQuality();
+                resetResolution();
+                search();
+            }
+        });
+    }
+
 
     private void setObjects(ArrayList<Torrent> torrents) {
         TorrentAdapter torrentAdapter = new TorrentAdapter(torrents);
@@ -239,4 +280,27 @@ public class TorrentRecyclerFragment extends Fragment {
     });
 
 }
+
+
+
+    private void resetResolution()
+    {
+        resolution.setSelectedIndex(0);
+    }
+    private void resetQuality()
+    {
+        quality.setSelectedIndex(0);
+    }
+    private void resetProvider()
+    {
+        provider.setSelectedIndex(0);
+    }
+    private void resetCodec()
+    {
+        codec.setSelectedIndex(0);
+    }
+    private void resetFeatures()
+    {
+        features.setSelectedIndex(0);
+    }
 }

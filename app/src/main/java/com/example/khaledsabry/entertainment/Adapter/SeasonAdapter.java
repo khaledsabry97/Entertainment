@@ -80,6 +80,9 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonCard
                             }
                     );
 
+                    TvContentFragment.loadSeasonPreviewFragment(season);
+
+
                 }
             });
         }

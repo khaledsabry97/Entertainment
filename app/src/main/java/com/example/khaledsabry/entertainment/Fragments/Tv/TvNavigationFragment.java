@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
+import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
 public class TvNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
@@ -24,7 +25,7 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
     int images = R.id.images;
     int seasons = R.id.seasons;
     int backButtonid = R.id.backButtonid;
-
+public static Tv tv;
     public static TvNavigationFragment newInstance(int tvId, boolean reset) {
         TvNavigationFragment fragment = new TvNavigationFragment();
         TvNavigationFragment.tvId = tvId;
