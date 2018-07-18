@@ -1,10 +1,10 @@
-package com.example.khaledsabry.entertainment.Fragments.MovieView;
+package com.example.khaledsabry.entertainment.Fragments;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,7 @@ import com.example.khaledsabry.entertainment.R;
 import java.util.ArrayList;
 
 
-public class PosterFragment extends Fragment {
+public class ImagesFragment extends Fragment {
     static Movie movie;
     static Tv tv;
 
@@ -32,10 +32,10 @@ public class PosterFragment extends Fragment {
     TmdbController tmdbController = new TmdbController();
     PosterAdapter posterAdapter;
 
-    public static PosterFragment newInstance(int contentId, Type type) {
-        PosterFragment fragment = new PosterFragment();
-        PosterFragment.contentId = contentId;
-        PosterFragment.type = type;
+    public static ImagesFragment newInstance(int contentId, Type type) {
+        ImagesFragment fragment = new ImagesFragment();
+        ImagesFragment.contentId = contentId;
+        ImagesFragment.type = type;
 
 
         return fragment;
@@ -60,7 +60,9 @@ public class PosterFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false);
+      //  GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false);
+     //   recyclerView.setLayoutManager(gridLayoutManager);
+        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(gridLayoutManager);
         return view;
     }
@@ -80,8 +82,8 @@ public class PosterFragment extends Fragment {
             tmdbController.getMovieImages(contentId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
-                    PosterFragment.movie = movie;
-                    PosterFragment.currentId = contentId;
+                    ImagesFragment.movie = movie;
+                    ImagesFragment.currentId = contentId;
 
                     setMovieImg();
                 }
@@ -96,8 +98,8 @@ public class PosterFragment extends Fragment {
             tmdbController.getTvImages(contentId, new OnTvSuccess() {
                 @Override
                 public void onSuccess(Tv tv) {
-                    PosterFragment.tv = tv;
-                    PosterFragment.currentId = contentId;
+                    ImagesFragment.tv = tv;
+                    ImagesFragment.currentId = contentId;
 
                     setTvImg();
                 }
@@ -109,8 +111,8 @@ public class PosterFragment extends Fragment {
     private void setTvImg() {
 
         imgs.addAll(tv.getBackdrops());
-
         imgs.addAll(tv.getPosters());
+        
          posterAdapter = new PosterAdapter(imgs);
         recyclerView.setAdapter(posterAdapter);
 

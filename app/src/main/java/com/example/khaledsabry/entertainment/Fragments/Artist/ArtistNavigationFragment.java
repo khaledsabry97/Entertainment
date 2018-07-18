@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.PosterFragment;
+import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.R;
 
 
@@ -63,7 +63,7 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
          else if (id == mainView)
             loadFragment(ArtistMainFragment.newInstance(artistId));
         else if (id == images)
-        loadFragment(PosterFragment.newInstance(artistId, PosterFragment.Type.artist));
+        loadFragment(ImagesFragment.newInstance(artistId, ImagesFragment.Type.artist));
         else if (id == roles)
            loadFragment(ArtistRolesFragment.newInstance(artistId));
 

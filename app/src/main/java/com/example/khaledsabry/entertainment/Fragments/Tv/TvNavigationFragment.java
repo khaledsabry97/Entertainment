@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.PosterFragment;
+import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.R;
 
 public class TvNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
@@ -60,7 +60,7 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
         else if (id == mainView)
             loadFragment(TvMainFragment.newInstance(tvId));
         else if (id == images)
-            loadFragment(PosterFragment.newInstance(tvId, PosterFragment.Type.tv));
+            loadFragment(ImagesFragment.newInstance(tvId, ImagesFragment.Type.tv));
         else if (id == seasons)
             loadFragment(TvContentFragment.newInstance(tvId));
 

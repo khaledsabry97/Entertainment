@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
@@ -61,7 +62,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         } else if (item.getItemId() == R.id.navigation_back)
 getActivity().getSupportFragmentManager().popBackStack();
         else if (item.getItemId() == R.id.navigation_images)
-            loadFragment(PosterFragment.newInstance(movieId, PosterFragment.Type.movie));
+            loadFragment(ImagesFragment.newInstance(movieId, ImagesFragment.Type.movie));
         else if (item.getItemId() == R.id.navigation_download)
             loadFragment(TorrentRecyclerFragment.newInstance(movie.getTitle()+ " "+movie.getYear()));
             //   loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
