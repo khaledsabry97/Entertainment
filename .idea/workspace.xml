@@ -42,44 +42,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TorrentRecyclerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/TorrentRecyclerFragment.java">
+      <file leaf-file-name="EpisodeSeasonPreviewFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/EpisodeSeasonPreviewFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+            <state relative-caret-position="112">
+              <caret line="77" column="29" lean-forward="true" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
               <folding>
-                <element signature="e#1519#1539#0" expanded="false" />
-                <element signature="method#newInstance#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="method#onCreateView#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="method#setCodec#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="method#setProvider#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="method#setQuality#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="method#setResolution#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="method#setObjects#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="method#setCustomSearch#0;class#TorrentRecyclerFragment#0" expanded="false" />
-                <element signature="class#8504:9090" expanded="false" />
-                <element signature="method#onQueryTextSubmit#0;class#8504:9090" expanded="false" />
-                <element signature="method#onQueryTextChange#0;class#8504:9090" expanded="false" />
+                <element signature="method#newInstance#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
+                <element signature="method#setDownload#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
+                <element signature="method#setSpecial#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
+                <element signature="method#getZeroNumber#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EpisodeSeasonPreviewFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/EpisodeSeasonPreviewFragment.java">
+      <file leaf-file-name="Movie.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Items/Movie.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="77" column="47" lean-forward="false" selection-start-line="77" selection-start-column="47" selection-end-line="77" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SeasonRecyclerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/SeasonRecyclerFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="38" column="50" lean-forward="false" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+            <state relative-caret-position="531">
+              <caret line="297" column="0" lean-forward="false" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,12 +70,9 @@
       <file leaf-file-name="SeasonAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Adapter/SeasonAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
+            <state relative-caret-position="988">
               <caret line="76" column="71" lean-forward="false" selection-start-line="76" selection-start-column="71" selection-end-line="76" selection-end-column="71" />
-              <folding>
-                <element signature="e#1064#1065#0" expanded="true" />
-                <element signature="e#1102#1103#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,62 +80,28 @@
       <file leaf-file-name="TvContentFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvContentFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+            <state relative-caret-position="425">
+              <caret line="50" column="28" lean-forward="true" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_episode_preview.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_episode_preview.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
+      <file leaf-file-name="TmdbController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/TmdbController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="52" column="55" lean-forward="true" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="55" />
-              <folding>
-                <element signature="e#684#2129#0" expanded="false" />
-                <element signature="e#896#1125#0" expanded="false" />
-                <element signature="e#1144#2070#0" expanded="false" />
-                <element signature="e#2595#3452#0" expanded="false" />
-                <element signature="e#3793#5941#0" expanded="false" />
-                <element signature="e#4143#4704#0" expanded="false" />
-                <element signature="e#4734#5900#0" expanded="false" />
-                <element signature="e#4917#5858#0" expanded="false" />
-                <element signature="e#5181#5810#0" expanded="false" />
-                <element signature="e#5967#7607#0" expanded="false" />
-                <element signature="e#7023#7566#0" expanded="false" />
-                <element signature="e#7632#9211#0" expanded="false" />
-                <element signature="e#7983#8599#0" expanded="false" />
-                <element signature="e#8629#9170#0" expanded="false" />
-                <element signature="e#9241#10874#0" expanded="false" />
-                <element signature="e#9592#10265#0" expanded="false" />
-                <element signature="e#10295#10833#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_tv_preview.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tv_preview.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="673">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+            <state relative-caret-position="283">
+              <caret line="195" column="50" lean-forward="false" selection-start-line="195" selection-start-column="50" selection-end-line="195" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tmdb.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Tmdb.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/Tmdb.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="1117" column="18" lean-forward="false" selection-start-line="1117" selection-start-column="18" selection-end-line="1117" selection-end-column="18" />
+            <state relative-caret-position="-487">
+              <caret line="940" column="30" lean-forward="false" selection-start-line="940" selection-start-column="30" selection-end-line="940" selection-end-column="30" />
               <folding>
                 <element signature="docComment;class#Tmdb#0" expanded="false" />
                 <element signature="method#Tmdb#0;class#Tmdb#0" expanded="false" />
@@ -183,24 +128,68 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_tv_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tv_main.xml">
-          <provider editor-type-id="android-designer2">
+      <file leaf-file-name="Tv.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Items/Tv.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="454">
+              <caret line="210" column="16" lean-forward="false" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
+              <folding>
+                <element signature="e#4866#4867#0" expanded="true" />
+                <element signature="e#4904#4905#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_episode_preview.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_episode_preview.xml">
+          <provider selected="true" editor-type-id="android-designer2">
             <state />
           </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="130" column="39" lean-forward="false" selection-start-line="130" selection-start-column="39" selection-end-line="130" selection-end-column="39" />
+              <folding>
+                <element signature="e#684#2129#0" expanded="false" />
+                <element signature="e#896#1125#0" expanded="false" />
+                <element signature="e#1144#2070#0" expanded="false" />
+                <element signature="e#2595#3452#0" expanded="false" />
+                <element signature="e#3793#6002#0" expanded="false" />
+                <element signature="e#4204#4765#0" expanded="false" />
+                <element signature="e#4795#5961#0" expanded="false" />
+                <element signature="e#4978#5919#0" expanded="false" />
+                <element signature="e#5242#5871#0" expanded="false" />
+                <element signature="e#6028#7726#0" expanded="false" />
+                <element signature="e#7142#7685#0" expanded="false" />
+                <element signature="e#7751#9330#0" expanded="false" />
+                <element signature="e#8102#8718#0" expanded="false" />
+                <element signature="e#8748#9289#0" expanded="false" />
+                <element signature="e#9357#11047#0" expanded="false" />
+                <element signature="e#9765#10438#0" expanded="false" />
+                <element signature="e#10468#11006#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TvPreviewFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvPreviewFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="38" />
+            <state relative-caret-position="768">
+              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TvMainFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvMainFragment.java">
+      <file leaf-file-name="fragment_tv_preview.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tv_preview.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+            <state relative-caret-position="1900">
+              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2372,9 +2361,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Adapter/ResultItemViewHolder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Adapter/RoleViewHolder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvContentFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/EpisodeSeasonPreviewFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tv_preview.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_episode_preview.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/EpisodeSeasonPreviewFragment.java" />
       </list>
     </option>
   </component>
@@ -2679,7 +2668,7 @@
       <option name="ACTIVITY_CLASS" value="com.example.khaledsabry.entertainment.Main2Activity" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531962315310" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531987525703" />
       </method>
     </configuration>
     <configuration default="false" name="Main3Activity" type="AndroidRunConfigurationType" factoryName="Android App" temporary="true">
@@ -2728,7 +2717,7 @@
       <option name="ACTIVITY_CLASS" value="com.example.khaledsabry.entertainment.Main3Activity" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531962315310" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531987525703" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -2801,7 +2790,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531962315311" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531987525704" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2849,7 +2838,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531962315311" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531987525704" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3032,7 +3021,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531962315312" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1531987525707" />
       </method>
     </configuration>
     <list size="3">
@@ -3094,14 +3083,14 @@
       <window_info id="AdbCommander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3995943" sideWeight="0.628125" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3995943" sideWeight="0.628125" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="simpleUML" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.46770832" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30833334" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30833334" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Sequence" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3242,19 +3231,11 @@
           <properties />
           <option name="timeStamp" value="312" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvContentFragment.java</url>
-          <line>47</line>
-          <properties class="com.example.khaledsabry.entertainment.Fragments.Tv.TvContentFragment" method="loadFragment">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="319" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="320" />
+      <option name="time" value="321" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3267,16 +3248,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_movie_main.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_navigation_drawer.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
@@ -3392,7 +3363,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
           <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3416,11 +3386,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="722">
           <caret line="55" column="40" lean-forward="false" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#905#906#0" expanded="false" />
-            <element signature="e#939#940#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3442,7 +3407,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-9728">
           <caret line="39" column="41" lean-forward="false" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3450,7 +3414,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="46" column="41" lean-forward="false" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3480,9 +3443,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="22" column="57" lean-forward="true" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
-          <folding>
-            <element signature="e#5270#6726#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3493,7 +3453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="29" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3512,9 +3471,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="863">
           <caret line="286" column="0" lean-forward="false" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
-          <folding>
-            <element signature="e#8380#9836#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3525,7 +3481,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3533,7 +3488,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3541,18 +3495,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Items/Tv.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="210" column="16" lean-forward="false" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
-          <folding>
-            <element signature="e#4866#4867#0" expanded="false" />
-            <element signature="e#4904#4905#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3560,15 +3502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="2229" column="0" lean-forward="false" selection-start-line="2229" selection-start-column="0" selection-end-line="2229" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/TmdbController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="221" column="49" lean-forward="false" selection-start-line="221" selection-start-column="49" selection-end-line="221" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3590,17 +3523,6 @@
         <state relative-caret-position="247">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvPreviewFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-65">
-          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-          <folding>
-            <element signature="e#1800#2137#0" expanded="true" />
-            <element signature="e#2136#2137#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3647,42 +3569,12 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/Tmdb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="1117" column="18" lean-forward="false" selection-start-line="1117" selection-start-column="18" selection-end-line="1117" selection-end-column="18" />
-          <folding>
-            <element signature="docComment;class#Tmdb#0" expanded="false" />
-            <element signature="method#Tmdb#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#showMovie#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#showRecommendationsAndSimilar#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getMovies#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getMovieVideosCreditsCategories#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getPostersBackdrops#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getPosters#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getReviews#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getGenres#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getPersonDetails#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getPersonRoles#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getPersonImages#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getCharacters#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getCrew#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getGenre#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getProductionCompanies#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getNetworks#0;class#Tmdb#0" expanded="false" />
-            <element signature="method#getPostersBackdrops#1;class#Tmdb#0" expanded="false" />
-            <element signature="method#getGuests#0;class#Tmdb#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvMainFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
+        <state relative-caret-position="2204">
           <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
           <folding />
         </state>
@@ -3720,29 +3612,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Adapter/SeasonAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="76" column="71" lean-forward="false" selection-start-line="76" selection-start-column="71" selection-end-line="76" selection-end-column="71" />
-          <folding>
-            <element signature="e#1064#1065#0" expanded="true" />
-            <element signature="e#1102#1103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/SeasonRecyclerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="38" column="50" lean-forward="false" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/EpisodeSeasonPreviewFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="77" column="47" lean-forward="false" selection-start-line="77" selection-start-column="47" selection-end-line="77" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -3752,45 +3625,130 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
+        <state relative-caret-position="1900">
           <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvPreviewFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Items/Movie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="297" column="0" lean-forward="false" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_episode_preview.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="130" column="39" lean-forward="false" selection-start-line="130" selection-start-column="39" selection-end-line="130" selection-end-column="39" />
+          <folding>
+            <element signature="e#684#2129#0" expanded="false" />
+            <element signature="e#896#1125#0" expanded="false" />
+            <element signature="e#1144#2070#0" expanded="false" />
+            <element signature="e#2595#3452#0" expanded="false" />
+            <element signature="e#3793#6002#0" expanded="false" />
+            <element signature="e#4204#4765#0" expanded="false" />
+            <element signature="e#4795#5961#0" expanded="false" />
+            <element signature="e#4978#5919#0" expanded="false" />
+            <element signature="e#5242#5871#0" expanded="false" />
+            <element signature="e#6028#7726#0" expanded="false" />
+            <element signature="e#7142#7685#0" expanded="false" />
+            <element signature="e#7751#9330#0" expanded="false" />
+            <element signature="e#8102#8718#0" expanded="false" />
+            <element signature="e#8748#9289#0" expanded="false" />
+            <element signature="e#9357#11047#0" expanded="false" />
+            <element signature="e#9765#10438#0" expanded="false" />
+            <element signature="e#10468#11006#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/EpisodeSeasonPreviewFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="77" column="29" lean-forward="true" selection-start-line="77" selection-start-column="29" selection-end-line="77" selection-end-column="29" />
+          <folding>
+            <element signature="method#newInstance#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
+            <element signature="method#setDownload#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
+            <element signature="method#setSpecial#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
+            <element signature="method#getZeroNumber#0;class#EpisodeSeasonPreviewFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Adapter/SeasonAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="988">
+          <caret line="76" column="71" lean-forward="false" selection-start-line="76" selection-start-column="71" selection-end-line="76" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/Tv/TvContentFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+        <state relative-caret-position="425">
+          <caret line="50" column="28" lean-forward="true" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_episode_preview.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/TmdbController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="52" column="55" lean-forward="true" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="55" />
+        <state relative-caret-position="283">
+          <caret line="195" column="50" lean-forward="false" selection-start-line="195" selection-start-column="50" selection-end-line="195" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Items/Tv.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="210" column="16" lean-forward="false" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
           <folding>
-            <element signature="e#684#2129#0" expanded="false" />
-            <element signature="e#896#1125#0" expanded="false" />
-            <element signature="e#1144#2070#0" expanded="false" />
-            <element signature="e#2595#3452#0" expanded="false" />
-            <element signature="e#3793#5941#0" expanded="false" />
-            <element signature="e#4143#4704#0" expanded="false" />
-            <element signature="e#4734#5900#0" expanded="false" />
-            <element signature="e#4917#5858#0" expanded="false" />
-            <element signature="e#5181#5810#0" expanded="false" />
-            <element signature="e#5967#7607#0" expanded="false" />
-            <element signature="e#7023#7566#0" expanded="false" />
-            <element signature="e#7632#9211#0" expanded="false" />
-            <element signature="e#7983#8599#0" expanded="false" />
-            <element signature="e#8629#9170#0" expanded="false" />
-            <element signature="e#9241#10874#0" expanded="false" />
-            <element signature="e#9592#10265#0" expanded="false" />
-            <element signature="e#10295#10833#0" expanded="false" />
+            <element signature="e#4866#4867#0" expanded="true" />
+            <element signature="e#4904#4905#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/Tmdb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-487">
+          <caret line="940" column="30" lean-forward="false" selection-start-line="940" selection-start-column="30" selection-end-line="940" selection-end-column="30" />
+          <folding>
+            <element signature="docComment;class#Tmdb#0" expanded="false" />
+            <element signature="method#Tmdb#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#showMovie#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#showRecommendationsAndSimilar#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMovies#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMovieVideosCreditsCategories#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPostersBackdrops#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPosters#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getReviews#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getGenres#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPersonDetails#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPersonRoles#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPersonImages#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getCharacters#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getCrew#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getGenre#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getProductionCompanies#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getNetworks#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPostersBackdrops#1;class#Tmdb#0" expanded="false" />
+            <element signature="method#getGuests#0;class#Tmdb#0" expanded="false" />
           </folding>
         </state>
       </provider>

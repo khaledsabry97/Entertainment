@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
 import com.example.khaledsabry.entertainment.Items.Episode;
@@ -34,6 +35,10 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
     TextView name;
     TextView ratetext;
     TextView titleText;
+    View overviewLayout;
+    View titleLayout;
+    View rateLayout;
+
     public static EpisodeSeasonPreviewFragment newInstance(Tv tv, Season season, Episode episode) {
         EpisodeSeasonPreviewFragment fragment = new EpisodeSeasonPreviewFragment();
         EpisodeSeasonPreviewFragment.tv = tv;
@@ -57,11 +62,14 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         poster = view.findViewById(R.id.posterid);
         download = view.findViewById(R.id.downloadid);
         name = view.findViewById(R.id.episodename);
-
-        ratetext  = view.findViewById(R.id.ratetextid);
+        overviewLayout = view.findViewById(R.id.overviewlayout);
+        titleLayout = view.findViewById(R.id.titleLayout);
+        rateLayout = view.findViewById(R.id.rateLayout);
+        ratetext = view.findViewById(R.id.ratetextid);
         titleText = view.findViewById(R.id.titletextid);
 
-setObjects();
+
+        setObjects();
 
         return view;
     }
@@ -71,20 +79,25 @@ setObjects();
             title.setText(season.getName());
 
             airDate.setText(season.getAirDate());
-            overView.setText(season.getOverView());
-            ImageController.putImageMidQuality(season.getPoster(), poster);
-            rate.setVisibility(View.GONE);
-            ratetext.setVisibility(View.GONE);
-            titleText.setVisibility(View.GONE);
+            if (season.getOverView().equals(""))
+                overviewLayout.setVisibility(View.GONE);
+            else
+                overView.setText(season.getOverView());
 
+            ImageController.putImageMidQuality(season.getPoster(), poster);
+            rateLayout.setVisibility(View.GONE);
+            titleLayout.setVisibility(View.GONE);
 
         } else if (episode != null) {
 
-            title.setText("Season "+getZeroNumber(episode.getSeasonNumber())+ " - "+ "Episode "+getZeroNumber(episode.getEpisodeNumber()));
+            title.setText("Season " + getZeroNumber(episode.getSeasonNumber()) + " - " + "Episode " + getZeroNumber(episode.getEpisodeNumber()));
             name.setText(episode.getName());
 
             airDate.setText(episode.getAirDate());
-            rate.setText(episode.getRateTmdb() + "/10");
+            if (episode.getRateTmdb() == 0.0)
+                rateLayout.setVisibility(View.GONE);
+            else
+                rate.setText(episode.getRateTmdb() + "/10");
 
             overView.setText(episode.getOverView());
             ImageController.putImageMidQuality(episode.getPoster(), poster);
@@ -102,6 +115,8 @@ setObjects();
             seasons += season.getSeasonNumber();
 
             searchString = tv.getTitle() + " " + seasons;
+            searchString = setSpecial(searchString, 1);
+
         } else if (episode != null) {
             String seasons = "S";
             if (episode.getSeasonNumber() < 10)
@@ -115,6 +130,7 @@ setObjects();
 
 
             searchString = tv.getTitle() + " " + seasons + episodes;
+            searchString = setSpecial(searchString, 0);
 
         }
 
@@ -129,11 +145,21 @@ setObjects();
 
     }
 
+    //state 0 --> episode   state 1 --> season
+    private String setSpecial(String searchString, int state) {
+
+        if (tv.getTitle().toLowerCase().contains("wwe") && state == 1) {
+            searchString = tv.getTitle() + " " + season.getAirDate().substring(0, 4);
+        } else if (tv.getTitle().toLowerCase().contains("wwe") && state == 0) {
+            searchString = tv.getTitle() + " " + episode.getAirDate();
+        }
 
 
+        return searchString;
+    }
 
-    private String getZeroNumber(int number)
-    {
+
+    private String getZeroNumber(int number) {
         String zero = "";
         if (number < 10)
             zero += "0";
