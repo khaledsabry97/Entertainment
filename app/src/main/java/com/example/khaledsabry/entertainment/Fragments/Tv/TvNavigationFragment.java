@@ -25,7 +25,6 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
     int images = R.id.images;
     int seasons = R.id.seasons;
     int backButtonid = R.id.backButtonid;
-public static Tv tv;
     public static TvNavigationFragment newInstance(int tvId, boolean reset) {
         TvNavigationFragment fragment = new TvNavigationFragment();
         TvNavigationFragment.tvId = tvId;

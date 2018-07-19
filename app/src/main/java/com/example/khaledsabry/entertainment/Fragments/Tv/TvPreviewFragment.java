@@ -22,9 +22,6 @@ public class TvPreviewFragment extends Fragment {
 
 
     static Tv tv;
-    static Season season;
-
-    static Episode episode;
 
     ImageView poster;
     TextView title;
@@ -32,14 +29,10 @@ public class TvPreviewFragment extends Fragment {
     TextView airDate;
     TextView overView;
     TextView download;
-    static boolean canDownlaod;
 
-    public static TvPreviewFragment newInstance(Tv tv, Season season, Episode episode, boolean canDownload) {
+    public static TvPreviewFragment newInstance(Tv tv) {
         TvPreviewFragment fragment = new TvPreviewFragment();
         TvPreviewFragment.tv = tv;
-        TvPreviewFragment.season = season;
-        TvPreviewFragment.episode = episode;
-        TvPreviewFragment.canDownlaod = canDownload;
         return fragment;
     }
 
@@ -79,67 +72,11 @@ public class TvPreviewFragment extends Fragment {
             airDate.setText("First Air Date : " + tv.getFirstAirDate());
             overView.setText(tv.getOverView());
             ImageController.putImageMidQuality(tv.getBackDrop(), poster);
-        } else if (season != null) {
-            title.setText(season.getName());
-
-            airDate.setText(season.getAirDate());
-            overView.setText(season.getOverView());
-            ImageController.putImageMidQuality(season.getPoster(), poster);
-            rate.setVisibility(View.GONE);
-
-
-        } else if (episode != null) {
-
-            title.setText(episode.getName());
-
-            airDate.setText(episode.getAirDate());
-            rate.setText(episode.getRateTmdb() + "/10");
-
-            overView.setText(episode.getOverView());
-            ImageController.putImageMidQuality(episode.getPoster(), poster);
         }
-        if (!canDownlaod)
-            download.setVisibility(View.INVISIBLE);
-        else
-            setDownload();
 
     }
 
 
-    private void setDownload() {
-        String searchString = "";
-        if (season != null) {
-            String seasons = "S";
-            if (season.getSeasonNumber() < 10)
-                seasons += "0";
-            seasons += season.getSeasonNumber();
 
-            searchString = TvNavigationFragment.tv.getTitle() + " " + seasons;
-        } else if (episode != null) {
-            String seasons = "S";
-            if (episode.getSeasonNumber() < 10)
-                seasons += "0";
-            seasons += episode.getSeasonNumber();
-
-            String episodes = "E";
-            if (episode.getEpisodeNumber() < 10)
-                episodes += "0";
-            episodes += episode.getEpisodeNumber();
-
-
-            searchString = TvNavigationFragment.tv.getTitle() + " " + seasons + episodes;
-
-        }
-
-
-        final String finalSearchString = searchString;
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, TorrentRecyclerFragment.newInstance(finalSearchString)).addToBackStack(null).commit();
-            }
-        });
-
-    }
 
 }

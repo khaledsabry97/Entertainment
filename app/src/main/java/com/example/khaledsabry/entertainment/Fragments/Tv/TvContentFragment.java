@@ -23,10 +23,10 @@ import java.util.ArrayList;
 public class TvContentFragment extends Fragment {
 
     ArrayList<Season> seasons = new ArrayList<>();
-    static boolean loaded = false;
     int tvId;
     static Tv tv;
 static ArrayList<Torrent> torrents = new ArrayList<>();
+static int currentId = -1;
     public static TvContentFragment newInstance(int tvId) {
         TvContentFragment fragment = new TvContentFragment();
         fragment.tvId = tvId;
@@ -47,12 +47,12 @@ static ArrayList<Torrent> torrents = new ArrayList<>();
 
     private void loadFragment() {
         TmdbController tmdbController = new TmdbController();
-        if (!loaded) {
+        if (tvId !=currentId) {
             tmdbController.getTv(tvId, new OnTvSuccess() {
                 @Override
                 public void onSuccess(Tv tv) {
                     TvContentFragment.tv = tv;
-                    loaded = true;
+                    currentId = tvId;
                     loadSeasonsFragment();
                 }
             });
@@ -72,14 +72,14 @@ static ArrayList<Torrent> torrents = new ArrayList<>();
     }
 
     public static void loadEpisodePreviewFragment(Episode episode) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, TvPreviewFragment.newInstance(null,null,episode,true)).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv,null,episode)).commit();
 
     }
 
 
 
     public static void loadSeasonPreviewFragment(Season season) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, TvPreviewFragment.newInstance(null,season,null,true)).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv,season,null)).commit();
 
     }
 

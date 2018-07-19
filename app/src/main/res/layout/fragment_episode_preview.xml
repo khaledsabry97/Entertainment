@@ -3,108 +3,234 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.khaledsabry.entertainment.Fragments.Tv.EpisodePreviewFragment">
+    android:background="@drawable/background3"
+
+    tools:context="com.example.khaledsabry.entertainment.Fragments.Tv.EpisodeSeasonPreviewFragment">
 
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background3">
 
-        <ImageView
-            android:id="@+id/posterid"
-            android:layout_width="0dp"
-            android:layout_height="300dp"
-            android:layout_marginBottom="600dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/batman"
-            app:layout_constraintBottom_toTopOf="@+id/titleid"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/titleid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/carterone"
-            android:text="title"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/posterid" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTintMode="src_over"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/rateid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/carterone"
-            android:text="rate"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/posterid" />
-
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="4dp"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleid">
-
-            <TextView
-                android:id="@+id/overviewid"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="15dp"
-                android:fontFamily="@font/carterone"
-                android:paddingBottom="20dp"
-                android:paddingRight="10dp"
-                android:text="ven if you have never played "
-                android:textColor="@color/cardview_light_background"
-                android:textSize="18sp" />
+                android:layout_weight="1.5">
 
-        </android.support.v4.widget.NestedScrollView>
-
-        <TextView
-            android:id="@+id/airdateid"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/carterone"
-            android:text="Air Date :"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <TextView
-            android:id="@+id/genresid"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/carterone"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
-
-    </android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/posterid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"></ImageView>
 
 
-</FrameLayout>
+                <TextView
+                    android:id="@+id/downloadid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/rightroundborder"
+                    android:fontFamily="@font/carterone"
+
+                    android:text="Download"
+                    android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/posterid"
+                    app:layout_constraintEnd_toEndOf="@+id/posterid"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/sideid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/titleid"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/blue"
+                        android:fontFamily="@font/carterone"
+                        android:includeFontPadding="true"
+                        android:lines="1"
+                        android:shadowColor="#000"
+                        android:shadowDx="5"
+                        android:shadowDy="5"
+                        android:textAlignment="center"
+                        android:textColor="@color/cardview_light_background"
+                        android:textSize="30sp">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight=".8"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:background="@drawable/rightroundborder"
+                                android:fontFamily="@font/carterone"
+                                android:text="Overview"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="20sp" />
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/overviewid"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="20dp"
+                                        android:background="@drawable/rightroundborder"
+                                        android:fontFamily="@font/carterone"
+                                        android:textColor="@color/cardview_light_background"
+                                        android:textSize="17sp" />
+                                </LinearLayout>
+                            </ScrollView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/titletextid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/rightroundborder"
+                                android:fontFamily="@font/carterone"
+                                android:text="Title"
+                                android:textAlignment="center"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/episodename"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/carterone"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="17sp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/rightroundborder"
+                                android:fontFamily="@font/carterone"
+                                android:text="Air Date"
+                                android:textAlignment="center"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/airdateid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/carterone"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="17sp" />
+
+                        </LinearLayout>
+
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/ratetextid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/rightroundborder"
+                                android:fontFamily="@font/carterone"
+                                android:text="Rate"
+                                android:textAlignment="center"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/rateid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/carterone"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="17sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+        </LinearLayout>
+
+
+    </FrameLayout>

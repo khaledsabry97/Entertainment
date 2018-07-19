@@ -100,7 +100,6 @@ public class TvMainFragment extends Fragment {
         viewPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(viewPager);
 
-        TvNavigationFragment.tv = tv;
         loadActorFragment();
         loadReviewFragment();
         loadProductionFragment();
@@ -140,6 +139,7 @@ public class TvMainFragment extends Fragment {
                 @Override
                 public void onSuccess(Tv tv) {
                     TvMainFragment.tv = tv;
+
                     setObjects(tv);
                 }
             });
