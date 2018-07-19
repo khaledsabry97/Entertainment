@@ -6,14 +6,15 @@
     app:cardCornerRadius="3dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="200dp"
+        android:layout_height="152dp"
+        android:background="@drawable/blue"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/posterimageid"
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="130dp"
             android:adjustViewBounds="false"
 
             android:scaleType="fitXY"
@@ -23,14 +24,15 @@
             android:id="@+id/companyid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
             android:background="@color/cardview_light_background"
             android:backgroundTint="@android:color/background_dark"
-            android:fontFamily="@font/velocista"
+            android:fontFamily="@font/carterone"
             android:gravity="center"
             android:paddingTop="2dp"
             android:text="Batman"
             android:textColor="#FFFFFFFF"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
     </LinearLayout>

@@ -227,7 +227,7 @@ private String status;
         {
             s +=genres.get(i).getName();
             if(i+1 !=genres.size())
-                s+= "| ";
+                s+= ", ";
 
         }
         return s;

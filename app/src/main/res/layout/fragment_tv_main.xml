@@ -1,10 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background3"
 
+    android:background="@drawable/blue"
     tools:context="com.example.khaledsabry.entertainment.Fragments.Tv.TvMainFragment">
 
 
@@ -40,8 +40,7 @@
                 android:typeface="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="43dp"
-                />
+                tools:layout_editor_absoluteX="43dp" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -49,7 +48,8 @@
             android:id="@+id/sideid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/blue">
 
 
             <LinearLayout
@@ -60,11 +60,13 @@
                 <TextView
                     android:id="@+id/titleId"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/size_hight_main_title"
                     android:layout_weight="1"
-                    android:background="@color/cardview_dark_background"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/blue"
                     android:fontFamily="@font/carterone"
                     android:includeFontPadding="true"
+                    android:lines="1"
                     android:shadowColor="#000"
                     android:shadowDx="5"
                     android:shadowDy="5"
@@ -88,31 +90,33 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:fontFamily="@font/velocista"
+                            android:layout_marginBottom="5dp"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
                             android:text="Overview"
                             android:textColor="@color/cardview_light_background"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/size_main_category" />
 
-                        <ScrollView
+                        <android.support.v4.widget.NestedScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="200dp">
 
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/overviewID"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_marginLeft="20dp"
+                                android:autoSizeTextType="uniform"
+                                android:background="@drawable/rightroundborder"
+                                android:fontFamily="@font/carterone"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="17sp" />
 
-                                <TextView
-                                    android:id="@+id/overviewID"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:textColor="@color/cardview_light_background"
-                                    android:textSize="17sp" />
-                            </LinearLayout>
-                        </ScrollView>
+                        </android.support.v4.widget.NestedScrollView>
 
                     </LinearLayout>
 
@@ -127,10 +131,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:fontFamily="@font/velocista"
-                            android:text="Run Time :"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
+                            android:text="Run Time"
+                            android:textAlignment="center"
                             android:textColor="@color/cardview_light_background"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/size_main_category" />
 
                         <TextView
                             android:id="@+id/runtimeid"
@@ -138,10 +146,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/carterone"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -153,8 +164,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:fontFamily="@font/velocista"
-                            android:text="First air date :"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
+                            android:text="First air date"
+                            android:textAlignment="center"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="20sp" />
 
@@ -164,6 +179,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/carterone"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -181,10 +198,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:fontFamily="@font/velocista"
-                            android:text="Last air date :"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
+                            android:text="Last air date"
+                            android:textAlignment="center"
                             android:textColor="@color/cardview_light_background"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/size_main_category" />
 
                         <TextView
                             android:id="@+id/lastairdateid"
@@ -192,6 +213,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/carterone"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -208,10 +231,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:fontFamily="@font/velocista"
-                            android:text="Genres :"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
+                            android:text="Genres"
+                            android:textAlignment="center"
                             android:textColor="@color/cardview_light_background"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/size_main_category" />
 
                         <TextView
                             android:id="@+id/genresid"
@@ -219,6 +246,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -235,10 +265,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:fontFamily="@font/velocista"
-                            android:text="Number of seasons :"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
+                            android:text="Number of seasons"
+                            android:textAlignment="center"
                             android:textColor="@color/cardview_light_background"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/size_main_category" />
 
                         <TextView
                             android:id="@+id/numberofseasonsid"
@@ -246,6 +280,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/carterone"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -262,10 +298,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:fontFamily="@font/velocista"
-                            android:text="Number of episodes :"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
+                            android:text="Number of episodes"
+                            android:textAlignment="center"
                             android:textColor="@color/cardview_light_background"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/size_main_category" />
 
                         <TextView
                             android:id="@+id/numberofepisodesid"
@@ -273,6 +313,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/carterone"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -289,10 +331,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:fontFamily="@font/velocista"
-                            android:text="Rate :"
+                            android:background="@drawable/rightroundborder"
+                            android:fontFamily="@font/carterone"
+                            android:lines="1"
+                            android:text="Rate"
+                            android:textAlignment="center"
                             android:textColor="@color/cardview_light_background"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/size_main_category" />
 
                         <TextView
                             android:id="@+id/rateid"
@@ -300,6 +345,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/carterone"
                             android:textColor="@color/cardview_light_background"
                             android:textSize="17sp" />
 
@@ -307,12 +354,20 @@
 
                 </LinearLayout>
 
+                <FrameLayout
+                    android:id="@+id/productionframelayoutid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
+
+                </FrameLayout>
+
                 <LinearLayout
-                    android:id="@+id/actor_crew"
+                    android:id="@+id/actor_crew_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -327,23 +382,33 @@
 
                         <Button
                             android:id="@+id/button_actors_id"
-                            style="@android:style/Widget.Holo.Button"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="2dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/blue"
                             android:fontFamily="@font/carterone"
                             android:text="Actors"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/size_main_category"
                             tools:layout_editor_absoluteY="695dp" />
 
                         <Button
                             android:id="@+id/button_crew_id"
-                            style="@android:style/Widget.Holo.Button"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="2dp"
                             android:layout_weight="1"
+                            android:autoSizeTextType="uniform"
+                            android:background="@drawable/blue"
                             android:elevation="0dp"
                             android:fontFamily="@font/carterone"
-                            android:text="Crew" />
+                            android:text="Crew"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/size_main_category" />
 
                     </LinearLayout>
 
@@ -362,14 +427,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <FrameLayout
-                        android:id="@+id/productionframelayoutid"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1">
-
-                    </FrameLayout>
 
                     <FrameLayout
                         android:id="@+id/ReviewLayoutid"
@@ -392,7 +449,6 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
-
 
 
 </FrameLayout>

@@ -50,6 +50,7 @@ public class TvMainFragment extends Fragment {
     Button actorButton;
     Button crewButton;
     NestedScrollView scrollView;
+    View actorCrewLayout;
     static FrameLayout reviewLayout;
 
     public static TvMainFragment newInstance(int tvId) {
@@ -70,7 +71,7 @@ public class TvMainFragment extends Fragment {
         genres = v.findViewById(R.id.genresid);
         lastAirDate = v.findViewById(R.id.lastairdateid);
         rate = v.findViewById(R.id.rateid);
-        //  status = v.findViewById(R.id.statusid);
+        actorCrewLayout = v.findViewById(R.id.actor_crew_layout);
         numberOfEpisodes = v.findViewById(R.id.numberofepisodesid);
         viewPager = v.findViewById(R.id.viewPagerid);
         indicator = v.findViewById(R.id.indicator);
@@ -93,13 +94,13 @@ public class TvMainFragment extends Fragment {
         numberOfSeasons.setText(String.valueOf(tv.getNumberOfSeasons()));
         numberOfEpisodes.setText(String.valueOf(tv.getNumberOfEpisodes()));
         lastAirDate.setText(tv.getLastAirDate());
-        //  status.setText(tv.getStatus());
         rate.setText(tv.getRateTmdb() + "/10");
         title.setText(tv.getTitle());
         viewPagerAdapter = new MainPosterViewPager(tv.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(viewPager);
-
+        if (tv.getActors().size() == 0)
+            actorCrewLayout.setVisibility(View.GONE);
         loadActorFragment();
         loadReviewFragment();
         loadProductionFragment();

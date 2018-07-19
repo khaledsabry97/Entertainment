@@ -15,9 +15,13 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Production Companies :-"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/rightroundborder"
+            android:fontFamily="@font/carterone"
+            android:text="Production Companies"
+            android:textAlignment="center"
             android:textColor="@color/cardview_light_background"
-            android:textSize="20sp" />
+            android:textSize="@dimen/size_main_category" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerid"

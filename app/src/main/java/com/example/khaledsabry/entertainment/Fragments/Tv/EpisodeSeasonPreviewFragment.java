@@ -68,6 +68,7 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         ratetext = view.findViewById(R.id.ratetextid);
         titleText = view.findViewById(R.id.titletextid);
 
+       // download.setTextAppearance(getContext(),R.style.outline);
 
         setObjects();
 
