@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.TrailerAdapter;
-import com.example.khaledsabry.entertainment.Adapter.TrailerViewAdapter;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public class YOU extends Fragment {
@@ -31,14 +29,14 @@ public class YOU extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_gdfgfdg, container, false);
         ViewPager viewPager =v.findViewById(R.id.viewPagerid);
-        trailers.add(trailerId);
+       trailers.add(trailerId);
         trailers.add("KHz_QSUIRvc");
-       // TrailerViewAdapter trailerViewAdapter =new TrailerViewAdapter(trailers,this);
         TrailerAdapter trailerAdapter;
-        trailerAdapter = new TrailerAdapter(getFragmentManager(),trailers);
+        trailerAdapter = new TrailerAdapter(trailers);
 
 
         viewPager.setAdapter(trailerAdapter);
+       // viewPager.setCurrentItem(0);
      //   getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.hello,YoutubeFragment.newInstance(trailerId)).commit();
         return v;
     }

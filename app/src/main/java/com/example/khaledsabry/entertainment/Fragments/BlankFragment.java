@@ -28,14 +28,6 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v  = inflater.inflate(R.layout.fragment_blank, container, false);
-        ApiConnections.getInstance().setContext(getContext());
-        TmdbController tmdbController = new TmdbController();
-        tmdbController.getMovieGetDetails(68735, new OnMovieDataSuccess() {
-            @Override
-            public void onSuccess(Movie movie) {
-             //   loadMovieDetails(movie);
-            }
-        });
 
 
 

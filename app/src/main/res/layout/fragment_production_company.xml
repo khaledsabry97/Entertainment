@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoSizeTextType="uniform"
-            android:background="@drawable/rightroundborder"
+            android:background="@drawable/round"
             android:fontFamily="@font/carterone"
             android:text="Production Companies"
             android:textAlignment="center"

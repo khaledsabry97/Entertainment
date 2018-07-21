@@ -6,7 +6,7 @@
     android:layout_marginLeft="3dp"
     android:layout_marginRight="0dp"
     android:layout_marginTop="2dp"
-    android:background="@drawable/rightroundborder"
+    android:background="@drawable/round"
     app:cardCornerRadius="4dp">
 
 
@@ -34,7 +34,7 @@
             android:layout_marginRight="4dp"
             android:autoSizeMinTextSize="10dp"
             android:autoSizeTextType="uniform"
-            android:background="@drawable/rightroundborder"
+            android:background="@drawable/round"
             android:fontFamily="@font/carterone"
             android:paddingRight="10dp"
             android:text="Season 1"

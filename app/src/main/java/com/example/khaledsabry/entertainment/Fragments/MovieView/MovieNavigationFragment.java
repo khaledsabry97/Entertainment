@@ -16,6 +16,7 @@ import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
+import com.example.khaledsabry.entertainment.YOU;
 
 
 public class MovieNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
@@ -65,10 +66,11 @@ getActivity().getSupportFragmentManager().popBackStack();
             loadFragment(ImagesFragment.newInstance(movieId, ImagesFragment.Type.movie));
         else if (item.getItemId() == R.id.navigation_download)
             loadFragment(TorrentRecyclerFragment.newInstance(movie.getTitle()+ " "+movie.getYear()));
-            //   loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
+            //
          //   loadFragment(ReviewFragment.newInstance(movieId));
         else if (item.getItemId() == R.id.navigation_reco_simi)
-            loadFragment(RecommendedAndSimilarFragment.newInstance(movieId));
+            loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
+           // loadFragment(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;
     }
 

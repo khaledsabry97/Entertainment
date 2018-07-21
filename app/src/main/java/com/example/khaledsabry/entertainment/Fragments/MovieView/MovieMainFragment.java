@@ -2,6 +2,7 @@ package com.example.khaledsabry.entertainment.Fragments.MovieView;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -20,16 +21,19 @@ import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import me.relex.circleindicator.CircleIndicator;
 
 
 public class MovieMainFragment extends Fragment {
 
     static int movieId;
-    TextView title;
+    static int currentMovieId = -1;
     static Movie movie = null;
 
-    static int currentMovieId = -1;
+    TextView title;
     TextView overviewText;
     TextView releaseDate;
     TextView runTimeText;
@@ -39,11 +43,14 @@ public class MovieMainFragment extends Fragment {
     TextView rate;
     TextView adult;
     TextView status;
+
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
+
     Button actorButton;
     Button crewButton;
+
     NestedScrollView scrollView;
     static FrameLayout reviewLayout;
 
@@ -79,6 +86,21 @@ public class MovieMainFragment extends Fragment {
         return v;
     }
 
+    public void getMovieDetails() {
+        if (movieId != currentMovieId) {
+            TmdbController tmdbController = new TmdbController();
+            tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
+                @Override
+                public void onSuccess(Movie movie) {
+                    currentMovieId = movie.getMovieId();
+                    MovieMainFragment.movie = movie;
+                    setObjects(movie);
+                }
+            });
+        } else
+            setObjects(movie);
+    }
+
 
     private void setObjects(Movie movie) {
         overviewText.setText(movie.getOverView());
@@ -95,15 +117,32 @@ public class MovieMainFragment extends Fragment {
         viewPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(viewPager);
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // if
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+        viewPagerAdapter.movePoster(viewPager, viewPagerAdapter, 7000, 4000);
+
+
+
 
         loadActorFragment();
         loadReviewFragment();
         loadProductionFragment();
-
-        Functions functions = new Functions();
-        functions.movePoster(viewPager,viewPagerAdapter,7000,3000);
-        scrollView.setVisibility(View.VISIBLE);
-
 
         actorButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,55 +151,49 @@ public class MovieMainFragment extends Fragment {
 
             }
         });
-
         crewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadCrewFragment();
             }
         });
+
+        scrollView.setVisibility(View.VISIBLE);
         MovieNavigationFragment.movie = movie;
 
     }
 
+
     private void loadProductionFragment() {
+        if(movie == null)
+            return;
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie.getProductionCompanies())).commit();
 
     }
 
 
-    public void getMovieDetails() {
-        TmdbController tmdbController = new TmdbController();
-        if (movieId != currentMovieId)
-            tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
-                @Override
-                public void onSuccess(Movie movie) {
-                    currentMovieId = movie.getMovieId();
-                    MovieMainFragment.movie = movie;
-                    setObjects(movie);
-                }
-            });
-        else
-            setObjects(movie);
-    }
-
     private void loadActorFragment() {
+        if (movie == null)
+            return;
         CastFragment castFragment = CastFragment.newInstance(movie.getCharacters());
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, castFragment).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, castFragment).commit();
     }
 
     private void loadCrewFragment() {
+        if (movie == null)
+            return;
         CrewFragment crewFragment = CrewFragment.newInstance(movie.getCrews());
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, crewFragment).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, crewFragment).commit();
     }
 
     private void loadReviewFragment() {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ReviewLayoutid, ReviewFragment.newInstance(movie.getReviews())).commit();
+        if (movie == null)
+            return;
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ReviewLayoutid, ReviewFragment.newInstance(movie.getReviews())).commit();
     }
 
-public static void hideReviewView()
-{
-    reviewLayout.setVisibility(View.GONE);
-}
+    public static void hideReviewView() {
+        reviewLayout.setVisibility(View.GONE);
+    }
 
 }

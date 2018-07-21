@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/titleid"
-            android:background="@drawable/rightroundborder"
+            android:background="@drawable/round"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/rateid"
-            android:background="@drawable/rightroundborder"
+            android:background="@drawable/round"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
 
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/rightroundborder"
+                android:background="@drawable/round"
                 android:fontFamily="@font/carterone"
                 android:paddingBottom="20dp"
                 android:paddingRight="10dp"
@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/airdateid"
-            android:background="@drawable/rightroundborder"
+            android:background="@drawable/round"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
