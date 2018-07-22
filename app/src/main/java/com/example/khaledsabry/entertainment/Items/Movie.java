@@ -29,7 +29,33 @@ public class Movie {
     private boolean isAdult;
     private Collection collection;
     private String backDropPoster;
+    private String domesticBudget;
+    private String overseasBudget;
+    private String worldWideBudget;
 
+    public String getOverseasBudget() {
+        return overseasBudget;
+    }
+
+    public void setOverseasBudget(String overseasBudget) {
+        this.overseasBudget = overseasBudget;
+    }
+
+    public String getWorldWideBudget() {
+        return worldWideBudget;
+    }
+
+    public void setWorldWideBudget(String worldWideBudget) {
+        this.worldWideBudget = worldWideBudget;
+    }
+
+    public String getDomesticBudget() {
+        return domesticBudget;
+    }
+
+    public void setDomesticBudget(String domesticBudget) {
+        this.domesticBudget = domesticBudget;
+    }
 
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
     private ArrayList<Genre> genres = new ArrayList<>();

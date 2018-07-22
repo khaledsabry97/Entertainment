@@ -1,37 +1,22 @@
 package com.example.khaledsabry.entertainment.Activities;
 
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
-import com.example.khaledsabry.entertainment.Controllers.TorrentController;
-import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
-import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
+import com.example.khaledsabry.entertainment.Connection.WebApi;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 
-import org.jsoup.Jsoup;
-import org.jsoup.select.Elements;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static java.nio.file.Files.copy;
-import static java.nio.file.Files.list;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,15 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
 // hide the navigation bar and the status bar
         periodicHideNavigation();
+        WebApi.getInstance().mojoAllTheTime(new OnWebSuccess.OnMovieList() {
+            @Override
+            public void onSuccess(ArrayList<Movie> movies) {
 
-        loadFragment(R.id.mainContainer, MainMenuFragment.newInstance());
-       //loadFragment(R.id.mainContainer, SearchFragment.newInstance());
-
-    }
-
-    public void loadMovieDetailFragment(int movieId) {
-        MovieNavigationFragment detailFragment = MovieNavigationFragment.newInstance(movieId, true);
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, detailFragment).addToBackStack(null).commit();
+            }
+        });
+     //   loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
     }
 
@@ -99,14 +82,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void loadFragment(int idContainer, android.support.v4.app.Fragment fragment) {
+    public static void loadFragmentWithReturn(int idContainer, android.support.v4.app.Fragment fragment) {
 
-        getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).addToBackStack(null).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).addToBackStack(null).commit();
     }
 
+    public static void loadFragmentNoReturn(int idContainer, android.support.v4.app.Fragment fragment) {
 
-    private void periodicHideNavigation()
-    {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).commit();
+    }
+    private void periodicHideNavigation() {
         final Handler handler = new Handler();
 
         Timer timer = new Timer();

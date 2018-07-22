@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/fragment_navigation_drawer"></include>
 
         <SearchView
             android:id="@+id/searchid"

@@ -7,12 +7,15 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <android.support.constraint.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/main_menu_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/blue">
+        android:layout_height="match_parent">
 
-    </android.support.constraint.ConstraintLayout>
+    </FrameLayout>
+
+    <include layout="@layout/fragment_navigation_drawer"></include>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerid"

@@ -24,12 +24,12 @@ import com.example.khaledsabry.entertainment.R;
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+
     TmdbController tmdbController;
     SearchView searchView;
     int value = 1;
     int currentvalue = 2;
+
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
         return fragment;
@@ -42,24 +42,8 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_search, container, false);
 
-        drawerLayout = v.findViewById(R.id.drawer_layout);
-        navigationView = v.findViewById(R.id.nav_view);
         searchView = v.findViewById(R.id.searchid);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
 
-                if(id== R.id.a)
-                    Toast.makeText(getContext(),"a",Toast.LENGTH_LONG).show();
-                else if(id== R.id.b)
-                    Toast.makeText(getContext(),"b",Toast.LENGTH_LONG).show();
-
-                drawerLayout.closeDrawer(GravityCompat.START,true);
-                return true;
-
-            }
-        });
         tmdbController = new TmdbController();
 
 
@@ -72,7 +56,7 @@ public class SearchFragment extends Fragment {
                 tmdbController.search(query, new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid,SearchResult.newInstance(searchItems)).commit();
+                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid, SearchResult.newInstance(searchItems)).commit();
                     }
                 });
                 return true;
@@ -83,7 +67,7 @@ public class SearchFragment extends Fragment {
                 tmdbController.search(query, new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid,SearchResult.newInstance(searchItems)).commit();
+                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid, SearchResult.newInstance(searchItems)).commit();
                     }
                 });
 
@@ -91,7 +75,6 @@ public class SearchFragment extends Fragment {
                 return true;
             }
         });
-
 
 
         return v;

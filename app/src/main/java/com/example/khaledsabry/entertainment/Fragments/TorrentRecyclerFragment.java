@@ -1,38 +1,24 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.TorrentAdapter;
 import com.example.khaledsabry.entertainment.Controllers.TorrentController;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
-import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
-import java.security.Provider;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class TorrentRecyclerFragment extends Fragment {
@@ -112,7 +98,7 @@ public class TorrentRecyclerFragment extends Fragment {
         String searchString = searchName + mresolution + mquality + mcodec + mprovider+mfeatures;
         if (!search.equals(searchString)) {
             search = searchString;
-            torrentController.downloadSkyTorrent(search, new OnTorrentSearchSuccess() {
+            torrentController.downloadSkyTorrent(search, new OnWebSuccess.OnTorrentSearch() {
                 @Override
                 public void onSuccess(ArrayList<Torrent> torrents) {
 
@@ -256,7 +242,7 @@ public class TorrentRecyclerFragment extends Fragment {
         customSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                torrentController.downloadSkyTorrent(query, new OnTorrentSearchSuccess() {
+                torrentController.downloadSkyTorrent(query, new OnWebSuccess.OnTorrentSearch() {
                     @Override
                     public void onSuccess(ArrayList<Torrent> torrents) {
                         setObjects(torrents);

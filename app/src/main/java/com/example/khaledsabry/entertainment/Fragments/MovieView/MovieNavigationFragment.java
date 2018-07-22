@@ -69,10 +69,10 @@ getActivity().getSupportFragmentManager().popBackStack();
         else if (item.getItemId() == R.id.navigation_download)
             loadFragment(TorrentRecyclerFragment.newInstance(movie.getTitle()+ " "+movie.getYear()));
             //
-         //   loadFragment(ReviewFragment.newInstance(movieId));
+         //   loadFragmentWithReturn(ReviewFragment.newInstance(movieId));
         else if (item.getItemId() == R.id.navigation_reco_simi)
             loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
-           // loadFragment(RecommendedAndSimilarFragment.newInstance(movieId));
+           // loadFragmentWithReturn(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;
     }
 

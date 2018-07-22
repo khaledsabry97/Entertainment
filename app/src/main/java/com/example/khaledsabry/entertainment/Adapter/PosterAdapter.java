@@ -41,7 +41,7 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().loadFragment(R.id.mainContainer, FullPoster.newInstance(posterUrl));
+                MainActivity.getActivity().loadFragmentWithReturn(R.id.mainContainer, FullPoster.newInstance(posterUrl));
             }
         });
 

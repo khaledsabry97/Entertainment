@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Controllers.TorrentController;
-import com.example.khaledsabry.entertainment.Interfaces.OnTorrentSearchSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
 import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.Items.Season;
