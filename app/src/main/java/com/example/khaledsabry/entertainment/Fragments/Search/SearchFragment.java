@@ -15,6 +15,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
@@ -27,6 +28,8 @@ public class SearchFragment extends Fragment {
     NavigationView navigationView;
     TmdbController tmdbController;
     SearchView searchView;
+    int value = 1;
+    int currentvalue = 2;
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
         return fragment;
@@ -65,6 +68,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                ApiConnections.getInstance().stopConnection();
                 tmdbController.search(query, new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -56,6 +57,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Functions.stopConnectionsAndStartImageGlide();
         MovieNavigationFragment.id = item.getItemId();
         if (item.getItemId() == R.id.navigation_home) {
             loadFragment(MovieMainFragment.newInstance(movieId));

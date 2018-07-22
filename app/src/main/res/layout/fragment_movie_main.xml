@@ -18,7 +18,8 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.5">
+            android:layout_weight="1.5"
+            android:background="@drawable/blue">
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPagerid"
@@ -49,7 +50,8 @@
             android:id="@+id/sideid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/blue">
 
 
             <LinearLayout
@@ -98,25 +100,21 @@
 
                         <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="150dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp">
 
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/overviewID"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp"
+                                android:autoSizeTextType="none"
+                                android:background="@drawable/round"
+                                android:fontFamily="@font/carterone"
+                                android:textColor="@color/cardview_light_background"
+                                android:textSize="17sp" />
 
-                                <TextView
-                                    android:id="@+id/overviewID"
-                                    style="@style/TextNormal"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:background="@drawable/round"
-                                    android:maxLines="6"
-                                    android:textColor="@color/cardview_light_background" />
-                            </LinearLayout>
                         </ScrollView>
 
                     </LinearLayout>

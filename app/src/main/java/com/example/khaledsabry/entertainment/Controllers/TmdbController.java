@@ -8,6 +8,7 @@ import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSeasonSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnTvList;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Tv;
@@ -229,7 +230,133 @@ public class TmdbController {
 
 
 
+    public void getMoviesNowPlaying(final OnMovieList listener) {
+        movieGetDetails = "movie/now_playing";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+                listener.onMovieList(controller.getMovieNowPlaying(jsonObject));
+
+            }
+        });
 
 
+    }
+
+    public void getMoviesPopular(final OnMovieList listener) {
+        movieGetDetails = "movie/popular";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onMovieList(controller.getMoviePopular(jsonObject));
+
+            }
+        });
+
+
+    }
+
+
+    public void getMoviesTopRated(final OnMovieList listener) {
+        movieGetDetails = "movie/top_rated";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onMovieList(controller.getMovieTopRated(jsonObject));
+
+            }
+        });
+
+
+    }
+
+    public void getMoviesUpComing(final OnMovieList listener) {
+        movieGetDetails = "movie/upcoming";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onMovieList(controller.getMovieUpComing(jsonObject));
+
+            }
+        });
+
+
+    }
+
+
+    public void getTvOnAir(final OnTvList listener) {
+        movieGetDetails = "tv/on_the_air";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+                listener.onSuccess(controller.getTvOnAir(jsonObject));
+
+            }
+        });
+    }
+
+    public void getTvAirToday(final OnTvList listener) {
+        movieGetDetails = "tv/airing_today";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getTvAiringToday(jsonObject));
+
+            }
+        });
+    }
+
+
+
+    public void getTvPopular(final OnTvList listener) {
+        movieGetDetails = "tv/popular";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+                listener.onSuccess(controller.getTvPopular(jsonObject));
+
+            }
+        });
+    }
+
+    public void getTvTopRated(final OnTvList listener) {
+        movieGetDetails = "tv/top_rated";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+                listener.onSuccess(controller.getTvTopRated(jsonObject));
+
+            }
+        });
+    }
+
+
+
+
+    public void getArtistPopular(final OnArtistDataSuccess.List listener) {
+        movieGetDetails = "person/popular";
+        String URL = makeBaseUrl(movieGetDetails);
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getArtistPopular(jsonObject));
+
+            }
+        });
+
+
+    }
 
 }

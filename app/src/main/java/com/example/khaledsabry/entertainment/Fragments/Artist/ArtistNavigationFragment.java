@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.R;
 
@@ -57,6 +58,8 @@ public class ArtistNavigationFragment extends Fragment implements BottomNavigati
 
 @Override
 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    Functions.stopConnectionsAndStartImageGlide();
+
     ArtistNavigationFragment.id = item.getItemId();
         if (id==backButtonid)
             getActivity().getSupportFragmentManager().popBackStack();

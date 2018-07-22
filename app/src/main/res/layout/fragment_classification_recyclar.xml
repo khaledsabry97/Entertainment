@@ -1,0 +1,58 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.khaledsabry.entertainment.Fragments.MainMenu.ClassificationRecyclerFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:background="@drawable/blue">
+
+        <LinearLayout
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/poster"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:src="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextCategoryRound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:text="@string/hello_blank_fragment"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titlebar" />
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

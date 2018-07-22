@@ -22,61 +22,60 @@ import com.example.khaledsabry.entertainment.R;
 
 public class ResultItemViewHolder extends RecyclerView.ViewHolder {
     TextView title;
+    TextView type;
+    TextView date;
     ImageView poster;
+
 
     public ResultItemViewHolder(View itemView) {
         super(itemView);
         title = itemView.findViewById(R.id.titleid);
         poster = itemView.findViewById(R.id.posterid);
+        type = itemView.findViewById(R.id.type);
+        date = itemView.findViewById(R.id.date);
     }
 
-    public void updateUi(final SearchItem searchItem)
-    {
-        if(searchItem.getType().equals("movie"))
-        {
-            if(!searchItem.getMovie().getReleaseDate().equals("")) {
+    public void updateUi(final SearchItem searchItem) {
+        if (searchItem.getType().equals("movie")) {
+            if (!searchItem.getMovie().getReleaseDate().equals("")) {
                 String date = searchItem.getMovie().getReleaseDate();
-                char[] d = new char[4];
-                d[0] = date.charAt(0);
-                d[1] = date.charAt(1);
-                d[2] = date.charAt(2);
-                d[3] = date.charAt(3);
-                date = String.copyValueOf(d);
-
-                title.setText(searchItem.getMovie().getTitle() + " (" + date + ")");
+                date = date.substring(0, 4);
+                this.date.setText(date);
             }
-            else
                 title.setText(searchItem.getMovie().getTitle());
-            ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(),poster);
+            ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(), poster);
 
+            type.setText("Movie");
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, MoviePreviewFragment.newInstance(searchItem.getMovie())).addToBackStack(null).commit();
                 }
             });
-        }
-        else if(searchItem.getType().equals("tv"))
-        {
-           title.setText(searchItem.getTv().getTitle());
-            ImageController.putImageLowQuality(searchItem.getTv().getPosterImage(),poster);
+        } else if (searchItem.getType().equals("tv")) {
+            if (!searchItem.getTv().getFirstAirDate().equals("")) {
+                String date = searchItem.getTv().getFirstAirDate();
+                date = date.substring(0, 4);
+                this.date.setText(date);
+            }
+                title.setText(searchItem.getTv().getTitle());
+
+            type.setText("Tv");
+            ImageController.putImageLowQuality(searchItem.getTv().getPosterImage(), poster);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, TvPreviewFragment.newInstance(searchItem.getTv())).commit();
                 }
             });
-        }
-
-        else if(searchItem.getType().equals("person"))
-        {
+        } else if (searchItem.getType().equals("person")) {
             title.setText(searchItem.getArtist().getName());
-            ImageController.putImageLowQuality(searchItem.getArtist().getPosterImage(),poster);
+            ImageController.putImageLowQuality(searchItem.getArtist().getPosterImage(), poster);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-
+                    type.setText("Artist");
                     TmdbController tmdbController = new TmdbController();
                     tmdbController.getPersonDetails(searchItem.getArtist().getId(), new OnArtistDataSuccess() {
                         @Override

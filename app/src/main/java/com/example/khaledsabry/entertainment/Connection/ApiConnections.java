@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -15,6 +17,7 @@ import com.example.khaledsabry.entertainment.Items.Season;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +31,7 @@ public class ApiConnections {
     private Context context;
     private String url;
     private static final ApiConnections ourInstance = new ApiConnections();
+    private ArrayList<JsonObjectRequest> jsonObjectRequestArrayList = new ArrayList<>();
 
     public String getUrl() {
         return url;
@@ -59,7 +63,7 @@ public class ApiConnections {
 
     public void connect(String url, final OnSuccess listener) {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 JsonObjectRequest.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -72,7 +76,7 @@ public class ApiConnections {
             }
         }
         );
-
+        jsonObjectRequestArrayList.add(jsonObjectRequest);
         Volley.newRequestQueue(context).add(jsonObjectRequest);
 
     }
@@ -108,6 +112,20 @@ public class ApiConnections {
 
         Volley.newRequestQueue(context).add(jsonObjectRequest);
 
+    }
+
+
+    public void stopConnection()
+    {
+        for (JsonObjectRequest jsonObjectRequest:jsonObjectRequestArrayList
+             ) {
+
+            jsonObjectRequest.cancel();
+
+
+
+        }
+        jsonObjectRequestArrayList.clear();
     }
 
 }

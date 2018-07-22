@@ -1167,4 +1167,265 @@ season.setTvTitle(tvTitle);
     }
 
 
+    public ArrayList<Movie> getMovieNowPlaying(JSONObject object)
+    {
+        ArrayList<Movie> movies = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                movies.add(getSearchMovie(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return movies;
+
+
+    }
+
+
+    public ArrayList<Movie> getMoviePopular(JSONObject object)
+    {
+        ArrayList<Movie> movies = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                movies.add(getSearchMovie(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return movies;
+
+
+    }
+
+
+    public ArrayList<Movie> getMovieUpComing(JSONObject object)
+    {
+        ArrayList<Movie> movies = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                movies.add(getSearchMovie(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return movies;
+
+
+    }
+
+    public ArrayList<Movie> getMovieTopRated(JSONObject object)
+    {
+        ArrayList<Movie> movies = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                movies.add(getSearchMovie(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return movies;
+
+
+    }
+
+
+    public ArrayList<Tv> getTvAiringToday(JSONObject object)
+    {
+        ArrayList<Tv> tvs = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                tvs.add(getSearchTv(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return tvs;
+
+
+    }
+
+
+
+    public ArrayList<Tv> getTvOnAir(JSONObject object)
+    {
+        ArrayList<Tv> tvs = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                tvs.add(getSearchTv(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return tvs;
+
+
+    }
+
+
+    public ArrayList<Tv> getTvPopular(JSONObject object)
+    {
+        ArrayList<Tv> tvs = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                tvs.add(getSearchTv(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return tvs;
+
+
+    }
+
+    public ArrayList<Tv> getTvTopRated(JSONObject object)
+    {
+        ArrayList<Tv> tvs = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                tvs.add(getSearchTv(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return tvs;
+
+
+    }
+
+
+    public ArrayList<Artist> getArtistPopular(JSONObject object)
+    {
+        ArrayList<Artist> artists = new ArrayList<>();
+
+        try {
+
+
+            JSONArray jsonArray;
+            int i;
+
+
+            jsonArray = object.getJSONArray(this.results);
+            i = 0;
+
+            while (!jsonArray.isNull(i)) {
+                artists.add(getSearchArtist(jsonArray.getJSONObject(i)));
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return artists;
+
+
+    }
+
+
+
 }

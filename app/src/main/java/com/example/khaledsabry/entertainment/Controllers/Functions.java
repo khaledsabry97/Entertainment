@@ -4,6 +4,10 @@ import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.bumptech.glide.Glide;
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,6 +25,12 @@ public class Functions {
     private Functions() {
     }
 */
+    public static void stopConnectionsAndStartImageGlide()
+    {
+        ApiConnections.getInstance().stopConnection();
+        Glide.with(MainActivity.getActivity()).onStop();
+        Glide.with(MainActivity.getActivity()).onStart();
+    }
     public void movePoster( ViewPager viewPager, PagerAdapter viewPagerAdapter, int delayToStart, int repeatTime) {
         final ViewPager f_viewPager = viewPager;
         final PagerAdapter f_viewPagerAdapter = viewPagerAdapter;

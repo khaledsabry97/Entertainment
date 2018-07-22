@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
-import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
 public class TvNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
@@ -54,6 +54,8 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Functions.stopConnectionsAndStartImageGlide();
+
         TvNavigationFragment.id = item.getItemId();
         if (id==backButtonid)
             getActivity().getSupportFragmentManager().popBackStack();

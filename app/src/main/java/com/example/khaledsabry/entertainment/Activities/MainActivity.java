@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Controllers.TorrentController;
+import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
@@ -56,28 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
 // hide the navigation bar and the status bar
         periodicHideNavigation();
-  //      loadMovieDetailFragment(68735);
 
-        //startActivity(new Intent(this,ANOTHER.class));
-
-
-        /*TorrentController torrentController = new TorrentController();
-        torrentController.downloadSkyTorrent("LEAN ON PETE", new OnTorrentSearchSuccess() {
-            @Override
-            public void onSuccess(ArrayList<TorrentApi> torrent) {
-                ArrayList<TorrentApi> torrents = torrent;
-            }
-        });
-
-        torrentController.getRottenTomatoesRate("inception", new OnMovieDataSuccess() {
-            @Override
-            public void onSuccess(Movie movie) {
-                Movie movie1 = movie;
-            }
-        });
-*/
-       loadFragment(R.id.mainContainer, SearchFragment.newInstance());
-      // loadFragment(R.id.mainContainer, TvNavigationFragment.newInstance(1399,true));
+        loadFragment(R.id.mainContainer, MainMenuFragment.newInstance());
+       //loadFragment(R.id.mainContainer, SearchFragment.newInstance());
 
     }
 
