@@ -130,6 +130,7 @@ public class WebApi {
                         movie.setOverseasBudget(overSeas);
                         movie.setWorldWideBudget(worldWideBudget);
                         movie.setDomesticBudget(domesticBudget);
+                        movie.setReleaseDate(String.valueOf(year));
                         movies.add(movie);
 
                     }
@@ -148,7 +149,8 @@ public class WebApi {
         task.execute();
 
     }
-    public void mojoAllTheTime( final OnWebSuccess.OnMovieList listener) {
+
+    public void mojoAllTheTime(final OnWebSuccess.OnMovieList listener) {
         AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
             @Override
             protected ArrayList<Movie> doInBackground(Void... voids) {
@@ -156,14 +158,12 @@ public class WebApi {
                 org.jsoup.nodes.Document
                         doc = null;
                 try {
-                    doc = Jsoup.connect("http://www.boxofficemojo.com/alltime/world").get();
+                    doc = Jsoup.connect("http://www.boxofficemojo.com/alltime/world/").get();
 
                     if (doc == null)
                         return movies;
                     Elements results = doc.getElementsByTag("tbody");
                     results = results.get(2).getElementsByTag("tr");
-                    results.remove(0);
-                    results.remove(0);
                     results.remove(0);
 
 
@@ -171,16 +171,21 @@ public class WebApi {
                         return movies;
                     for (Element element : results) {
                         Elements attributes = element.getElementsByTag("td");
-                        int position = Integer.valueOf(attributes.get(0).text());
                         String title = attributes.get(1).text();
                         String worldWideBudget = attributes.get(3).text();
                         String domesticBudget = attributes.get(4).text();
                         String overSeas = attributes.get(6).text();
+                        String year = attributes.get(8).text();
+                        if (year.contains("^"))
+                            year = year.replace("^", "");
+
+
                         Movie movie = new Movie();
                         movie.setTitle(title);
                         movie.setOverseasBudget(overSeas);
                         movie.setWorldWideBudget(worldWideBudget);
                         movie.setDomesticBudget(domesticBudget);
+                        movie.setReleaseDate(year);
                         movies.add(movie);
 
                     }
@@ -200,5 +205,57 @@ public class WebApi {
 
     }
 
+
+    public void mojoYearlyBoxOffice(final OnWebSuccess.OnMovieList listener) {
+        AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
+            @Override
+            protected ArrayList<Movie> doInBackground(Void... voids) {
+                ArrayList<Movie> movies = new ArrayList<>();
+                org.jsoup.nodes.Document
+                        doc = null;
+                try {
+                    doc = Jsoup.connect("http://www.boxofficemojo.com/yearly/?view2=worldwide&view=releasedate").get();
+
+                    if (doc == null)
+                        return movies;
+                    Elements results = doc.getElementsByTag("tbody");
+                    results = results.get(2).getElementsByTag("tr");
+                    results.remove(0);
+
+
+                    if (results == null)
+                        return movies;
+                    for (Element element : results) {
+                        Elements attributes = element.getElementsByTag("td");
+                        String year = attributes.get(0).text();
+                        String title = attributes.get(1).text();
+                        String worldWideBudget = attributes.get(2).text();
+
+                        if (year.contains("^"))
+                            year = year.replace("^", "");
+
+
+                        Movie movie = new Movie();
+                        movie.setTitle(title);
+                        movie.setWorldWideBudget(worldWideBudget);
+                        movie.setReleaseDate(year);
+                        movies.add(movie);
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return movies;
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<Movie> movies) {
+                listener.onSuccess(movies);
+
+            }
+        };
+        task.execute();
+
+    }
 
 }

@@ -329,6 +329,8 @@ public class Movie {
     public String getYear()
     {
         String date = releaseDate;
+        if(date == null)
+            return null;
         char[] d = new char[4];
         d[0] = date.charAt(0);
         d[1] = date.charAt(1);

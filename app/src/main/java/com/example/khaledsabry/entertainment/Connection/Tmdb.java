@@ -559,6 +559,30 @@ public class Tmdb {
         return searchItems;
     }
 
+    public ArrayList<SearchItem> getSearchDoneMovie(JSONObject jsonObject) {
+        ArrayList<SearchItem> searchItems = new ArrayList<>();
+
+        try {
+            JSONArray result = jsonObject.getJSONArray(this.results);
+            int i = 0;
+
+            while (!result.isNull(i)) {
+                JSONObject object = result.getJSONObject(i);
+                SearchItem searchItem = new SearchItem();
+                searchItem.setType("Movie");
+                    searchItem.setMovie(getSearchMovie(object));
+                searchItems.add(searchItem);
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return searchItems;
+    }
     private Tv getSearchTv(JSONObject object) {
         Tv tv = new Tv();
         JSONArray jsonArray;

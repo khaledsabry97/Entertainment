@@ -24,7 +24,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
 
     static int movieId;
     static int id = -200;
-   public static Movie movie;
+    public static Movie movie;
 
     public static MovieNavigationFragment newInstance(int movieId, boolean reset) {
         MovieNavigationFragment fragment = new MovieNavigationFragment();
@@ -63,16 +63,18 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
             loadFragment(MovieMainFragment.newInstance(movieId));
 
         } else if (item.getItemId() == R.id.navigation_back)
-getActivity().getSupportFragmentManager().popBackStack();
+            getActivity().getSupportFragmentManager().popBackStack();
         else if (item.getItemId() == R.id.navigation_images)
             loadFragment(ImagesFragment.newInstance(movieId, ImagesFragment.Type.movie));
-        else if (item.getItemId() == R.id.navigation_download)
-            loadFragment(TorrentRecyclerFragment.newInstance(movie.getTitle()+ " "+movie.getYear()));
-            //
-         //   loadFragmentWithReturn(ReviewFragment.newInstance(movieId));
+        else if (item.getItemId() == R.id.navigation_download) {
+            if (movie != null)
+                loadFragment(TorrentRecyclerFragment.newInstance(movie.getTitle() + " " + movie.getYear()));
+        }
+        //
+        //   loadFragmentWithReturn(ReviewFragment.newInstance(movieId));
         else if (item.getItemId() == R.id.navigation_reco_simi)
             loadFragment(YOU.newInstance("aJ7BoNG-r2c"));
-           // loadFragmentWithReturn(RecommendedAndSimilarFragment.newInstance(movieId));
+        // loadFragmentWithReturn(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;
     }
 

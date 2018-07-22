@@ -2,6 +2,7 @@ package com.example.khaledsabry.entertainment.Fragments.MainMenu;
 
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,11 +20,13 @@ import android.widget.Toast;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.MainRecyclersAdapter;
 import com.example.khaledsabry.entertainment.Connection.Tmdb;
+import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvList;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -79,8 +82,20 @@ loadFragment(SearchFragment.newInstance());
             }
         });
 
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
 
-        setMoviesNowPlaying();
+                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setMoviesNowPlaying();
+
+                    }
+                });
+            }
+        });
+   //     setMoviesNowPlaying();
         setMoviesPopular();
         setMoviesTopRated();
         setMoviesUpComing();
@@ -89,6 +104,7 @@ loadFragment(SearchFragment.newInstance());
         setTvOnAir();
         setTvShowToday();
         setArtistPopular();
+        setTopMoviesWorldWideGross(2018);
         return view;
     }
 
@@ -168,7 +184,7 @@ loadFragment(SearchFragment.newInstance());
                 Classification classification = new Classification();
                 classification.setImage(R.drawable.arrowleft);
                 classification.setTitle("UpComing Movies");
-                classification.setSearchItems(movies(movies));
+                classification.setSearchItems(movies(movies,null));
                 adapter.putClassification(classification);
 
             }
@@ -182,7 +198,7 @@ loadFragment(SearchFragment.newInstance());
                 Classification classification = new Classification();
                 classification.setImage(R.drawable.arrowleft);
                 classification.setTitle("Top Movies");
-                classification.setSearchItems(movies(movies));
+                classification.setSearchItems(movies(movies,null));
                 adapter.putClassification(classification);
 
             }
@@ -197,7 +213,7 @@ loadFragment(SearchFragment.newInstance());
                 Classification classification = new Classification();
                 classification.setImage(R.drawable.arrowleft);
                 classification.setTitle("Popular Movies");
-                classification.setSearchItems(movies(movies));
+                classification.setSearchItems(movies(movies,null));
                 adapter.putClassification(classification);
 
             }
@@ -212,7 +228,7 @@ loadFragment(SearchFragment.newInstance());
                Classification classification = new Classification();
                classification.setImage(R.drawable.arrowleft);
                classification.setTitle("Now Playing");
-               classification.setSearchItems(movies(movies));
+               classification.setSearchItems(movies(movies,null));
 
                 adapter.putClassification(classification);
 
@@ -222,13 +238,17 @@ loadFragment(SearchFragment.newInstance());
 
 
 
-    ArrayList<SearchItem> movies(ArrayList<Movie> movies)
+    ArrayList<SearchItem> movies(ArrayList<Movie> movies,String type)
     {
+
         ArrayList<SearchItem> items = new ArrayList<>();
         for (int i = 0 ; i < movies.size();i++)
         {
             SearchItem searchItem = new SearchItem();
+            if(type==null)
             searchItem.setType("movie");
+            else
+                searchItem.setType(type);
             searchItem.setMovie(movies.get(i));
             items.add(searchItem);
         }
@@ -260,5 +280,19 @@ loadFragment(SearchFragment.newInstance());
             items.add(searchItem);
         }
         return items;
+    }
+
+    public void setTopMoviesWorldWideGross(int year) {
+        WebApi.getInstance().mojoWorldWideGross(year, new OnWebSuccess.OnMovieList() {
+            @Override
+            public void onSuccess(ArrayList<Movie> movies) {
+                Classification classification = new Classification();
+                classification.setImage(R.drawable.arrowleft);
+                classification.setTitle("Top Gross in 2018");
+                classification.setSearchItems(movies(movies,"mojomovie"));
+
+                adapter.putClassification(classification);
+            }
+        });
     }
 }

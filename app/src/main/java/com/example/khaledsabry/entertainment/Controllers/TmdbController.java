@@ -1,5 +1,7 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
+import android.support.v4.view.PagerAdapter;
+
 import com.example.khaledsabry.entertainment.Connection.Tmdb;
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
@@ -11,9 +13,12 @@ import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvList;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Tv;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by KhALeD SaBrY on 26-Jun-18.
@@ -359,4 +364,25 @@ public class TmdbController {
 
     }
 
+
+
+    public void getSearchOneMovie(String movieName, String year , final OnMovieDataSuccess listener)
+    {
+        movieGetDetails = "search/movie";
+        String URL = makeBaseUrl(movieGetDetails)+"&query="+movieName;
+        if(year != null)
+            URL+="&year="+year;
+ //URL = URL.replace(' ','%');
+        connection.connect(URL, new OnSuccess() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                ArrayList<SearchItem> searchItems = new ArrayList<>();
+              searchItems.addAll( controller.getSearchDoneMovie(jsonObject));
+if(searchItems.size() == 0)
+    return;
+listener.onSuccess(searchItems.get(0).getMovie());
+
+            }
+        });
+    }
 }

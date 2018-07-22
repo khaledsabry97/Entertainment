@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
+import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
+import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
@@ -42,13 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 // hide the navigation bar and the status bar
         periodicHideNavigation();
-        WebApi.getInstance().mojoAllTheTime(new OnWebSuccess.OnMovieList() {
-            @Override
-            public void onSuccess(ArrayList<Movie> movies) {
-
-            }
-        });
-     //   loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
+    //   loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
     }
 
