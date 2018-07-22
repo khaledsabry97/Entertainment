@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 // hide the navigation bar and the status bar
         periodicHideNavigation();
-loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
-    //   loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+//loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
+       loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
     }
 

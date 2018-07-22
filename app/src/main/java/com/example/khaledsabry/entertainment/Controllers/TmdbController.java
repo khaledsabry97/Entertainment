@@ -18,6 +18,8 @@ import com.example.khaledsabry.entertainment.Items.Tv;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -127,10 +129,11 @@ public class TmdbController {
     }
 
     public void search(String query, final OnSearchSuccess listener) {
+        if(query.equals(""))
+            return;
         movieGetDetails = "search/multi";
         String URL = makeBaseUrl(movieGetDetails)+"&query="+query+"&page=1";
-       // URL = "https://oneom.tk/serial/62";
-        connection.connect(URL, new OnSuccess() {
+connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getSearchDone(jsonObject));
@@ -372,7 +375,6 @@ public class TmdbController {
         String URL = makeBaseUrl(movieGetDetails)+"&query="+movieName;
         if(year != null)
             URL+="&year="+year;
- //URL = URL.replace(' ','%');
         connection.connect(URL, new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {

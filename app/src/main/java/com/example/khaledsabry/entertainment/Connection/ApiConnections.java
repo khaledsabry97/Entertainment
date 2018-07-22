@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -69,7 +70,10 @@ public class ApiConnections {
 
     public void connect(String url, final OnSuccess listener) {
 
-         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+        url = url.replace(" ","%20");
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 JsonObjectRequest.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -83,16 +87,9 @@ public class ApiConnections {
 
             }
         }
-        ){
-             @Override
-             public Map<String, String> getHeaders() throws AuthFailureError {
-                 Map<String, String> header = new LinkedHashMap<String, String>();
-                 header.put("Content-Type", "application/json");
-                 return super.getHeaders();
-             }
-         };
-         jsonObjectRequestArrayList.clear();
+        );
         jsonObjectRequestArrayList.add(jsonObjectRequest);
+
         Volley.newRequestQueue(context).add(jsonObjectRequest);
 
     }
@@ -137,9 +134,6 @@ public class ApiConnections {
              ) {
 
             jsonObjectRequest.cancel();
-
-
-
         }
         jsonObjectRequestArrayList.clear();
     }

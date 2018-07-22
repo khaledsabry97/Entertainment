@@ -44,6 +44,7 @@ public class MainMenuFragment extends Fragment {
     RecyclerView recyclerView;
     TmdbController tmdbController;
     MainRecyclersAdapter adapter;
+
     public static MainMenuFragment newInstance() {
         MainMenuFragment fragment = new MainMenuFragment();
 
@@ -54,16 +55,17 @@ public class MainMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-      View view =  inflater.inflate(R.layout.fragment_main_menu, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
         drawerLayout = view.findViewById(R.id.drawer_layout);
         navigationView = view.findViewById(R.id.nav_view);
-      recyclerView = view.findViewById(R.id.recyclerid);
-tmdbController = new TmdbController();
-         adapter = new MainRecyclersAdapter(new ArrayList<Classification>());
+        recyclerView = view.findViewById(R.id.recyclerid);
+        tmdbController = new TmdbController();
+        adapter = new MainRecyclersAdapter(new ArrayList<Classification>());
         recyclerView.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+recyclerView.setHasFixedSize(true);
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -71,31 +73,19 @@ tmdbController = new TmdbController();
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
 
-                if(id== R.id.searchid)
-loadFragment(SearchFragment.newInstance());
-                else if(id== R.id.b)
-                    Toast.makeText(getContext(),"b",Toast.LENGTH_LONG).show();
+                if (id == R.id.searchid)
+                    loadFragment(SearchFragment.newInstance());
+                else if (id == R.id.b)
+                    Toast.makeText(getContext(), "b", Toast.LENGTH_LONG).show();
 
-                drawerLayout.closeDrawer(GravityCompat.START,true);
+                drawerLayout.closeDrawer(GravityCompat.START, true);
                 return true;
 
             }
         });
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
 
-                MainActivity.getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setMoviesNowPlaying();
-
-                    }
-                });
-            }
-        });
-   //     setMoviesNowPlaying();
+        setMoviesNowPlaying();
         setMoviesPopular();
         setMoviesTopRated();
         setMoviesUpComing();
@@ -108,145 +98,289 @@ loadFragment(SearchFragment.newInstance());
         return view;
     }
 
-    private void loadFragment(Fragment fragment)
-    {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_menu_container,fragment).commit();
+    private void loadFragment(Fragment fragment) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_menu_container, fragment).commit();
     }
+
     private void setArtistPopular() {
-        tmdbController.getArtistPopular(new OnArtistDataSuccess.List() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onSuccess(ArrayList<Artist> artists) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("Popular Artists");
-                classification.setSearchItems(artists(artists));
-                adapter.putClassification(classification);
+            public void run() {
+                tmdbController.getArtistPopular(new OnArtistDataSuccess.List() {
+                    @Override
+                    public void onSuccess(ArrayList<Artist> artists) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Popular Artists");
+                        classification.setSearchItems(artists(artists));
+
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
+
             }
         });
     }
 
     private void setTvShowToday() {
-        tmdbController.getTvAirToday(new OnTvList() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onSuccess(ArrayList<Tv> tvs) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("On Tv Today");
-                classification.setSearchItems(tvs(tvs));
-                adapter.putClassification(classification);
+            public void run() {
+                tmdbController.getTvAirToday(new OnTvList() {
+                    @Override
+                    public void onSuccess(ArrayList<Tv> tvs) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("On Tv Today");
+                        classification.setSearchItems(tvs(tvs));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
             }
         });
+
+
     }
 
     private void setTvOnAir() {
-        tmdbController.getTvOnAir(new OnTvList() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onSuccess(ArrayList<Tv> tvs) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("Tv Series On Air");
-                classification.setSearchItems(tvs(tvs));
-                adapter.putClassification(classification);
+            public void run() {
+
+                tmdbController.getTvOnAir(new OnTvList() {
+                    @Override
+                    public void onSuccess(ArrayList<Tv> tvs) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Tv Series On Air");
+                        classification.setSearchItems(tvs(tvs));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
+
+
             }
         });
+
     }
 
     private void setTvTopRated() {
-        tmdbController.getTvTopRated(new OnTvList() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onSuccess(ArrayList<Tv> tvs) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("Top Rated Tv Series");
-                classification.setSearchItems(tvs(tvs));
-                adapter.putClassification(classification);
+            public void run() {
+
+                tmdbController.getTvTopRated(new OnTvList() {
+                    @Override
+                    public void onSuccess(ArrayList<Tv> tvs) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Top Rated Tv Series");
+                        classification.setSearchItems(tvs(tvs));
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+
+                    }
+                });
+
+
             }
         });
+
     }
 
     private void setTvPopular() {
-        tmdbController.getTvPopular(new OnTvList() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onSuccess(ArrayList<Tv> tvs) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("Popular Tv Series");
-                classification.setSearchItems(tvs(tvs));
-                adapter.putClassification(classification);
+            public void run() {
+                tmdbController.getTvPopular(new OnTvList() {
+                    @Override
+                    public void onSuccess(ArrayList<Tv> tvs) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Popular Tv Series");
+                        classification.setSearchItems(tvs(tvs));
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
+
+
             }
         });
+
     }
 
     private void setMoviesUpComing() {
-        tmdbController.getMoviesUpComing(new OnMovieList() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onMovieList(ArrayList<Movie> movies) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("UpComing Movies");
-                classification.setSearchItems(movies(movies,null));
-                adapter.putClassification(classification);
+            public void run() {
+
+                tmdbController.getMoviesUpComing(new OnMovieList() {
+                    @Override
+                    public void onMovieList(ArrayList<Movie> movies) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("UpComing Movies");
+                        classification.setSearchItems(movies(movies, null));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+
+                    }
+                });
+
 
             }
         });
+
     }
 
     private void setMoviesTopRated() {
-        tmdbController.getMoviesTopRated(new OnMovieList() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onMovieList(ArrayList<Movie> movies) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("Top Movies");
-                classification.setSearchItems(movies(movies,null));
-                adapter.putClassification(classification);
+            public void run() {
+
+                tmdbController.getMoviesTopRated(new OnMovieList() {
+                    @Override
+                    public void onMovieList(ArrayList<Movie> movies) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Top Movies");
+                        classification.setSearchItems(movies(movies, null));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+
+                    }
+                });
+
 
             }
         });
+
     }
 
     private void setMoviesPopular() {
-
-        tmdbController.getMoviesPopular(new OnMovieList() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onMovieList(ArrayList<Movie> movies) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("Popular Movies");
-                classification.setSearchItems(movies(movies,null));
-                adapter.putClassification(classification);
+            public void run() {
 
+
+                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tmdbController.getMoviesPopular(new OnMovieList() {
+                            @Override
+                            public void onMovieList(ArrayList<Movie> movies) {
+                                final Classification classification = new Classification();
+                                classification.setImage(R.drawable.arrowleft);
+                                classification.setTitle("Popular Movies");
+                                classification.setSearchItems(movies(movies, null));
+
+                                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        adapter.putClassification(classification);
+
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                });
             }
         });
+
     }
 
     private void setMoviesNowPlaying() {
-        tmdbController.getMoviesNowPlaying(new OnMovieList() {
+
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onMovieList(ArrayList<Movie> movies) {
+            public void run() {
 
-               Classification classification = new Classification();
-               classification.setImage(R.drawable.arrowleft);
-               classification.setTitle("Now Playing");
-               classification.setSearchItems(movies(movies,null));
+                tmdbController.getMoviesNowPlaying(new OnMovieList() {
+                    @Override
+                    public void onMovieList(ArrayList<Movie> movies) {
 
-                adapter.putClassification(classification);
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Now Playing");
+                        classification.setSearchItems(movies(movies, null));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.putClassification(classification);
+
+
+                            }
+                        });
+                    }
+                });
+
 
             }
         });
+
+
     }
 
 
-
-    ArrayList<SearchItem> movies(ArrayList<Movie> movies,String type)
-    {
+    ArrayList<SearchItem> movies(ArrayList<Movie> movies, String type) {
 
         ArrayList<SearchItem> items = new ArrayList<>();
-        for (int i = 0 ; i < movies.size();i++)
-        {
+        for (int i = 0; i < movies.size(); i++) {
             SearchItem searchItem = new SearchItem();
-            if(type==null)
-            searchItem.setType("movie");
+            if (type == null)
+                searchItem.setType("movie");
             else
                 searchItem.setType(type);
             searchItem.setMovie(movies.get(i));
@@ -255,11 +389,9 @@ loadFragment(SearchFragment.newInstance());
         return items;
     }
 
-    ArrayList<SearchItem> tvs(ArrayList<Tv> tvs)
-    {
+    ArrayList<SearchItem> tvs(ArrayList<Tv> tvs) {
         ArrayList<SearchItem> items = new ArrayList<>();
-        for (int i = 0 ; i < tvs.size();i++)
-        {
+        for (int i = 0; i < tvs.size(); i++) {
             SearchItem searchItem = new SearchItem();
             searchItem.setType("tv");
             searchItem.setTv(tvs.get(i));
@@ -269,11 +401,9 @@ loadFragment(SearchFragment.newInstance());
     }
 
 
-    ArrayList<SearchItem> artists(ArrayList<Artist> artists)
-    {
+    ArrayList<SearchItem> artists(ArrayList<Artist> artists) {
         ArrayList<SearchItem> items = new ArrayList<>();
-        for (int i = 0 ; i < artists.size();i++)
-        {
+        for (int i = 0; i < artists.size(); i++) {
             SearchItem searchItem = new SearchItem();
             searchItem.setType("artist");
             searchItem.setArtist(artists.get(i));
@@ -282,17 +412,29 @@ loadFragment(SearchFragment.newInstance());
         return items;
     }
 
-    public void setTopMoviesWorldWideGross(int year) {
-        WebApi.getInstance().mojoWorldWideGross(year, new OnWebSuccess.OnMovieList() {
+    public void setTopMoviesWorldWideGross(final int year) {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onSuccess(ArrayList<Movie> movies) {
-                Classification classification = new Classification();
-                classification.setImage(R.drawable.arrowleft);
-                classification.setTitle("Top Gross in 2018");
-                classification.setSearchItems(movies(movies,"mojomovie"));
+            public void run() {
+                WebApi.getInstance().mojoWorldWideGross(year, new OnWebSuccess.OnMovieList() {
+                    @Override
+                    public void onSuccess(ArrayList<Movie> movies) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Top Gross in 2018");
+                        classification.setSearchItems(movies(movies, "mojomovie"));
 
-                adapter.putClassification(classification);
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
             }
         });
+
     }
 }
