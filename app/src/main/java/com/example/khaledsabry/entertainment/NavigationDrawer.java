@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 
 
-public class NavigationDrawer extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class NavigationDrawer extends Fragment {
 
     NavigationDrawer navigationDrawer;
     DrawerLayout drawerLayout;
@@ -32,23 +32,23 @@ public class NavigationDrawer extends Fragment implements NavigationView.OnNavig
        View v = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 drawerLayout = v.findViewById(R.id.drawer_layout);
        navigationView = v.findViewById(R.id.nav_view);
-       navigationView.setNavigationItemSelectedListener(this);
+       navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+           @Override
+           public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+               int id = item.getItemId();
+
+               if(id== R.id.a)
+                   Toast.makeText(getContext(),"a",Toast.LENGTH_LONG).show();
+               else if(id== R.id.b)
+                   Toast.makeText(getContext(),"b",Toast.LENGTH_LONG).show();
+
+               drawerLayout.closeDrawer(GravityCompat.START,true);
+               return true;
+
+           }
+       });
         return v;
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if(id== R.id.a)
-            Toast.makeText(getContext(),"a",Toast.LENGTH_LONG).show();
-        else if(id== R.id.b)
-            Toast.makeText(getContext(),"b",Toast.LENGTH_LONG).show();
-
-        drawerLayout.closeDrawer(GravityCompat.START,true);
-        return true;
-
-
-    }
 }

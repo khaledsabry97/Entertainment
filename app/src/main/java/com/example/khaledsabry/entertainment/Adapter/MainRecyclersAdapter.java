@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,8 +15,12 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.ClassificationRecyclerFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Classification;
+import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -43,7 +48,6 @@ public class MainRecyclersAdapter extends RecyclerView.Adapter<MainRecyclersAdap
     public void onBindViewHolder(@NonNull MainRecyclerViewHolder holder, int position) {
         Classification classification = classifications.get(position);
         holder.updateUi(classification);
-        YoYo.with(Techniques.Bounce).playOn(holder.cardView);
     }
 
     @Override
@@ -74,16 +78,53 @@ public class MainRecyclersAdapter extends RecyclerView.Adapter<MainRecyclersAdap
             cardView = itemView.findViewById(R.id.cardview);
         }
 
-        void updateUi(Classification classification) {
-            //  MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.recyclerlayout, ClassificationRecyclerFragment.newInstance(classification)).commit();
+        void updateUi(final Classification classification) {
+
+                  setObjects(classification);
 
 
+
+        }
+
+
+
+        private void setObjects(Classification classification)
+        {
             title.setText(classification.getTitle());
             poster.setImageResource(classification.getImage());
             ClassificationAdapter adapter = new ClassificationAdapter(classification.getSearchItems());
             recyclerView.setAdapter(adapter);
+            recyclerView.setHasFixedSize(true);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+            linearLayoutManager.setSmoothScrollbarEnabled(true);
             recyclerView.setLayoutManager(linearLayoutManager);
         }
+
+       private ArrayList<SearchItem> movies(ArrayList<Movie> movies, String type, Integer limit) {
+
+            ArrayList<SearchItem> items = new ArrayList<>();
+            int size;
+            if (limit == null)
+                size = movies.size();
+            else
+            {
+                if (limit > movies.size())
+                    size = movies.size();
+                else
+                    size = limit;
+            }
+
+            for (int i = 0; i < size; i++) {
+                SearchItem searchItem = new SearchItem();
+                if (type == null)
+                    searchItem.setType("movie");
+                else
+                    searchItem.setType(type);
+                searchItem.setMovie(movies.get(i));
+                items.add(searchItem);
+            }
+            return items;
+        }
+
     }
 }

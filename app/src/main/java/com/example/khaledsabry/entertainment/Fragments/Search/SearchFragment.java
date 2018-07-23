@@ -64,6 +64,8 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String query) {
+                ApiConnections.getInstance().stopConnection();
+
                 tmdbController.search(query, new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {

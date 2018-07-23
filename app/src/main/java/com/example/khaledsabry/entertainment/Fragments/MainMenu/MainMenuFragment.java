@@ -32,6 +32,7 @@ import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Tv;
+import com.example.khaledsabry.entertainment.NavigationDrawer;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -65,9 +66,7 @@ public class MainMenuFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-recyclerView.setHasFixedSize(true);
-
-
+        recyclerView.setHasFixedSize(true);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -95,7 +94,62 @@ recyclerView.setHasFixedSize(true);
         setTvShowToday();
         setArtistPopular();
         setTopMoviesWorldWideGross(2018);
+        setBoxOffice();
+        setDailyBoxOffice();
         return view;
+    }
+
+    private void setDailyBoxOffice() {
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                WebApi.getInstance().mojoDaily(null, new OnWebSuccess.OnMovieList() {
+                    @Override
+                    public void onSuccess(ArrayList<Movie> movies) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Today Box Office");
+                        classification.setSearchItems(movies(movies, "mojomovie", 10));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    private void setBoxOffice() {
+
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                WebApi.getInstance().mojoBoxOffice(new OnWebSuccess.OnMovieList() {
+                    @Override
+                    public void onSuccess(ArrayList<Movie> movies) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Box Office");
+                        classification.setSearchItems(movies(movies, "mojomovie", 10));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     private void loadFragment(Fragment fragment) {
@@ -256,7 +310,7 @@ recyclerView.setHasFixedSize(true);
                         final Classification classification = new Classification();
                         classification.setImage(R.drawable.arrowleft);
                         classification.setTitle("UpComing Movies");
-                        classification.setSearchItems(movies(movies, null));
+                        classification.setSearchItems(movies(movies, null, null));
 
                         MainActivity.getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -286,7 +340,7 @@ recyclerView.setHasFixedSize(true);
                         final Classification classification = new Classification();
                         classification.setImage(R.drawable.arrowleft);
                         classification.setTitle("Top Movies");
-                        classification.setSearchItems(movies(movies, null));
+                        classification.setSearchItems(movies(movies, null, null));
 
                         MainActivity.getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -321,7 +375,7 @@ recyclerView.setHasFixedSize(true);
                                 final Classification classification = new Classification();
                                 classification.setImage(R.drawable.arrowleft);
                                 classification.setTitle("Popular Movies");
-                                classification.setSearchItems(movies(movies, null));
+                                classification.setSearchItems(movies(movies, null, null));
 
                                 MainActivity.getActivity().runOnUiThread(new Runnable() {
                                     @Override
@@ -353,7 +407,7 @@ recyclerView.setHasFixedSize(true);
                         final Classification classification = new Classification();
                         classification.setImage(R.drawable.arrowleft);
                         classification.setTitle("Now Playing");
-                        classification.setSearchItems(movies(movies, null));
+                        classification.setSearchItems(movies(movies, null, null));
 
                         MainActivity.getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -374,10 +428,20 @@ recyclerView.setHasFixedSize(true);
     }
 
 
-    ArrayList<SearchItem> movies(ArrayList<Movie> movies, String type) {
+    ArrayList<SearchItem> movies(ArrayList<Movie> movies, String type, Integer limit) {
 
         ArrayList<SearchItem> items = new ArrayList<>();
-        for (int i = 0; i < movies.size(); i++) {
+        int size;
+        if (limit == null)
+            size = movies.size();
+        else {
+            if (limit > movies.size())
+                size = movies.size();
+            else
+                size = limit;
+        }
+
+        for (int i = 0; i < size; i++) {
             SearchItem searchItem = new SearchItem();
             if (type == null)
                 searchItem.setType("movie");
@@ -413,7 +477,7 @@ recyclerView.setHasFixedSize(true);
     }
 
     public void setTopMoviesWorldWideGross(final int year) {
-        AsyncTask.execute(new Runnable() {
+ AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 WebApi.getInstance().mojoWorldWideGross(year, new OnWebSuccess.OnMovieList() {
@@ -422,7 +486,7 @@ recyclerView.setHasFixedSize(true);
                         final Classification classification = new Classification();
                         classification.setImage(R.drawable.arrowleft);
                         classification.setTitle("Top Gross in 2018");
-                        classification.setSearchItems(movies(movies, "mojomovie"));
+                        classification.setSearchItems(movies(movies, "mojomovie", 10));
 
                         MainActivity.getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -435,6 +499,5 @@ recyclerView.setHasFixedSize(true);
                 });
             }
         });
-
     }
 }

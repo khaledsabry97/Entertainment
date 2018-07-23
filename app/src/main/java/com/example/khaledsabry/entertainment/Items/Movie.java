@@ -32,6 +32,20 @@ public class Movie {
     private String domesticBudget;
     private String overseasBudget;
     private String worldWideBudget;
+    private String noWeeksInBoxOffice;
+    private String Budget;
+
+    public String getNoWeeksInBoxOffice() {
+        return noWeeksInBoxOffice;
+    }
+
+    public void setNoWeeksInBoxOffice(String noWeeksInBoxOffice) {
+        this.noWeeksInBoxOffice = noWeeksInBoxOffice;
+    }
+
+    public void setBudget(String budget) {
+        Budget = budget;
+    }
 
     public String getOverseasBudget() {
         return overseasBudget;

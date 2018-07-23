@@ -11,6 +11,7 @@ import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.NavigationDrawer;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         periodicHideNavigation();
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
        loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+      //  loadFragmentNoReturn(R.id.mainContainer, NavigationDrawer.newInstance());
 
     }
 

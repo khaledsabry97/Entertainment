@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 22-Jul-18.
  */
 
-public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAdapter.ClassificationViewHolder>  {
+public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAdapter.ClassificationViewHolder> {
 
     ArrayList<SearchItem> searchItems = new ArrayList<>();
 
@@ -37,7 +37,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
     @NonNull
     @Override
     public ClassificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(MainActivity.getActivity()).inflate(R.layout.cardview_classificationitem,parent,false);
+        View view = LayoutInflater.from(MainActivity.getActivity()).inflate(R.layout.cardview_classificationitem, parent, false);
         return new ClassificationViewHolder(view);
     }
 
