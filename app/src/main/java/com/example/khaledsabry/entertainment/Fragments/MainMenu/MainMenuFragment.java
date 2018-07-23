@@ -1,7 +1,6 @@
 package com.example.khaledsabry.entertainment.Fragments.MainMenu;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,9 +18,10 @@ import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.MainRecyclersAdapter;
-import com.example.khaledsabry.entertainment.Connection.Tmdb;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
@@ -32,7 +32,6 @@ import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Tv;
-import com.example.khaledsabry.entertainment.NavigationDrawer;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -45,6 +44,9 @@ public class MainMenuFragment extends Fragment {
     RecyclerView recyclerView;
     TmdbController tmdbController;
     MainRecyclersAdapter adapter;
+
+
+    int search = R.id.searchid;
 
     public static MainMenuFragment newInstance() {
         MainMenuFragment fragment = new MainMenuFragment();
@@ -60,6 +62,7 @@ public class MainMenuFragment extends Fragment {
         drawerLayout = view.findViewById(R.id.drawer_layout);
         navigationView = view.findViewById(R.id.nav_view);
         recyclerView = view.findViewById(R.id.recyclerid);
+
         tmdbController = new TmdbController();
         adapter = new MainRecyclersAdapter(new ArrayList<Classification>());
         recyclerView.setAdapter(adapter);
@@ -67,16 +70,22 @@ public class MainMenuFragment extends Fragment {
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-
-                if (id == R.id.searchid)
+                Functions.stopConnectionsAndStartImageGlide();
+                if (id == R.id.home)
+                    MainActivity.loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+                else if (id == R.id.searchid)
                     loadFragment(SearchFragment.newInstance());
-                else if (id == R.id.b)
-                    Toast.makeText(getContext(), "b", Toast.LENGTH_LONG).show();
+                else if (id == R.id.boxofficeid)
+                    loadFragment(BoxOfficeFragment.newInstance());
+                else if (id == R.id.topgross)
+                    Toast.makeText(getContext(), "boxofficeid", Toast.LENGTH_LONG).show();
 
+                navigationView.setCheckedItem(id);
                 drawerLayout.closeDrawer(GravityCompat.START, true);
                 return true;
 
@@ -428,6 +437,32 @@ public class MainMenuFragment extends Fragment {
     }
 
 
+    public void setTopMoviesWorldWideGross(final int year) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                WebApi.getInstance().mojoWorldWideGross(year, new OnWebSuccess.OnMovieList() {
+                    @Override
+                    public void onSuccess(ArrayList<Movie> movies) {
+                        final Classification classification = new Classification();
+                        classification.setImage(R.drawable.arrowleft);
+                        classification.setTitle("Top Gross in 2018");
+                        classification.setSearchItems(movies(movies, "mojomovie", 10));
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.putClassification(classification);
+
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+
     ArrayList<SearchItem> movies(ArrayList<Movie> movies, String type, Integer limit) {
 
         ArrayList<SearchItem> items = new ArrayList<>();
@@ -476,28 +511,4 @@ public class MainMenuFragment extends Fragment {
         return items;
     }
 
-    public void setTopMoviesWorldWideGross(final int year) {
- AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                WebApi.getInstance().mojoWorldWideGross(year, new OnWebSuccess.OnMovieList() {
-                    @Override
-                    public void onSuccess(ArrayList<Movie> movies) {
-                        final Classification classification = new Classification();
-                        classification.setImage(R.drawable.arrowleft);
-                        classification.setTitle("Top Gross in 2018");
-                        classification.setSearchItems(movies(movies, "mojomovie", 10));
-
-                        MainActivity.getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                adapter.putClassification(classification);
-
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }
 }

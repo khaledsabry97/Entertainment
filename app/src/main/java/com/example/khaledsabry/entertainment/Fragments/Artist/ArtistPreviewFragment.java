@@ -37,13 +37,13 @@ fragment.artist = artist;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_artist_preview, container, false);
 
-        title = view.findViewById(R.id.titleid);
+        title = view.findViewById(R.id.title);
         rate = view.findViewById(R.id.rateid);
 
         birthDate = view.findViewById(R.id.birthdayid);
 
         biography = view.findViewById(R.id.biographyid);
-        poster = view.findViewById(R.id.posterid);
+        poster = view.findViewById(R.id.posterrelativelayout);
         placeOfBirth = view.findViewById(R.id.placeofbirthid);
 
         setObjects();

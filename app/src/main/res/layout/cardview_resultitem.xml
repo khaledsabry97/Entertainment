@@ -14,7 +14,7 @@
         android:background="@drawable/blue">
 
         <TextView
-            android:id="@+id/titleid"
+            android:id="@+id/title"
             style="@style/TextNormal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:textAlignment="viewStart"
             android:textColor="@color/cardview_light_background"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/posterid"
+            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -39,8 +39,8 @@
             android:textAlignment="viewStart"
             android:textColor="@color/cardview_light_background"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/posterid"
-            app:layout_constraintTop_toBottomOf="@+id/titleid" />
+            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
             android:id="@+id/type"
@@ -55,10 +55,10 @@
             android:textColor="@color/cardview_light_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/posterid" />
+            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout" />
 
         <ImageView
-            android:id="@+id/posterid"
+            android:id="@+id/posterrelativelayout"
             android:layout_width="80dp"
             android:layout_height="100dp"
             android:layout_weight="1"

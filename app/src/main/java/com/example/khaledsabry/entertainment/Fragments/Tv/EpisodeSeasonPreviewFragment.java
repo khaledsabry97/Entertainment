@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
 import com.example.khaledsabry.entertainment.Items.Episode;
@@ -53,13 +52,13 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_episode_preview, container, false);
-        title = view.findViewById(R.id.titleid);
+        title = view.findViewById(R.id.title);
         rate = view.findViewById(R.id.rateid);
 
         airDate = view.findViewById(R.id.airdateid);
 
         overView = view.findViewById(R.id.overviewid);
-        poster = view.findViewById(R.id.posterid);
+        poster = view.findViewById(R.id.posterrelativelayout);
         download = view.findViewById(R.id.downloadid);
         name = view.findViewById(R.id.episodename);
         overviewLayout = view.findViewById(R.id.overviewlayout);

@@ -37,4 +37,29 @@
     </style>
 
 
+
+
+    <style name="TextHeader">
+        <item name="android:fontFamily">@font/carterone</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/size_main_title</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
+
+
+    </style>
+
+
+
+    <style name="TextCategory">
+    <item name="android:fontFamily">@font/carterone</item>
+    <item name="android:autoSizeTextType">uniform</item>
+    <item name="android:lines">1</item>
+    <item name="android:textSize">@dimen/size_main_category</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:textColor">@color/cardview_light_background</item>
+    </style>
+
+
 </resources>

@@ -41,8 +41,8 @@ TmdbController tmdbController = new TmdbController();
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_movie, container, false);
-        poster = view.findViewById(R.id.posterid);
-        title = view.findViewById(R.id.titleid);
+        poster = view.findViewById(R.id.posterrelativelayout);
+        title = view.findViewById(R.id.title);
         rate = view.findViewById(R.id.rateid);
         overView = view.findViewById(R.id.contentid);
         releaseDate = view.findViewById(R.id.releaseDateid);

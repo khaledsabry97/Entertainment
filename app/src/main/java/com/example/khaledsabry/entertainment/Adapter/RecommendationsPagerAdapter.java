@@ -34,7 +34,7 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.recommendations, container, false);
 
         final Movie movie = movies.get(position);
-        ImageView poster = view.findViewById(R.id.posterid);
+        ImageView poster = view.findViewById(R.id.posterrelativelayout);
         TextView rate = view.findViewById(R.id.rateid);
 
         ImageController.putImageMidQuality(movie.getPosterImage(), poster);

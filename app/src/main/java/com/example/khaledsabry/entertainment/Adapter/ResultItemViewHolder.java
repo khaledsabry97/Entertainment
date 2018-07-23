@@ -29,8 +29,8 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
 
     public ResultItemViewHolder(View itemView) {
         super(itemView);
-        title = itemView.findViewById(R.id.titleid);
-        poster = itemView.findViewById(R.id.posterid);
+        title = itemView.findViewById(R.id.title);
+        poster = itemView.findViewById(R.id.posterrelativelayout);
         type = itemView.findViewById(R.id.type);
         date = itemView.findViewById(R.id.date);
     }

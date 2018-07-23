@@ -10,7 +10,7 @@
         android:background="@drawable/background3">
 
         <ImageView
-            android:id="@+id/posterid"
+            android:id="@+id/posterrelativelayout"
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:layout_marginBottom="600dp"
@@ -19,13 +19,13 @@
             android:layout_marginTop="8dp"
             android:scaleType="fitXY"
             android:src="@drawable/batman"
-            app:layout_constraintBottom_toTopOf="@+id/titleid"
+            app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/titleid"
+            android:id="@+id/title"
             android:background="@drawable/round"
 
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
             android:textColor="@color/cardview_light_background"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/posterid" />
+            app:layout_constraintTop_toBottomOf="@id/posterrelativelayout" />
 
         <TextView
             android:id="@+id/rateid"
@@ -52,7 +52,7 @@
             android:textColor="@color/cardview_light_background"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/posterid" />
+            app:layout_constraintTop_toBottomOf="@id/posterrelativelayout" />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
@@ -66,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleid">
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
             <TextView
                 android:id="@+id/overviewid"

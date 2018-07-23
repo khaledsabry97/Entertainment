@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by KhALeD SaBrY on 26-Jun-18.
@@ -384,6 +385,28 @@ if(searchItems.size() == 0)
     return;
 listener.onSuccess(searchItems.get(0).getMovie());
 
+            }
+        });
+    }
+
+
+
+    public void getGenresFromIds(final Movie movie , final OnMovieDataSuccess listener)
+    {
+        getGenres(new OnMovieDataSuccess() {
+            @Override
+            public void onSuccess(Movie movie1) {
+
+                HashMap<Integer,String> map = new HashMap<>();
+                for(int i = 0 ;i < movie1.getGenres().size();i++)
+                {
+                    map.put(movie1.getGenres().get(i).getId(),movie1.getGenres().get(i).getName());
+                }
+                for(int i =0;i<movie.getGenres().size();i++)
+                {
+                    movie.getGenres().get(i).setName(map.get(movie.getGenres().get(i).getId()));
+                }
+listener.onSuccess(movie);
             }
         });
     }

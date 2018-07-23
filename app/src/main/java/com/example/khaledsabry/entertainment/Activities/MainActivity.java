@@ -6,16 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
-import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
-import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.NavigationDrawer;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 

@@ -14,7 +14,7 @@
         android:background="@drawable/background">
 
         <ImageView
-            android:id="@+id/poster"
+            android:id="@+id/posterrelativelayout"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="2dp"
@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerid"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/poster"
+            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
@@ -51,7 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poster"
+            app:layout_constraintTop_toBottomOf="@+id/posterrelativelayout"
             tools:listitem="@layout/cardview_classificationitem" />
 
         <android.support.constraint.Guideline

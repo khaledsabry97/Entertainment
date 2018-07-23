@@ -1,6 +1,5 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,16 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Connection.WebApi;
-import com.example.khaledsabry.entertainment.Fragments.MainMenu.ClassificationRecyclerFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
@@ -73,7 +66,7 @@ public class MainRecyclersAdapter extends RecyclerView.Adapter<MainRecyclersAdap
 
             recyclerView = itemView.findViewById(R.id.recyclerid);
             title = itemView.findViewById(R.id.title);
-            poster = itemView.findViewById(R.id.poster);
+            poster = itemView.findViewById(R.id.posterrelativelayout);
 
             cardView = itemView.findViewById(R.id.cardview);
         }

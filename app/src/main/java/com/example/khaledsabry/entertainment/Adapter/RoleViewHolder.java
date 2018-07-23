@@ -25,8 +25,8 @@ public class RoleViewHolder extends RecyclerView.ViewHolder {
 
     public RoleViewHolder(View itemView) {
         super(itemView);
-        title = itemView.findViewById(R.id.titleid);
-        poster = itemView.findViewById(R.id.posterid);
+        title = itemView.findViewById(R.id.title);
+        poster = itemView.findViewById(R.id.posterrelativelayout);
 
     }
 

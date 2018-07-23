@@ -13,10 +13,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.ClassificationAdapter;
 import com.example.khaledsabry.entertainment.Items.Classification;
-import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
-
-import java.util.ArrayList;
 
 
 public class ClassificationRecyclerFragment extends Fragment {
@@ -42,7 +39,7 @@ public class ClassificationRecyclerFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerid);
         title = view.findViewById(R.id.title);
-        poster = view.findViewById(R.id.poster);
+        poster = view.findViewById(R.id.posterrelativelayout);
 
 title.setText(classifications.getTitle());
 poster.setImageResource(classifications.getImage());

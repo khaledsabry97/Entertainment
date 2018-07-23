@@ -23,7 +23,7 @@
                 android:layout_weight="1.5">
 
                 <ImageView
-                    android:id="@+id/posterid"
+                    android:id="@+id/posterrelativelayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"></ImageView>
@@ -48,8 +48,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/posterid"
-                    app:layout_constraintEnd_toEndOf="@+id/posterid"
+                    app:layout_constraintBottom_toBottomOf="@+id/posterrelativelayout"
+                    app:layout_constraintEnd_toEndOf="@+id/posterrelativelayout"
                     app:layout_constraintStart_toStartOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
@@ -67,7 +67,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/titleid"
+                        android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="1"

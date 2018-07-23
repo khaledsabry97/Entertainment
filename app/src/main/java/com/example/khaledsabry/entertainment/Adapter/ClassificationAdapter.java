@@ -15,7 +15,6 @@ import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistNavigationFr
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Tv.TvNavigationFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
-import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
@@ -62,7 +61,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
 
         public ClassificationViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.poster);
+            image = itemView.findViewById(R.id.posterrelativelayout);
             title = itemView.findViewById(R.id.title);
             view = itemView;
         }

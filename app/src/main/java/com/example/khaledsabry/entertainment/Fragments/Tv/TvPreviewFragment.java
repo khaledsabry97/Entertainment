@@ -11,9 +11,6 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
-import com.example.khaledsabry.entertainment.Items.Episode;
-import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
@@ -41,13 +38,13 @@ public class TvPreviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_preview, container, false);
-        title = view.findViewById(R.id.titleid);
+        title = view.findViewById(R.id.title);
         rate = view.findViewById(R.id.rateid);
 
         airDate = view.findViewById(R.id.airdateid);
 
         overView = view.findViewById(R.id.overviewid);
-        poster = view.findViewById(R.id.posterid);
+        poster = view.findViewById(R.id.posterrelativelayout);
         download = view.findViewById(R.id.downloadid);
 
 

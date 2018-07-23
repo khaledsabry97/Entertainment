@@ -3,7 +3,7 @@
 
     <group >
         <item
-            android:id="@+id/a"
+            android:id="@+id/home"
             android:title="Home" />
 
         <item android:id="@+id/searchid"
@@ -13,10 +13,21 @@
 
 
     <item android:title="hello">
-        <group>
+        <menu>
             <item
                 android:id="@+id/b"
                 android:title="Item" />
-        </group>
+
+            <item
+                android:id="@+id/boxofficeid"
+                android:title="Box Office"></item>
+            <item
+                android:id="@+id/todayearnings"
+                android:title="Today Revenue"></item>
+            <item
+                android:id="@+id/topgross"
+                android:title="Top Movies Earnings"></item>
+
+        </menu>
     </item>
 </menu>
