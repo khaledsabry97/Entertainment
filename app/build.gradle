@@ -56,4 +56,5 @@ dependencies {
     implementation 'jp.hamcheesedev:outlinedtextview:0.1.0'
 
 
+
 }

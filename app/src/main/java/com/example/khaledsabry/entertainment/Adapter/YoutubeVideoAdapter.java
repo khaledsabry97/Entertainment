@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
-import com.example.khaledsabry.entertainment.Fragments.Youtube;
+import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
@@ -68,7 +68,7 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
                     @Override
                     public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
                         //print or show error when thumbnail load failed
-                        Log.e(TAG, "Youtube Thumbnail Error");
+                        Log.e(TAG, "YoutubeFragment Thumbnail Error");
                     }
                 });
             }
@@ -76,7 +76,7 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
             @Override
             public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
                 //print or show error when initialization failed
-                Log.e(TAG, "Youtube Initialization Failure");
+                Log.e(TAG, "YoutubeFragment Initialization Failure");
 
             }
         });
@@ -121,7 +121,7 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
                 @Override
                 public void onClick(View v) {
                     setSelectedPosition(position);
-                    Youtube.youTubePlayer.cueVideo(videoId);
+                    YoutubeFragment.youTubePlayer.cueVideo(videoId);
                 }
             });
 
