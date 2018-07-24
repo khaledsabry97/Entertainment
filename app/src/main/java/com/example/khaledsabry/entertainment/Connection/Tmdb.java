@@ -227,7 +227,7 @@ public class Tmdb {
             movie.setOverView(movieDetails.getString(overview));
             movie.setMovieImdbId(movieDetails.getString(imdb_id));
             movie.setMovieId(movieDetails.getInt(id));
-            movie.setRevneue(movieDetails.getInt(revenue));
+            movie.setRevneue(String.valueOf(movieDetails.getInt(revenue)));
             movie.setPopularity(movieDetails.getDouble(popularity));
             movie.setPosterImage(movieDetails.getString(poster_path));
             movie.setTmdbRate(movieDetails.getInt(vote_average));

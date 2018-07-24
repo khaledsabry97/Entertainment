@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.TorrentRecyclerFragment;
+import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
 import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
@@ -139,7 +139,7 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, TorrentRecyclerFragment.newInstance(finalSearchString)).addToBackStack(null).commit();
+                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, TorrentFragment.newInstance(finalSearchString)).addToBackStack(null).commit();
             }
         });
 

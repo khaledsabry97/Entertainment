@@ -23,7 +23,7 @@ public class Movie {
     private float tmdbRate;
     private float imdbRate;
     private int budget;
-    private int revneue;
+    private String revneue;
     private int runTime;
     private Double popularity;
     private boolean isAdult;
@@ -33,7 +33,16 @@ public class Movie {
     private String overseasBudget;
     private String worldWideBudget;
     private String noWeeksInBoxOffice;
+    private String totalRevenue;
     private String Budget;
+
+    public String getTotalRevenue() {
+        return totalRevenue;
+    }
+
+    public void setTotalRevenue(String totalRevenue) {
+        this.totalRevenue = totalRevenue;
+    }
 
     public String getNoWeeksInBoxOffice() {
         return noWeeksInBoxOffice;
@@ -255,14 +264,17 @@ public class Movie {
         this.budget = budget;
     }
 
-    public String getRevneue() {
+    public String getRevneue(boolean putDollarSign) {
+        if(!putDollarSign)
+            return revneue;
+
         DecimalFormat decimalFormat = new DecimalFormat("#,##0");
-        String numberAsString = decimalFormat.format(revneue);
+        String numberAsString = decimalFormat.format(Double.valueOf(revneue));
         numberAsString = "$"+numberAsString;
         return numberAsString;
     }
 
-    public void setRevneue(int revneue) {
+    public void setRevneue(String revneue) {
         this.revneue = revneue;
     }
 

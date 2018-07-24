@@ -107,7 +107,7 @@ public class MovieMainFragment extends Fragment {
         releaseDate.setText(movie.getReleaseDate());
         runTimeText.setText(movie.getRunTime() + " min");
         genres.setText(movie.getGenreList());
-        revenue.setText(movie.getRevneue());
+        revenue.setText(movie.getRevneue(true));
         adult.setText((movie.isAdult()));
         budget.setText(movie.getBudget());
         status.setText(movie.getStatus());

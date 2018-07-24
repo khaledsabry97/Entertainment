@@ -38,8 +38,7 @@ import java.util.ArrayList;
 
 
 public class MainMenuFragment extends Fragment {
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+
 
     RecyclerView recyclerView;
     TmdbController tmdbController;
@@ -59,8 +58,7 @@ public class MainMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
-        drawerLayout = view.findViewById(R.id.drawer_layout);
-        navigationView = view.findViewById(R.id.nav_view);
+
         recyclerView = view.findViewById(R.id.recyclerid);
 
         tmdbController = new TmdbController();
@@ -71,28 +69,20 @@ public class MainMenuFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                Functions.stopConnectionsAndStartImageGlide();
-                if (id == R.id.home)
-                    MainActivity.loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
-                else if (id == R.id.searchid)
-                    loadFragment(SearchFragment.newInstance());
-                else if (id == R.id.boxofficeid)
-                    loadFragment(BoxOfficeFragment.newInstance());
-                else if (id == R.id.topgross)
-                    Toast.makeText(getContext(), "boxofficeid", Toast.LENGTH_LONG).show();
 
-                navigationView.setCheckedItem(id);
-                drawerLayout.closeDrawer(GravityCompat.START, true);
-                return true;
-
-            }
-        });
+        loadFirst();
 
 
+        return view;
+    }
+
+    private void loadSec() {
+        /*setTopMoviesWorldWideGross(2018);
+        setBoxOffice();
+        setDailyBoxOffice();*/
+    }
+
+    private void loadFirst() {
         setMoviesNowPlaying();
         setMoviesPopular();
         setMoviesTopRated();
@@ -101,11 +91,8 @@ public class MainMenuFragment extends Fragment {
         setTvTopRated();
         setTvOnAir();
         setTvShowToday();
+        //i will set the secload in the artist popular
         setArtistPopular();
-        setTopMoviesWorldWideGross(2018);
-        setBoxOffice();
-        setDailyBoxOffice();
-        return view;
     }
 
     private void setDailyBoxOffice() {
@@ -113,7 +100,7 @@ public class MainMenuFragment extends Fragment {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                WebApi.getInstance().mojoDaily(null, new OnWebSuccess.OnMovieList() {
+                WebApi.getInstance().mojoDaily(-1, new OnWebSuccess.OnMovieList() {
                     @Override
                     public void onSuccess(ArrayList<Movie> movies) {
                         final Classification classification = new Classification();
@@ -162,7 +149,7 @@ public class MainMenuFragment extends Fragment {
     }
 
     private void loadFragment(Fragment fragment) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_menu_container, fragment).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, fragment).commit();
     }
 
     private void setArtistPopular() {
@@ -183,7 +170,7 @@ public class MainMenuFragment extends Fragment {
                             public void run() {
 
                                 adapter.putClassification(classification);
-
+loadSec();
                             }
                         });
                     }

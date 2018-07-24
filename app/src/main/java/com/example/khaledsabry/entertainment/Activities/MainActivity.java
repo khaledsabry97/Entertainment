@@ -1,12 +1,22 @@
 package com.example.khaledsabry.entertainment.Activities;
 
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
+import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
+import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 
@@ -16,7 +26,8 @@ import java.util.TimerTask;
 import static java.nio.file.Files.copy;
 
 public class MainActivity extends AppCompatActivity {
-
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
     //to get the main activity in the app
     private static MainActivity mainActivity;
 
@@ -37,10 +48,37 @@ public class MainActivity extends AppCompatActivity {
         //set the context for the volley library
         ApiConnections.getInstance().setContext(getApplicationContext());
 
+
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                Functions.stopConnectionsAndStartImageGlide();
+                if (id == R.id.home)
+                    MainActivity.loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+                else if (id == R.id.searchid)
+                    loadFragmentNoReturn(R.id.mainContainer,SearchFragment.newInstance());
+                else if (id == R.id.boxofficeid)
+                    loadFragmentNoReturn(R.id.mainContainer,BoxOfficeFragment.newInstance());
+                else if (id == R.id.topgross)
+                    Toast.makeText(getApplicationContext(), "boxofficeid", Toast.LENGTH_LONG).show();
+
+                navigationView.setCheckedItem(id);
+                drawerLayout.closeDrawer(GravityCompat.START, true);
+                return true;
+
+            }
+        });
+
+
+        loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
 // hide the navigation bar and the status bar
         periodicHideNavigation();
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
-       loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+   //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
       //  loadFragmentNoReturn(R.id.mainContainer, NavigationDrawer.newInstance());
 
     }

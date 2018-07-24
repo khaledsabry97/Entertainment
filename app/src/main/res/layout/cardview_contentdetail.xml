@@ -17,7 +17,6 @@
         android:visibility="visible">
 
 
-
         <TextView
             android:id="@+id/date"
             style="@style/TextNormal"
@@ -36,7 +35,7 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/TextCategory"
+            style="@style/TextHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -64,27 +63,55 @@
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
-            android:id="@+id/revenue"
+            android:id="@+id/totalrevenue"
             style="@style/TextCategoryRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginStart="4dp"
-            android:text="$3.000.000"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Total Revenue : $3.000.000"
             android:textAlignment="textEnd"
             android:textColor="@color/cardview_light_background"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/weeks"
+            style="@style/TextCategoryRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="16dp"
+            android:text="No. of weeks in box office : 1"
+            android:textAlignment="textEnd"
+            android:textColor="@color/cardview_light_background"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/revenue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.98"
-            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout" />
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/revenue"
+            style="@style/TextCategoryRound"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="16dp"
+            android:text="Revenue : $3.000.000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/cardview_light_background"
+            app:layout_constraintBottom_toTopOf="@+id/totalrevenue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
             android:id="@+id/rate"
             style="@style/TextNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
             android:drawableLeft="@android:drawable/btn_star"

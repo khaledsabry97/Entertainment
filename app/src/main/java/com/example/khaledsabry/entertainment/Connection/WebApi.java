@@ -28,13 +28,9 @@ import java.util.Random;
  */
 
 public class WebApi {
-    private String serials = "serials";
-    private String ep = "ep";
-    private String serial = "serial";
 
     private static final WebApi ourInstance = new WebApi();
-    private String title = "title";
-    private String id = "id";
+
 
     public static WebApi getInstance() {
         return ourInstance;
@@ -145,9 +141,7 @@ public class WebApi {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
                 return movies;
@@ -308,8 +302,8 @@ public class WebApi {
 
                         Movie movie = new Movie();
                         movie.setTitle(title);
-                        movie.setDomesticBudget(weekendGross);
-                        movie.setWorldWideBudget(totalGross);
+                        movie.setRevneue(weekendGross);
+                        movie.setTotalRevenue(totalGross);
                         movie.setBudget(budget);
                         movie.setNoWeeksInBoxOffice(daysInBoxOffice);
                         movies.add(movie);
@@ -334,20 +328,19 @@ public class WebApi {
     }
 
     public void mojoDaily(final Integer dayNumber, final OnWebSuccess.OnMovieList listener) {
+
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
             @Override
             protected ArrayList<Movie> doInBackground(Void... voids) {
                 ArrayList<Movie> movies = new ArrayList<>();
                 org.jsoup.nodes.Document
                         doc = null;
-                int i = 0;
-                if (dayNumber != null)
-                    i = dayNumber;
+
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DATE, i);
+                calendar.add(Calendar.DATE, dayNumber);
                 Date date = calendar.getTime();
 
                 String today = formatter.format(date);
@@ -383,16 +376,18 @@ public class WebApi {
                             break;
 
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    return null;
                 }
                 return movies;
             }
 
             @Override
             protected void onPostExecute(ArrayList<Movie> movies) {
+                if (movies == null)
+                    return;
                 if (movies.size() == 0)
-                    mojoDaily(-1, listener);
+                    mojoDaily(dayNumber - 1, listener);
                 else
                     listener.onSuccess(movies);
 
