@@ -13,18 +13,11 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
-import com.example.khaledsabry.entertainment.Interfaces.OnYoutubeSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
-
-import java.util.ArrayList;
 
 
 public class MovieNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
@@ -47,7 +40,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_detail, container, false);
+        View v = inflater.inflate(R.layout.fragment_movie_navigation, container, false);
         BottomNavigationView bottomNavigationView = v.findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 

@@ -29,9 +29,9 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class MovieMainFragment extends Fragment {
 
-    static int movieId;
+    int movieId;
     static int currentMovieId = -1;
-    static Movie movie = null;
+     Movie movie = null;
 
     TextView title;
     TextView overviewText;
@@ -56,7 +56,7 @@ public class MovieMainFragment extends Fragment {
 
     public static MovieMainFragment newInstance(int movieId) {
         MovieMainFragment fragment = new MovieMainFragment();
-        MovieMainFragment.movieId = movieId;
+        fragment.movieId = movieId;
         return fragment;
     }
 
@@ -87,13 +87,14 @@ public class MovieMainFragment extends Fragment {
     }
 
     public void getMovieDetails() {
+        movie =MovieNavigationFragment.movie;
         if (movieId != currentMovieId) {
             TmdbController tmdbController = new TmdbController();
             tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
                     currentMovieId = movie.getMovieId();
-                    MovieMainFragment.movie = movie;
+                    MovieNavigationFragment.movie = movie;
                     setObjects(movie);
                 }
             });

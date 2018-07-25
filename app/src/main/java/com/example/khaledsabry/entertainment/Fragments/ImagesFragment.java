@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -58,11 +59,9 @@ public class ImagesFragment extends Fragment {
 
 
         recyclerView.setHasFixedSize(true);
-
-
-      //  GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false);
+          GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3, GridLayoutManager.HORIZONTAL, false);
      //   recyclerView.setLayoutManager(gridLayoutManager);
-        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+    //    StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(gridLayoutManager);
         return view;
     }

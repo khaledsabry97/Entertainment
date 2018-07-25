@@ -40,7 +40,7 @@ TmdbController tmdbController = new TmdbController();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search_movie, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie_preview, container, false);
         poster = view.findViewById(R.id.posterrelativelayout);
         title = view.findViewById(R.id.title);
         rate = view.findViewById(R.id.rateid);
