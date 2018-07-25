@@ -1,7 +1,9 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Connection.YoutubeJson;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnYoutubeSuccess;
 
 import org.json.JSONObject;
 
@@ -23,9 +25,11 @@ public class YoutubeController {
 
     private String url = Settings.youtubeConnectionBaseUrl;
     private ApiConnections connection;
+    private YoutubeJson youtubeJson;
 
     public YoutubeController() {
         connection = ApiConnections.getInstance();
+        youtubeJson = new YoutubeJson();
     }
 
     private void addNoResults(Integer num) {
@@ -49,7 +53,7 @@ public class YoutubeController {
         url += "&safeSearch=moderate";
     }
 
-    public void search(String name, String year, Type type) {
+    public void search(String name, String year, Type type, final OnYoutubeSuccess listener) {
         String searchQuery = name;
         if (year != null)
             searchQuery += year;
@@ -57,11 +61,11 @@ public class YoutubeController {
         addNoResults(50);
         addSafeSearch();
         addType(null);
-addQuery(searchQuery);
+        addQuery(searchQuery);
         execute(new OnSuccess() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                System.out.print(1);
+                listener.onSuccess(youtubeJson.getVideos(jsonObject));
             }
         });
     }

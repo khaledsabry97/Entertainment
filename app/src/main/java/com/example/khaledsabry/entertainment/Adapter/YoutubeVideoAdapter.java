@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -22,15 +26,19 @@ import java.util.ArrayList;
  */
 
 public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapter.YoutubeViewHolder> {
-    private static final String TAG = YoutubeVideoAdapter.class.getSimpleName();
-    private ArrayList<String> youtubeVideoModelArrayList;
 
+private ArrayList<Youtube> youtubes;
     //position to check which position is selected
     private int selectedPosition = 0;
 
 
-    public YoutubeVideoAdapter(ArrayList<String> youtubeVideoModelArrayList) {
-        this.youtubeVideoModelArrayList = youtubeVideoModelArrayList;
+    public YoutubeVideoAdapter(ArrayList<Youtube> youtubes) {
+       this.youtubes = youtubes;
+
+       if(youtubes.size() > 0) {
+           YoutubeFragment.youTubePlayer.cueVideo(youtubes.get(0).getId());
+YoutubeFragment.youTubePlayer.play();
+       }
 
     }
 
@@ -51,44 +59,14 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
             holder.youtubeCardView.setCardBackgroundColor(ContextCompat.getColor(MainActivity.getActivity().getApplicationContext(), android.R.color.white));
         }
 
-        /*  initialize the thumbnail image view , we need to pass Developer Key */
-        holder.videoThumbnailImageView.initialize(com.example.khaledsabry.entertainment.Controllers.Settings.YoutubeApiKey, new YouTubeThumbnailView.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
-                //when initialization is sucess, set the video id to thumbnail to load
-                youTubeThumbnailLoader.setVideo(youtubeVideoModelArrayList.get(position));
-
-                youTubeThumbnailLoader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
-                    @Override
-                    public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-                        //when thumbnail loaded successfully release the thumbnail loader as we are showing thumbnail in adapter
-                        youTubeThumbnailLoader.release();
-                    }
-
-                    @Override
-                    public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-                        //print or show error when thumbnail load failed
-                        Log.e(TAG, "YoutubeFragment Thumbnail Error");
-                    }
-                });
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
-                //print or show error when initialization failed
-                Log.e(TAG, "YoutubeFragment Initialization Failure");
-
-            }
-        });
-
-        holder.updateUi(position,youtubeVideoModelArrayList.get(position));
+        holder.updateUi(position,youtubes.get(position).getTitle(),youtubes.get(position).getId(),youtubes.get(position).getPosterUrl());
 
     }
 
     @Override
     public int getItemCount() {
-        if(youtubeVideoModelArrayList!= null)
-            return youtubeVideoModelArrayList.size();
+        if(youtubes != null)
+            return youtubes.size();
         return 0;
     }
 
@@ -105,25 +83,32 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
 
 
     public class YoutubeViewHolder extends RecyclerView.ViewHolder {
-        public YouTubeThumbnailView videoThumbnailImageView;
         public CardView youtubeCardView;
+        TextView title;
+        private ImageView poster;
 
         public YoutubeViewHolder(View itemView) {
             super(itemView);
-            videoThumbnailImageView = itemView.findViewById(R.id.video_thumbnail_image_view);
-            youtubeCardView = itemView.findViewById(R.id.youtube_row_card_view);
-
+            youtubeCardView = itemView.findViewById(R.id.cardview);
+            poster = itemView.findViewById(R.id.poster);
+title= itemView.findViewById(R.id.titleId);
         }
 
 
-        public void updateUi(final int position, final String videoId) {
+        public void updateUi(final int position,String title, final String videoId, String imgUrl) {
+poster.setImageDrawable(null);
+this.title.setText(title);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     setSelectedPosition(position);
                     YoutubeFragment.youTubePlayer.cueVideo(videoId);
+                    YoutubeFragment.youTubePlayer.play();
+
                 }
             });
+
+            ImageController.putImageMidQualityYoutube(imgUrl,poster);
 
         }
     }

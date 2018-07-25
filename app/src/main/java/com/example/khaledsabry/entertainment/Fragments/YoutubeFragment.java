@@ -1,7 +1,10 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,27 +12,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.khaledsabry.entertainment.Adapter.YoutubeOptionAdapter;
 import com.example.khaledsabry.entertainment.Adapter.YoutubeVideoAdapter;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
+import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
+import com.example.khaledsabry.entertainment.Items.Artist;
+import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Tv;
+import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
-public class YoutubeFragment extends Fragment  {
+public class YoutubeFragment extends Fragment {
 
-    RecyclerView recyclerView;
+    public enum Type {
+        movie,
+        tv,
+        artist
+    }
 
+   static DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    static RecyclerView recyclerView;
+    RecyclerView options;
+    YoutubeController controller;
+    static Type type;
     public static YouTubePlayer youTubePlayer;
     ArrayList<String> youtubeVideoArrayList = new ArrayList<>();
-
+    static ArrayList<Youtube> youtubes = new ArrayList<>();
     YouTubePlayerSupportFragment youTubePlayerFragment;
+    static Movie movie;
+    static Tv tv;
+    static Artist artist;
+    static Object item;
+    ArrayList<YoutubeController.Type> types;
+    ArrayList<String> titles;
+    YoutubeOptionAdapter optionAdapter;
 
-    public static YoutubeFragment newInstance(String movieName, Integer movieId) {
+    public static YoutubeFragment newInstance(Object item, Type type) {
         YoutubeFragment fragment = new YoutubeFragment();
+        YoutubeFragment.youtubes = youtubes;
+        fragment.type = type;
+        YoutubeFragment.item = item;
+
         return fragment;
 
     }
@@ -40,22 +72,53 @@ public class YoutubeFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_youtube, container, false);
-        recyclerView = v.findViewById(R.id.recycler_view);
+        recyclerView = v.findViewById(R.id.recyclerid);
+        options = v.findViewById(R.id.recycleroptionsid);
+        drawerLayout = v.findViewById(R.id.drawer_layout);
         youTubePlayerFragment = (YouTubePlayerSupportFragment) getChildFragmentManager().findFragmentById(R.id.youtube_player_fragment);
 
-        youtubeVideoArrayList.add("aJ7BoNG-r2c");
-        youtubeVideoArrayList.add("KHz_QSUIRvc");
+        //fill the arraylist id
+      /*  for (int i = 0; i < youtubes.size(); i++) {
+            youtubeVideoArrayList.add(youtubes.get(i).getId());
 
+        }*/
 
-
+        types = new ArrayList<>();
+        titles = new ArrayList<>();
         initializeYoutubePlayer();
+        options.setHasFixedSize(true);
         recyclerView.setHasFixedSize(true);
+        options.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        //Horizontal direction recycler view
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        populateRecyclerView();
+
+
+        if (type == Type.movie)
+            loadMovie();
+
+
         return v;
+    }
+
+    private void loadMovie() {
+        movie = (Movie) item;
+        types.add(YoutubeController.Type.trailer);
+        types.add(YoutubeController.Type.movie_review);
+        types.add(YoutubeController.Type.featurette);
+        types.add(YoutubeController.Type.behind_the_scenes);
+
+
+        titles.add("Trailer");
+        titles.add("Reviews");
+        titles.add("Featurette");
+        titles.add("Behind the Scenes");
+
+
+        optionAdapter = new YoutubeOptionAdapter(types, titles, movie.getTitle(), movie.getYear());
+        options.setAdapter(optionAdapter);
+
+
     }
 
 
@@ -76,7 +139,7 @@ public class YoutubeFragment extends Fragment  {
                     youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
 
                     //cue the 1st video by default
-                    youTubePlayer.cueVideo(youtubeVideoArrayList.get(0));
+//                    youTubePlayer.cueVideo(youtubes.get(0).getId());
                 }
             }
 
@@ -93,13 +156,13 @@ public class YoutubeFragment extends Fragment  {
             }
         });
     }
-    /**
-     * populate the recycler view and implement the click event here
-     */
-    private void populateRecyclerView() {
-        final YoutubeVideoAdapter adapter = new YoutubeVideoAdapter(youtubeVideoArrayList);
+
+
+    public static void loadVideos(ArrayList<Youtube> youtubes) {
+        YoutubeVideoAdapter adapter = new YoutubeVideoAdapter(youtubes);
         recyclerView.setAdapter(adapter);
-        //set click event
+        drawerLayout.openDrawer(GravityCompat.END,true);
 
     }
+
 }

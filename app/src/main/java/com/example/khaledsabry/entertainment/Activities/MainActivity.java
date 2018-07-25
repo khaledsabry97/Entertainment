@@ -16,6 +16,7 @@ import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
@@ -74,10 +75,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        YoutubeController youtubeController = new YoutubeController();
-        youtubeController.search("Ready Player One","2018", YoutubeController.Type.trailer);
 
-/*
 
         loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
 // hide the navigation bar and the status bar
@@ -86,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
    //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
       //  loadFragmentNoReturn(R.id.mainContainer, NavigationDrawer.newInstance());
 
-      */
 
     }
 

@@ -8,7 +8,15 @@ public class Youtube {
     private String title;
     private String description;
     private String posterUrl;
+    private String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

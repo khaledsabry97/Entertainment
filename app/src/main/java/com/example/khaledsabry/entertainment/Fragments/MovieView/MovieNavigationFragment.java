@@ -13,11 +13,18 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnYoutubeSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
+
+import java.util.ArrayList;
 
 
 public class MovieNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
@@ -73,7 +80,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         //
         //   loadFragmentWithReturn(ReviewFragment.newInstance(movieId));
         else if (item.getItemId() == R.id.navigation_reco_simi)
-            loadFragment(YoutubeFragment.newInstance("aJ7BoNG-r2c",null));
+            loadYoutubeFragment();
         // loadFragmentWithReturn(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;
     }
@@ -81,5 +88,25 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     @Override
     public void onNavigationItemReselected(@NonNull MenuItem item) {
 
+    }
+
+
+
+    void loadYoutubeFragment()
+    {
+        loadFragment(YoutubeFragment.newInstance(movie, YoutubeFragment.Type.movie));
+       /* TmdbController tmdbController = new TmdbController();
+        tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
+            @Override
+            public void onSuccess(Movie movie) {
+                YoutubeController youtubeController = new YoutubeController();
+                youtubeController.search(movie.getTitle(), movie.getYear(), YoutubeController.Type.trailer, new OnYoutubeSuccess() {
+                    @Override
+                    public void onSuccess(ArrayList<Youtube> youtubes) {
+loadFragment(YoutubeFragment.newInstance(youtubes));
+                    }
+                });
+            }
+        });*/
     }
 }
