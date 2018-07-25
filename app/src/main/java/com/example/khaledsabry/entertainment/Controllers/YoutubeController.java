@@ -80,7 +80,7 @@ public class YoutubeController {
 
     private String getAccordingToType(String searchQuery, Type type) {
         if (type == Type.movie_review)
-            searchQuery += " Movie Review";
+            searchQuery += " Review";
         else if (type == Type.trailer_review)
             searchQuery += " Trailer Review";
         else if (type == Type.trailer)

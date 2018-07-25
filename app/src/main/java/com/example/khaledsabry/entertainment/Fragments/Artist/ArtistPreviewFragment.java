@@ -46,6 +46,7 @@ fragment.artist = artist;
         poster = view.findViewById(R.id.posterrelativelayout);
         placeOfBirth = view.findViewById(R.id.placeofbirthid);
 
+
         setObjects();
 
         view.setOnClickListener(new View.OnClickListener() {

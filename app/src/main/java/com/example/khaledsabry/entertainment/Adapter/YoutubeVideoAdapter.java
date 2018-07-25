@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,18 +28,18 @@ import java.util.ArrayList;
 
 public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapter.YoutubeViewHolder> {
 
-private ArrayList<Youtube> youtubes;
+    private ArrayList<Youtube> youtubes;
     //position to check which position is selected
     private int selectedPosition = 0;
 
 
     public YoutubeVideoAdapter(ArrayList<Youtube> youtubes) {
-       this.youtubes = youtubes;
+        this.youtubes = youtubes;
 
-       if(youtubes.size() > 0) {
-           YoutubeFragment.youTubePlayer.cueVideo(youtubes.get(0).getId());
-YoutubeFragment.youTubePlayer.play();
-       }
+        if (youtubes.size() > 0) {
+            YoutubeFragment.youTubePlayer.cueVideo(youtubes.get(0).getId());
+            YoutubeFragment.youTubePlayer.play();
+        }
 
     }
 
@@ -59,13 +60,13 @@ YoutubeFragment.youTubePlayer.play();
             holder.youtubeCardView.setCardBackgroundColor(ContextCompat.getColor(MainActivity.getActivity().getApplicationContext(), android.R.color.white));
         }
 
-        holder.updateUi(position,youtubes.get(position).getTitle(),youtubes.get(position).getId(),youtubes.get(position).getPosterUrl());
+        holder.updateUi(position, youtubes.get(position).getTitle(), youtubes.get(position).getId(), youtubes.get(position).getPosterUrl());
 
     }
 
     @Override
     public int getItemCount() {
-        if(youtubes != null)
+        if (youtubes != null)
             return youtubes.size();
         return 0;
     }
@@ -91,24 +92,26 @@ YoutubeFragment.youTubePlayer.play();
             super(itemView);
             youtubeCardView = itemView.findViewById(R.id.cardview);
             poster = itemView.findViewById(R.id.poster);
-title= itemView.findViewById(R.id.titleId);
+            title = itemView.findViewById(R.id.titleId);
         }
 
 
-        public void updateUi(final int position,String title, final String videoId, String imgUrl) {
-poster.setImageDrawable(null);
-this.title.setText(title);
+        public void updateUi(final int position, String title, final String videoId, String imgUrl) {
+            poster.setImageDrawable(null);
+            this.title.setText(title);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     setSelectedPosition(position);
                     YoutubeFragment.youTubePlayer.cueVideo(videoId);
                     YoutubeFragment.youTubePlayer.play();
+                    YoutubeFragment.drawerLayout.closeDrawer(GravityCompat.END,true);
+setSelectedPosition(position);
 
                 }
             });
 
-            ImageController.putImageMidQualityYoutube(imgUrl,poster);
+            ImageController.putImageMidQualityYoutube(imgUrl, poster);
 
         }
     }

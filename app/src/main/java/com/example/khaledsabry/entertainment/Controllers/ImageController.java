@@ -95,6 +95,7 @@ public class ImageController {
         // Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);
 
+
     }
 
     }

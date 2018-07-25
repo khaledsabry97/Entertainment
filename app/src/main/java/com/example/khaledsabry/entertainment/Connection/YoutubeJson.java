@@ -25,7 +25,7 @@ public class YoutubeJson {
     private String name = "name";
     private String videoId = "videoId";
     private String high = "high";
-    private String runtime = "runtime";
+    private String mid = "mid";
     private String status = "status";
     private String tagline = "tagline";
 
@@ -48,9 +48,12 @@ public ArrayList<Youtube> getVideos(JSONObject jsonObject)
             String title = snippet.getString(this.title);
             String description = snippet.getString(this.description);
             JSONObject thumbnail = snippet.getJSONObject(this.thumbnails);
-
-          JSONObject high =  thumbnail.getJSONObject(this.high);
-          String url = high.getString(this.url);
+            JSONObject img;
+            if(thumbnail.isNull(this.maxres))
+              img = thumbnail.getJSONObject(this.high);
+            else
+                img = thumbnail.getJSONObject(this.maxres);
+          String url = img.getString(this.url);
 
 
           youtube.setTitle(title);

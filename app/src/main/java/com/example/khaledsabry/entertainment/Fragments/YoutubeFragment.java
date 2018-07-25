@@ -38,7 +38,7 @@ public class YoutubeFragment extends Fragment {
         artist
     }
 
-   static DrawerLayout drawerLayout;
+  public static DrawerLayout drawerLayout;
     NavigationView navigationView;
     static RecyclerView recyclerView;
     RecyclerView options;
@@ -46,7 +46,7 @@ public class YoutubeFragment extends Fragment {
     static Type type;
     public static YouTubePlayer youTubePlayer;
     ArrayList<String> youtubeVideoArrayList = new ArrayList<>();
-    static ArrayList<Youtube> youtubes = new ArrayList<>();
+     ArrayList<Youtube> youtubes = new ArrayList<>();
     YouTubePlayerSupportFragment youTubePlayerFragment;
     static Movie movie;
     static Tv tv;
@@ -58,7 +58,6 @@ public class YoutubeFragment extends Fragment {
 
     public static YoutubeFragment newInstance(Object item, Type type) {
         YoutubeFragment fragment = new YoutubeFragment();
-        YoutubeFragment.youtubes = youtubes;
         fragment.type = type;
         YoutubeFragment.item = item;
 
@@ -77,15 +76,11 @@ public class YoutubeFragment extends Fragment {
         drawerLayout = v.findViewById(R.id.drawer_layout);
         youTubePlayerFragment = (YouTubePlayerSupportFragment) getChildFragmentManager().findFragmentById(R.id.youtube_player_fragment);
 
-        //fill the arraylist id
-      /*  for (int i = 0; i < youtubes.size(); i++) {
-            youtubeVideoArrayList.add(youtubes.get(i).getId());
-
-        }*/
 
         types = new ArrayList<>();
         titles = new ArrayList<>();
         initializeYoutubePlayer();
+
         options.setHasFixedSize(true);
         recyclerView.setHasFixedSize(true);
         options.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -107,12 +102,14 @@ public class YoutubeFragment extends Fragment {
         types.add(YoutubeController.Type.movie_review);
         types.add(YoutubeController.Type.featurette);
         types.add(YoutubeController.Type.behind_the_scenes);
+        types.add(YoutubeController.Type.soundtrack);
 
 
         titles.add("Trailer");
         titles.add("Reviews");
         titles.add("Featurette");
         titles.add("Behind the Scenes");
+        titles.add("SoundTrack");
 
 
         optionAdapter = new YoutubeOptionAdapter(types, titles, movie.getTitle(), movie.getYear());

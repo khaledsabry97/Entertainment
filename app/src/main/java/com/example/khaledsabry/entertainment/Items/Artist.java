@@ -173,4 +173,29 @@ private ArrayList<Tv> tvs = new ArrayList<>();
     public void setImages(ArrayList<String> images) {
         this.images = images;
     }
+ /*   public ArrayList<Movie> sort()
+    {
+        ArrayList<Movie> years = new ArrayList<>();
+        for (int i = 0 ;i  < movies.size();i++)
+        {
+            years = movies;
+            for(int j = 0 ; j <movies.size();j++)
+            {
+                if(i !=j)
+                {
+                    if(Integer.valueOf(movies.get(i).getYear() )>Integer.valueOf( movies.get(j).getYear()))
+                    {
+                    Movie movie = movies.get(i);
+                    years.get(i) = movie;
+                    }
+                }
+
+                movies =years
+            }
+           years.add( Integer.valueOf(movies.get(i).getYear()));
+
+        }
+
+    }
+    */
 }
