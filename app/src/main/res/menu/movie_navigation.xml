@@ -19,7 +19,8 @@
         android:icon="@drawable/download"
         android:title="Download" />
     <item
-        android:id="@+id/navigation_reco_simi"
-        android:title="Recommendation and Similar" />
+        android:id="@+id/navigation_youtube"
+        android:icon="@drawable/youtube"
+        android:title="Videos" />
 
 </menu>

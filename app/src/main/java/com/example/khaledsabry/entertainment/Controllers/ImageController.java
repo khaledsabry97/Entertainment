@@ -48,7 +48,8 @@ public class ImageController {
 
         if(image == null || posterImage == null)
             return;
-
+        if(posterImage.equals("null"))
+            return;
         String url =  "https://image.tmdb.org/t/p/"+highQuality+posterImage;
       //  Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);
@@ -59,6 +60,8 @@ public class ImageController {
     public static void putImageMidQuality(String posterImage, ImageView image) {
         if(image == null || posterImage == null)
             return;
+        if(posterImage.equals("null"))
+            return;
         String url =  "https://image.tmdb.org/t/p/"+midQuality+posterImage;
        // Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);
@@ -67,6 +70,8 @@ public class ImageController {
 
     public static void putImageLowQuality(String posterImage, ImageView image) {
         if(image == null || posterImage == null)
+            return;
+        if(posterImage.equals("null"))
             return;
         String url =  "https://image.tmdb.org/t/p/"+lowQuality+posterImage;
        // Picasso.get().load(url).into(image);
@@ -91,6 +96,7 @@ public class ImageController {
     public static void putImageMidQualityYoutube(String posterImage, ImageView image) {
         if(image == null || posterImage == null)
             return;
+
         String url = posterImage;
         // Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);

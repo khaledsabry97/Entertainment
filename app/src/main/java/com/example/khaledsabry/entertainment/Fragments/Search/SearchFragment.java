@@ -7,11 +7,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -26,9 +29,7 @@ import java.util.ArrayList;
 public class SearchFragment extends Fragment {
 
     TmdbController tmdbController;
-    SearchView searchView;
-    int value = 1;
-    int currentvalue = 2;
+    EditText searchView;
 
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
@@ -45,41 +46,31 @@ public class SearchFragment extends Fragment {
         searchView = v.findViewById(R.id.searchid);
 
         tmdbController = new TmdbController();
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-
+        searchView.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                ApiConnections.getInstance().stopConnection();
-                tmdbController.search(query, new OnSearchSuccess() {
-                    @Override
-                    public void onSuccess(ArrayList<SearchItem> searchItems) {
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid, SearchResult.newInstance(searchItems)).commit();
-                    }
-                });
-                return true;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String query) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ApiConnections.getInstance().stopConnection();
-
-                tmdbController.search(query, new OnSearchSuccess() {
+                tmdbController.search(String.valueOf(s), new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {
                         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.resultsid, SearchResult.newInstance(searchItems)).commit();
                     }
                 });
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
 
-                return true;
             }
         });
 
-
         return v;
     }
+
 
 }

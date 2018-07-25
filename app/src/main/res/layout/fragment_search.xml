@@ -11,26 +11,26 @@
         android:layout_height="match_parent">
 
 
-        <android.support.v7.widget.SearchView
+        <EditText
             android:id="@+id/searchid"
-            style="@style/TextNormal"
+            style="@style/TextCategoryRound"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/round"
+            android:layout_marginEnd="3dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="4dp"
+            android:drawableRight="@drawable/baseline_search_white_36"
+            android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </android.support.v7.widget.SearchView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/resultsid"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchid">
 

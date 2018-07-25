@@ -72,7 +72,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         }
         //
         //   loadFragmentWithReturn(ReviewFragment.newInstance(movieId));
-        else if (item.getItemId() == R.id.navigation_reco_simi)
+        else if (item.getItemId() == R.id.navigation_youtube)
             loadYoutubeFragment();
         // loadFragmentWithReturn(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;
