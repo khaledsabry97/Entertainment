@@ -77,12 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
+     //   loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
 // hide the navigation bar and the status bar
         periodicHideNavigation();
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
-   //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
-      //  loadFragmentNoReturn(R.id.mainContainer, NavigationDrawer.newInstance());
+       loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
 
     }

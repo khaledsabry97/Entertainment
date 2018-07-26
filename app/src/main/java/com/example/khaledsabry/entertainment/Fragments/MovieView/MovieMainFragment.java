@@ -104,6 +104,8 @@ public class MovieMainFragment extends Fragment {
 
 
     private void setObjects(Movie movie) {
+        this.movie = movie;
+
         overviewText.setText(movie.getOverView());
         releaseDate.setText(movie.getReleaseDate());
         runTimeText.setText(movie.getRunTime() + " min");
@@ -160,8 +162,6 @@ public class MovieMainFragment extends Fragment {
         });
 
         scrollView.setVisibility(View.VISIBLE);
-        MovieNavigationFragment.movie = movie;
-
     }
 
 

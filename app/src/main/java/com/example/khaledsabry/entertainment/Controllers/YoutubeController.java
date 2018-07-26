@@ -56,7 +56,7 @@ public class YoutubeController {
     public void search(String name, String year, Type type, final OnYoutubeSuccess listener) {
         String searchQuery = name;
         if (year != null)
-            searchQuery += year;
+            searchQuery += " " +year;
         searchQuery = getAccordingToType(searchQuery, type);
         addNoResults(50);
         addSafeSearch();
@@ -80,7 +80,7 @@ public class YoutubeController {
 
     private String getAccordingToType(String searchQuery, Type type) {
         if (type == Type.movie_review)
-            searchQuery += " Review";
+            searchQuery += " Movie Review";
         else if (type == Type.trailer_review)
             searchQuery += " Trailer Review";
         else if (type == Type.trailer)
