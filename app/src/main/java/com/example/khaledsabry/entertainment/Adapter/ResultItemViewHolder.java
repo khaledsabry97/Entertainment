@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
+import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,39 +38,35 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
 
     public void updateUi(final SearchItem searchItem) {
         if (searchItem.getType().equals("movie")) {
-            if (!searchItem.getMovie().getReleaseDate().equals("")) {
-                String date = searchItem.getMovie().getReleaseDate();
-                date = date.substring(0, 4);
-                this.date.setText(date);
-            }
-                title.setText(searchItem.getMovie().getTitle());
+            setDate(searchItem.getMovie().getReleaseDate());
+
+            setTitle(searchItem.getMovie().getTitle());
+
             ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(), poster);
 
             type.setText("Movie");
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, MoviePreviewFragment.newInstance(searchItem.getMovie())).addToBackStack(null).commit();
+                    loadFragment(MoviePreviewFragment.newInstance(searchItem.getMovie()));
                 }
             });
         } else if (searchItem.getType().equals("tv")) {
-            if (!searchItem.getTv().getFirstAirDate().equals("")) {
-                String date = searchItem.getTv().getFirstAirDate();
-                date = date.substring(0, 4);
-                this.date.setText(date);
-            }
-                title.setText(searchItem.getTv().getTitle());
-
             type.setText("Tv");
+            setDate(searchItem.getTv().getFirstAirDate());
+
+            setTitle(searchItem.getTv().getTitle());
+
             ImageController.putImageLowQuality(searchItem.getTv().getPosterImage(), poster);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, TvPreviewFragment.newInstance(searchItem.getTv())).commit();
+                    loadFragment(TvPreviewFragment.newInstance(searchItem.getTv()));
                 }
             });
         } else if (searchItem.getType().equals("person")) {
-            title.setText(searchItem.getArtist().getName());
+
+            setTitle(searchItem.getArtist().getName());
             ImageController.putImageLowQuality(searchItem.getArtist().getPosterImage(), poster);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,12 +77,32 @@ public class ResultItemViewHolder extends RecyclerView.ViewHolder {
                     tmdbController.getPersonDetails(searchItem.getArtist().getId(), new OnArtistDataSuccess() {
                         @Override
                         public void onSuccess(Artist artist) {
-                            MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, ArtistPreviewFragment.newInstance(artist)).commit();
+                            loadFragment(ArtistPreviewFragment.newInstance(artist));
                         }
                     });
                 }
             });
         }
+
+    }
+
+
+    private void setTitle(String title) {
+        this.title.setText(title);
+
+    }
+
+
+    private void setDate(String date) {
+        if (!date.equals("")) {
+            date = date.substring(0, 4);
+            this.date.setText(date);
+        }
+    }
+
+
+    private void loadFragment(android.support.v4.app.Fragment fragment) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, fragment).commit();
 
     }
 }

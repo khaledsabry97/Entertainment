@@ -38,7 +38,7 @@ public class SearchResult extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
-        recyclerView = view.findViewById(R.id.resultitemsid);
+        recyclerView = view.findViewById(R.id.itemsid);
         resultItemRecyclarView = new ResultItemRecyclarView(searchItems);
         recyclerView.setAdapter(resultItemRecyclarView);
 recyclerView.setHasFixedSize(true);
@@ -46,6 +46,7 @@ recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        resultItemRecyclarView.selectFirstItem();
 
         return view;
     }

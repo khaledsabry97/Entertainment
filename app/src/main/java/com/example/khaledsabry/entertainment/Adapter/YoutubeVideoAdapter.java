@@ -37,8 +37,10 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
         this.youtubes = youtubes;
 
         if (youtubes.size() > 0) {
-            YoutubeFragment.youTubePlayer.cueVideo(youtubes.get(0).getId());
-            YoutubeFragment.youTubePlayer.play();
+            if(YoutubeFragment.youTubePlayer != null) {
+                YoutubeFragment.youTubePlayer.cueVideo(youtubes.get(0).getId());
+                YoutubeFragment.youTubePlayer.play();
+            }
         }
 
     }

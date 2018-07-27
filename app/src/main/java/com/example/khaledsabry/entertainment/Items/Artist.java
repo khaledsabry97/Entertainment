@@ -25,7 +25,8 @@ public class Artist {
     private ArrayList<String> images = new ArrayList<>();
 
     private ArrayList<Movie> movies = new ArrayList<>();
-private ArrayList<Tv> tvs = new ArrayList<>();
+    private ArrayList<Tv> tvs = new ArrayList<>();
+
     public Artist() {
     }
 
@@ -86,7 +87,7 @@ private ArrayList<Tv> tvs = new ArrayList<>();
 
     public void setGender(int gender) {
 
-        if(gender == 2)
+        if (gender == 2)
             this.gender = 'M';
         else
             this.gender = 'F';
@@ -117,7 +118,7 @@ private ArrayList<Tv> tvs = new ArrayList<>();
     }
 
     public String getDeathDay() {
-        if(deathDay == "null")
+        if (deathDay == "null")
             return "-";
         return deathDay;
     }
@@ -173,29 +174,69 @@ private ArrayList<Tv> tvs = new ArrayList<>();
     public void setImages(ArrayList<String> images) {
         this.images = images;
     }
- /*   public ArrayList<Movie> sort()
-    {
-        ArrayList<Movie> years = new ArrayList<>();
-        for (int i = 0 ;i  < movies.size();i++)
-        {
-            years = movies;
-            for(int j = 0 ; j <movies.size();j++)
-            {
-                if(i !=j)
-                {
-                    if(Integer.valueOf(movies.get(i).getYear() )>Integer.valueOf( movies.get(j).getYear()))
-                    {
-                    Movie movie = movies.get(i);
-                    years.get(i) = movie;
+
+    public void sort() {
+        if (movies != null | tvs != null)
+            try {
+                for (int i = 0; i < movies.size(); i++) {
+                    for (int j = i; j < movies.size(); j++) {
+                        Integer f, s;
+                        if (i != j) {
+
+                            if (movies.get(i).getReleaseDate() == null ||movies.get(i).getReleaseDate().equals(""))
+                                f = 1800;
+                            else
+                                f = Integer.valueOf(movies.get(i).getReleaseDate().substring(0, 4));
+                            if (movies.get(j).getReleaseDate() == null ||movies.get(j).getReleaseDate().equals(""))
+                                s = 1800;
+                            else
+                                s = Integer.valueOf(movies.get(j).getReleaseDate().substring(0, 4));
+                            if (f < s) {
+                                Movie movie = movies.get(i);
+                                movies.set(i, movies.get(j));
+                                movies.set(j, movie);
+                            }
+                        }
+
+
+                    }
+                }
+                for (int i = 0; i < tvs.size(); i++) {
+                    for (int j = i; j < tvs.size(); j++) {
+                        Integer f, s;
+                        if (i != j) {
+                            if (tvs.get(i).getFirstAirDate() == null ||tvs.get(i).getFirstAirDate().equals(""))
+                                f = 1800;
+                            else
+                                f = Integer.valueOf(tvs.get(i).getFirstAirDate().substring(0, 4));
+                            if (tvs.get(j).getFirstAirDate() == null ||tvs.get(j).getFirstAirDate().equals(""))
+                                s = 1800;
+                            else
+                                s = Integer.valueOf(tvs.get(j).getFirstAirDate().substring(0, 4));
+                            if (f < s) {
+                                Tv tv = tvs.get(i);
+                                tvs.set(i, tvs.get(j));
+                                tvs.set(j, tv);
+                            }
+                        }
+
+
                     }
                 }
 
-                movies =years
-            }
-           years.add( Integer.valueOf(movies.get(i).getYear()));
 
-        }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
     }
-    */
+
+    private int sortNull(String s)
+    {
+        if(s == null || s.equals(""))
+            return 1800;
+        return 5;
+    }
+
 }

@@ -59,6 +59,7 @@
     <item name="android:textSize">@dimen/size_main_category</item>
     <item name="android:textAlignment">center</item>
     <item name="android:textColor">@color/cardview_light_background</item>
+
     </style>
 
 
@@ -72,5 +73,7 @@
         <!-- The hint text that appears when the user has not typed anything -->
         <item name="queryHint">"type something"</item>
     </style>
+
+
 
 </resources>

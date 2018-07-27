@@ -242,4 +242,18 @@ private String status;
     }
 
 
+    public String getYear()
+    {
+        String date = firstAirDate;
+        if(date == null || date.equals(""))
+            return null;
+        char[] d = new char[4];
+        d[0] = date.charAt(0);
+        d[1] = date.charAt(1);
+        d[2] = date.charAt(2);
+        d[3] = date.charAt(3);
+        date = String.copyValueOf(d);
+        return date;
+    }
+
 }

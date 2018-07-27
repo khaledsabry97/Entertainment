@@ -83,7 +83,7 @@ public class ArtistRolesFragment extends Fragment {
     }
 
     private void setAdapter(int type) {
-
+artist.sort();
         RoleRecyclarAdapter recyclarAdapter = new RoleRecyclarAdapter(type, artist.getMovies(), artist.getTvs());
         recyclerView.setAdapter(recyclarAdapter);
 
