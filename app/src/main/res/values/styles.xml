@@ -15,12 +15,12 @@
     <style name="TextCategoryRound">
         <item name="android:fontFamily">@font/carterone</item>
         <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
         <item name="android:lines">1</item>
         <item name="android:textSize">@dimen/size_main_category</item>
         <item name="android:textAlignment">center</item>
-<item name="android:textColor">@color/cardview_light_background</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
         <item name="android:background">@drawable/round</item>
-
 
 
     </style>
@@ -28,6 +28,8 @@
     <style name="TextNormal">
         <item name="android:fontFamily">@font/carterone</item>
         <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
+
         <item name="android:lines">1</item>
         <item name="android:textSize">@dimen/size_normal_text</item>
         <item name="android:textAlignment">center</item>
@@ -36,12 +38,25 @@
 
     </style>
 
+    <style name="TextNormalRound">
+        <item name="android:fontFamily">@font/carterone</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/size_normal_text</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
+        <item name="android:background">@drawable/round</item>
 
+
+    </style>
 
 
     <style name="TextHeader">
         <item name="android:fontFamily">@font/carterone</item>
         <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
+
         <item name="android:lines">1</item>
         <item name="android:textSize">@dimen/size_main_title</item>
         <item name="android:textAlignment">center</item>
@@ -51,17 +66,17 @@
     </style>
 
 
-
     <style name="TextCategory">
-    <item name="android:fontFamily">@font/carterone</item>
-    <item name="android:autoSizeTextType">uniform</item>
-    <item name="android:lines">1</item>
-    <item name="android:textSize">@dimen/size_main_category</item>
-    <item name="android:textAlignment">center</item>
-    <item name="android:textColor">@color/cardview_light_background</item>
+        <item name="android:fontFamily">@font/carterone</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
+
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/size_main_category</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
 
     </style>
-
 
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
@@ -73,7 +88,6 @@
         <!-- The hint text that appears when the user has not typed anything -->
         <item name="queryHint">"type something"</item>
     </style>
-
 
 
 </resources>

@@ -17,21 +17,33 @@
         android:layout_height="match_parent"
         android:background="@drawable/blue">
 
-        <ImageView
-            android:id="@+id/posterrelativelayout"
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/_150sdp"
+android:background="@drawable/round"            app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:adjustViewBounds="true"
-            android:cropToPadding="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/batman"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            >
+            <ImageView
+                android:id="@+id/posterrelativelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/batman"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:id="@+id/title"
@@ -42,10 +54,10 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/carterone"
             android:text="title"
+            android:textSize="@dimen/size_main_category"
             android:textColor="@color/cardview_light_background"
-            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/posterrelativelayout" />
+            app:layout_constraintTop_toBottomOf="@id/card_view" />
 
         <TextView
             android:id="@+id/rateid"
@@ -57,29 +69,28 @@
             android:fontFamily="@font/carterone"
             android:text="rate"
             android:textColor="@color/cardview_light_background"
-            android:textSize="24sp"
+            android:textSize="@dimen/size_main_category"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/posterrelativelayout" />
+            app:layout_constraintTop_toBottomOf="@id/card_view" />
 
         <TextView
             android:id="@+id/releaseDateid"
-            style="@style/TextCategoryRound"
+            style="@style/TextNormalRound"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
             android:fontFamily="@font/carterone"
             android:text="release date :"
             android:textColor="@color/cardview_light_background"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
             android:id="@+id/genresid"
-            style="@style/TextNormal"
+            style="@style/TextNormalRound"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -105,7 +116,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/contentid"
@@ -120,7 +132,7 @@
                 android:paddingRight="10dp"
                 android:textAlignment="viewStart"
                 android:textColor="@color/cardview_light_background"
-                android:textSize="14sp" />
+                android:textSize="@dimen/_7sdp" />
 
         </android.support.v4.widget.NestedScrollView>
 
