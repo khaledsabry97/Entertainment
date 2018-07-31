@@ -28,6 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,47 +38,46 @@ import java.util.Map;
 
 public class Insertion {
 
-
-
-    public void user(HashMap<String,String> list)
-    {
-       String username = list.get(DatabaseTables.user.username);
+String quoute = "\"";
+    public void user(HashMap<String, String> list) {
+        String username = list.get(DatabaseTables.user.username);
         String email = list.get(DatabaseTables.user.email);
         String password = list.get(DatabaseTables.user.password);
         String age = list.get(DatabaseTables.user.age);
         String phone = list.get(DatabaseTables.user.phone);
 
+        final String query = "insert into " + DatabaseTables.user.className + "(" + DatabaseTables.user.username + "," + DatabaseTables.user.email + "," + DatabaseTables.user.password
+                + "," + DatabaseTables.user.age + "," + DatabaseTables.user.phone + ") values("+quoute + username  +quoute+",'" + email + "','" + password + "'," + age + "," + phone + ")";
 
-        final String query = "insert into "+ DatabaseTables.user.className+"("+ DatabaseTables.user.username +","+ DatabaseTables.user.email+","+ DatabaseTables.user.password
-                +","+ DatabaseTables.user.age+","+ DatabaseTables.user.phone+") values('"+username+"','"+email+"','"+password+"',"+age+","+phone+")";
-
-
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                JsonObjectRequest.Method.POST, DatabaseTables.file.getInsertion(), null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-response.toString();            }
-        }, new Response.ErrorListener() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DatabaseTables.file.getInsertion(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the response string.
+                        response.toString();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.v("Error", error.toString());
+                error.toString();
             }
-        })
-        {
-
+        }) {
+            //adding parameters to the request
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-               params.put("Cookie", "__test=31680452f9f0bce024fab29d26a45ec7; expires=Friday, January 1, 2038 at 1:55:55 AM; path=/");
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
                 params.put("query", query);
-
                 return params;
             }
         };
 
 
-        Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(jsonObjectRequest);
+        Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
 /*
         AsyncTask.execute(new Runnable() {
             @Override

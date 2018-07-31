@@ -7,9 +7,16 @@ package com.example.khaledsabry.entertainment.Database;
 public class DatabaseTables {
 
    public static class file
-    {
-        private final static String baseUrl = "http://entertainment.byethost31.com/";
+   {
+       private final static String baseUrl = "https://water-gas-oil.000webhostapp.com/";
         private final static String insertion = "insertion.php";
+
+        public static String getSelection() {
+            return baseUrl+selection;
+        }
+
+        private final static String selection = "selection.php";
+
         public static String getInsertion() {
             return baseUrl +insertion;
         }

@@ -62,7 +62,7 @@ signInUpController = new SignInUpController();
         if (!allCheck())
             return;
 */
-        username.setText("drfsd");
+        username.setText("drf'sd");
         password.setText("4234324");
         email.setText("sdfwef@");
         age.setText("23");
