@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.khaledsabry.entertainment.Fragments.MovieView.RecommendedAndSimilarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TOUpdatingdate blank fragment layout -->
 
     <LinearLayout
         android:layout_width="match_parent"

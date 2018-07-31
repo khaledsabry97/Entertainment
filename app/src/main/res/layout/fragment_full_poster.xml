@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.khaledsabry.entertainment.Fragments.FullPoster">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TOUpdatingdate blank fragment layout -->
 
     <ImageView
         android:id="@+id/fullposterid"

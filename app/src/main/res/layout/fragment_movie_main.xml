@@ -6,7 +6,7 @@
     android:background="@drawable/blue"
     tools:context="com.example.khaledsabry.entertainment.Fragments.MovieView.MovieMainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TOUpdatingdate blank fragment layout -->
 
 
     <LinearLayout

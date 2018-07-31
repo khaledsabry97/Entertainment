@@ -4,6 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.khaledsabry.entertainment.Fragments.Search.SearchResultItemFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TOUpdatingdate blank fragment layout -->
 
 </FrameLayout>

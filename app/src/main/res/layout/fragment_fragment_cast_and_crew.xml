@@ -5,7 +5,7 @@
     android:background="@drawable/background3"
     tools:context="com.example.khaledsabry.entertainment.Fragments.CastAndCrewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TOUpdatingdate blank fragment layout -->
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

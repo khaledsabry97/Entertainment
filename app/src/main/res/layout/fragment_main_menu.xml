@@ -5,7 +5,7 @@
     android:background="@color/cardview_dark_background"
     tools:context="com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TOUpdatingdate blank fragment layout -->
 
 
     <android.support.v7.widget.RecyclerView

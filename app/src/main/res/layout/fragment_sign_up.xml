@@ -1,0 +1,202 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/MainBackground"
+    tools:context="com.example.khaledsabry.entertainment.Fragments.SignUpFragment">
+
+    <!-- TOUpdatingdate blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/bar"
+            layout="@layout/barlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+           ></include>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_220sdp"
+            android:layout_margin="4dp"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/bar"
+            tools:layout_editor_absoluteX="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:text="UserName" />
+
+                <EditText
+                    android:id="@+id/username"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="type your username"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart"
+                    android:textColorHint="@android:color/holo_orange_light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:text="Email" />
+
+                <EditText
+                    android:id="@+id/email"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="type your email account"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart"
+                    android:textColorHint="@android:color/holo_orange_light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:text="Password" />
+
+                <EditText
+                    android:id="@+id/password"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="type your password"
+                    android:inputType="textWebPassword"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart"
+                    android:textColorHint="@android:color/holo_orange_light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textbox"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:text="Age" />
+
+                <EditText
+                    android:id="@+id/age"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="type your age"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart"
+                    android:textColorHint="@android:color/holo_orange_light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textbox"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:text="Phone" />
+
+                <EditText
+                    android:id="@+id/phone"
+                    style="@style/TextCategoryRound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="type your phone number "
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart"
+                    android:textColorHint="@android:color/holo_orange_light" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/signup"
+            style="@style/TextCategoryRound"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/blue"
+            android:text="Sign Up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
