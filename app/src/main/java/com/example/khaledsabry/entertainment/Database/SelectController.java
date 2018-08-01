@@ -20,7 +20,7 @@ import java.util.HashMap;
 //fifth : call create select query from the database controller and then send it to the server
 
 public class SelectController extends DatabaseController {
-    private final String equal = "==";
+    private final String equal = "=";
     private final String less = "<";
     private final String bigger = ">";
     private final String lessOrEqual = "<=";
@@ -38,8 +38,8 @@ public class SelectController extends DatabaseController {
 
     public void userSignIn(String username, String password, OnDatabaseSuccess.array listener) {
 
-        addqoutes(username);
-        addqoutes(password);
+       username = addqoutes(username);
+     password =   addqoutes(password);
 
         selects.add(DatabaseTables.user.phone);
 
@@ -54,4 +54,23 @@ public class SelectController extends DatabaseController {
 
 
     }
+
+
+    public void userCheckUsername(String username,OnDatabaseSuccess.array listener)
+    {
+        username = addqoutes(username);
+
+        selects.add(DatabaseTables.user.username);
+
+        selects.add(null);
+
+        tables.put(DatabaseTables.user.tableName,null);
+
+        condition += DatabaseTables.user.username + equal + username;
+        String query = createSelectQuery(null,tables,condition);
+        server.select(query,listener);
+
+    }
+
+
 }

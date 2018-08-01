@@ -26,11 +26,12 @@ public class Controller {
     //to convert an array of json objects to an array of values that has the same name in the database
     protected ArrayList<Object> getArray(String key, ArrayList<JSONObject> jsonObjects) {
         ArrayList<Object> arrayList = new ArrayList<>();
+       key = key.replace("`","");
         try {
             for (int i = 0; i < jsonObjects.size(); i++) {
 
-                Object object = jsonObjects.get(0).get(key);
-
+                Object object = jsonObjects.get(i).get(key);
+arrayList.add(object);
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -13,7 +13,7 @@ import java.util.HashMap;
  * Created by KhALeD SaBrY on 31-Jul-18.
  */
 
-public class DatabaseController extends Controller {
+public class DatabaseController {
     //quoutes that is used to let the query function correctly
     String quoute = "\"";
     //this is a refrence to the database server to access to the web
@@ -94,7 +94,7 @@ public class DatabaseController extends Controller {
     protected String createSelectQuery(ArrayList<String> selects, HashMap<String, String> tablenames, String condition) {
         String query;
         query = "select ";
-        if (selects.size() == 0)
+        if (selects == null)
             query += " * ";
         else
             for (int i = 0; i < selects.size(); i++) {
@@ -111,11 +111,11 @@ public class DatabaseController extends Controller {
         ArrayList<String> keys = new ArrayList<String>(tablenames.keySet());
         ArrayList<String> values = new ArrayList<String>(tablenames.values());
 
-        for (int i = 0; i < selects.size(); i++) {
+        for (int i = 0; i < tablenames.size(); i++) {
             query += keys.get(i);
-            if (values.get(i) != null) ;
+            if (values.get(i) != null)
             query += values.get(i);
-            if (i == selects.size() - 1)
+            if (i == tablenames.size() - 1)
                 query += " ";
             else
                 query += ",";
@@ -123,8 +123,8 @@ public class DatabaseController extends Controller {
 
         if (condition != null)
             query += "where " + condition;
-        return query;
 
+       return query;
 
     }
 }

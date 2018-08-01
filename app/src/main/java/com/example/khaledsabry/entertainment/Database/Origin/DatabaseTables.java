@@ -17,5 +17,6 @@ public class DatabaseTables {
         public final static String password ="`password`";
         public final static String age = "`age`";
         public final static String phone = "`phone`";
+        public final static String id = "id";
     }
 }

@@ -4,6 +4,8 @@ package com.example.khaledsabry.entertainment.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,7 @@ public class SignUpFragment extends Fragment {
     TextView header;
     Button signUp;
     SignInUpController signInUpController;
-
+boolean userNamechecked = false;
     public static SignUpFragment newInstance() {
         SignUpFragment fragment = new SignUpFragment();
         return fragment;
@@ -44,13 +46,33 @@ public class SignUpFragment extends Fragment {
         email = view.findViewById(R.id.email);
         phone = view.findViewById(R.id.phone);
         signUp = view.findViewById(R.id.signup);
+
         header.setText("Sign Up");
         header.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-signInUpController = new SignInUpController();
+
+        signInUpController = new SignInUpController();
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signUp();
+            }
+        });
+
+
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+checkUserNameAvailability();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         return view;
@@ -93,6 +115,7 @@ signInUpController = new SignInUpController();
             signInUpController.toast("check your username");
             return false;
         }
+
 
         return true;
     }
@@ -146,5 +169,11 @@ signInUpController = new SignInUpController();
         }
 
         return true;
+    }
+
+
+    private void checkUserNameAvailability()
+    {
+        signInUpController.checkUserNameAvailability(username.getText().toString());
     }
 }
