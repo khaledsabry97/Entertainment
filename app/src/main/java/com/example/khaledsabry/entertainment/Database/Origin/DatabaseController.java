@@ -94,7 +94,7 @@ public class DatabaseController {
     protected String createSelectQuery(ArrayList<String> selects, HashMap<String, String> tablenames, String condition) {
         String query;
         query = "select ";
-        if (selects == null)
+        if (selects.size() == 0)
             query += " * ";
         else
             for (int i = 0; i < selects.size(); i++) {
@@ -121,7 +121,7 @@ public class DatabaseController {
                 query += ",";
         }
 
-        if (condition != null)
+        if (!condition.equals(""))
             query += "where " + condition;
 
        return query;

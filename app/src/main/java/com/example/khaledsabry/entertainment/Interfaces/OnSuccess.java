@@ -7,5 +7,17 @@ import org.json.JSONObject;
  */
 
 public interface OnSuccess {
-    void onSuccess(JSONObject jsonObject);
+
+    interface Json {
+        void onSuccess(JSONObject jsonObject);
+    }
+     interface string
+    {
+        void onSuccess(String word);
+    }
+
+    interface bool
+    {
+        void onSuccess(boolean state);
+    }
 }

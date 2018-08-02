@@ -1,3 +1,4 @@
+
 package com.example.khaledsabry.entertainment.Fragments.MovieView;
 
 import android.content.res.ColorStateList;

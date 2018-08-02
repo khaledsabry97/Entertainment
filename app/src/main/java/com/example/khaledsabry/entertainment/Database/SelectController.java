@@ -41,7 +41,6 @@ public class SelectController extends DatabaseController {
        username = addqoutes(username);
      password =   addqoutes(password);
 
-        selects.add(DatabaseTables.user.phone);
 
         tables.put(DatabaseTables.user.tableName, "s");
 
@@ -62,12 +61,24 @@ public class SelectController extends DatabaseController {
 
         selects.add(DatabaseTables.user.username);
 
-        selects.add(null);
-
         tables.put(DatabaseTables.user.tableName,null);
 
         condition += DatabaseTables.user.username + equal + username;
-        String query = createSelectQuery(null,tables,condition);
+        String query = createSelectQuery(selects,tables,condition);
+        server.select(query,listener);
+
+    }
+
+    public void userCheckEmail(String email, OnDatabaseSuccess.array listener)
+    {
+        email = addqoutes(email);
+
+        selects.add(DatabaseTables.user.username);
+
+        tables.put(DatabaseTables.user.tableName,null);
+
+        condition += DatabaseTables.user.email + equal + email;
+        String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
 
     }

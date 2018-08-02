@@ -3,7 +3,6 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Controllers.SignInUpController;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
 
 
@@ -27,7 +27,11 @@ public class SignUpFragment extends Fragment {
     TextView header;
     Button signUp;
     SignInUpController signInUpController;
-boolean userNamechecked = false;
+    boolean userNamechecked = false;
+    boolean userNameAvailable = false;
+    boolean emailchecked = false;
+    boolean emailAvailable = false;
+
     public static SignUpFragment newInstance() {
         SignUpFragment fragment = new SignUpFragment();
         return fragment;
@@ -67,7 +71,25 @@ boolean userNamechecked = false;
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-checkUserNameAvailability();
+                checkUserNameAvailability();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkEmailAvailability();
             }
 
             @Override
@@ -80,16 +102,12 @@ checkUserNameAvailability();
 
 
     private void signUp() {
-        /*
+
         if (!allCheck())
             return;
-*/
-        username.setText("drf'sd");
-        password.setText("4234324");
-        email.setText("sdfwef@");
-        age.setText("23");
-        phone.setText("024234234");
-        signInUpController.signIn(username.getText().toString(), email.getText().toString(), password.getText().toString(), age.getText().toString(), phone.getText().toString());
+
+
+        signInUpController.signUp(username.getText().toString(), email.getText().toString(), password.getText().toString(), age.getText().toString(), phone.getText().toString());
 
 
     }
@@ -117,6 +135,12 @@ checkUserNameAvailability();
         }
 
 
+        if (userNamechecked)
+            if (!userNameAvailable) {
+                signInUpController.toast("there is another one has this username");
+                return false;
+            }
+
         return true;
     }
 
@@ -125,7 +149,11 @@ checkUserNameAvailability();
             signInUpController.toast("check your email");
             return false;
         }
-
+        if (emailchecked)
+            if (!emailAvailable) {
+                signInUpController.toast("there is another one has this email");
+                return false;
+            }
         return true;
     }
 
@@ -172,8 +200,26 @@ checkUserNameAvailability();
     }
 
 
-    private void checkUserNameAvailability()
-    {
-        signInUpController.checkUserNameAvailability(username.getText().toString());
+    private void checkUserNameAvailability() {
+        userNamechecked = false;
+        signInUpController.checkUserNameAvailability(username.getText().toString(), new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                userNamechecked = true;
+                userNameAvailable = state;
+            }
+        });
     }
+
+    private void checkEmailAvailability() {
+        emailchecked = false;
+        signInUpController.checkEmailAvailability(email.getText().toString(), new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                emailchecked = true;
+                emailAvailable = state;
+            }
+        });
+    }
+
 }

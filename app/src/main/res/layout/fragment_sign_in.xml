@@ -1,0 +1,106 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.khaledsabry.entertainment.Fragments.SignInFragment"
+    android:background="@drawable/MainBackground">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/toplayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+
+            android:orientation="vertical">
+
+           <EditText
+               android:id="@+id/username"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               style="@style/TextHeader"
+               android:inputType="text"
+               android:textSize="@dimen/_15sdp"
+               android:textAlignment="textStart"
+               android:textColorHint="#FF747474"
+               android:drawableLeft="@drawable/ic_person_black_24dp"
+               android:drawablePadding="@dimen/_5sdp"
+               android:hint="Username"
+               />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextHeader"
+                android:inputType="numberPassword"
+                android:textSize="@dimen/_15sdp"
+                android:textAlignment="textStart"
+                android:textColorHint="#FF747474"
+                android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:hint="password"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/signin"
+            style="@style/TextHeader"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/blue"
+            android:text="sign in"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/signup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <Button
+            android:id="@+id/signup"
+            style="@style/TextHeader"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/blue"
+            android:text="sign up"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/forgetpassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/forgetpassword"
+            style="@style/TextHeader"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/blue"
+            android:text="forgot passowrd"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

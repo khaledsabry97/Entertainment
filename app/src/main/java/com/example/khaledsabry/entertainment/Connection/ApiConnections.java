@@ -68,7 +68,7 @@ public class ApiConnections {
         return ourInstance;
     }
 
-    public void connect(String url, final OnSuccess listener) {
+    public void connect(String url, final OnSuccess.Json listener) {
 
         url = url.replace(" ","%20");
 
@@ -94,7 +94,7 @@ public class ApiConnections {
 
     }
 
-    public void connectOneom(String url, final OnSuccess listener) {
+    public void connectOneom(String url, final OnSuccess.Json listener) {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 JsonObjectRequest.Method.GET, url, null, new Response.Listener<JSONObject>() {

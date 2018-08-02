@@ -62,19 +62,22 @@ public class YoutubeController {
         addSafeSearch();
         addType(null);
         addQuery(searchQuery);
-        execute(new OnSuccess() {
+        execute(new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(youtubeJson.getVideos(jsonObject));
+
             }
         });
+
+
     }
 
     private void addQuery(String searchQuery) {
         url += "&q=" + searchQuery;
     }
 
-    private void execute(OnSuccess listener) {
+    private void execute(OnSuccess.Json listener) {
         connection.connect(url, listener);
     }
 

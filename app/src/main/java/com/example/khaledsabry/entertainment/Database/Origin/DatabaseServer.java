@@ -36,7 +36,7 @@ public class DatabaseServer {
     private final String serverResponse = "server_response";
 
     //this is a main function that i use it from only the functions of this class
-    private void connect(int request, String url, final String query, final OnSuccess listener) {
+    private void connect(int request, String url, final String query, final OnSuccess.Json listener) {
         StringRequest stringRequest = new StringRequest(request, url,
                 new Response.Listener<String>() {
                     @Override
@@ -72,7 +72,7 @@ public class DatabaseServer {
     //insert function to send it to the database
     public void insert(final String query, final OnDatabaseSuccess.bool listener) {
         String url = baseUrl + inserting;
-        connect(Request.Method.POST, url, query, new OnSuccess() {
+        connect(Request.Method.POST, url, query, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 boolean state = objectJson(jsonObject);
@@ -84,7 +84,7 @@ public class DatabaseServer {
     //select function to get data from the database
     public void select(final String query, final OnDatabaseSuccess.array listener) {
         String url = baseUrl + selecting;
-        connect(Request.Method.POST, url, query, new OnSuccess() {
+        connect(Request.Method.POST, url, query, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 ArrayList<JSONObject> jsonObjects = arrayJson(jsonObject);
@@ -96,7 +96,7 @@ public class DatabaseServer {
     //update function to update data from the database
     public void update(final String query, final OnDatabaseSuccess.bool listener) {
         String url = baseUrl + updating;
-        connect(Request.Method.POST, url, query, new OnSuccess() {
+        connect(Request.Method.POST, url, query, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 boolean state = objectJson(jsonObject);
@@ -108,7 +108,7 @@ public class DatabaseServer {
     //delete data from the database
     public void delete(final String query, final OnDatabaseSuccess.bool listener) {
         String url = baseUrl + deleting;
-        connect(Request.Method.POST, url, query, new OnSuccess() {
+        connect(Request.Method.POST, url, query, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 boolean state = objectJson(jsonObject);

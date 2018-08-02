@@ -48,7 +48,7 @@ public class TmdbController {
         movieGetDetails = "movie/" + movieID;
         String URL = makeBaseUrl(movieGetDetails) + "&append_to_response=credits,images,videos,reviews";
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.showMovie(jsonObject));
@@ -61,7 +61,7 @@ public class TmdbController {
     public void getRecommendations(int movieId, final OnMovieList listener) {
         movieGetDetails = "movie/" + movieId + "/recommendations";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onMovieList(controller.showRecommendationsAndSimilar(jsonObject));
@@ -76,7 +76,7 @@ public class TmdbController {
     public void getSimilar(int movieId, final OnMovieList listener) {
         movieGetDetails = "movie/" + movieId + "/similar";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 // getMovieCast(jsonObject);
@@ -92,7 +92,7 @@ public class TmdbController {
         movieGetDetails = "movie/" + movieID;
         String URL = makeBaseUrl(movieGetDetails) + "&append_to_response=credits,videos";
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getMovieVideosCreditsCategories(jsonObject));
@@ -105,7 +105,7 @@ public class TmdbController {
         movieGetDetails = "movie/" + movieID + "/images";
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getPostersBackdrops(jsonObject, new Movie()));
@@ -118,7 +118,7 @@ public class TmdbController {
         movieGetDetails = "movie/" + movieID + "/reviews";
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 Movie movie = new Movie();
@@ -134,7 +134,7 @@ public class TmdbController {
             return;
         movieGetDetails = "search/multi";
         String URL = makeBaseUrl(movieGetDetails)+"&query="+query+"&page=1";
-connection.connect(URL, new OnSuccess() {
+connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getSearchDone(jsonObject));
@@ -147,7 +147,7 @@ connection.connect(URL, new OnSuccess() {
         movieGetDetails = "genre/movie/list";
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getGenres(jsonObject));
@@ -160,7 +160,7 @@ connection.connect(URL, new OnSuccess() {
         movieGetDetails = "person/"+personId;
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getPersonDetails(jsonObject));
@@ -173,7 +173,7 @@ connection.connect(URL, new OnSuccess() {
         movieGetDetails = "person/"+personId+"/combined_credits";
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getPersonRoles(jsonObject));
@@ -186,7 +186,7 @@ connection.connect(URL, new OnSuccess() {
         movieGetDetails = "person/"+personId+"/images";
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getPersonImages(jsonObject));
@@ -200,7 +200,7 @@ connection.connect(URL, new OnSuccess() {
         movieGetDetails = "tv/" + tvId;
         String URL = makeBaseUrl(movieGetDetails) + "&append_to_response=credits,images,videos,reviews";
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getTv(jsonObject,new Tv()));
@@ -213,7 +213,7 @@ connection.connect(URL, new OnSuccess() {
         movieGetDetails = "tv/" + tvId + "/images";
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getPostersBackdrops(jsonObject, new Tv()));
@@ -226,7 +226,7 @@ connection.connect(URL, new OnSuccess() {
         movieGetDetails = "tv/" + tvId + "/season/"+seasonNo;
         String URL = makeBaseUrl(movieGetDetails);
 
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getSeason(jsonObject));
@@ -242,7 +242,7 @@ connection.connect(URL, new OnSuccess() {
     public void getMoviesNowPlaying(final OnMovieList listener) {
         movieGetDetails = "movie/now_playing";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 // getMovieCast(jsonObject);
@@ -257,7 +257,7 @@ connection.connect(URL, new OnSuccess() {
     public void getMoviesPopular(final OnMovieList listener) {
         movieGetDetails = "movie/popular";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onMovieList(controller.getMoviePopular(jsonObject));
@@ -272,7 +272,7 @@ connection.connect(URL, new OnSuccess() {
     public void getMoviesTopRated(final OnMovieList listener) {
         movieGetDetails = "movie/top_rated";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onMovieList(controller.getMovieTopRated(jsonObject));
@@ -286,7 +286,7 @@ connection.connect(URL, new OnSuccess() {
     public void getMoviesUpComing(final OnMovieList listener) {
         movieGetDetails = "movie/upcoming";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onMovieList(controller.getMovieUpComing(jsonObject));
@@ -301,7 +301,7 @@ connection.connect(URL, new OnSuccess() {
     public void getTvOnAir(final OnTvList listener) {
         movieGetDetails = "tv/on_the_air";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 // getMovieCast(jsonObject);
@@ -314,7 +314,7 @@ connection.connect(URL, new OnSuccess() {
     public void getTvAirToday(final OnTvList listener) {
         movieGetDetails = "tv/airing_today";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getTvAiringToday(jsonObject));
@@ -328,7 +328,7 @@ connection.connect(URL, new OnSuccess() {
     public void getTvPopular(final OnTvList listener) {
         movieGetDetails = "tv/popular";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 // getMovieCast(jsonObject);
@@ -341,7 +341,7 @@ connection.connect(URL, new OnSuccess() {
     public void getTvTopRated(final OnTvList listener) {
         movieGetDetails = "tv/top_rated";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 // getMovieCast(jsonObject);
@@ -357,7 +357,7 @@ connection.connect(URL, new OnSuccess() {
     public void getArtistPopular(final OnArtistDataSuccess.List listener) {
         movieGetDetails = "person/popular";
         String URL = makeBaseUrl(movieGetDetails);
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 listener.onSuccess(controller.getArtistPopular(jsonObject));
@@ -376,7 +376,7 @@ connection.connect(URL, new OnSuccess() {
         String URL = makeBaseUrl(movieGetDetails)+"&query="+movieName;
         if(year != null)
             URL+="&year="+year;
-        connection.connect(URL, new OnSuccess() {
+        connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 ArrayList<SearchItem> searchItems = new ArrayList<>();

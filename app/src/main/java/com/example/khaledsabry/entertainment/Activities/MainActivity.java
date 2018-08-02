@@ -13,14 +13,12 @@ import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
-import com.example.khaledsabry.entertainment.Fragments.SignUpFragment;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
+import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
    //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
-loadFragmentNoReturn(R.id.mainContainer, SignUpFragment.newInstance());
+loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
     }
 
 

@@ -40,4 +40,23 @@ arrayList.add(object);
         return arrayList;
     }
 
+
+
+    protected Object getObject(String key,ArrayList<JSONObject> jsonObjects)
+    {
+        Object object = null;
+        key = key.replace("`","");
+        if(jsonObjects.size() == 0)
+            return null;
+        try {
+            object = jsonObjects.get(0).get(key);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return object;
+
+    }
+
 }
