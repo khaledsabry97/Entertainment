@@ -9,6 +9,29 @@ package com.example.khaledsabry.entertainment.Database.Origin;
         //every String in the classes inside the databasetables is an attribute in the database
 public class DatabaseTables {
 
+    //this is not a table but it's a constants that is used to easy the database
+    public class constants
+    {
+        //for category table "category type"
+        public final static int favourite = 1;
+        public final static int history = 2;
+        public final static int other = 3;
+
+
+        //for category table "content type"
+        public final static int movie = 1;
+        public final static int tv = 2;
+        public final static int artist = 2;
+
+        //for friend table  "type"
+        public final static int friend = 1;
+        public final static int movieLover = 2;
+        public final static int contentMaker = 3;
+        public final static int brother = 4;
+        public final static int sister = 5;
+
+
+    }
   public class user
     {
         public final static String tableName = "`user`";
@@ -19,4 +42,27 @@ public class DatabaseTables {
         public final static String phone = "`phone`";
         public final static String id = "id";
     }
+
+    public class category
+    {
+        public final static String tableName = "`category`";
+        public final static String userId = "`userId`";
+        public final static String contentType = "`contentType`";
+        public final static String categoryType ="`categoryType`";
+        public final static String categoryName ="`categoryName`";
+
+        public final static String tmdbId = "`tmdbId`";
+        public final static String imdbId = "`imdbId`";
+        public final static String description = "`description`";
+    }
+
+    public class follower
+    {
+        public final static String tableName = "`follower`";
+        public final static String userId = "`userId`";
+        public final static String followerId = "`followerId`";
+        public final static String type ="`type`";
+
+    }
+
 }

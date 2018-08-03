@@ -60,6 +60,8 @@ public class DatabaseController {
     //this is to create an insert query
     //important: in this project i used this in all the queries
     protected String createInsertQuery(String tableName, HashMap<String, String> map) {
+        addqoutes(map);
+
         String query = "insert into " + tableName + "(";
         ArrayList<String> keys = new ArrayList<String>(map.keySet());
         ArrayList<String> values = new ArrayList<String>(map.values());

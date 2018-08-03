@@ -26,6 +26,8 @@ public class SelectController extends DatabaseController {
     private final String lessOrEqual = "<=";
     private final String biggerOrEqual = ">=";
     private String and = " and ";
+    private String or = " or ";
+
 
     private ArrayList<String> selects;
     private HashMap<String, String> tables;
@@ -81,6 +83,26 @@ public class SelectController extends DatabaseController {
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
 
+    }
+
+
+    public void userSearchForusers(String usernameOrEmail,OnDatabaseSuccess.array listener)
+    {
+        usernameOrEmail = addqoutes(usernameOrEmail);
+
+        selects.add(DatabaseTables.user.username);
+        selects.add(DatabaseTables.user.email);
+        selects.add(DatabaseTables.user.id);
+
+        tables.put(DatabaseTables.user.tableName,null);
+
+
+        condition += DatabaseTables.user.username + equal + usernameOrEmail;
+        condition += or;
+        condition += DatabaseTables.user.email +equal +usernameOrEmail;
+
+        String query = createSelectQuery(selects,tables,condition);
+        server.select(query,listener);
     }
 
 

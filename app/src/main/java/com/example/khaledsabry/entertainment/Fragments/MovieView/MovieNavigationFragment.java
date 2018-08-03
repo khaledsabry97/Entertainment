@@ -71,11 +71,9 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
             if (movie != null)
                 loadFragment(TorrentFragment.newInstance(movie.getTitle() + " " + movie.getYear()));
         }
-        //
-        //   loadFragmentWithReturn(ReviewFragment.newInstance(movieId));
+
         else if (item.getItemId() == R.id.navigation_youtube)
             loadYoutubeFragment();
-        // loadFragmentWithReturn(RecommendedAndSimilarFragment.newInstance(movieId));
         return true;
     }
 

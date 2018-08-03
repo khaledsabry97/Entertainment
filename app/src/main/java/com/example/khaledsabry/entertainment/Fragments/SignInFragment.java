@@ -42,7 +42,6 @@ public class SignInFragment extends Fragment {
         forgetPassword = view.findViewById(R.id.forgetpassword);
         controller = new SignInUpController();
 
-
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,16 +63,19 @@ public class SignInFragment extends Fragment {
             }
         });
 
-
+signIn();
         return view;
     }
 
 
     private void signIn()
     {
+        /*
      if(!allChecked())
          return;
-
+*/
+        username.setText("khaled");
+        password.setText("4234324");
      controller.signIn(username.getText().toString(), password.getText().toString(), new OnSuccess.bool() {
          @Override
          public void onSuccess(boolean state) {
