@@ -4,6 +4,8 @@ import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseController;
+import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
+import com.example.khaledsabry.entertainment.Database.UserData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +19,8 @@ import java.util.ArrayList;
 public class Controller {
     //variable to the database controller to use it latter in the childeren of the parent controller class
     protected DatabaseController databaseController = new DatabaseController();
-
+    public DatabaseTables.constants constants = new DatabaseTables.constants();
+    protected UserData userData = UserData.getInstance();
     //to show a msg on screen
     public void toast(String msg) {
         Toast.makeText(MainActivity.getActivity().getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
@@ -54,7 +57,7 @@ arrayList.add(object);
             e.printStackTrace();
             return null;
         }
-
+String name =object.toString();
         return object;
 
     }

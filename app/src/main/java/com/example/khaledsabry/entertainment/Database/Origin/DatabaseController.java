@@ -14,6 +14,8 @@ import java.util.HashMap;
  */
 
 public class DatabaseController {
+
+    protected DatabaseTables.constants constants = new DatabaseTables.constants();
     //quoutes that is used to let the query function correctly
     String quoute = "\"";
     //this is a refrence to the database server to access to the web
@@ -129,4 +131,15 @@ public class DatabaseController {
        return query;
 
     }
+
+
+    protected String createDeleteQuery(String table, String condition) {
+        String query;
+        query = "Delete From " + table;
+        query += "where " + condition;
+
+        return query;
+
+    }
+
 }

@@ -107,7 +107,7 @@ public class DatabaseServer {
 
     //delete data from the database
     public void delete(final String query, final OnDatabaseSuccess.bool listener) {
-        String url = baseUrl + deleting;
+        String url = baseUrl + inserting;
         connect(Request.Method.POST, url, query, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {

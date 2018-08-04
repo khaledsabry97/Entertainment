@@ -10,25 +10,25 @@ package com.example.khaledsabry.entertainment.Database.Origin;
 public class DatabaseTables {
 
     //this is not a table but it's a constants that is used to easy the database
-    public class constants
+    public static class constants
     {
         //for category table "category type"
-        public final static int favourite = 1;
-        public final static int history = 2;
-        public final static int other = 3;
+        public final  int favourite = 1;
+        public final  int history = 2;
+        public final  int other = 3;
 
 
         //for category table "content type"
-        public final static int movie = 1;
-        public final static int tv = 2;
-        public final static int artist = 2;
+        public final  int movie = 1;
+        public final  int tv = 2;
+        public final  int artist = 2;
 
         //for friend table  "type"
-        public final static int friend = 1;
-        public final static int movieLover = 2;
-        public final static int contentMaker = 3;
-        public final static int brother = 4;
-        public final static int sister = 5;
+        public final  int friend = 1;
+        public final  int movieLover = 2;
+        public final  int contentMaker = 3;
+        public final  int brother = 4;
+        public final  int sister = 5;
 
 
     }

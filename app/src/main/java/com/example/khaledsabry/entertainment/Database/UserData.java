@@ -1,19 +1,42 @@
 package com.example.khaledsabry.entertainment.Database;
 
+import android.support.v4.app.NavUtils;
+
 /**
  * Created by KhALeD SaBrY on 02-Aug-18.
  */
 
 public class UserData {
 
-    private static String username;
+    private  String username;
+    private  Integer userId;
+    static UserData userData = null;
 
 
-    public static String getUsername() {
+    private UserData() {
+
+    }
+
+    public static UserData getInstance() {
+        if (userData == null)
+            userData = new UserData();
+        return userData;
+    }
+
+
+    public  Integer getUserId() {
+        return userId;
+    }
+
+    public  void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public  String getUsername() {
         return username;
     }
 
-    public static void setUsername(String username) {
-        UserData.username = username;
+    public  void setUsername(String username) {
+        this.username = username;
     }
 }

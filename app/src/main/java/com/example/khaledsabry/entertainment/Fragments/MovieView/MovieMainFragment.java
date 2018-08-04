@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
+import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
@@ -31,7 +35,7 @@ public class MovieMainFragment extends Fragment {
 
     int movieId;
     static int currentMovieId = -1;
-     Movie movie = null;
+    Movie movie = null;
 
     TextView title;
     TextView overviewText;
@@ -43,7 +47,7 @@ public class MovieMainFragment extends Fragment {
     TextView rate;
     TextView adult;
     TextView status;
-
+    ImageView favourite;
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
@@ -53,6 +57,7 @@ public class MovieMainFragment extends Fragment {
 
     NestedScrollView scrollView;
     static FrameLayout reviewLayout;
+    CategoryController categoryController = new CategoryController();
 
     public static MovieMainFragment newInstance(int movieId) {
         MovieMainFragment fragment = new MovieMainFragment();
@@ -82,12 +87,14 @@ public class MovieMainFragment extends Fragment {
         scrollView = v.findViewById(R.id.sideid);
         scrollView.setVisibility(View.INVISIBLE);
         reviewLayout = v.findViewById(R.id.ReviewLayoutid);
+        favourite = v.findViewById(R.id.favourite);
+        categoryController = new CategoryController();
         getMovieDetails();
         return v;
     }
 
     public void getMovieDetails() {
-        movie =MovieNavigationFragment.movie;
+        movie = MovieNavigationFragment.movie;
         if (movieId != currentMovieId) {
             TmdbController tmdbController = new TmdbController();
             tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
@@ -103,7 +110,7 @@ public class MovieMainFragment extends Fragment {
     }
 
 
-    private void setObjects(Movie movie) {
+    private void setObjects(final Movie movie) {
         this.movie = movie;
 
         overviewText.setText(movie.getOverView());
@@ -141,12 +148,31 @@ public class MovieMainFragment extends Fragment {
         viewPagerAdapter.movePoster(viewPager, viewPagerAdapter, 7000, 4000);
 
 
-
-
         loadActorFragment();
         loadReviewFragment();
         loadProductionFragment();
 
+        categoryController.addHistory(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+            }});
+
+
+
+
+        favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
+    @Override
+    public void onSuccess(boolean state) {
+        if(state)
+        categoryController.toast(movie.getTitle() + " has been added to your favourite list");
+
+    }
+});
+            }
+        });
         actorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,7 +192,7 @@ public class MovieMainFragment extends Fragment {
 
 
     private void loadProductionFragment() {
-        if(movie == null)
+        if (movie == null)
             return;
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(movie.getProductionCompanies())).commit();
 

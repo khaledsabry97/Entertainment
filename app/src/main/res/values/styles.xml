@@ -1,4 +1,4 @@
-<resources>
+<resources >
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -89,5 +89,17 @@
         <item name="queryHint">"type something"</item>
     </style>
 
+
+    <style name="MaterialSpinner">
+
+        <item name="android:fontFamily">@font/carterone</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
+
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
+    </style>
 
 </resources>
