@@ -30,7 +30,7 @@ public class NewMainMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_new_main_menu, container, false);
-
+/*
   LinearLayoutManager      linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
 linearLayoutManager.setSmoothScrollbarEnabled(true);
 newsRecycler.setLayoutManager(linearLayoutManager);
@@ -56,10 +56,10 @@ RecyclerView.SmoothScroller smoothScroller = new RecyclerView.SmoothScroller() {
 
     }
 }
-        moveNews();
+        moveNews();*/
         return view;
     }
-
+/*
     private void moveNews() {
         final int speedScroll = 1200;
         final Handler handler = new Handler();
@@ -85,5 +85,5 @@ RecyclerView.SmoothScroller smoothScroller = new RecyclerView.SmoothScroller() {
 
         handler.postDelayed(runnable,speedScroll);
     }
-
+*/
 }

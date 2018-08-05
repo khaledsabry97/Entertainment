@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Activities;
 
+import android.icu.util.Calendar;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,14 +13,20 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
+import com.example.khaledsabry.entertainment.Fragments.NewsFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
+import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -65,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     loadFragmentNoReturn(R.id.mainContainer,BoxOfficeFragment.newInstance());
                 else if (id == R.id.topgross)
                     Toast.makeText(getApplicationContext(), "boxofficeid", Toast.LENGTH_LONG).show();
-
+else if(id ==R.id.news)
+    loadFragmentNoReturn(R.id.mainContainer, NewsFragment.newInstance());
                 navigationView.setCheckedItem(id);
                 drawerLayout.closeDrawer(GravityCompat.START, true);
                 return true;
@@ -82,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
    //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
-loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
+
+        loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
     }
 
 

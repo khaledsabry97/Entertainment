@@ -25,7 +25,7 @@
 
     </style>
 
-    <style name="TextNormal">
+    <style name="TextNormalLine">
         <item name="android:fontFamily">@font/carterone</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
@@ -38,11 +38,35 @@
 
     </style>
 
-    <style name="TextNormalRound">
+    <style name="TextNormal">
+        <item name="android:fontFamily">@font/carterone</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
+
+        <item name="android:textSize">@dimen/size_normal_text</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
+
+
+    </style>
+
+    <style name="TextNormalRoundLine">
         <item name="android:fontFamily">@font/carterone</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
         <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/size_normal_text</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
+        <item name="android:background">@drawable/round</item>
+
+
+    </style>
+
+
+    <style name="TextNormalRound">
+        <item name="android:fontFamily">@font/carterone</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">@dimen/_4sdp</item>
         <item name="android:textSize">@dimen/size_normal_text</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/cardview_light_background</item>

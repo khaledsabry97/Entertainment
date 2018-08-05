@@ -7,9 +7,12 @@ import android.text.method.DateTimeKeyListener;
 
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Attribute;
+import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -398,52 +401,88 @@ public class WebApi {
     }
 
 
-public void imdbTopNews(final OnWebSuccess.OnMovieList listener)
+public void imdbTopNews(final OnWebSuccess.OnNews listener)
 {
-    imdbNews("Top",listener);
+    imdbNews("top",listener);
 }
-    private void imdbNews(final String type, final OnWebSuccess.OnMovieList listener) {
-        AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
+    private void imdbNews(final String type, final OnWebSuccess.OnNews listener) {
+        AsyncTask<Void, Void, ArrayList<News>> task = new AsyncTask<Void, Void, ArrayList<News>>() {
             @Override
-            protected ArrayList<Movie> doInBackground(Void... voids) {
-                ArrayList<Movie> movies = new ArrayList<>();
+            protected ArrayList<News> doInBackground(Void... voids) {
+                ArrayList<News> news = new ArrayList<>();
                 org.jsoup.nodes.Document
                         doc = null;
                 try {
                     doc = Jsoup.connect("https://www.imdb.com/news/"+type).get();
 
                     if (doc == null)
-                        return movies;
-                    Elements results = doc.getElementsByClass("ipl-zebra-list");
+                        return news;
+                    Elements results = doc.getElementsByClass("ipl-zebra-list__item news-article");
+
 
                     if (results == null)
-                        return movies;
+                        return news;
                     for (Element element : results) {
-                        Elements attributes = element.getElementsByClass("news-article__header");
+                        Elements attributes = element.getElementsByClass("news-article__title");
                         String newsTitle = attributes.get(0).text();
-                        String url = attributes.get(0).attr("href");
+                        Elements sdf =attributes.get(0).getElementsByAttribute("href");
+                        String url = "https://www.imdb.com";
+                        url += sdf.get(0).attr("href");
 
-                        Elements titleSpecefications = attributes.get(1).getAllElements();
-                        String time = titleSpecefications.get(0).text();
-                        String writtenBy = titleSpecefications.get(1).text();
-                        String source = titleSpecefications.get(2).text();
+                        attributes = element.getElementsByClass("ipl-inline-list__item news-article__date");
+                        String time = attributes.get(0).text();
+                        String writtenBy = "";
+                        try {
+                            attributes = element.getElementsByClass("ipl-inline-list__item news-article__author");
+                             writtenBy = attributes.get(0).text();
+                        }
+                        catch (Exception e) {
+
+                        }
+                        attributes = element.getElementsByClass("ipl-inline-list__item news-article__source");
+                        String source = attributes.get(0).text();
 
 
-                        attributes = element.getElementsByClass("news-article__body");
-                        String content = attributes.get(1).text();
+                        attributes = element.getElementsByClass("news-article__content");
+                        String content = attributes.get(0).text();
+                        String image = null;
+                        try {
+                            attributes =element.getElementsByClass("news-article__image");
+                            Attributes  attributes1= attributes.get(0).attributes();
+                             image = attributes1.get("src");
+                            image = image.substring(0,image.indexOf('@')+1);
+                            image +="._V1_SY600_SX400_AL_.jpg";
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+
+
+News news1 = new News();
+news1.setTitle(newsTitle);
+                        news1.setContent(content);
+                        news1.setImage(image);
+                        news1.setSource(source);
+                        news1.setTime(time);
+                        news1.setUrl(url);
+                        news1.setWrittenBy(writtenBy);
+
+                        news.add(news1);
+
 
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
-
+e.printStackTrace();
                 }
-                return movies;
+                return news;
             }
 
             @Override
-            protected void onPostExecute(ArrayList<Movie> movies) {
-                listener.onSuccess(movies);
+            protected void onPostExecute(ArrayList<News> news) {
+                listener.onSuccess(news);
 
             }
         };

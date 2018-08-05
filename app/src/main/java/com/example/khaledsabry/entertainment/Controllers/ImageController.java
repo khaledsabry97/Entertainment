@@ -94,8 +94,8 @@ public class ImageController {
 
 
     public static void putImageMidQualityYoutube(String posterImage, ImageView image) {
-        if(image == null || posterImage == null)
-            return;
+       // if(image == null || posterImage == null)
+    //        return;
 
         String url = posterImage;
         // Picasso.get().load(url).into(image);

@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Interfaces;
 
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 
 import java.util.ArrayList;
@@ -20,6 +21,12 @@ public interface OnWebSuccess {
     public interface OnMovieList
     {
         void onSuccess(ArrayList<Movie> movies);
+
+    }
+
+    public interface OnNews
+    {
+        void onSuccess(ArrayList<News> news);
 
     }
 }

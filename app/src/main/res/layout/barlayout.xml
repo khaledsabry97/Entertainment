@@ -10,10 +10,10 @@
         style="@style/TextHeader"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
-        android:background="@drawable/blue"
+        android:background="@drawable/red6"
         android:paddingLeft="10dp"
         android:text="Header"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

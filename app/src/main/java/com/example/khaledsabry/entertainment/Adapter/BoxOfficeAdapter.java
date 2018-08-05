@@ -69,7 +69,7 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
             position = itemView.findViewById(R.id.position);
             rate = itemView.findViewById(R.id.rate);
             title = itemView.findViewById(R.id.title);
-            genres = itemView.findViewById(R.id.genre);
+            genres = itemView.findViewById(R.id.writtenBy);
             revenue = itemView.findViewById(R.id.revenue);
             date = itemView.findViewById(R.id.date);
             poster = itemView.findViewById(R.id.poster);

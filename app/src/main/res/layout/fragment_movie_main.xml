@@ -150,7 +150,7 @@
 
                         <TextView
                             android:id="@+id/timeid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -176,7 +176,7 @@
 
                         <TextView
                             android:id="@+id/releasetimeid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -203,7 +203,7 @@
 
                         <TextView
                             android:id="@+id/genresid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -229,7 +229,7 @@
 
                         <TextView
                             android:id="@+id/budgetid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -254,7 +254,7 @@
 
                         <TextView
                             android:id="@+id/revenueid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -279,7 +279,7 @@
 
                         <TextView
                             android:id="@+id/adultid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -304,7 +304,7 @@
 
                         <TextView
                             android:id="@+id/statusid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -329,7 +329,7 @@
 
                         <TextView
                             android:id="@+id/rateid"
-                            style="@style/TextNormal"
+                            style="@style/TextNormalLine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"

@@ -6,6 +6,6 @@
     <color name="brownandblack">#212121</color>
     <color name="shadow">#a6000000</color>
     <color name="blue">#161923</color>
-    <drawable name="MainBackground">@drawable/background</drawable>
+    <drawable name="MainBackground">@drawable/background3</drawable>
 
 </resources>
