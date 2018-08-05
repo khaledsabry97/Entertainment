@@ -398,4 +398,58 @@ public class WebApi {
     }
 
 
+public void imdbTopNews(final OnWebSuccess.OnMovieList listener)
+{
+    imdbNews("Top",listener);
+}
+    private void imdbNews(final String type, final OnWebSuccess.OnMovieList listener) {
+        AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
+            @Override
+            protected ArrayList<Movie> doInBackground(Void... voids) {
+                ArrayList<Movie> movies = new ArrayList<>();
+                org.jsoup.nodes.Document
+                        doc = null;
+                try {
+                    doc = Jsoup.connect("https://www.imdb.com/news/"+type).get();
+
+                    if (doc == null)
+                        return movies;
+                    Elements results = doc.getElementsByClass("ipl-zebra-list");
+
+                    if (results == null)
+                        return movies;
+                    for (Element element : results) {
+                        Elements attributes = element.getElementsByClass("news-article__header");
+                        String newsTitle = attributes.get(0).text();
+                        String url = attributes.get(0).attr("href");
+
+                        Elements titleSpecefications = attributes.get(1).getAllElements();
+                        String time = titleSpecefications.get(0).text();
+                        String writtenBy = titleSpecefications.get(1).text();
+                        String source = titleSpecefications.get(2).text();
+
+
+                        attributes = element.getElementsByClass("news-article__body");
+                        String content = attributes.get(1).text();
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+
+                }
+                return movies;
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<Movie> movies) {
+                listener.onSuccess(movies);
+
+            }
+        };
+        task.execute();
+
+    }
+
+
 }

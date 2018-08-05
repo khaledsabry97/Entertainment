@@ -19,3 +19,43 @@ the plan :
 - change the tmdb to best handling for the main movie info
 - run the images
 - put youtube in a recyclar view
+
+
+
+
+
+
+
+4/8/2018 to 11/8/2018
+- make profile page
+- provide the ability to upload photo
+- provide the ability to add friends
+- search for members by username/email/phone
+- provide the ability to add to watchlist or even a custom one
+
+
+
+12/8/2018 to 18/8/2018
+- show the custom categories
+- add today's box office
+- add rottentomatoes rating
+- add reviews from rottentomatoes/imdb
+- add news from imdb
+
+
+19/8/2018 to 25/8/2018
+- learn about sqllite
+- make setting page
+- adjust the sign in/up page and add forget my password
+- adjust the search view
+- adjus the two bars at the beginning
+
+
+
+
+
+
+
+
+
+
