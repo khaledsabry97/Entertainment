@@ -400,7 +400,24 @@ public class WebApi {
 
     }
 
+    public void imdbCelebrityNews(final OnWebSuccess.OnNews listener)
+    {
+        imdbNews("celebrity",listener);
+    }
 
+    public void imdbTvNews(final OnWebSuccess.OnNews listener)
+    {
+        imdbNews("tv",listener);
+    }
+
+    public void imdbIndieNews(final OnWebSuccess.OnNews listener)
+    {
+        imdbNews("indie",listener);
+    }
+    public void imdbMovieNews(final OnWebSuccess.OnNews listener)
+    {
+        imdbNews("movie",listener);
+    }
 public void imdbTopNews(final OnWebSuccess.OnNews listener)
 {
     imdbNews("top",listener);
@@ -450,8 +467,8 @@ public void imdbTopNews(final OnWebSuccess.OnNews listener)
                             attributes =element.getElementsByClass("news-article__image");
                             Attributes  attributes1= attributes.get(0).attributes();
                              image = attributes1.get("src");
-                            image = image.substring(0,image.indexOf('@')+1);
-                            image +="._V1_SY600_SX400_AL_.jpg";
+                            image = image.substring(0,image.indexOf("._")+1);
+                            image +="V1_SY600_SX400_AL_.jpg";
                         }
                         catch (Exception e)
                         {

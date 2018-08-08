@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Fragments.NewsFragment;
 import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.R;
 
@@ -22,6 +23,14 @@ import java.util.ArrayList;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private ArrayList<News> news = new ArrayList<>();
+
+    public void setNews(ArrayList<News> news) {
+        this.news = news;
+    }
+
+    public ArrayList<News> getNews() {
+        return news;
+    }
 
     public NewsAdapter(ArrayList<News> news) {
         this.news = news;
@@ -44,6 +53,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public int getItemCount() {
+        if(news == null)
+            return 0;
         return news.size();
     }
 
@@ -74,7 +85,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
 
 
-        void updateUi(News news)
+        void updateUi(final News news)
         {
             poster.setVisibility(View.VISIBLE);
             title.setText(news.getTitle());
@@ -91,7 +102,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             viewSource.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    try {
+                        NewsFragment.fragment.loadWebView(news.getUrl());
 
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                 }
             });
 

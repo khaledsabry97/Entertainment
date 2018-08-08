@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/topnews"
+        android:icon="@drawable/arrowleft"
+        android:title="Top News" />
+    <item
+        android:id="@+id/movienews"
+        android:icon="@mipmap/outline_theaters_black_48"
+        android:title="Movie News" />
+
+    <item
+        android:id="@+id/tvnews"
+        android:icon="@drawable/images"
+        android:title="Tv News" />
+    <item
+        android:id="@+id/actorsnews"
+        android:icon="@drawable/download"
+        android:title="Actors News" />
+
+    <item
+        android:id="@+id/indienews"
+        android:icon="@drawable/download"
+        android:title="Indie News" />
+</menu>

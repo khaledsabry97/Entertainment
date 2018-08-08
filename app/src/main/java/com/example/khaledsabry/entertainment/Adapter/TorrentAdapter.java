@@ -104,7 +104,8 @@ String magnet = torrent.getMagnet();
                     i.setType("application/x-bittorrent");
                     i.setData(Uri.parse(torrent.getMagnet()));
                  Intent intent =    generateTorrentIntent(MainActivity.getActivity().getApplicationContext(),i);
-                 MainActivity.getActivity().startActivity(intent);
+
+                 MainActivity.getActivity().startActivity(Intent.createChooser(intent,"send to"));
 
                 }
             });
@@ -123,7 +124,7 @@ String magnet = torrent.getMagnet();
                     String packageName = r.activityInfo.packageName;
 
                     progIntent.setPackage(packageName);
-                    if (r.activityInfo.packageName.contains("torrent"))
+                    if (r.activityInfo.packageName.toLowerCase().contains("torrent"))
                         targetedShareIntents.add(progIntent);
 
                 }
