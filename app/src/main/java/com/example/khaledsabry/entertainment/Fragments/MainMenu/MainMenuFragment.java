@@ -4,13 +4,17 @@ package com.example.khaledsabry.entertainment.Fragments.MainMenu;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.MainRecyclersAdapter;
+import com.example.khaledsabry.entertainment.Adapter.NewsFeedAdpater;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
@@ -30,6 +35,7 @@ import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
@@ -43,7 +49,8 @@ public class MainMenuFragment extends Fragment {
     RecyclerView recyclerView;
     TmdbController tmdbController;
     MainRecyclersAdapter adapter;
-
+Toolbar toolbar;
+RecyclerView newsRecycler;
 
     int search = R.id.searchid;
 
@@ -60,6 +67,9 @@ public class MainMenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerid);
+toolbar = view.findViewById(R.id.toolbar);
+newsRecycler = view.findViewById(R.id.news);
+        MainActivity.getActivity().setSupportActionBar(toolbar);
 
         tmdbController = new TmdbController();
         adapter = new MainRecyclersAdapter(new ArrayList<Classification>());
@@ -70,12 +80,27 @@ public class MainMenuFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
 
+
+
         loadFirst();
 
 
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.main_bar_menu,menu);
+      //  super.onCreateOptionsMenu(menu, inflater);
+    }
     private void loadSec() {
         /*setTopMoviesWorldWideGross(2018);
         setBoxOffice();
@@ -83,6 +108,8 @@ public class MainMenuFragment extends Fragment {
     }
 
     private void loadFirst() {
+
+        setNews();
         setMoviesNowPlaying();
         setMoviesPopular();
         setMoviesTopRated();
@@ -93,6 +120,41 @@ public class MainMenuFragment extends Fragment {
         setTvShowToday();
         //i will set the secload in the artist popular
         setArtistPopular();
+    }
+
+    private void setNews() {
+        WebApi.getInstance().imdbTopNews(new OnWebSuccess.OnNews() {
+            @Override
+            public void onSuccess(ArrayList<News> news) {
+                NewsFeedAdpater newsFeedAdpater = new NewsFeedAdpater(news);
+                newsRecycler.setHasFixedSize(false);
+                newsRecycler.setAdapter(newsFeedAdpater);
+                newsRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+
+                RecyclerView.SmoothScroller smoothScroller = new RecyclerView.SmoothScroller() {
+                    @Override
+                    protected void onStart() {
+
+                    }
+
+                    @Override
+                    protected void onStop() {
+
+                    }
+
+                    @Override
+                    protected void onSeekTargetStep(int dx, int dy, RecyclerView.State state, Action action) {
+
+                    }
+
+                    @Override
+                    protected void onTargetFound(View targetView, RecyclerView.State state, Action action) {
+
+                    }
+                };
+
+            }
+        });
     }
 
     private void setDailyBoxOffice() {

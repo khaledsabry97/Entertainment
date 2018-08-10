@@ -2,20 +2,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/cardview_dark_background"
     tools:context="com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment">
 
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
     <!-- TOUpdatingdate blank fragment layout -->
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Movita"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:background="@color/brownandblack"
+        ></android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent" />
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/news"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/cardview_news_bar"></android.support.v7.widget.RecyclerView>
 
 
 
+</android.support.constraint.ConstraintLayout>
 
 
 

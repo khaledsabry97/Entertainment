@@ -19,6 +19,7 @@ import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Fragments.NewsFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
+import com.example.khaledsabry.entertainment.Fragments.UserProfile.ProfileFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.News;
@@ -90,8 +91,9 @@ else if(id ==R.id.news)
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
    //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-        loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
+        loadFragmentNoReturn(R.id.mainContainer, ProfileFragment.newInstance());
     }
 
 

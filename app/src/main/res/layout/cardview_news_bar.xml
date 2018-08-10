@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    >
+
+
+
+        <TextView
+            android:id="@+id/newstitle"
+            android:text="Single line text view that scrolls automatically if the text is too long to fit in the widget how to change every thing again and again and again the only problem here is to change the reality"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit ="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
+            android:background="@drawable/blue"
+            android:layout_width="wrap_content"
+            style="@style/TextCategory"
+            android:layout_height="@dimen/_20sdp"/>
+
+
+</android.support.v7.widget.CardView>
