@@ -39,9 +39,4 @@ public class ContentSideBarFragment extends Fragment {
     }
 
 
-    public static void openCategoryAdd(ArrayList<String> names,ArrayList<Integer> ids,ArrayList<Boolean> booleans)
-    {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,CategoryAddFragment.newInstance(names,ids,booleans)).commit();
-    }
-
 }

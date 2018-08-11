@@ -21,24 +21,19 @@ public class DeleteController extends DatabaseController {
 
     private String condition = "";
 
-    public void categoryRemoveDuplicates(int userId, String tmdbId, String categoryName, OnDatabaseSuccess.bool listener)
-    {
-/*
+    public void categoryRemoveList(int categoryId, String tmdbId, OnDatabaseSuccess.bool listener) {
+
         tmdbId = addqoutes(tmdbId);
-        categoryName = addqoutes(categoryName);
-        condition += DatabaseTables.category.userId +equal + userId;
+
+        condition += listTable.categoryId + equal + categoryId;
         condition += and;
-        condition += DatabaseTables.category.tmdbId +equal +tmdbId;
-        condition +=and;
-        condition += DatabaseTables.category.categoryName + equal +categoryName;
+        condition += listTable.tmdbId + equal + tmdbId;
 
-server.delete(createDeleteQuery(DatabaseTables.category.tableName,condition),listener);
+        server.delete(createDeleteQuery(listTable.tableName, condition), listener);
 
-
-
-*/
 
     }
+
 
 
 

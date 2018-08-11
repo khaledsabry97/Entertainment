@@ -36,14 +36,34 @@ public class InsertController extends DatabaseController {
         server.insert(query, listener);
     }
 
+public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDatabaseSuccess.bool listener)
+{
+    /*deleteController().categoryRemoveList(categoryId, tmdbId, imdbId, new OnDatabaseSuccess.bool() {
+        @Override
+        public void onSuccess(boolean state) {
 
+        }
+    });
+
+    */
+
+    insert.put(listTable.categoryId, String.valueOf(categoryId));
+    insert.put(listTable.imdbId,imdbId);
+    insert.put(listTable.tmdbId,tmdbId);
+    insert.put(listTable.type, String.valueOf(type));
+
+
+    String query = createInsertQuery(listTable.tableName,insert);
+    server.insert(query,listener);
+
+}
     //add to the database the favourit/history movies.tvs or artists
     public void listAdd(String categoryName, int categoryType, int userid, String tmdbId, String imdbId, int contentType, String description, OnDatabaseSuccess.bool listener) {
 /*
         DeleteController deleteController = new DeleteController();
         if (categoryType == constants.Favourite) {
             insert.put(DatabaseTables.category.categoryName, "Favourite");
-            deleteController.categoryRemoveDuplicates(userid, tmdbId, "Favourite", new OnDatabaseSuccess.bool() {
+            deleteController.categoryRemoveList(userid, tmdbId, "Favourite", new OnDatabaseSuccess.bool() {
                 @Override
                 public void onSuccess(boolean state) {
 
@@ -51,7 +71,7 @@ public class InsertController extends DatabaseController {
             });
         } else if (categoryType == constants.history) {
             insert.put(DatabaseTables.category.categoryName, "History");
-            deleteController.categoryRemoveDuplicates(userid, tmdbId, "History", new OnDatabaseSuccess.bool() {
+            deleteController.categoryRemoveList(userid, tmdbId, "History", new OnDatabaseSuccess.bool() {
                 @Override
                 public void onSuccess(boolean state) {
 

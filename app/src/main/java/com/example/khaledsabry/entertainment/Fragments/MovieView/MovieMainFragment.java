@@ -242,13 +242,13 @@ public class MovieMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (categoryIds != null)
-                    openCategoryAdd(categoryNames, categoryIds, categoryCheacks);
+                    openCategoryAdd(categoryNames, categoryIds, categoryCheacks,movieId);
             }
         });
     }
 
 
-    public static void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans)).commit();
+    public static void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans,int movieId) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans,1, String.valueOf(movieId))).commit();
     }
 }

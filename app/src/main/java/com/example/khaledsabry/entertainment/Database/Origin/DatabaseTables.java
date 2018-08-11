@@ -68,6 +68,8 @@ public class DatabaseTables {
         public final  String categoryId = "`category_id`";
         public final  String tmdbId = "`tmdb_id`";
         public final  String imdbId = "`imdb_id`";
+        public final  String type = "`type`";
+
         public final  String addedDate = "`added_date`";
     }
 

@@ -44,10 +44,33 @@ public class CategoryController extends Controller {
     }
 
 
+public void addListToCategory(Integer categoryId, String tmdbId, String imdbId, int type, final OnSuccess.bool listener)
+{
 
+    databaseController.insertController().listAdd(categoryId, tmdbId, imdbId, type, new OnDatabaseSuccess.bool() {
+        @Override
+        public void onSuccess(boolean state) {
+            listener.onSuccess(state);
+        }
+    });
+
+}
+
+public void removeFromList(int categoryId,String tmdbId,OnSuccess.bool listener)
+{
+    databaseController.deleteController().categoryRemoveList(categoryId, tmdbId, new OnDatabaseSuccess.bool() {
+        @Override
+        public void onSuccess(boolean state) {
+
+        }
+    });
+}
 
     public void getCategories(final int tmdbId)
     {
+        MovieMainFragment.categoryNames = null;
+        MovieMainFragment.categoryCheacks = null;
+        MovieMainFragment.categoryIds = null;
         databaseController.selectController().categoryGet(UserData.getInstance().getUserId(), new OnDatabaseSuccess.array() {
             @Override
             public void onSuccess(ArrayList<JSONObject> jsonObjects) {
