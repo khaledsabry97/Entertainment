@@ -106,4 +106,37 @@ public class SelectController extends DatabaseController {
     }
 
 
+
+    public void categoryGet(int userId,OnDatabaseSuccess.array listener)
+    {
+
+tables.put(tableCategory.tableName,null);
+condition += userId +equal + tableCategory.userId;
+
+server.select(createSelectQuery(selects,tables,condition),listener);
+
+    }
+
+
+    public void listGet(int userId,int tmdbId,OnDatabaseSuccess.array listener)
+    {
+
+        selects.add(listTable.categoryId);
+        selects.add(listTable.tmdbId);
+
+
+        tables.put(listTable.tableName,null);
+        tables.put(tableCategory.tableName,null);
+
+        condition += userId +equal + tableCategory.userId;
+        condition += and;
+        condition += tmdbId +equal +listTable.tmdbId;
+
+        server.select(createSelectQuery(selects,tables,condition),listener);
+
+    }
+
+
+
+
 }

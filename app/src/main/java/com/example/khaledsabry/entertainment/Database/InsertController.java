@@ -39,7 +39,7 @@ public class InsertController extends DatabaseController {
 
     //add to the database the favourit/history movies.tvs or artists
     public void listAdd(String categoryName, int categoryType, int userid, String tmdbId, String imdbId, int contentType, String description, OnDatabaseSuccess.bool listener) {
-
+/*
         DeleteController deleteController = new DeleteController();
         if (categoryType == constants.Favourite) {
             insert.put(DatabaseTables.category.categoryName, "Favourite");
@@ -94,9 +94,10 @@ public class InsertController extends DatabaseController {
 
         String query = createInsertQuery(DatabaseTables.follower.tableName, insert);
         server.insert(query, listener);
-
+*/
 
     }
+
 
 
     public void categorySignUpDefault(OnDatabaseSuccess.bool listener) {

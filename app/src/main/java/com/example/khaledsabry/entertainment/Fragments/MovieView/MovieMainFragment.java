@@ -19,12 +19,14 @@ import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
+import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -57,6 +59,13 @@ public class MovieMainFragment extends Fragment {
 
     NestedScrollView scrollView;
     static FrameLayout reviewLayout;
+
+    ImageView addNewCategory;
+    ImageView addToCategory;
+    public static ArrayList<String> categoryNames;
+    public static ArrayList<Integer> categoryIds;
+    public static ArrayList<Boolean> categoryCheacks;
+
     CategoryController categoryController = new CategoryController();
 
     public static MovieMainFragment newInstance(int movieId) {
@@ -88,6 +97,8 @@ public class MovieMainFragment extends Fragment {
         scrollView.setVisibility(View.INVISIBLE);
         reviewLayout = v.findViewById(R.id.ReviewLayoutid);
         favourite = v.findViewById(R.id.favourite);
+        addNewCategory = v.findViewById(R.id.addnewcategory);
+        addToCategory = v.findViewById(R.id.addtocategory);
         categoryController = new CategoryController();
         getMovieDetails();
         return v;
@@ -103,6 +114,7 @@ public class MovieMainFragment extends Fragment {
                     currentMovieId = movie.getMovieId();
                     MovieNavigationFragment.movie = movie;
                     setObjects(movie);
+
                 }
             });
         } else
@@ -111,6 +123,7 @@ public class MovieMainFragment extends Fragment {
 
 
     private void setObjects(final Movie movie) {
+        loadCategories();
         this.movie = movie;
 
         overviewText.setText(movie.getOverView());
@@ -155,22 +168,21 @@ public class MovieMainFragment extends Fragment {
         categoryController.addHistory(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
-            }});
-
-
+            }
+        });
 
 
         favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
-    @Override
-    public void onSuccess(boolean state) {
-        if(state)
-        categoryController.toast(movie.getTitle() + " has been added to your Favourite list");
+                categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
+                    @Override
+                    public void onSuccess(boolean state) {
+                        if (state)
+                            categoryController.toast(movie.getTitle() + " has been added to your Favourite list");
 
-    }
-});
+                    }
+                });
             }
         });
         actorButton.setOnClickListener(new View.OnClickListener() {
@@ -223,4 +235,20 @@ categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMov
         reviewLayout.setVisibility(View.GONE);
     }
 
+
+    private void loadCategories() {
+        categoryController.getCategories(movieId);
+        addToCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (categoryIds != null)
+                    openCategoryAdd(categoryNames, categoryIds, categoryCheacks);
+            }
+        });
+    }
+
+
+    public static void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans)).commit();
+    }
 }

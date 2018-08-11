@@ -20,6 +20,10 @@ public class Controller {
     //variable to the database controller to use it latter in the childeren of the parent controller class
     protected DatabaseController databaseController = new DatabaseController();
     public DatabaseTables.constants constants = new DatabaseTables.constants();
+    protected DatabaseTables.user userTable = new DatabaseTables.user();
+    protected DatabaseTables.category categoryTable = new DatabaseTables.category();
+    protected DatabaseTables.list listTable = new DatabaseTables.list();
+
     protected UserData userData = UserData.getInstance();
     //to show a msg on screen
     public void toast(String msg) {

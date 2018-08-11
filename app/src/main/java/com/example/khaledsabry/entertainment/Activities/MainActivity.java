@@ -91,9 +91,8 @@ else if(id ==R.id.news)
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
    //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-        loadFragmentNoReturn(R.id.mainContainer, ProfileFragment.newInstance());
+        loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
     }
 
 

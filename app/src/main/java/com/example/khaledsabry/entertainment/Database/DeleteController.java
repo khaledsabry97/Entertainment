@@ -23,7 +23,7 @@ public class DeleteController extends DatabaseController {
 
     public void categoryRemoveDuplicates(int userId, String tmdbId, String categoryName, OnDatabaseSuccess.bool listener)
     {
-
+/*
         tmdbId = addqoutes(tmdbId);
         categoryName = addqoutes(categoryName);
         condition += DatabaseTables.category.userId +equal + userId;
@@ -36,7 +36,7 @@ server.delete(createDeleteQuery(DatabaseTables.category.tableName,condition),lis
 
 
 
-
+*/
 
     }
 

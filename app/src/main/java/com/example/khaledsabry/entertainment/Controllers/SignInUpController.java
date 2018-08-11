@@ -43,8 +43,8 @@ public class SignInUpController extends Controller {
                     return;
                 }
 
-                String username = (String) getObject(DatabaseTables.user.username,jsonObjects);
-                int id = Integer.valueOf((String) getObject(DatabaseTables.user.id,jsonObjects));
+                String username = (String) getObject(userTable.username,jsonObjects);
+                int id = Integer.valueOf((String) getObject(userTable.id,jsonObjects));
                 UserData.getInstance().setUsername(username);
                 UserData.getInstance().setUserId(id);
                 listener.onSuccess(true);

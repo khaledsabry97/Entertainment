@@ -18,6 +18,7 @@ public class DatabaseController {
     protected DatabaseTables.constants constants = new DatabaseTables.constants();
     protected DatabaseTables.user tableUser = new DatabaseTables.user();
     protected DatabaseTables.category tableCategory = new DatabaseTables.category();
+    protected DatabaseTables.list listTable = new DatabaseTables.list();
     protected DatabaseTables databaseTables = new DatabaseTables();
     //quoutes that is used to let the query function correctly
     String quoute = "\"";

@@ -61,14 +61,14 @@ public class DatabaseTables {
 
     }
 
-    public class list
+    public static class list
     {
-        public final static String tableName = "`list`";
-        public final static String id = "`id`";
-        public final static String categoryId = "`category_id`";
-        public final static String tmdbId = "`tmdb_id`";
-        public final static String imdbId = "`imdb_id`";
-        public final static String addedDate = "`added_date`";
+        public final  String tableName = "`list`";
+        public final  String id = "`id`";
+        public final  String categoryId = "`category_id`";
+        public final  String tmdbId = "`tmdb_id`";
+        public final  String imdbId = "`imdb_id`";
+        public final  String addedDate = "`added_date`";
     }
 
     public class images
