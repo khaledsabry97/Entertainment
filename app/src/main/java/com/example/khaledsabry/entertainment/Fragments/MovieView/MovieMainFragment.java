@@ -167,7 +167,7 @@ categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMov
     @Override
     public void onSuccess(boolean state) {
         if(state)
-        categoryController.toast(movie.getTitle() + " has been added to your favourite list");
+        categoryController.toast(movie.getTitle() + " has been added to your Favourite list");
 
     }
 });

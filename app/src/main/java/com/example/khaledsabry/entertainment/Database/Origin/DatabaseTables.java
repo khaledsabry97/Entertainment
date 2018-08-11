@@ -13,8 +13,8 @@ public class DatabaseTables {
     public static class constants
     {
         //for category table "category type"
-        public final  int favourite = 1;
-        public final  int history = 2;
+        public final  int history = 1;
+        public final  int Favourite = 2;
         public final  int other = 3;
 
 
@@ -32,30 +32,54 @@ public class DatabaseTables {
 
 
     }
-  public class user
+  public static class user
     {
-        public final static String tableName = "`user`";
-        public final static String username = "`username`";
-        public final static String email = "`email`";
-        public final static String password ="`password`";
-        public final static String age = "`age`";
-        public final static String phone = "`phone`";
-        public final static String id = "id";
+        public final  String tableName = "`user`";
+        public final  String username = "`user_name`";
+        public final  String email = "`email`";
+        public final  String password ="`password`";
+        public final  String age = "`age`";
+        public final  String phone = "`phone`";
+        public final  String id = "id";
+        public final  String profileImage = "`profile_image`";
+        public final  String backdropImage = "`backdrop_image`";
     }
 
-    public class category
+    public static class category
     {
-        public final static String tableName = "`category`";
-        public final static String userId = "`userId`";
-        public final static String contentType = "`contentType`";
-        public final static String categoryType ="`categoryType`";
-        public final static String categoryName ="`categoryName`";
+        public final  String tableName = "`category`";
+        public final  String id = "`id`";
+        public final  String userId = "`user_id`";
+        public final  String name = "`name`";
+        public final  String description = "`description`";
+        public final  String type = "`type`";
+        public final  String createdDate = "`created_date`";
 
-        public final static String tmdbId = "`tmdbId`";
-        public final static String imdbId = "`imdbId`";
-        public final static String description = "`description`";
+
+
+
+
     }
 
+    public class list
+    {
+        public final static String tableName = "`list`";
+        public final static String id = "`id`";
+        public final static String categoryId = "`category_id`";
+        public final static String tmdbId = "`tmdb_id`";
+        public final static String imdbId = "`imdb_id`";
+        public final static String addedDate = "`added_date`";
+    }
+
+    public class images
+    {
+        public final static String tableName = "`images`";
+        public final static String id = "`id`";
+        public final static String userId = "`user_id`";
+        public final static String createdDate = "`created_date`";
+        public final static String imdbId = "`imdb_id`";
+        public final static String photoUrl = "`photo_url`";
+    }
     public class follower
     {
         public final static String tableName = "`follower`";

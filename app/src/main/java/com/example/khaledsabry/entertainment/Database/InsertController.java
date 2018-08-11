@@ -26,22 +26,22 @@ public class InsertController extends DatabaseController {
 
     public void userSignIn(String username, String email, String password, String age, String phone, OnDatabaseSuccess.bool listener) {
 
-        insert.put(DatabaseTables.user.username, username);
-        insert.put(DatabaseTables.user.email, email);
-        insert.put(DatabaseTables.user.age, age);
-        insert.put(DatabaseTables.user.phone, phone);
-        insert.put(DatabaseTables.user.password, password);
+        insert.put(tableUser.username, username);
+        insert.put(tableUser.email, email);
+        insert.put(tableUser.age, age);
+        insert.put(tableUser.phone, phone);
+        insert.put(tableUser.password, password);
 
-        String query = createInsertQuery(DatabaseTables.user.tableName, insert);
+        String query = createInsertQuery(tableUser.tableName, insert);
         server.insert(query, listener);
     }
 
 
     //add to the database the favourit/history movies.tvs or artists
-    public void categoryAdd(String categoryName,int categoryType, int userid, String tmdbId, String imdbId, int contentType, String description, OnDatabaseSuccess.bool listener) {
+    public void listAdd(String categoryName, int categoryType, int userid, String tmdbId, String imdbId, int contentType, String description, OnDatabaseSuccess.bool listener) {
 
         DeleteController deleteController = new DeleteController();
-        if(categoryType == constants.favourite) {
+        if (categoryType == constants.Favourite) {
             insert.put(DatabaseTables.category.categoryName, "Favourite");
             deleteController.categoryRemoveDuplicates(userid, tmdbId, "Favourite", new OnDatabaseSuccess.bool() {
                 @Override
@@ -49,8 +49,7 @@ public class InsertController extends DatabaseController {
 
                 }
             });
-        }
-      else  if(categoryType == constants.history) {
+        } else if (categoryType == constants.history) {
             insert.put(DatabaseTables.category.categoryName, "History");
             deleteController.categoryRemoveDuplicates(userid, tmdbId, "History", new OnDatabaseSuccess.bool() {
                 @Override
@@ -58,9 +57,24 @@ public class InsertController extends DatabaseController {
 
                 }
             });
+        } else
+        {
+
+
+            String query = createInsertQuery(DatabaseTables.category.tableName, insert);
+            server.insert(query, new OnDatabaseSuccess.bool() {
+                @Override
+                public void onSuccess(boolean state) {
+                    if(state)
+                    {
+
+
+                    }
+                }
+            });
+
         }
-      else
-          insert.put(DatabaseTables.category.categoryName,categoryName);
+            insert.put(DatabaseTables.category.categoryName, categoryName);
         insert.put(DatabaseTables.category.categoryType, String.valueOf(categoryType));
         insert.put(DatabaseTables.category.contentType, String.valueOf(contentType));
         insert.put(DatabaseTables.category.userId, String.valueOf(userid));
@@ -72,9 +86,7 @@ public class InsertController extends DatabaseController {
         server.insert(query, listener);
     }
 
-
-
-//add somebody to follow
+    //add somebody to follow
     public void userAddfollowing(int id, int followerId, int type, OnDatabaseSuccess.bool listener) {
         insert.put(DatabaseTables.follower.userId, String.valueOf(id));
         insert.put(DatabaseTables.follower.followerId, String.valueOf(followerId));
@@ -84,5 +96,40 @@ public class InsertController extends DatabaseController {
         server.insert(query, listener);
 
 
+    }
+
+
+    public void categorySignUpDefault(OnDatabaseSuccess.bool listener) {
+        insert.put(tableCategory.name, "Favourite Movies");
+        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(tableCategory.type, String.valueOf(constants.movie));
+
+        addqoutes(insert);
+        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+
+        insert.clear();
+        insert.put(tableCategory.name, "Favourite Tv Series");
+        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(tableCategory.type, String.valueOf(constants.tv));
+
+        addqoutes(insert);
+        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+
+        insert.clear();
+        insert.put(tableCategory.name, "Favourite Artists");
+        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(tableCategory.type, String.valueOf(constants.artist));
+
+        addqoutes(insert);
+        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+
+
+        insert.clear();
+        insert.put(tableCategory.name, "History");
+        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(tableCategory.type, String.valueOf(constants.other));
+
+        addqoutes(insert);
+        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
     }
 }

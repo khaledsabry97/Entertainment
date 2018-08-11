@@ -16,6 +16,9 @@ import java.util.HashMap;
 public class DatabaseController {
 
     protected DatabaseTables.constants constants = new DatabaseTables.constants();
+    protected DatabaseTables.user tableUser = new DatabaseTables.user();
+    protected DatabaseTables.category tableCategory = new DatabaseTables.category();
+    protected DatabaseTables databaseTables = new DatabaseTables();
     //quoutes that is used to let the query function correctly
     String quoute = "\"";
     //this is a refrence to the database server to access to the web
@@ -140,6 +143,13 @@ public class DatabaseController {
 
         return query;
 
+    }
+
+
+
+    protected DatabaseTables databaseTables()
+    {
+        return new DatabaseTables();
     }
 
 }

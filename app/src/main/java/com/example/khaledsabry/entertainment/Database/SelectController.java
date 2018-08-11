@@ -44,11 +44,11 @@ public class SelectController extends DatabaseController {
      password =   addqoutes(password);
 
 
-        tables.put(DatabaseTables.user.tableName, "s");
+        tables.put(tableUser.tableName, "s");
 
-        condition += DatabaseTables.user.username + equal + username;
+        condition += tableUser.username + equal + username;
         condition += and;
-        condition += DatabaseTables.user.password + equal + password;
+        condition += tableUser.password + equal + password;
 
         String query = createSelectQuery(selects, tables, condition);
         server.select(query, listener);
@@ -61,11 +61,11 @@ public class SelectController extends DatabaseController {
     {
         username = addqoutes(username);
 
-        selects.add(DatabaseTables.user.username);
+        selects.add(tableUser.username);
 
-        tables.put(DatabaseTables.user.tableName,null);
+        tables.put(tableUser.tableName,null);
 
-        condition += DatabaseTables.user.username + equal + username;
+        condition += tableUser.username + equal + username;
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
 
@@ -75,11 +75,11 @@ public class SelectController extends DatabaseController {
     {
         email = addqoutes(email);
 
-        selects.add(DatabaseTables.user.username);
+        selects.add(tableUser.username);
 
-        tables.put(DatabaseTables.user.tableName,null);
+        tables.put(tableUser.tableName,null);
 
-        condition += DatabaseTables.user.email + equal + email;
+        condition += tableUser.email + equal + email;
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
 
@@ -90,16 +90,16 @@ public class SelectController extends DatabaseController {
     {
         usernameOrEmail = addqoutes(usernameOrEmail);
 
-        selects.add(DatabaseTables.user.username);
-        selects.add(DatabaseTables.user.email);
-        selects.add(DatabaseTables.user.id);
+        selects.add(tableUser.username);
+        selects.add(tableUser.email);
+        selects.add(tableUser.id);
 
-        tables.put(DatabaseTables.user.tableName,null);
+        tables.put(tableUser.tableName,null);
 
 
-        condition += DatabaseTables.user.username + equal + usernameOrEmail;
+        condition += tableUser.username + equal + usernameOrEmail;
         condition += or;
-        condition += DatabaseTables.user.email +equal +usernameOrEmail;
+        condition += tableUser.email +equal +usernameOrEmail;
 
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
