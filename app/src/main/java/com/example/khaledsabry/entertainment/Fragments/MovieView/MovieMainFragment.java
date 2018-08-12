@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
@@ -59,7 +61,9 @@ public class MovieMainFragment extends Fragment {
 
     NestedScrollView scrollView;
     static FrameLayout reviewLayout;
-
+    LinearLayout writeNewCategoryLayout;
+EditText categoryNew;
+Button addCategoryButton;
     ImageView addNewCategory;
     ImageView addToCategory;
     public static ArrayList<String> categoryNames;
@@ -99,6 +103,9 @@ public class MovieMainFragment extends Fragment {
         favourite = v.findViewById(R.id.favourite);
         addNewCategory = v.findViewById(R.id.addnewcategory);
         addToCategory = v.findViewById(R.id.addtocategory);
+        writeNewCategoryLayout = v.findViewById(R.id.addnew);
+        categoryNew = v.findViewById(R.id.categorytext);
+        addCategoryButton = v.findViewById(R.id.addcategory);
         categoryController = new CategoryController();
         getMovieDetails();
         return v;
@@ -245,10 +252,37 @@ public class MovieMainFragment extends Fragment {
                     openCategoryAdd(categoryNames, categoryIds, categoryCheacks,movieId);
             }
         });
+
+
+        addNewCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeNewCategoryLayout.setVisibility(View.VISIBLE);
+                addToCategory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+setAddNewCategory(categoryNew.getText().toString());
+                    }
+                });
+            }
+        });
     }
 
 
-    public static void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans,int movieId) {
+    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans,int movieId) {
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans,1, String.valueOf(movieId))).commit();
     }
+
+    public void setAddNewCategory(String categoryName)
+    {
+        categoryController.addMovieCategory(categoryName, new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                
+            }
+        });
+    }
+
+
+
 }

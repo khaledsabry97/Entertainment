@@ -102,5 +102,15 @@ public void removeFromList(int categoryId,String tmdbId,OnSuccess.bool listener)
     }
 
 
+    public void addMovieCategory(String name,OnSuccess.bool listener)
+    {
+        databaseController.insertController().categoryAdd(name, constants.movie, new OnDatabaseSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+
+            }
+        });
+
+    }
 
 }

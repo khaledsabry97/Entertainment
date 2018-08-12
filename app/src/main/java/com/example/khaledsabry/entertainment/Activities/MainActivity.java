@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Connection.Downloader;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
@@ -91,8 +92,10 @@ else if(id ==R.id.news)
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
    //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
+        Downloader.getInstance().downloadYoutube("https://www.youtube.com/watch?v=h7NLOLUOxh4","Slender Man - Movie Review");
 
         loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
+
     }
 
 

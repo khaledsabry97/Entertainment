@@ -153,4 +153,14 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
         addqoutes(insert);
         server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
     }
+
+    public void categoryAdd(String name,int constantType,OnDatabaseSuccess.bool listener)
+    {
+        insert.put(tableCategory.name, name);
+        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(tableCategory.type, String.valueOf(constantType));
+
+        addqoutes(insert);
+        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+    }
 }

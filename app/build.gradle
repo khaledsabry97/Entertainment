@@ -60,4 +60,9 @@ dependencies {
 
 
     implementation 'com.android.support:mediarouter-v7:27.1.0'
+
+    implementation 'com.mindorks.android:prdownloader:0.4.0'
+
+    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
+
 }
