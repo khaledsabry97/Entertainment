@@ -258,7 +258,7 @@ Button addCategoryButton;
             @Override
             public void onClick(View v) {
                 writeNewCategoryLayout.setVisibility(View.VISIBLE);
-                addToCategory.setOnClickListener(new View.OnClickListener() {
+                addCategoryButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 setAddNewCategory(categoryNew.getText().toString());
@@ -278,7 +278,7 @@ setAddNewCategory(categoryNew.getText().toString());
         categoryController.addMovieCategory(categoryName, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
-                
+
             }
         });
     }

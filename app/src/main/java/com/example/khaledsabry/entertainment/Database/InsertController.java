@@ -125,7 +125,6 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
         insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
         insert.put(tableCategory.type, String.valueOf(constants.movie));
 
-        addqoutes(insert);
         server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
 
         insert.clear();
@@ -133,7 +132,6 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
         insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
         insert.put(tableCategory.type, String.valueOf(constants.tv));
 
-        addqoutes(insert);
         server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
 
         insert.clear();
@@ -141,7 +139,6 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
         insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
         insert.put(tableCategory.type, String.valueOf(constants.artist));
 
-        addqoutes(insert);
         server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
 
 
@@ -150,7 +147,6 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
         insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
         insert.put(tableCategory.type, String.valueOf(constants.other));
 
-        addqoutes(insert);
         server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
     }
 
@@ -160,7 +156,6 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
         insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
         insert.put(tableCategory.type, String.valueOf(constantType));
 
-        addqoutes(insert);
         server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
     }
 }
