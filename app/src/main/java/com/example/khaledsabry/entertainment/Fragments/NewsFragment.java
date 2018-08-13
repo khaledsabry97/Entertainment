@@ -44,7 +44,8 @@ public class NewsFragment extends Fragment {
     Controller controller;
     NewsAdapter newsAdapter;
     FrameLayout frameLayout;
-   public static NewsFragment fragment = null;
+    public static NewsFragment fragment = null;
+
     public static NewsFragment newInstance() {
         fragment = new NewsFragment();
 
@@ -61,7 +62,7 @@ public class NewsFragment extends Fragment {
         header = view.findViewById(R.id.header);
         navigationView = view.findViewById(R.id.nav_view);
         drawerLayout = view.findViewById(R.id.drawer_layout);
-frameLayout = view.findViewById(R.id.web);
+        frameLayout = view.findViewById(R.id.web);
 
         controller = new Controller();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -77,7 +78,7 @@ frameLayout = view.findViewById(R.id.web);
                     loadActorsNews();
                 else if (id == R.id.tvnews)
                     loadTvNews();
-                else if(id == R.id.indienews)
+                else if (id == R.id.indienews)
                     loadIndieNews();
                 navigationView.setCheckedItem(id);
                 drawerLayout.closeDrawer(GravityCompat.END, true);
@@ -162,10 +163,8 @@ frameLayout = view.findViewById(R.id.web);
     }
 
 
-
-    public void loadWebView(String url)
-    {
-        MainActivity.loadFragmentWithReturn(R.id.web,WebFragment.newInstance(url));
+    public void loadWebView(String url) {
+        MainActivity.loadFragmentWithReturn(R.id.web, WebFragment.newInstance(url));
     }
 
 }

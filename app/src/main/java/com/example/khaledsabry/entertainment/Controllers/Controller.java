@@ -1,5 +1,8 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
+import android.app.ActivityManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -10,7 +13,10 @@ import com.example.khaledsabry.entertainment.Database.UserData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * Created by KhALeD SaBrY on 27-Jun-18.
@@ -65,5 +71,8 @@ String name =object.toString();
         return object;
 
     }
+
+
+
 
 }

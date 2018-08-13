@@ -124,6 +124,7 @@ public class YoutubeFragment extends Fragment {
         if (youTubePlayerFragment == null)
             return;
 
+
         youTubePlayerFragment.initialize(Settings.YoutubeApiKey, new YouTubePlayer.OnInitializedListener() {
 
             @Override
@@ -134,8 +135,9 @@ public class YoutubeFragment extends Fragment {
 
                     //set the player style default
                     youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
+youTubePlayer.play();
 
-                    //cue the 1st video by default
+//cue the 1st video by default
 //                    youTubePlayer.cueVideo(youtubes.get(0).getId());
                 }
             }
@@ -159,6 +161,7 @@ public class YoutubeFragment extends Fragment {
         YoutubeVideoAdapter adapter = new YoutubeVideoAdapter(youtubes);
         recyclerView.setAdapter(adapter);
         drawerLayout.openDrawer(GravityCompat.END,true);
+        youTubePlayer.play();
 
     }
 

@@ -118,7 +118,7 @@ server.select(createSelectQuery(selects,tables,condition),listener);
     }
 
 
-    public void listGet(int userId,int tmdbId,OnDatabaseSuccess.array listener)
+    public void listGetByTmdbId(int userId, int tmdbId, OnDatabaseSuccess.array listener)
     {
 
         selects.add(listTable.categoryId);
@@ -137,6 +137,18 @@ server.select(createSelectQuery(selects,tables,condition),listener);
     }
 
 
+    public void listGetByCategory(int categoryId,OnDatabaseSuccess.array listener)
+    {
+
+
+
+        tables.put(listTable.tableName,null);
+
+        condition += categoryId +equal +listTable.categoryId;
+
+        server.select(createSelectQuery(selects,tables,condition),listener);
+
+    }
 
 
 }

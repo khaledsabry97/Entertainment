@@ -41,6 +41,11 @@ public class MovieMainFragment extends Fragment {
     static int currentMovieId = -1;
     Movie movie = null;
 
+    //Layouts
+    NestedScrollView scrollView;
+    static FrameLayout reviewLayout;
+    LinearLayout writeNewCategoryLayout;
+
     TextView title;
     TextView overviewText;
     TextView releaseDate;
@@ -59,11 +64,9 @@ public class MovieMainFragment extends Fragment {
     Button actorButton;
     Button crewButton;
 
-    NestedScrollView scrollView;
-    static FrameLayout reviewLayout;
-    LinearLayout writeNewCategoryLayout;
-EditText categoryNew;
-Button addCategoryButton;
+
+    EditText categoryNew;
+    Button addCategoryButton;
     ImageView addNewCategory;
     ImageView addToCategory;
     public static ArrayList<String> categoryNames;
@@ -249,7 +252,7 @@ Button addCategoryButton;
             @Override
             public void onClick(View v) {
                 if (categoryIds != null)
-                    openCategoryAdd(categoryNames, categoryIds, categoryCheacks,movieId);
+                    openCategoryAdd(categoryNames, categoryIds, categoryCheacks, movieId);
             }
         });
 
@@ -261,7 +264,8 @@ Button addCategoryButton;
                 addCategoryButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-setAddNewCategory(categoryNew.getText().toString());
+                        setAddNewCategory(categoryNew.getText().toString());
+
                     }
                 });
             }
@@ -269,20 +273,25 @@ setAddNewCategory(categoryNew.getText().toString());
     }
 
 
-    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans,int movieId) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans,1, String.valueOf(movieId))).commit();
+    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans, int movieId) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 1, String.valueOf(movieId))).commit();
     }
 
-    public void setAddNewCategory(String categoryName)
-    {
-        categoryController.addMovieCategory(categoryName, new OnSuccess.bool() {
-            @Override
-            public void onSuccess(boolean state) {
+    public void setAddNewCategory(String categoryName) {
+        if(!categoryName.isEmpty()) {
+            categoryController.addMovieCategory(categoryName, new OnSuccess.bool() {
+                @Override
+                public void onSuccess(boolean state) {
 
-            }
-        });
+                }
+            });
+            writeNewCategoryLayout.setVisibility(View.GONE);
+            categoryNew.setText("");
+        }
+        else
+            categoryController.toast("write a name for the category");
+
     }
-
 
 
 }

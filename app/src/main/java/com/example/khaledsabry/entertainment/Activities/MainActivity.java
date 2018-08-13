@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
 import com.example.khaledsabry.entertainment.Connection.Downloader;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
+import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 int id = item.getItemId();
                 Functions.stopConnectionsAndStartImageGlide();
                 if (id == R.id.home)
