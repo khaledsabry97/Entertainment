@@ -1,5 +1,7 @@
 package com.example.khaledsabry.entertainment.Interfaces;
 
+import android.support.v4.util.ObjectsCompat;
+
 import org.json.JSONObject;
 
 /**
@@ -8,6 +10,11 @@ import org.json.JSONObject;
 
 public interface OnSuccess {
 
+    interface Object
+    {
+        void onSuccess(Object state);
+        void onSuccess(Integer num);
+    }
     interface Json {
         void onSuccess(JSONObject jsonObject);
     }

@@ -8,6 +8,11 @@
 
         <item android:id="@+id/searchid"
             android:title="Search"></item>
+        <item
+android:id="@+id/category"
+            android:title="Lists"
+            ></item>
+
     </group>
 
 

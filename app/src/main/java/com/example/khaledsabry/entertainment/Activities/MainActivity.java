@@ -18,6 +18,7 @@ import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
+import com.example.khaledsabry.entertainment.Fragments.CategoryListFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Fragments.NewsFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         ApiConnections.getInstance().setContext(getApplicationContext());
 
 
-
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -68,16 +68,29 @@ public class MainActivity extends AppCompatActivity {
 
                 int id = item.getItemId();
                 Functions.stopConnectionsAndStartImageGlide();
-                if (id == R.id.home)
-                    MainActivity.loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
-                else if (id == R.id.searchid)
-                    loadFragmentNoReturn(R.id.mainContainer,SearchFragment.newInstance());
-                else if (id == R.id.boxofficeid)
-                    loadFragmentNoReturn(R.id.mainContainer,BoxOfficeFragment.newInstance());
-                else if (id == R.id.topgross)
-                    Toast.makeText(getApplicationContext(), "boxofficeid", Toast.LENGTH_LONG).show();
-else if(id ==R.id.news)
-    loadFragmentNoReturn(R.id.mainContainer, NewsFragment.newInstance());
+                switch (id) {
+                    case R.id.home:
+                        MainActivity.loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+                        break;
+                    case R.id.searchid:
+                        loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
+                        break;
+
+                    case R.id.boxofficeid:
+                        loadFragmentNoReturn(R.id.mainContainer, BoxOfficeFragment.newInstance());
+                        break;
+
+                    case R.id.category:
+                        MainActivity.loadFragmentWithReturn(R.id.mainContainer, CategoryListFragment.newInstance());
+                        break;
+                    case R.id.news:
+                        loadFragmentNoReturn(R.id.mainContainer, NewsFragment.newInstance());
+                        break;
+                    default:
+                        break;
+                }
+
+
                 navigationView.setCheckedItem(id);
                 drawerLayout.closeDrawer(GravityCompat.START, true);
                 return true;
@@ -86,15 +99,13 @@ else if(id ==R.id.news)
         });
 
 
-
-
-     //   loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
+        //   loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
 // hide the navigation bar and the status bar
         periodicHideNavigation();
 //loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
-   //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+        //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
-        Downloader.getInstance().downloadYoutube("https://www.youtube.com/watch?v=h7NLOLUOxh4","Slender Man - Movie Review");
+  //      Downloader.getInstance().downloadYoutube("https://www.youtube.com/watch?v=h7NLOLUOxh4", "Slender Man - Movie Review");
 
         loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
 
@@ -139,6 +150,7 @@ else if(id ==R.id.news)
 
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).commit();
     }
+
     private void periodicHideNavigation() {
         final Handler handler = new Handler();
 

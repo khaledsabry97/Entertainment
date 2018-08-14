@@ -51,7 +51,7 @@ public class SignInFragment extends Fragment {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.loadFragmentWithReturn(R.id.mainContainer, SignUpFragment.newInstance());
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, SignUpFragment.newInstance());
             }
         });
 

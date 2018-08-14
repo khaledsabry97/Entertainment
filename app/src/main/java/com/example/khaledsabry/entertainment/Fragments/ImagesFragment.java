@@ -59,7 +59,7 @@ public class ImagesFragment extends Fragment {
 
 
         recyclerView.setHasFixedSize(true);
-         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), GridLayoutManager.chooseSize(3,4,2), GridLayoutManager.HORIZONTAL, false);
+         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3, GridLayoutManager.HORIZONTAL, false);
      //   recyclerView.setLayoutManager(gridLayoutManager);
     //    StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(gridLayoutManager);

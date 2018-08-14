@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -18,42 +20,58 @@ import java.util.ArrayList;
 
 public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.TitleViewHolder> {
 
-ArrayList<String> titles;
+    ArrayList<String> titles;
+    public TitleViewHolder titleViewHolder;
+public OnSuccess.Object listener;
 
-public TitleViewHolder titleViewHolder;
-    public TitleAdapter(ArrayList<String> titles) {
+    public TitleAdapter(ArrayList<String> titles, OnSuccess.Object listener) {
         this.titles = titles;
+        this.listener = listener;
+
     }
 
     @NonNull
     @Override
     public TitleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_title,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_title, parent, false);
         titleViewHolder = new TitleViewHolder(view);
         return titleViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull TitleViewHolder holder, int position) {
-holder.title.setText(titles.get(position));
+        holder.updateUi(position);
 
     }
+
 
     @Override
     public int getItemCount() {
         return titles.size();
     }
 
-   public class TitleViewHolder extends RecyclerView.ViewHolder
-    {
-public TextView title;
-View view;
+    public class TitleViewHolder extends RecyclerView.ViewHolder {
+        private TextView title;
+private View view;
         public TitleViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             view = itemView;
+
         }
 
-
+        void updateUi(final int position)
+        {
+            title.setText(titles.get(position));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onSuccess(position);
+                }
+            });
+        }
+        public TextView getTitle() {
+            return title;
+        }
     }
 }

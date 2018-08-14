@@ -77,13 +77,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
 
         void updateUi(final int postion) {
-            if (types.get(postion) == 1) {
+            Integer type = Integer.valueOf(types.get(postion)+"");
+            if (type.equals(1)) {
                 //movie
-                controller.getMovieGetDetails(items.get(postion), new OnMovieDataSuccess() {
+                controller.getMovieGetDetails(Integer.valueOf(items.get(postion)+""), new OnMovieDataSuccess() {
                     @Override
                     public void onSuccess(final Movie movie) {
 
-                        setObjects(movie.getTitle(),movie.getImdbRate(),movie.getReleaseDate(),movie.getPosterImage(),movie.getMovieId(),MovieNavigationFragment.newInstance(movie.getMovieId(),true));
+                        setObjects(movie.getTitle(),movie.getTmdbRate(),movie.getReleaseDate(),movie.getPosterImage(),movie.getMovieId(),1,movie.getMovieId());
 
                     }
                 });
@@ -99,7 +100,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             }
 
 
-        private void setObjects(String title, float rate, String date, String posterUrl, int removeItemId, final Fragment fragmentOpen) {
+        private void setObjects(String title, float rate, String date, String posterUrl, int removeItemId, final int type, final int movieId) {
             this.title.setText(title);
             this.rate.setText(String.valueOf(rate));
             this.date.setText(date);
@@ -107,7 +108,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.loadFragmentNoReturn(R.id.mainContainer, fragmentOpen);
+                    if(type == 1)
+                    MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movieId,true));
                 }
             });
 

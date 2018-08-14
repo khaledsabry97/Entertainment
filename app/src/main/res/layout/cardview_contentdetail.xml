@@ -139,8 +139,8 @@
 
             <ImageView
                 android:id="@+id/poster"
-                android:layout_width="@dimen/_180sdp"
-                android:layout_height="@dimen/_240sdp"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_170sdp"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 tools:src="@tools:sample/avatars"
