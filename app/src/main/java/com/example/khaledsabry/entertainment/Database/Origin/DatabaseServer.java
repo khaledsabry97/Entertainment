@@ -1,8 +1,10 @@
 package com.example.khaledsabry.entertainment.Database.Origin;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -66,6 +68,10 @@ public class DatabaseServer {
         };
 
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                20000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
     }
 

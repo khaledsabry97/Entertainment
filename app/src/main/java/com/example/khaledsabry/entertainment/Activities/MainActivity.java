@@ -1,15 +1,25 @@
 package com.example.khaledsabry.entertainment.Activities;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
@@ -17,8 +27,10 @@ import com.example.khaledsabry.entertainment.Connection.Downloader;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
+import com.example.khaledsabry.entertainment.Database.UserData;
 import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
 import com.example.khaledsabry.entertainment.Fragments.CategoryListFragment;
+import com.example.khaledsabry.entertainment.Fragments.MainFragment;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Fragments.NewsFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
@@ -30,6 +42,7 @@ import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Settings;
 import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,8 +50,9 @@ import java.util.TimerTask;
 import static java.nio.file.Files.copy;
 
 public class MainActivity extends AppCompatActivity {
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+
+
+
     //to get the main activity in the app
     private static MainActivity mainActivity;
 
@@ -54,14 +68,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
         //get width and height for the mobile and tablet
         Settings.getInstance().setWidthAndHeight(getWindowManager());
         //set the context for the volley library
         ApiConnections.getInstance().setContext(getApplicationContext());
 
-
-        drawerLayout = findViewById(R.id.drawer_layout);
+  /*      drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        poster = v.findViewById(R.id.nav_view).findViewById(R.id.poster);
+        backDrop = v.findViewById(R.id.backdrop);
+        title = v.findViewById(R.id.title);
+        email = v.findViewById(R.id.email);
+        setObjects();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -98,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+*/
         //   loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
 // hide the navigation bar and the status bar
         periodicHideNavigation();
@@ -107,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
 
   //      Downloader.getInstance().downloadYoutube("https://www.youtube.com/watch?v=h7NLOLUOxh4", "Slender Man - Movie Review");
 
-        loadFragmentNoReturn(R.id.mainContainer, SignInFragment.newInstance());
-
+loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
     }
+
 
 
     @Override
@@ -169,5 +191,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 1000, 2000);
     }
+
 
 }

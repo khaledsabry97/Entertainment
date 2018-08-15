@@ -4,6 +4,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseController;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 
+import java.net.PortUnreachableException;
 import java.util.HashMap;
 
 /**
@@ -15,7 +16,9 @@ public class UpdateController extends DatabaseController{
     String condition = "";
     String table;
 
-
+    public UpdateController() {
+        this.set = new HashMap<>();
+    }
 
     public void categoryUpdateName(String name, Integer id, OnDatabaseSuccess.bool listener)
     {
@@ -30,6 +33,21 @@ public class UpdateController extends DatabaseController{
 
         String query = createUpdateQuery(table,set,condition);
         server.update(query,listener);
+    }
+
+
+    public void userUpdateProfileImage(String image64,int userId,OnDatabaseSuccess.bool listener)
+    {
+        table = tableUser.tableName;
+
+        set.put(tableUser.profileImage,image64);
+
+        condition += tableUser.id + equal + userId;
+
+        String query = createUpdateQuery(table,set,condition);
+
+        server.update(query,listener);
+
     }
 
 

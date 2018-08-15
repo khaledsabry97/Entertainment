@@ -10,6 +10,7 @@ public class UserData {
 
     private  String username;
     private  Integer userId;
+    private  String email;
     private static UserData userData = null;
 
 
@@ -39,4 +40,12 @@ public class UserData {
     public  void setUsername(String username) {
         this.username = username;
     }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

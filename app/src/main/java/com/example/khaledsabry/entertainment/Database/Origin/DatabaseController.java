@@ -168,8 +168,7 @@ public class DatabaseController {
         for (int i = 0; i < keys.size(); i++) {
             query += keys.get(i);
             query += "= ";
-            String qoutes =addqoutes(values.get(i));
-            query += qoutes;
+            query += values.get(i);
 
             if (i == keys.size() - 1)
                 break;

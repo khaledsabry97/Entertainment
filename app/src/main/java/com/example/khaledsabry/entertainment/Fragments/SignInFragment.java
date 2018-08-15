@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class SignInFragment extends Fragment {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.loadFragmentNoReturn(R.id.mainContainer, SignUpFragment.newInstance());
+                MainActivity.loadFragmentNoReturn(R.id.mainFrame, SignUpFragment.newInstance());
             }
         });
 
@@ -82,7 +83,7 @@ signIn();
              if(!state)
                  controller.toast("check your username/password");
              else
-                 MainActivity.loadFragmentNoReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+                 MainActivity.loadFragmentNoReturn(R.id.mainFrame, MainFragment.newInstance());
          }
      });
 
