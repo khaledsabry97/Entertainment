@@ -317,6 +317,10 @@ public class WebApi {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                catch (Exception e)
+                {
+
+                }
                 return movies;
             }
 

@@ -10,7 +10,7 @@ public class UserData {
 
     private  String username;
     private  Integer userId;
-    static UserData userData = null;
+    private static UserData userData = null;
 
 
     private UserData() {

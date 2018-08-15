@@ -1,12 +1,14 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigation
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
+import com.google.android.youtube.player.YouTubePlayer;
 
 import java.util.ArrayList;
 
@@ -29,11 +32,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     ArrayList<Integer> items = new ArrayList<>();
     ArrayList<Integer> types = new ArrayList<>();
 
-    public CategoryAdapter(ArrayList<Integer> itemsId, ArrayList<Integer> items, ArrayList<Integer> types) {
+    private int typeToShow;
+
+    public void setData(ArrayList<Integer> itemsId, ArrayList<Integer> items, ArrayList<Integer> types) {
         this.itemsId = itemsId;
         this.items = items;
         this.types = types;
+        notifyDataSetChanged();
     }
+
+    public void setTypeToShow(int typeToShow) {
+        this.typeToShow = typeToShow;
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
@@ -49,6 +61,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
+        if (items == null)
+            return 0;
         return items.size();
     }
 
@@ -70,34 +84,54 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             poster = itemView.findViewById(R.id.poster);
             remove = itemView.findViewById(R.id.delete);
 
-         remove.setVisibility(View.VISIBLE);
+            remove.setVisibility(View.VISIBLE);
 
 
         }
 
+        void load(final int postion, int typeShown) {
+
+
+        }
 
         void updateUi(final int postion) {
-            Integer type = Integer.valueOf(types.get(postion)+"");
-            if (type.equals(1)) {
+            view.setVisibility(View.VISIBLE);
+
+            Integer type = Integer.valueOf(types.get(postion) + "");
+//here we determine the type we show if the type to show is 0 then show all else show its type
+            if (typeToShow != 0 && type != typeToShow) {
+                view.setVisibility(View.GONE);
+                return;
+
+            }
+
+            switch (type) {
                 //movie
-                controller.getMovieGetDetails(Integer.valueOf(items.get(postion)+""), new OnMovieDataSuccess() {
-                    @Override
-                    public void onSuccess(final Movie movie) {
+                case 1:
+                    controller.getMovieGetDetails(Integer.valueOf(items.get(postion) + ""), new OnMovieDataSuccess() {
+                        @Override
+                        public void onSuccess(final Movie movie) {
 
-                        setObjects(movie.getTitle(),movie.getTmdbRate(),movie.getReleaseDate(),movie.getPosterImage(),movie.getMovieId(),1,movie.getMovieId());
+                            setObjects(movie.getTitle(), movie.getTmdbRate(), movie.getReleaseDate(), movie.getPosterImage(), movie.getMovieId(), 1, movie.getMovieId());
 
-                    }
-                });
+                        }
+                    });
+                    break;
+//tv
+                case 2:
+
+                    break;
+
+//artist
+                case 3:
+
+                    break;
+                default:
+
             }
-            else if (types.get(postion) == 2) {
-                    //tv
-
-                } else if (types.get(postion) == 3) {
-                    //artist
-                }
 
 
-            }
+        }
 
 
         private void setObjects(String title, float rate, String date, String posterUrl, int removeItemId, final int type, final int movieId) {
@@ -108,8 +142,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(type == 1)
-                    MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movieId,true));
+                    if (type == 1)
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movieId, true));
                 }
             });
 

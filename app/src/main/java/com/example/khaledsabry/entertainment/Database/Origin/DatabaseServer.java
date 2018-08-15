@@ -95,7 +95,7 @@ public class DatabaseServer {
 
     //update function to update data from the database
     public void update(final String query, final OnDatabaseSuccess.bool listener) {
-        String url = baseUrl + updating;
+        String url = baseUrl + inserting;
         connect(Request.Method.POST, url, query, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {

@@ -124,12 +124,12 @@ public void removeFromList(int categoryId,String tmdbId,OnSuccess.bool listener)
         });
     }
 
-    public void addMovieCategory(String name,OnSuccess.bool listener)
+    public void addMovieCategory(String name, final OnSuccess.bool listener)
     {
         databaseController.insertController().categoryAdd(name, constants.movie, new OnDatabaseSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
-
+listener.onSuccess(state);
             }
         });
 
@@ -148,6 +148,20 @@ public void removeFromList(int categoryId,String tmdbId,OnSuccess.bool listener)
 
 
                 categoryListFragment.setRecyclerView(ids,contentIds,types);
+
+            }
+        });
+    }
+
+
+
+    public void updateName(String name, Integer id, final OnSuccess.bool listener)
+    {
+        databaseController.updateController().categoryUpdateName(name, id, new OnDatabaseSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                listener.onSuccess(state);
+
 
             }
         });

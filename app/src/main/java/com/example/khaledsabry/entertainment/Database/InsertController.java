@@ -4,6 +4,9 @@ import com.example.khaledsabry.entertainment.Database.Origin.DatabaseController;
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -36,8 +39,7 @@ public class InsertController extends DatabaseController {
         server.insert(query, listener);
     }
 
-public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDatabaseSuccess.bool listener)
-{
+    public void listAdd(int categoryId, String tmdbId, String imdbId, int type, OnDatabaseSuccess.bool listener) {
     /*deleteController().categoryRemoveList(categoryId, tmdbId, imdbId, new OnDatabaseSuccess.bool() {
         @Override
         public void onSuccess(boolean state) {
@@ -47,16 +49,17 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
 
     */
 
-    insert.put(listTable.categoryId, String.valueOf(categoryId));
-    insert.put(listTable.imdbId,imdbId);
-    insert.put(listTable.tmdbId,tmdbId);
-    insert.put(listTable.type, String.valueOf(type));
+        insert.put(listTable.categoryId, String.valueOf(categoryId));
+        insert.put(listTable.imdbId, imdbId);
+        insert.put(listTable.tmdbId, tmdbId);
+        insert.put(listTable.type, String.valueOf(type));
 
 
-    String query = createInsertQuery(listTable.tableName,insert);
-    server.insert(query,listener);
+        String query = createInsertQuery(listTable.tableName, insert);
+        server.insert(query, listener);
 
-}
+    }
+
     //add to the database the favourit/history movies.tvs or artists
     public void listAdd(String categoryName, int categoryType, int userid, String tmdbId, String imdbId, int contentType, String description, OnDatabaseSuccess.bool listener) {
 /*
@@ -119,7 +122,7 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
     }
 
 
-
+    //categories will be added when sign up
     public void categorySignUpDefault(OnDatabaseSuccess.bool listener) {
         insert.put(tableCategory.name, "Favourite Movies");
         insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
@@ -150,12 +153,27 @@ public void listAdd(int categoryId,String tmdbId,String imdbId,int type,OnDataba
         server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
     }
 
-    public void categoryAdd(String name,int constantType,OnDatabaseSuccess.bool listener)
-    {
-        insert.put(tableCategory.name, name);
-        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
-        insert.put(tableCategory.type, String.valueOf(constantType));
+    //add category
+    public void categoryAdd(final String name, final int constantType, final OnDatabaseSuccess.bool listener) {
+        selectController().categoryCheckIfFound(name, new OnDatabaseSuccess.array() {
+            @Override
+            public void onSuccess(ArrayList<JSONObject> jsonObjects) {
+                if (jsonObjects != null) {
 
-        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+                    if (jsonObjects.size() == 0) {
+                        listener.onSuccess(false);
+                        return;
+                    }
+                    insert.put(tableCategory.name, name);
+                    insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
+                    insert.put(tableCategory.type, String.valueOf(constantType));
+
+                    server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+
+                }}
+            });
+
+        }
+
+
     }
-}

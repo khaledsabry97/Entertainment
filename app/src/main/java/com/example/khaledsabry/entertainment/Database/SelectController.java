@@ -20,13 +20,7 @@ import java.util.HashMap;
 //fifth : call create select query from the database controller and then send it to the server
 
 public class SelectController extends DatabaseController {
-    private final String equal = "=";
-    private final String less = "<";
-    private final String bigger = ">";
-    private final String lessOrEqual = "<=";
-    private final String biggerOrEqual = ">=";
-    private String and = " and ";
-    private String or = " or ";
+
 
 
     private ArrayList<String> selects;
@@ -150,5 +144,17 @@ server.select(createSelectQuery(selects,tables,condition),listener);
 
     }
 
+    public void categoryCheckIfFound(String categoryName,OnDatabaseSuccess.array listener)
+    {
+        categoryName = addqoutes(categoryName);
+        selects.add(tableCategory.name);
+
+        tables.put(tableCategory.tableName,null);
+
+        condition += UserData.getInstance().getUserId() + equal + tableCategory.userId;
+        condition += and;
+        condition += categoryName + equal + tableCategory.name ;
+        server.select(createSelectQuery(selects,tables,condition),listener);
+    }
 
 }

@@ -14,6 +14,13 @@ import java.util.HashMap;
  */
 
 public class DatabaseController {
+    protected final String equal = "=";
+    protected final String less = "<";
+    protected final String bigger = ">";
+    protected final String lessOrEqual = "<=";
+    protected final String biggerOrEqual = ">=";
+    protected String and = " and ";
+    protected String or = " or ";
 
     protected DatabaseTables.constants constants = new DatabaseTables.constants();
     protected DatabaseTables.user tableUser = new DatabaseTables.user();
@@ -122,7 +129,7 @@ public class DatabaseController {
         for (int i = 0; i < tablenames.size(); i++) {
             query += keys.get(i);
             if (values.get(i) != null)
-            query += values.get(i);
+                query += values.get(i);
             if (i == tablenames.size() - 1)
                 query += " ";
             else
@@ -132,7 +139,7 @@ public class DatabaseController {
         if (!condition.equals(""))
             query += "where " + condition;
 
-       return query;
+        return query;
 
     }
 
@@ -147,9 +154,39 @@ public class DatabaseController {
     }
 
 
+    //this is to create an insert query
+    //important: in this project i used this in all the queries
+    protected String createUpdateQuery(String tableName, HashMap<String, String> map,String condition) {
+        addqoutes(map);
 
-    protected DatabaseTables databaseTables()
-    {
+        String query = "update " + tableName;
+        query += " set ";
+
+        ArrayList<String> keys = new ArrayList<String>(map.keySet());
+        ArrayList<String> values = new ArrayList<String>(map.values());
+
+        for (int i = 0; i < keys.size(); i++) {
+            query += keys.get(i);
+            query += "= ";
+            String qoutes =addqoutes(values.get(i));
+            query += qoutes;
+
+            if (i == keys.size() - 1)
+                break;
+            else
+                query += ",";
+
+        }
+
+        if (!condition.equals(""))
+            query += " where " + condition;
+
+
+        return query;
+    }
+
+
+    protected DatabaseTables databaseTables() {
         return new DatabaseTables();
     }
 

@@ -48,6 +48,8 @@ public void downloadYoutube(String link,String fileName)
             .build();
     PRDownloader.initialize(MainActivity.getActivity().getApplicationContext(), config);
     File mydir = new File(Environment.getExternalStorageDirectory(), "MovitaDownload");
+    File s = new File(MainActivity.getActivity().getFilesDir(),"MovitaDownload");
+    s.mkdirs();
     mydir.mkdirs();
 
     new YouTubeExtractor(MainActivity.getActivity().getApplicationContext()) {
@@ -105,4 +107,13 @@ fileName +=".mp4";
 
             });*/
 }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
 }

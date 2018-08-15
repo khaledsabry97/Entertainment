@@ -39,6 +39,8 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
         return new BoxOfficeViewHolder(view);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull BoxOfficeViewHolder holder, int position) {
         holder.updateUi(classification, position);

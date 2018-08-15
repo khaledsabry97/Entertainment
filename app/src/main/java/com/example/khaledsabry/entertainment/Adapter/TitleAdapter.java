@@ -30,6 +30,12 @@ public OnSuccess.Object listener;
 
     }
 
+    public void addTitle(String title)
+    {
+        titles.add(title);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public TitleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
