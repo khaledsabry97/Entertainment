@@ -1,7 +1,6 @@
 package com.example.khaledsabry.entertainment.Database;
 
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseController;
-import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 
 import org.json.JSONObject;
@@ -29,18 +28,18 @@ public class InsertController extends DatabaseController {
 
     public void userSignIn(String username, String email, String password, String age, String phone, OnDatabaseSuccess.bool listener) {
 
-        insert.put(tableUser.username, username);
-        insert.put(tableUser.email, email);
-        insert.put(tableUser.age, age);
-        insert.put(tableUser.phone, phone);
-        insert.put(tableUser.password, password);
+        insert.put(userTable.username, username);
+        insert.put(userTable.email, email);
+        insert.put(userTable.age, age);
+        insert.put(userTable.phone, phone);
+        insert.put(userTable.password, password);
 
-        String query = createInsertQuery(tableUser.tableName, insert);
+        String query = createInsertQuery(userTable.tableName, insert);
         server.insert(query, listener);
     }
 
-    public void listAdd(int categoryId, String tmdbId, String imdbId, int type, OnDatabaseSuccess.bool listener) {
-    /*deleteController().categoryRemoveList(categoryId, tmdbId, imdbId, new OnDatabaseSuccess.bool() {
+    public void itemAdd(int categoryId, String tmdbId, String imdbId, int type, OnDatabaseSuccess.bool listener) {
+    /*deleteController().CategoryItemRemove(categoryId, tmdbId, imdbId, new OnDatabaseSuccess.bool() {
         @Override
         public void onSuccess(boolean state) {
 
@@ -49,24 +48,24 @@ public class InsertController extends DatabaseController {
 
     */
 
-        insert.put(listTable.categoryId, String.valueOf(categoryId));
-        insert.put(listTable.imdbId, imdbId);
-        insert.put(listTable.tmdbId, tmdbId);
-        insert.put(listTable.type, String.valueOf(type));
+        insert.put(categoryItemTable.categoryId, String.valueOf(categoryId));
+        insert.put(categoryItemTable.imdbId, imdbId);
+        insert.put(categoryItemTable.tmdbId, tmdbId);
+        insert.put(categoryItemTable.type, String.valueOf(type));
 
 
-        String query = createInsertQuery(listTable.tableName, insert);
+        String query = createInsertQuery(categoryItemTable.tableName, insert);
         server.insert(query, listener);
 
     }
 
     //add to the database the favourit/history movies.tvs or artists
-    public void listAdd(String categoryName, int categoryType, int userid, String tmdbId, String imdbId, int contentType, String description, OnDatabaseSuccess.bool listener) {
+    public void itemAdd(String categoryName, int categoryType, int userid, String tmdbId, String imdbId, int contentType, String description, OnDatabaseSuccess.bool listener) {
 /*
         DeleteController deleteController = new DeleteController();
         if (categoryType == constants.Favourite) {
             insert.put(DatabaseTables.category.categoryName, "Favourite");
-            deleteController.categoryRemoveList(userid, tmdbId, "Favourite", new OnDatabaseSuccess.bool() {
+            deleteController.CategoryItemRemove(userid, tmdbId, "Favourite", new OnDatabaseSuccess.bool() {
                 @Override
                 public void onSuccess(boolean state) {
 
@@ -74,7 +73,7 @@ public class InsertController extends DatabaseController {
             });
         } else if (categoryType == constants.history) {
             insert.put(DatabaseTables.category.categoryName, "History");
-            deleteController.categoryRemoveList(userid, tmdbId, "History", new OnDatabaseSuccess.bool() {
+            deleteController.CategoryItemRemove(userid, tmdbId, "History", new OnDatabaseSuccess.bool() {
                 @Override
                 public void onSuccess(boolean state) {
 
@@ -124,33 +123,33 @@ public class InsertController extends DatabaseController {
 
     //categories will be added when sign up
     public void categorySignUpDefault(OnDatabaseSuccess.bool listener) {
-        insert.put(tableCategory.name, "Favourite Movies");
-        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
-        insert.put(tableCategory.type, String.valueOf(constants.movie));
+        insert.put(categoryTable.name, "Favourite Movies");
+        insert.put(categoryTable.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(categoryTable.type, String.valueOf(constants.movie));
 
-        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
-
-        insert.clear();
-        insert.put(tableCategory.name, "Favourite Tv Series");
-        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
-        insert.put(tableCategory.type, String.valueOf(constants.tv));
-
-        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+        server.insert(createInsertQuery(categoryTable.tableName, insert), listener);
 
         insert.clear();
-        insert.put(tableCategory.name, "Favourite Artists");
-        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
-        insert.put(tableCategory.type, String.valueOf(constants.artist));
+        insert.put(categoryTable.name, "Favourite Tv Series");
+        insert.put(categoryTable.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(categoryTable.type, String.valueOf(constants.tv));
 
-        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+        server.insert(createInsertQuery(categoryTable.tableName, insert), listener);
+
+        insert.clear();
+        insert.put(categoryTable.name, "Favourite Artists");
+        insert.put(categoryTable.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(categoryTable.type, String.valueOf(constants.artist));
+
+        server.insert(createInsertQuery(categoryTable.tableName, insert), listener);
 
 
         insert.clear();
-        insert.put(tableCategory.name, "History");
-        insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
-        insert.put(tableCategory.type, String.valueOf(constants.other));
+        insert.put(categoryTable.name, "History");
+        insert.put(categoryTable.userId, String.valueOf(UserData.getInstance().getUserId()));
+        insert.put(categoryTable.type, String.valueOf(constants.other));
 
-        server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+        server.insert(createInsertQuery(categoryTable.tableName, insert), listener);
     }
 
     //add category
@@ -164,17 +163,23 @@ public class InsertController extends DatabaseController {
                         listener.onSuccess(false);
                         return;
                     }
-                    insert.put(tableCategory.name, name);
-                    insert.put(tableCategory.userId, String.valueOf(UserData.getInstance().getUserId()));
-                    insert.put(tableCategory.type, String.valueOf(constantType));
+                    insert.put(categoryTable.name, name);
+                    insert.put(categoryTable.userId, String.valueOf(UserData.getInstance().getUserId()));
+                    insert.put(categoryTable.type, String.valueOf(constantType));
 
-                    server.insert(createInsertQuery(tableCategory.tableName, insert), listener);
+                    server.insert(createInsertQuery(categoryTable.tableName, insert), listener);
 
                 }}
             });
 
         }
 
+    //[Special type of insert]
+    //to update the database with image
+    public void userUploadImage(int userId, String imageName, String image64, OnDatabaseSuccess.bool listener) {
 
+        server.uploadImage(userId, addqoutes(imageName), addqoutes(image64), listener);
+
+    }
 
     }

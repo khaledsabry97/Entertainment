@@ -151,7 +151,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //remove the movie,tv or artist from the list
+                    //remove the movie,tv or artist from the categoryItem
 
                 }
             });

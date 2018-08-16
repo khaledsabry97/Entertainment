@@ -9,6 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 
@@ -27,13 +28,15 @@ import java.util.Map;
 public class DatabaseServer {
 
     //base url to the server
-    private final String baseUrl = "https://water-gas-oil.000webhostapp.com/";
+    public final String baseUrl = "https://water-gas-oil.000webhostapp.com/";
     //and these are the files on the server
     private final String inserting = "inserting.php";
     private final String selecting = "selecting.php";
     private final String deleting = "deleting.php";
     private final String updating = "updating.php";
     private final String image = "image.php";
+
+    public final String imageFolder = "images/";
 
     //this is a commen string i use it in every call to every file
     private final String serverResponse = "server_response";
@@ -69,14 +72,10 @@ public class DatabaseServer {
         };
 
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                40000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
     }
 
+    //this is a special function to only upload images from your phone to the server
     public void uploadImage(final int userId, final String imageName, final String imageBase64, final OnDatabaseSuccess.bool listener)
     {
         String url = baseUrl + image;

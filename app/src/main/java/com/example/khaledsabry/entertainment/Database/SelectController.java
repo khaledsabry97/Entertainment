@@ -1,7 +1,6 @@
 package com.example.khaledsabry.entertainment.Database;
 
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseController;
-import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 
 import java.util.ArrayList;
@@ -38,11 +37,11 @@ public class SelectController extends DatabaseController {
      password =   addqoutes(password);
 
 
-        tables.put(tableUser.tableName, "s");
+        tables.put(userTable.tableName, "s");
 
-        condition += tableUser.username + equal + username;
+        condition += userTable.username + equal + username;
         condition += and;
-        condition += tableUser.password + equal + password;
+        condition += userTable.password + equal + password;
 
         String query = createSelectQuery(selects, tables, condition);
         server.select(query, listener);
@@ -55,11 +54,11 @@ public class SelectController extends DatabaseController {
     {
         username = addqoutes(username);
 
-        selects.add(tableUser.username);
+        selects.add(userTable.username);
 
-        tables.put(tableUser.tableName,null);
+        tables.put(userTable.tableName,null);
 
-        condition += tableUser.username + equal + username;
+        condition += userTable.username + equal + username;
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
 
@@ -69,11 +68,11 @@ public class SelectController extends DatabaseController {
     {
         email = addqoutes(email);
 
-        selects.add(tableUser.username);
+        selects.add(userTable.username);
 
-        tables.put(tableUser.tableName,null);
+        tables.put(userTable.tableName,null);
 
-        condition += tableUser.email + equal + email;
+        condition += userTable.email + equal + email;
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
 
@@ -84,16 +83,16 @@ public class SelectController extends DatabaseController {
     {
         usernameOrEmail = addqoutes(usernameOrEmail);
 
-        selects.add(tableUser.username);
-        selects.add(tableUser.email);
-        selects.add(tableUser.id);
+        selects.add(userTable.username);
+        selects.add(userTable.email);
+        selects.add(userTable.id);
 
-        tables.put(tableUser.tableName,null);
+        tables.put(userTable.tableName,null);
 
 
-        condition += tableUser.username + equal + usernameOrEmail;
+        condition += userTable.username + equal + usernameOrEmail;
         condition += or;
-        condition += tableUser.email +equal +usernameOrEmail;
+        condition += userTable.email +equal +usernameOrEmail;
 
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
@@ -104,8 +103,8 @@ public class SelectController extends DatabaseController {
     public void categoryGet(int userId,OnDatabaseSuccess.array listener)
     {
 
-tables.put(tableCategory.tableName,null);
-condition += userId +equal + tableCategory.userId;
+tables.put(categoryTable.tableName,null);
+condition += userId +equal + categoryTable.userId;
 
 server.select(createSelectQuery(selects,tables,condition),listener);
 
@@ -115,30 +114,30 @@ server.select(createSelectQuery(selects,tables,condition),listener);
     public void listGetByTmdbId(int userId, int tmdbId, OnDatabaseSuccess.array listener)
     {
 
-        selects.add(listTable.categoryId);
-        selects.add(listTable.tmdbId);
+        selects.add(categoryItemTable.categoryId);
+        selects.add(categoryItemTable.tmdbId);
 
 
-        tables.put(listTable.tableName,null);
-        tables.put(tableCategory.tableName,null);
+        tables.put(categoryItemTable.tableName,null);
+        tables.put(categoryTable.tableName,null);
 
-        condition += userId +equal + tableCategory.userId;
+        condition += userId +equal + categoryTable.userId;
         condition += and;
-        condition += tmdbId +equal +listTable.tmdbId;
+        condition += tmdbId +equal + categoryItemTable.tmdbId;
 
         server.select(createSelectQuery(selects,tables,condition),listener);
 
     }
 
 
-    public void listGetByCategory(int categoryId,OnDatabaseSuccess.array listener)
+    public void CategoryItemGetByCategory(int categoryId, OnDatabaseSuccess.array listener)
     {
 
 
 
-        tables.put(listTable.tableName,null);
+        tables.put(categoryItemTable.tableName,null);
 
-        condition += categoryId +equal +listTable.categoryId;
+        condition += categoryId +equal + categoryItemTable.categoryId;
 
         server.select(createSelectQuery(selects,tables,condition),listener);
 
@@ -147,14 +146,29 @@ server.select(createSelectQuery(selects,tables,condition),listener);
     public void categoryCheckIfFound(String categoryName,OnDatabaseSuccess.array listener)
     {
         categoryName = addqoutes(categoryName);
-        selects.add(tableCategory.name);
+        selects.add(categoryTable.name);
 
-        tables.put(tableCategory.tableName,null);
+        tables.put(categoryTable.tableName,null);
 
-        condition += UserData.getInstance().getUserId() + equal + tableCategory.userId;
+        condition += UserData.getInstance().getUserId() + equal + categoryTable.userId;
         condition += and;
-        condition += categoryName + equal + tableCategory.name ;
+        condition += categoryName + equal + categoryTable.name ;
         server.select(createSelectQuery(selects,tables,condition),listener);
     }
 
+
+    public void imageGetImage(int userId,String name, OnDatabaseSuccess.array listener)
+    {
+        name = addqoutes(name);
+
+
+        tables.put(imageTable.tableName,null);
+
+       condition += imageTable.userId + equal + userId;
+       condition += and;
+       condition += imageTable.name + equal + name;
+        String query = createSelectQuery(selects,tables,condition);
+        server.select(query,listener);
+
+    }
 }

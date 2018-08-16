@@ -2,7 +2,6 @@ package com.example.khaledsabry.entertainment.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +96,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             if(news.getImage() == null)
                 poster.setVisibility(View.GONE);
             else
-            ImageController.putImageMidQualityYoutube(news.getImage(),poster);
+            ImageController.putImageToImageView(news.getImage(),poster);
 
             viewSource.setOnClickListener(new View.OnClickListener() {
                 @Override

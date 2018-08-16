@@ -20,6 +20,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Database.Origin.DatabaseServer;
 import com.example.khaledsabry.entertainment.Interfaces.OnImageConvertedSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnImagesDownloaded;
 
@@ -80,28 +81,16 @@ public class ImageController {
     }
 
 
-    public static void downloadImage(final ArrayList<String> images, final int from,int to) {
 
 
-       for (int i = from; i < to; i++) {
-        // Picasso.get().load(url).into(image);
-           String url = "https://image.tmdb.org/t/p/" + highQuality + images.get(i);
-
-        Glide.with(MainActivity.getActivity().getApplicationContext())
-                .load(url);}
-
-        }
-
-
-    public static void putImageMidQualityYoutube(String posterImage, ImageView image) {
+    public static void putImageToImageView(String posterImage, ImageView image) {
        // if(image == null || posterImage == null)
     //        return;
 
         String url = posterImage;
         // Picasso.get().load(url).into(image);
         Glide.with(MainActivity.getActivity()).load(url).into(image);
-
-
     }
 
-    }
+
+}

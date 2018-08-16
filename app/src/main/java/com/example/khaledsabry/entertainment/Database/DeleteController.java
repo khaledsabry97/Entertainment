@@ -1,9 +1,7 @@
 package com.example.khaledsabry.entertainment.Database;
 
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseController;
-import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
-import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 
 /**
  * Created by KhALeD SaBrY on 31-Jul-18.
@@ -21,15 +19,15 @@ public class DeleteController extends DatabaseController {
 
     private String condition = "";
 
-    public void categoryRemoveList(int categoryId, String tmdbId, OnDatabaseSuccess.bool listener) {
+    public void CategoryItemRemove(int categoryId, String tmdbId, OnDatabaseSuccess.bool listener) {
 
         tmdbId = addqoutes(tmdbId);
 
-        condition += listTable.categoryId + equal + categoryId;
+        condition += categoryItemTable.categoryId + equal + categoryId;
         condition += and;
-        condition += listTable.tmdbId + equal + tmdbId;
+        condition += categoryItemTable.tmdbId + equal + tmdbId;
 
-        server.delete(createDeleteQuery(listTable.tableName, condition), listener);
+        server.delete(createDeleteQuery(categoryItemTable.tableName, condition), listener);
 
 
     }

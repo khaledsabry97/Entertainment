@@ -4,7 +4,6 @@ package com.example.khaledsabry.entertainment.Fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -37,10 +36,9 @@ import com.example.khaledsabry.entertainment.R;
 import java.io.ByteArrayOutputStream;
 import java.util.concurrent.ExecutionException;
 
-import javax.microedition.khronos.opengles.GL;
-
 
 public class MainFragment extends Fragment {
+    //this is the left side navigation in the app
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
@@ -49,8 +47,10 @@ public class MainFragment extends Fragment {
     ImageView backDrop;
     TextView title;
     TextView email;
-
+    //to upload images and get them
     PreferencesController preferencesController;
+
+    //for intent result for
     private static final int REQUEST_CODE_BACKDROP = 1000;
     private static final int REQUEST_CODE_POSTER = 2000;
 
@@ -120,7 +120,14 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    //set the nav header object
     private void setObjects() {
+        //set the profile Image if found
+        preferencesController.setProfileImage(poster);
+        //set the backdrop image if found
+        preferencesController.setBackDropImage(backDrop);
+
+        //upload an image from the gallery when i click on the poster imageview
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +136,7 @@ public class MainFragment extends Fragment {
             }
         });
 
-
+        //same as the posterview
         backDrop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,12 +144,14 @@ public class MainFragment extends Fragment {
             }
         });
 
+        //set the title text with the username
         title.setText(UserData.getInstance().getUsername());
+        //set email
         email.setText(UserData.getInstance().getEmail());
 
     }
 
-
+    //get an image from the gallery
     private void getFromGallery(int requestCode) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -161,12 +170,12 @@ public class MainFragment extends Fragment {
                 public void run() {
                     final Bitmap bitmap;
                     try {
-                         bitmap = Glide.with(getContext()).asBitmap().load(data.getData()).submit().get();
+                        bitmap = Glide.with(getContext()).asBitmap().load(data.getData()).submit().get();
 
                         MainActivity.getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                sendImage(bitmap);
+                                sendImage(bitmap, "Profile Image");
 
                             }
                         });
@@ -187,7 +196,7 @@ public class MainFragment extends Fragment {
             Glide.with(getContext()).asBitmap().load(data.getData()).into(new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    sendImage(resource);
+                    sendImage(resource, "BackDrop Image");
                 }
             });
 
@@ -195,20 +204,35 @@ public class MainFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void sendImage(Bitmap bitmap) {
+    //upload image to the server
+    private void sendImage(Bitmap bitmap, String type) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-        preferencesController.updateProfileImage(encoded, new OnSuccess.bool() {
-            @Override
-            public void onSuccess(boolean state) {
+        if (type.equals("Profile Image")) {
+            preferencesController.uploadProfileImage(encoded, new OnSuccess.bool() {
+                @Override
+                public void onSuccess(boolean state) {
 
-                if (state)
-                    preferencesController.toast("Profile Image successfully added!");
-            }
-        });
+                    if (state)
+                        preferencesController.toast("Profile Image successfully added!");
+                }
+            });
+        } else {
+            preferencesController.uploadBackDropImage(encoded, new OnSuccess.bool() {
+                @Override
+                public void onSuccess(boolean state) {
+
+                    if (state)
+                        preferencesController.toast("BackDrop Image successfully added!");
+                }
+            });
+        }
+
+
     }
+
 
 }

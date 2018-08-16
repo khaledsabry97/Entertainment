@@ -189,7 +189,7 @@ public class MovieMainFragment extends Fragment {
                     @Override
                     public void onSuccess(boolean state) {
                         if (state)
-                            categoryController.toast(movie.getTitle() + " has been added to your Favourite list");
+                            categoryController.toast(movie.getTitle() + " has been added to your Favourite categoryItem");
 
                     }
                 });

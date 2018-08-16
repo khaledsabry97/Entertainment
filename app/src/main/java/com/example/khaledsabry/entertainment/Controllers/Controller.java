@@ -1,8 +1,5 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
-import android.app.ActivityManager;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -13,10 +10,7 @@ import com.example.khaledsabry.entertainment.Database.UserData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * Created by KhALeD SaBrY on 27-Jun-18.
@@ -28,7 +22,8 @@ public class Controller {
     public DatabaseTables.constants constants = new DatabaseTables.constants();
     protected DatabaseTables.user userTable = new DatabaseTables.user();
     protected DatabaseTables.category categoryTable = new DatabaseTables.category();
-    protected DatabaseTables.list listTable = new DatabaseTables.list();
+    protected DatabaseTables.categoryItem categoryItemTable = new DatabaseTables.categoryItem();
+    protected DatabaseTables.image imageTable = new DatabaseTables.image();
 
     protected UserData userData = UserData.getInstance();
     //to show a msg on screen

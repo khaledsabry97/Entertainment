@@ -4,7 +4,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,6 @@ import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubeThumbnailLoader;
-import com.google.android.youtube.player.YouTubeThumbnailView;
 
 import java.util.ArrayList;
 
@@ -113,7 +109,7 @@ setSelectedPosition(position);
                 }
             });
 
-            ImageController.putImageMidQualityYoutube(imgUrl, poster);
+            ImageController.putImageToImageView(imgUrl, poster);
 
         }
     }

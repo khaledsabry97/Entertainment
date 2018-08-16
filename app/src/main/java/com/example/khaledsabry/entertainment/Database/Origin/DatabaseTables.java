@@ -61,9 +61,9 @@ public class DatabaseTables {
 
     }
 
-    public static class list
+    public static class categoryItem
     {
-        public final  String tableName = "`list`";
+        public final  String tableName = "`categoryItem`";
         public final  String id = "`id`";
         public final  String categoryId = "`category_id`";
         public final  String tmdbId = "`tmdb_id`";
@@ -73,14 +73,15 @@ public class DatabaseTables {
         public final  String addedDate = "`added_date`";
     }
 
-    public class images
+    public static class image
     {
-        public final static String tableName = "`images`";
-        public final static String id = "`id`";
-        public final static String userId = "`user_id`";
-        public final static String createdDate = "`created_date`";
-        public final static String imdbId = "`imdb_id`";
-        public final static String photoUrl = "`photo_url`";
+        public final  String tableName = "`image`";
+        public final  String id = "`id`";
+        public final  String userId = "`user_id`";
+        public final  String name = "`name`";
+        public final  String path = "`path`";
+        public final  String createdDate = "`created_date`";
+
     }
     public class follower
     {

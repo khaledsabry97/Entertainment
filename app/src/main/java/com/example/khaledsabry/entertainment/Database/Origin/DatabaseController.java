@@ -1,6 +1,5 @@
 package com.example.khaledsabry.entertainment.Database.Origin;
 
-import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Database.DeleteController;
 import com.example.khaledsabry.entertainment.Database.InsertController;
 import com.example.khaledsabry.entertainment.Database.SelectController;
@@ -22,11 +21,14 @@ public class DatabaseController {
     protected String and = " and ";
     protected String or = " or ";
 
+    //variable to the database controller to use it latter in the childeren of the parent controller class
     protected DatabaseTables.constants constants = new DatabaseTables.constants();
-    protected DatabaseTables.user tableUser = new DatabaseTables.user();
-    protected DatabaseTables.category tableCategory = new DatabaseTables.category();
-    protected DatabaseTables.list listTable = new DatabaseTables.list();
+    protected DatabaseTables.user userTable = new DatabaseTables.user();
+    protected DatabaseTables.category categoryTable = new DatabaseTables.category();
+    protected DatabaseTables.categoryItem categoryItemTable = new DatabaseTables.categoryItem();
+    protected DatabaseTables.image imageTable = new DatabaseTables.image();
     protected DatabaseTables databaseTables = new DatabaseTables();
+
     //quoutes that is used to let the query function correctly
     String quoute = "\"";
     //this is a refrence to the database server to access to the web

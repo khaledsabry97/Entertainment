@@ -1,31 +1,20 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.CategoryAdapter;
@@ -35,9 +24,6 @@ import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
-
-import static com.example.khaledsabry.entertainment.R.color.colorAccent;
-import static com.example.khaledsabry.entertainment.R.style.TextCategory;
 
 
 public class CategoryListFragment extends Fragment {
@@ -101,7 +87,7 @@ public class CategoryListFragment extends Fragment {
                 drawerLayout.closeDrawer(GravityCompat.END, true);
                 int id = Integer.valueOf(String.valueOf(ids.get(num)));
                 header.setText(categoryNames.get(num));
-                categoryController.getListToCategory(id);
+                categoryController.getItemsByCategoryId(id);
 
             }
         });
@@ -112,7 +98,7 @@ public class CategoryListFragment extends Fragment {
 
         int id = Integer.valueOf(String.valueOf(ids.get(0)));
         header.setText(categoryNames.get(0));
-        categoryController.getListToCategory(id);
+        categoryController.getItemsByCategoryId(id);
 
     }
 

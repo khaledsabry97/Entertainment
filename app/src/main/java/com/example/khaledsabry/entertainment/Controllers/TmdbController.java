@@ -144,7 +144,7 @@ connection.connect(URL, new OnSuccess.Json() {
     }
 
     public void getGenres(final OnMovieDataSuccess listener) {
-        movieGetDetails = "genre/movie/list";
+        movieGetDetails = "genre/movie/categoryItem";
         String URL = makeBaseUrl(movieGetDetails);
 
         connection.connect(URL, new OnSuccess.Json() {
