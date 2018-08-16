@@ -33,6 +33,7 @@ public class DatabaseServer {
     private final String selecting = "selecting.php";
     private final String deleting = "deleting.php";
     private final String updating = "updating.php";
+    private final String image = "image.php";
 
     //this is a commen string i use it in every call to every file
     private final String serverResponse = "server_response";
@@ -69,9 +70,56 @@ public class DatabaseServer {
 
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                20000,
+                40000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
+    }
+
+    public void uploadImage(final int userId, final String imageName, final String imageBase64, final OnDatabaseSuccess.bool listener)
+    {
+        String url = baseUrl + image;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the response string.
+                        response.toString();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean state = objectJson(jsonObject);
+                            listener.onSuccess(state);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            listener.onSuccess(false);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.toString();
+            }
+        }) {
+            //adding parameters to the request
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", String.valueOf(userId));
+                params.put("image_base64",imageBase64);
+
+                params.put("image_name",imageName);
+
+                return params;
+            }
+        };
+
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                40000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
     }
 

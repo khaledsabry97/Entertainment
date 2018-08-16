@@ -206,7 +206,7 @@ public class MainFragment extends Fragment {
             public void onSuccess(boolean state) {
 
                 if (state)
-                    preferencesController.toast("successfully added!");
+                    preferencesController.toast("Profile Image successfully added!");
             }
         });
     }

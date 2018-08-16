@@ -14,7 +14,7 @@ public class PreferencesController extends Controller {
 
     public void updateProfileImage(String image64, final OnSuccess.bool listener)
     {
-        databaseController.updateController().userUpdateProfileImage(image64, UserData.getInstance().getUserId(), new OnDatabaseSuccess.bool() {
+        databaseController.updateController().userUpdateProfileImage(UserData.getInstance().getUserId(),userTable.profileImage,image64, new OnDatabaseSuccess.bool() {
                     @Override
                     public void onSuccess(boolean state) {
                         listener.onSuccess(state);

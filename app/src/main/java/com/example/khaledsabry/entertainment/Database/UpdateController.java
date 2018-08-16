@@ -36,17 +36,10 @@ public class UpdateController extends DatabaseController{
     }
 
 
-    public void userUpdateProfileImage(String image64,int userId,OnDatabaseSuccess.bool listener)
+    public void userUpdateProfileImage(int userId,String imageName,String image64,OnDatabaseSuccess.bool listener)
     {
-        table = tableUser.tableName;
 
-        set.put(tableUser.profileImage,image64);
-
-        condition += tableUser.id + equal + userId;
-
-        String query = createUpdateQuery(table,set,condition);
-
-        server.update(query,listener);
+        server.uploadImage(userId, addqoutes(imageName), addqoutes(image64), listener);
 
     }
 

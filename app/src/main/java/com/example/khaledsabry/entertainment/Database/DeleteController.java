@@ -34,6 +34,10 @@ public class DeleteController extends DatabaseController {
 
     }
 
+    public void imageRemoveByNameAndUserId(String path)
+    {
+    }
+
 
 
 
