@@ -3,6 +3,9 @@ package com.example.khaledsabry.entertainment.Database;
 import com.example.khaledsabry.entertainment.Database.Origin.DatabaseController;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,17 +21,30 @@ public class UpdateController extends DatabaseController {
         this.set = new HashMap<>();
     }
 
-    public void categoryUpdateName(String name, Integer id, OnDatabaseSuccess.bool listener) {
-        table = categoryTable.tableName;
+    public void categoryUpdateName(final String name, final Integer id, final OnDatabaseSuccess.bool listener) {
+        selectController().categoryCheckIfFound(name, new OnDatabaseSuccess.array() {
+            @Override
+            public void onSuccess(ArrayList<JSONObject> jsonObjects) {
+                if (jsonObjects != null) {
 
-        set.put(categoryTable.name, name);
+                    if (jsonObjects.size() != 0) {
+                        listener.onSuccess(false);
+                        return;
+                    }
+                    table = categoryTable.tableName;
+
+                    set.put(categoryTable.name, name);
 
 
-        condition += categoryTable.id + equal + id;
+                    condition += categoryTable.id + equal + id;
 
 
-        String query = createUpdateQuery(table, set, condition);
-        server.update(query, listener);
+                    String query = createUpdateQuery(table, set, condition);
+                    server.update(query, listener);
+
+                }}
+        });
+
     }
 
 

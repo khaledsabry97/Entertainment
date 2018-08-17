@@ -24,9 +24,10 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.TitleViewHol
     public TitleViewHolder titleViewHolder;
 public OnSuccess.Object listener;
 
-    public TitleAdapter(ArrayList<String> titles, OnSuccess.Object listener) {
+    public void setData(ArrayList<String> titles, OnSuccess.Object listener) {
         this.titles = titles;
         this.listener = listener;
+        notifyDataSetChanged();
 
     }
 
@@ -53,6 +54,8 @@ public OnSuccess.Object listener;
 
     @Override
     public int getItemCount() {
+        if(titles == null)
+            return 0;
         return titles.size();
     }
 

@@ -40,7 +40,6 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull BoxOfficeViewHolder holder, int position) {
         holder.updateUi(classification, position);
@@ -90,14 +89,20 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
+                    //if the type of this classification is box office
+                    //so show it in this way
                     if (classification.getType() == Classification.type.boxoffice) {
-
+//get the movie
                         final Movie movie = searchItem.getMovie();
                         TmdbController tmdbController = new TmdbController();
+                        //then check if this movie has a poster image or not
+                        //null : mean that you didn't get any link to the tmdb database
+                        // not null: means that you already have the link so don't enter again and search for the item on the tmdb database
                         if (searchItem.getMovie().getPosterImage() != null) {
                             MainActivity.getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    //position + 1 : because the postion starts from 0
                                     setBoxOffice(movie, position + 1, 2);
                                 }
                             });
@@ -105,11 +110,13 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                             MainActivity.getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-
+//phase 1: means that you got the data from boxofficemijo but you didn't get the data from tmdb
+//phase 2: means that you get the data from both boxofficemijo and tmdb
                                     setBoxOffice(movie, position + 1, 1);
 
                                 }
                             });
+                            //search in the tmdb on that movie by name
                             tmdbController.getSearchOneMovie(searchItem.getMovie().getTitle(), searchItem.getMovie().getYear(), new OnMovieDataSuccess() {
                                 @Override
                                 public void onSuccess(Movie movie) {
@@ -125,16 +132,60 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                                         @Override
                                         public void run() {
 
-                                            setBoxOffice(finalMovie, position + 1, 2);
+                                            setDailyBoxOffice(finalMovie, position + 1, 2);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    } else if (classification.getType() == Classification.type.dailyboxoffice) {
+                        //get the movie
+                        final Movie movie = searchItem.getMovie();
+                        TmdbController tmdbController = new TmdbController();
+                        //then check if this movie has a poster image or not
+                        //null : mean that you didn't get any link to the tmdb database
+                        // not null: means that you already have the link so don't enter again and search for the item on the tmdb database
+                        if (searchItem.getMovie().getPosterImage() != null) {
+                            MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //position + 1 : because the postion starts from 0
+                                    setDailyBoxOffice(movie, position + 1, 2);
+                                }
+                            });
+                        } else {
+                            MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //phase 1: means that you got the data from boxofficemijo but you didn't get the data from tmdb
+                                    //phase 2: means that you get the data from both boxofficemijo and tmdb
+                                    setDailyBoxOffice(movie, position + 1, 1);
+
+                                }
+                            });
+                            //search in the tmdb on that movie by name
+                            tmdbController.getSearchOneMovie(searchItem.getMovie().getTitle(), searchItem.getMovie().getYear(), new OnMovieDataSuccess() {
+                                @Override
+                                public void onSuccess(Movie movie) {
+                                    searchItem.getMovie().setPosterImage(movie.getPosterImage());
+                                    searchItem.getMovie().setMovieId(movie.getMovieId());
+                                    searchItem.getMovie().setTmdbRate(movie.getTmdbRate());
+                                    searchItem.getMovie().setReleaseDate(movie.getReleaseDate());
+                                    // searchItem.getMovie().setGenres(movie.getGenres());
+
+                                    movie = searchItem.getMovie();
+                                    final Movie finalMovie = movie;
+                                    MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            setDailyBoxOffice(finalMovie, position + 1, 2);
                                         }
                                     });
                                 }
                             });
                         }
                     }
-
-
-                    //else if
 
 
                 }
@@ -171,7 +222,37 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(),true));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), true));
+                    }
+                });
+
+            }
+        }
+
+
+        void setDailyBoxOffice(final Movie movie, int position, int phase) {
+            layout.setVisibility(View.VISIBLE);
+            poster.setImageBitmap(null);
+
+            if (phase == 1) {
+                title.setText(movie.getTitle());
+                noweeks.setVisibility(View.INVISIBLE);
+                totalrevenue.setVisibility(View.INVISIBLE);
+                noweeks.setVisibility(View.INVISIBLE);
+                this.position.setText(String.valueOf(position));
+                revenue.setText("Domestic Revenue : " + movie.getRevneue(false));
+
+            } else if (phase == 2) {
+
+                ImageController.putImageLowQuality(movie.getPosterImage(), poster);
+
+                rate.setText(String.valueOf(movie.getTmdbRate()));
+                date.setText(movie.getReleaseDate());
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), true));
                     }
                 });
 

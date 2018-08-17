@@ -355,7 +355,7 @@ public class WebApi {
                     doc = Jsoup.connect("http://www.boxofficemojo.com/daily/chart/?sortdate=" + today).get();
 
                     if (doc == null)
-                        return movies;
+                        return null;
                     Elements results = doc.getElementsByTag("tbody");
                     results = results.get(8).getElementsByTag("tr");
                     results.remove(0);

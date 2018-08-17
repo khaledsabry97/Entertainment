@@ -45,9 +45,10 @@ public class CategoryListFragment extends Fragment {
     ImageView deleteCategory;
     ImageView addCategory;
     ImageView changeCategoryName;
-Integer currentCategoryId;
-String currentCategoryName;
-static Context context;
+    Integer currentCategoryId;
+    String currentCategoryName;
+    static Context context;
+
     public static CategoryListFragment newInstance() {
         CategoryListFragment fragment = new CategoryListFragment();
 
@@ -67,41 +68,47 @@ static Context context;
         navigationView = view.findViewById(R.id.nav_view);
         drawerLayout = view.findViewById(R.id.drawer_layout);
         tabLayout = view.findViewById(R.id.tablayout);
-deleteCategory = view.findViewById(R.id.deletecategory);
-addCategory = view.findViewById(R.id.addcategory);
-changeCategoryName = view.findViewById(R.id.changename);
+        deleteCategory = view.findViewById(R.id.deletecategory);
+        addCategory = view.findViewById(R.id.addcategory);
+        changeCategoryName = view.findViewById(R.id.changename);
 
-context = getContext();
-currentCategoryName = "";
-currentCategoryId = null;
-
-
-
+        //context is for AlertBuilder In a static function to remove item from category;
+        context = getContext();
+        currentCategoryName = "";
+        currentCategoryId = null;
 
 
-deleteCategory.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        deleteCategory();
-    }
-});
+        titleAdapter = new TitleAdapter();
+        adapter = new CategoryAdapter();
+        categoriesRecycle.setAdapter(titleAdapter);
+        listRecycle.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
+        categoriesRecycle.setLayoutManager(linearLayoutManager);
+        listRecycle.setLayoutManager(linearLayoutManager);
 
-addCategory.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        addCategory();
-    }
-});
+        deleteCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteCategory();
+            }
+        });
 
-changeCategoryName.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        changeCategoryName();
-    }
-});
+        addCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addCategory();
+            }
+        });
+
+        changeCategoryName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeCategoryName();
+            }
+        });
 
         setTabLayout();
-        adapter = new CategoryAdapter();
         categoryController.setCategoryListFragment(this);
         categoryController.getCategories();
 
@@ -109,89 +116,10 @@ changeCategoryName.setOnClickListener(new View.OnClickListener() {
         return view;
     }
 
-    private void changeCategoryName() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-// I'm using fragment here so I'm using getView() to provide ViewGroup
-// but you can provide here any other instance of ViewGroup from your Fragment / Activity
-        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.add_category, (ViewGroup) getView(), false);
-// Set up the input
-        final EditText input = (EditText) viewInflated.findViewById(R.id.input);
-        input.setHint("Write the name for this category");
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        builder.setView(viewInflated);
-
-// Set up the buttons
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // dialog.dismiss();
-                final String newName = input.getText().toString();
-                if(newName.isEmpty())
-                    return;
-                categoryController.updateName(newName,currentCategoryId, new OnSuccess.bool() {
-                    @Override
-                    public void onSuccess(boolean state) {
-                        if (state) {
-                            categoryController.toast(currentCategoryName + " has been changed to "+ newName);
-                            titleAdapter.addTitle(newName);
-                        } else
-                            categoryController.toast("failed to change Name");
-                    }
-                });
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
-
-    private void deleteCategory() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-        builder.setTitle("Do you want to delete this category ( "+currentCategoryName +" ) ?");
-        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(currentCategoryId == null)
-                    return;
-                categoryController.deleteCategory(currentCategoryId, new OnSuccess.bool() {
-                    @Override
-                    public void onSuccess(boolean state) {
-                        if(state) {
-                            categoryController.toast("category " + currentCategoryName + " has been deleted successfully");
-                            MainActivity.loadFragmentNoReturn(R.id.mainContainer,CategoryListFragment.newInstance());
-                        }
-                        else
-                        {
-                            categoryController.toast("failed to delete the category ( "+ currentCategoryName+" )");
-                        }
-                    }
-                });
-            }
-        });
-
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-
-            }
-        });
-
-        builder.show();
-
-
-    }
-
-
+    //get the categories and set it in the navigation view
     public void setNavigationView(final ArrayList<String> categoryNames, final ArrayList<Integer> ids) {
         //this is to add a category
-        titleAdapter = new TitleAdapter(categoryNames, new OnSuccess.Object() {
+        titleAdapter.setData(categoryNames, new OnSuccess.Object() {
             @Override
             public void onSuccess(OnSuccess.Object state) {
 
@@ -201,38 +129,43 @@ changeCategoryName.setOnClickListener(new View.OnClickListener() {
             public void onSuccess(Integer num) {
 
                 drawerLayout.closeDrawer(GravityCompat.END, true);
-                int id = Integer.valueOf(String.valueOf(ids.get(num)));
-                header.setText(categoryNames.get(num));
-                currentCategoryId = id;
-                currentCategoryName = categoryNames.get(num);
-                categoryController.getItemsByCategoryId(id);
+                getCategoryItems(categoryNames, ids, num);
+
 
             }
         });
-        categoriesRecycle.setAdapter(titleAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        linearLayoutManager.setSmoothScrollbarEnabled(true);
-        categoriesRecycle.setLayoutManager(linearLayoutManager);
 
-        if(ids.size() == 0)
+        //show items of the first category
+        getCategoryItems(categoryNames, ids, 0);
+
+    }
+
+    private void getCategoryItems(final ArrayList<String> categoryNames, final ArrayList<Integer> ids, Integer num) {
+        //if there is no categories so return
+        if (ids.size() == 0)
             return;
-        int id = Integer.valueOf(String.valueOf(ids.get(0)));
-        header.setText(categoryNames.get(0));
-        categoryController.getItemsByCategoryId(id);
+        //if there are categories select
+        int id = Integer.valueOf(String.valueOf(ids.get(num)));
+        header.setText(categoryNames.get(num));
         currentCategoryId = id;
-        currentCategoryName = categoryNames.get(0);
+        currentCategoryName = categoryNames.get(num);
+        categoryController.getItemsByCategoryId(id);
+    }
+
+    //from setNavigationView function call this to get items to specific category
+    public void setRecyclerView(ArrayList<Integer> itemsId, final ArrayList<Integer> contentId, ArrayList<Integer> types) {
+        //itemsid: id for the categoryItem
+        //contentId: tmdb Id
+        //types : movie,tv or artist
+        //categoryController: to use it later to delete a category item
+
+        adapter.setData(itemsId, contentId, types, currentCategoryId, currentCategoryName, categoryController);
+
 
     }
 
-    public void setRecyclerView(ArrayList<Integer> listId, final ArrayList<Integer> contentId, ArrayList<Integer> types) {
-        adapter.setData(listId, contentId, types,currentCategoryId,currentCategoryName,categoryController);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        linearLayoutManager.setSmoothScrollbarEnabled(true);
-        listRecycle.setLayoutManager(linearLayoutManager);
-        listRecycle.setAdapter(adapter);
-    }
 
-
+    //set an tab click listener
     private void setTabLayout() {
         //  setTabsTitles(tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -272,7 +205,7 @@ changeCategoryName.setOnClickListener(new View.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // dialog.dismiss();
                 final String newName = input.getText().toString();
-                if(newName.isEmpty())
+                if (newName.isEmpty())
                     return;
                 categoryController.addMovieCategory(newName, new OnSuccess.bool() {
                     @Override
@@ -296,12 +229,88 @@ changeCategoryName.setOnClickListener(new View.OnClickListener() {
         builder.show();
     }
 
+    private void changeCategoryName() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+// I'm using fragment here so I'm using getView() to provide ViewGroup
+// but you can provide here any other instance of ViewGroup from your Fragment / Activity
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.add_category, (ViewGroup) getView(), false);
+// Set up the input
+        final EditText input = (EditText) viewInflated.findViewById(R.id.input);
+        input.setHint("Write the name for this category");
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        builder.setView(viewInflated);
+
+// Set up the buttons
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // dialog.dismiss();
+                final String newName = input.getText().toString();
+                if (newName.isEmpty())
+                    return;
+                categoryController.updateName(newName, currentCategoryId, new OnSuccess.bool() {
+                    @Override
+                    public void onSuccess(boolean state) {
+                        if (state) {
+                            categoryController.toast(currentCategoryName + " has been changed to " + newName);
+                            titleAdapter.addTitle(newName);
+                        } else
+                            categoryController.toast("failed to change Name");
+                    }
+                });
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void deleteCategory() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Do you want to delete this category ( " + currentCategoryName + " ) ?");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (currentCategoryId == null)
+                    return;
+                categoryController.deleteCategory(currentCategoryId, new OnSuccess.bool() {
+                    @Override
+                    public void onSuccess(boolean state) {
+                        if (state) {
+                            categoryController.toast("category " + currentCategoryName + " has been deleted successfully");
+                            MainActivity.loadFragmentNoReturn(R.id.mainContainer, CategoryListFragment.newInstance());
+                        } else {
+                            categoryController.toast("failed to delete the category ( " + currentCategoryName + " )");
+                        }
+                    }
+                });
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+
+            }
+        });
+
+        builder.show();
+
+
+    }
 
     public static void deleteCategoryItem(final int categoryItemId, final int categoryId, String categoryName, final CategoryController categoryController) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-            builder.setTitle("Do you want to remove this from ( "+categoryName +" ) ?");
+            builder.setTitle("Do you want to remove this from ( " + categoryName + " ) ?");
             builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -309,13 +318,11 @@ changeCategoryName.setOnClickListener(new View.OnClickListener() {
                     categoryController.deleteItemFromCategory(categoryItemId, new OnSuccess.bool() {
                         @Override
                         public void onSuccess(boolean state) {
-                            if(state) {
+                            if (state) {
                                 categoryController.toast("Deleted successfully");
                                 categoryController.getItemsByCategoryId(categoryId);
-                                MainActivity.loadFragmentNoReturn(R.id.mainContainer,CategoryListFragment.newInstance());
-                            }
-                            else
-                            {
+                                MainActivity.loadFragmentNoReturn(R.id.mainContainer, CategoryListFragment.newInstance());
+                            } else {
                                 categoryController.toast("failed to delete");
                             }
                         }
@@ -333,9 +340,7 @@ changeCategoryName.setOnClickListener(new View.OnClickListener() {
 
             builder.show();
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

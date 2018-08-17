@@ -133,8 +133,6 @@ server.select(createSelectQuery(selects,tables,condition),listener);
     public void CategoryItemGetByCategory(int categoryId, OnDatabaseSuccess.array listener)
     {
 
-
-
         tables.put(categoryItemTable.tableName,null);
 
         condition += categoryId +equal + categoryItemTable.categoryId;

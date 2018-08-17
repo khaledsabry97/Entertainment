@@ -6,7 +6,14 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 22-Jul-18.
  */
 
+//classification is class that put group of searchItem and set the type for it
+    //to display it
 public class Classification {
+
+    private String title;
+    private int image;
+    private ArrayList<SearchItem> searchItems = new ArrayList<>();
+    private type type;
 
     public enum type
     {
@@ -14,10 +21,7 @@ public class Classification {
         dailyboxoffice,
         topGross;
     }
-    private String title;
-    private int image;
-    private ArrayList<SearchItem> searchItems = new ArrayList<>();
-    private type type;
+
 
     public Classification.type getType() {
         return type;

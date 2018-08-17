@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
@@ -31,6 +32,7 @@ public class Functions {
       }
   */
     public static void stopConnectionsAndStartImageGlide() {
+        Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).start();
         ApiConnections.getInstance().stopConnection();
         Glide.with(MainActivity.getActivity()).onStop();
         Glide.with(MainActivity.getActivity()).onStart();
@@ -64,7 +66,7 @@ public class Functions {
         }, f_delayToStart, f_repeatTime);
     }
 
-
+//this to get 10 items for movies as a seach item
     public static ArrayList<SearchItem> movies(ArrayList<Movie> movies, String type, Integer limit) {
 
         ArrayList<SearchItem> items = new ArrayList<>();
@@ -90,6 +92,7 @@ public class Functions {
         return items;
     }
 
+    //this to get tvs as a search item
     public static ArrayList<SearchItem> tvs(ArrayList<Tv> tvs) {
         ArrayList<SearchItem> items = new ArrayList<>();
         for (int i = 0; i < tvs.size(); i++) {
@@ -100,7 +103,6 @@ public class Functions {
         }
         return items;
     }
-
 
     public static ArrayList<SearchItem> artists(ArrayList<Artist> artists) {
         ArrayList<SearchItem> items = new ArrayList<>();

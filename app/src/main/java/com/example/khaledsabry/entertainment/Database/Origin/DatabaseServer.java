@@ -1,11 +1,16 @@
 package com.example.khaledsabry.entertainment.Database.Origin;
 
+import android.service.carrier.CarrierMessagingService;
+import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -54,12 +59,15 @@ public class DatabaseServer {
                             listener.onSuccess(jsonObject);
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(MainActivity.getActivity().getApplicationContext(),"Failed to connect to the server!",Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.toString();
+                Toast.makeText(MainActivity.getActivity().getApplicationContext(),"Failed to connect to the server!",Toast.LENGTH_SHORT).show();
             }
         }) {
             //adding parameters to the request
@@ -91,6 +99,7 @@ public class DatabaseServer {
                             listener.onSuccess(state);
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(MainActivity.getActivity().getApplicationContext(),"Failed to connect to the server!",Toast.LENGTH_SHORT).show();
                             listener.onSuccess(false);
                         }
                     }
@@ -98,6 +107,8 @@ public class DatabaseServer {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.toString();
+                Toast.makeText(MainActivity.getActivity().getApplicationContext(),"Failed to connect to the server!",Toast.LENGTH_SHORT).show();
+
             }
         }) {
             //adding parameters to the request
