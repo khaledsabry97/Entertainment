@@ -24,7 +24,7 @@ public class UpdateController extends DatabaseController {
         set.put(categoryTable.name, name);
 
 
-        condition += categoryTable.id + and + id;
+        condition += categoryTable.id + equal + id;
 
 
         String query = createUpdateQuery(table, set, condition);

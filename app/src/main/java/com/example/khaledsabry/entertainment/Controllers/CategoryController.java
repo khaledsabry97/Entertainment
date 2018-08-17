@@ -156,13 +156,25 @@ public class CategoryController extends Controller {
     }
 
     //remove the category using its id
-    public void deleteCategory(Integer id, OnSuccess.bool listener) {
+    public void deleteCategory(Integer id, final OnSuccess.bool listener) {
 
+        databaseController.deleteController().categoryDelete(id, new OnDatabaseSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                listener.onSuccess(state);
+            }
+        });
     }
 
     //remove an item from the category
-    public void deleteItemFromCategory(Integer CategoryItemId, OnSuccess.bool listener) {
+    public void deleteItemFromCategory(Integer categoryItemId, final OnSuccess.bool listener) {
 
+        databaseController.deleteController().categoryItemDelete(categoryItemId, new OnDatabaseSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                listener.onSuccess(state);
+            }
+        });
     }
 
 }

@@ -17,6 +17,7 @@ public class DeleteController extends DatabaseController {
     private String and = " and ";
     private String or = " or ";
 
+    private String table ="";
     private String condition = "";
 
     public void CategoryItemRemove(int categoryId, String tmdbId, OnDatabaseSuccess.bool listener) {
@@ -36,6 +37,23 @@ public class DeleteController extends DatabaseController {
     {
     }
 
+public void categoryDelete(int categoryId,OnDatabaseSuccess.bool listener)
+{
+
+    table = categoryTable.tableName;
+    condition += categoryTable.id + equal + categoryId;
+    String query = createDeleteQuery(table,condition);
+    server.delete(query,listener);
+}
+
+    public void categoryItemDelete(int categoryItemId,OnDatabaseSuccess.bool listener)
+    {
+
+        table = categoryItemTable.tableName;
+        condition += categoryItemTable.id + equal + categoryItemId;
+        String query = createDeleteQuery(table,condition);
+        server.delete(query,listener);
+    }
 
 
 

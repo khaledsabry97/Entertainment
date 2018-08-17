@@ -159,7 +159,7 @@ public class InsertController extends DatabaseController {
             public void onSuccess(ArrayList<JSONObject> jsonObjects) {
                 if (jsonObjects != null) {
 
-                    if (jsonObjects.size() == 0) {
+                    if (jsonObjects.size() != 0) {
                         listener.onSuccess(false);
                         return;
                     }

@@ -63,7 +63,7 @@ public class DatabaseTables {
 
     public static class categoryItem
     {
-        public final  String tableName = "`categoryItem`";
+        public final  String tableName = "`category_item`";
         public final  String id = "`id`";
         public final  String categoryId = "`category_id`";
         public final  String tmdbId = "`tmdb_id`";

@@ -12,9 +12,12 @@ import android.view.ViewManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.StringRequest;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Fragments.CategoryListFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -31,13 +34,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     ArrayList<Integer> itemsId = new ArrayList<>();
     ArrayList<Integer> items = new ArrayList<>();
     ArrayList<Integer> types = new ArrayList<>();
+    CategoryController categoryController = new CategoryController();
+    String categoryName;
+    int categoryId;
 
     private int typeToShow;
 
-    public void setData(ArrayList<Integer> itemsId, ArrayList<Integer> items, ArrayList<Integer> types) {
+    public void setData(ArrayList<Integer> itemsId, ArrayList<Integer> items, ArrayList<Integer> types,int categoryId,String categoryName,CategoryController categoryController) {
         this.itemsId = itemsId;
         this.items = items;
         this.types = types;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.categoryController = categoryController;
+
         notifyDataSetChanged();
     }
 
@@ -45,7 +55,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         this.typeToShow = typeToShow;
         notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override
@@ -98,6 +107,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             view.setVisibility(View.VISIBLE);
 
             Integer type = Integer.valueOf(types.get(postion) + "");
+            final Integer categoryItemId = Integer.valueOf(itemsId.get(postion) + "");
 //here we determine the type we show if the type to show is 0 then show all else show its type
             if (typeToShow != 0 && type != typeToShow) {
                 view.setVisibility(View.GONE);
@@ -112,7 +122,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                         @Override
                         public void onSuccess(final Movie movie) {
 
-                            setObjects(movie.getTitle(), movie.getTmdbRate(), movie.getReleaseDate(), movie.getPosterImage(), movie.getMovieId(), 1, movie.getMovieId());
+                            setObjects(movie.getTitle(), movie.getTmdbRate(), movie.getReleaseDate(), movie.getPosterImage(), categoryItemId, 1, movie.getMovieId());
 
                         }
                     });
@@ -134,7 +144,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
 
-        private void setObjects(String title, float rate, String date, String posterUrl, int removeItemId, final int type, final int movieId) {
+        private void setObjects(String title, float rate, String date, String posterUrl, final int removeItemId, final int type, final int movieId) {
             this.title.setText(title);
             this.rate.setText(String.valueOf(rate));
             this.date.setText(date);
@@ -152,7 +162,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 @Override
                 public void onClick(View v) {
                     //remove the movie,tv or artist from the categoryItem
-
+                    CategoryListFragment.deleteCategoryItem(removeItemId,categoryId,categoryName,categoryController);
                 }
             });
 

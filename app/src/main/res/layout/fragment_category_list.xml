@@ -73,7 +73,6 @@
                         android:layout_height="0dp"
                         android:background="@drawable/MainBackground"
                         tools:listitem="@layout/cardview_contentdetail"
-                        app:layout_constraintBottom_toTopOf="@+id/adding"
                         ></android.support.v7.widget.RecyclerView>
 
 
@@ -85,15 +84,24 @@
                         android:background="@color/brownandblack"
                         app:layout_constraintBottom_toBottomOf="parent">
                         <ImageView
+                            android:id="@+id/addcategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_playlist_add_black_24dp"
                             android:layout_weight="1"/>
 
                         <ImageView
+                            android:id="@+id/changename"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_edit_black_24dp"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:id="@+id/deletecategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_delete_forever_black_24dp"
                             android:layout_weight="1"/>
                     </LinearLayout>
 
