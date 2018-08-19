@@ -56,11 +56,9 @@ public class RecyclerViewPager extends Fragment {
     RecyclerView recyclerView;
     OnRecyclerViewSuccess listener;
 
-    public static RecyclerViewPager newInstance(RecyclerView.Adapter adapter, RecyclerView.LayoutManager layoutManager, OnRecyclerViewSuccess listener) {
+    public static RecyclerViewPager newInstance(ViewPagerType type) {
         RecyclerViewPager fragment = new RecyclerViewPager();
-        fragment.adapter = adapter;
-        fragment.layoutManager = layoutManager;
-        fragment.listener = listener;
+        fragment.type = type;
         return fragment;
     }
     @Override
@@ -69,15 +67,10 @@ public class RecyclerViewPager extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycler_view_pager, container, false);
         recyclerView = view.findViewById(R.id.recyclerid);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        listener.onSuccess(recyclerView);
-      //  setRecycler();
+        setRecycler();
         return view;
     }
-/*
+
     private void setRecycler() {
         switch (type)
         {
@@ -112,8 +105,8 @@ setDailyBoxOffice();
             default:
         }
     }
-*/
-/*
+
+
 
     private void setDailyBoxOffice() {
 
@@ -132,7 +125,9 @@ setDailyBoxOffice();
                         MainActivity.getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                             BoxOfficeAdapter   adapter = new BoxOfficeAdapter(classification);
+                             BoxOfficeAdapter   adapter = new BoxOfficeAdapter();
+                                adapter.setData(classification);
+
                                 recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -164,7 +159,8 @@ setDailyBoxOffice();
                         MainActivity.getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                            BoxOfficeAdapter    adapter = new BoxOfficeAdapter(classification);
+                            BoxOfficeAdapter    adapter = new BoxOfficeAdapter();
+                            adapter.setData(classification);
                                 recyclerView.setHasFixedSize(true);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -176,5 +172,5 @@ setDailyBoxOffice();
             }
         });
     }
-    */
+
 }

@@ -39,6 +39,7 @@ public class BoxOfficeFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
 LinearLayoutManager linearLayoutManager;
+    FragmentPagerAdapter fragmentPagerAdapter;
     public static BoxOfficeFragment newInstance() {
         BoxOfficeFragment fragment = new BoxOfficeFragment();
         return fragment;
@@ -60,15 +61,15 @@ LinearLayoutManager linearLayoutManager;
         adapter = new BoxOfficeAdapter();
         dailyAdapter = new BoxOfficeAdapter();
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        viewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+        fragmentPagerAdapter = new FragmentPagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:
-                        return setBoxOffice();
+                        return RecyclerViewPager.newInstance(RecyclerViewPager.ViewPagerType.boxOffice);
 
                     case 1:
-                        return setDailyBoxOffice();
+                        return RecyclerViewPager.newInstance(RecyclerViewPager.ViewPagerType.dailyBoxOffice);
                     default:
                         return BoxOfficeFragment.newInstance();
                 }
@@ -80,89 +81,37 @@ LinearLayoutManager linearLayoutManager;
             public int getCount() {
                 return 2;
             }
-        });
+
+
+        };
+
+        viewPager.setAdapter(fragmentPagerAdapter);
+        setTabLayout();
         setBoxOffice();
 
         return view;
     }
 
 
-    private Fragment setBoxOffice() {
+    private void setBoxOffice() {
 
         //set the header title to box office
         header.setText("Box Office");
- RecyclerViewPager fragment = RecyclerViewPager.newInstance(adapter, new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false), new OnRecyclerViewSuccess() {
-     @Override
-     public void onSuccess(RecyclerView recyclerView) {
-         AsyncTask.execute(new Runnable() {
-             @Override
-             public void run() {
-                 //get box office
-                 WebApi.getInstance().mojoBoxOffice(new OnWebSuccess.OnMovieList() {
-                     @Override
-                     public void onSuccess(ArrayList<Movie> movies) {
-                         final Classification classification = new Classification();
-
-                         classification.setType(Classification.type.boxoffice);
-                         classification.setSearchItems(Functions.movies(movies, null, 10));
-
-                         MainActivity.getActivity().runOnUiThread(new Runnable() {
-                             @Override
-                             public void run() {
-                                 adapter.setData(classification);
-                             }
-                         });
-                     }
-                 });
-             }
-         });
-     }
- });
-              return fragment;
+        fragmentPagerAdapter.notifyDataSetChanged();
 
  }
 
 
-    private Fragment setDailyBoxOffice() {
+    private void setDailyBoxOffice() {
         //set the header title to box office
         header.setText("Today's Box Office");
-
-     RecyclerViewPager fragment = RecyclerViewPager.newInstance(dailyAdapter, new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false), new OnRecyclerViewSuccess() {
-            @Override
-            public void onSuccess(RecyclerView recyclerView) {
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        //get box office
-                        WebApi.getInstance().mojoDaily(0, new OnWebSuccess.OnMovieList() {
-                            @Override
-                            public void onSuccess(ArrayList<Movie> movies) {
-                                final Classification classification = new Classification();
-
-                                classification.setType(Classification.type.dailyboxoffice);
-                                classification.setSearchItems(Functions.movies(movies, null, 10));
-
-                                MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        adapter.setData(classification);
-
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });
-
-     return fragment;
+        fragmentPagerAdapter.notifyDataSetChanged();
 
 
     }
 
 
-    /* setTabsTitles(tabLayout);
+
     private void setTabLayout() {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -190,5 +139,5 @@ LinearLayoutManager linearLayoutManager;
             }
         });
     }
-    */
+
 }

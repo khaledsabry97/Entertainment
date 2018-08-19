@@ -10,6 +10,7 @@ import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;
@@ -504,6 +505,73 @@ e.printStackTrace();
             @Override
             protected void onPostExecute(ArrayList<News> news) {
                 listener.onSuccess(news);
+
+            }
+        };
+        task.execute();
+
+    }
+
+
+    public void imdbMovieDetails(final String imdbId, final OnWebSuccess.OnMovie listener) {
+
+        AsyncTask<Void, Void, Movie> task = new AsyncTask<Void, Void, Movie>() {
+            @Override
+            protected Movie doInBackground(Void... voids) {
+                Movie movie = new Movie();
+                org.jsoup.nodes.Document
+                        doc = null;
+                try {
+                    doc = Jsoup.connect("https://www.imdb.com/title/"+imdbId).get();
+
+                    if (doc == null)
+                        return movie;
+                    Elements results = doc.getElementsByTag("script");
+                    results =    doc.getElementsByAttributeValue("type","application/ld+json");
+                    El
+                    String jsonObject = results.get(0).text();
+                    JSONObject jsonObject1 = new JSONObject(jsonObject);
+                    results.remove(0);
+                    results.remove(0);
+
+                    results.remove(0);
+
+
+                    if (results == null)
+                        return movie;
+                    for (Element element : results) {
+                        Elements attributes = element.getElementsByTag("td");
+
+                        String title = attributes.get(2).text();
+                        String weekendGross = attributes.get(4).text();
+                        String totalGross = attributes.get(9).text();
+                        String budget = attributes.get(10).text();
+                        String daysInBoxOffice = attributes.get(11).text();
+
+
+                        budget += "M";
+
+
+                        movie.setTitle(title);
+                        movie.setRevneue(weekendGross);
+                        movie.setTotalRevenue(totalGross);
+                        movie.setBudget(budget);
+                        movie.setNoWeeksInBoxOffice(daysInBoxOffice);
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                catch (Exception e)
+                {
+
+                }
+                return movie;
+            }
+
+            @Override
+            protected void onPostExecute(Movie movie) {
+                listener.onSuccess(movie);
 
             }
         };

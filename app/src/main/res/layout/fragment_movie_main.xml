@@ -9,449 +9,513 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <!-- TOUpdatingdate blank fragment layout -->
-    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTintMode="src_over"
-        android:orientation="horizontal">
-
-        <android.support.constraint.ConstraintLayout
+        <!-- TOUpdatingdate blank fragment layout -->
+        <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:background="@drawable/blue">
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPagerid"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                ></android.support.v4.view.ViewPager>
-
-            <me.relex.circleindicator.CircleIndicator
-                android:id="@+id/indicator"
-                android:layout_width="match_parent"
-                android:layout_height="48dp" />
-
-            <ImageView
-                android:id="@+id/favourite"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/ic_turned_in_black_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/titleIds"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/carterone"
-                android:textColor="?attr/colorBackgroundFloating"
-                android:textSize="40sp"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="43dp" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/sideid"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/blue">
+            android:layout_height="match_parent">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:backgroundTintMode="src_over"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/titleId"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_hight_main_title"
-                    android:layout_weight="1"
-                    android:autoSizeTextType="uniform"
-                    android:background="@drawable/blue"
-                    android:fontFamily="@font/carterone"
-                    android:includeFontPadding="true"
-                    android:lines="1"
-                    android:shadowColor="#000"
-                    android:shadowDx="5"
-                    android:shadowDy="5"
-                    android:textAlignment="center"
-                    android:textColor="@color/cardview_light_background"
-                    android:textSize="@dimen/size_main_title" />
-
-                <LinearLayout
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/blue">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewPagerid"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"></android.support.v4.view.ViewPager>
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp" />
+
+                    <ImageView
+                        android:id="@+id/favourite"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="1dp"
+                        android:background="@drawable/ic_turned_in_black_24dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/titleIds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/carterone"
+                        android:textColor="?attr/colorBackgroundFloating"
+                        android:textSize="40sp"
+                        android:typeface="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:ignore="MissingConstraints"
+                        tools:layout_editor_absoluteX="43dp" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/sideid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/blue">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="5dp"
-                            android:autoSizeTextType="uniform"
-                            android:background="@drawable/round"
-                            android:fontFamily="@font/carterone"
-                            android:lines="1"
-                            android:text="Overview"
-                            android:textColor="@color/cardview_light_background"
-                            android:textSize="@dimen/size_main_category" />
-
-                        <android.support.v4.widget.NestedScrollView
+                            android:id="@+id/titleId"
+                            style="@style/TextHeader"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp">
+                            android:layout_height="@dimen/size_hight_main_title"
+                            android:layout_weight="1"
+                            android:background="@drawable/ContentTitle"
+                            android:lines="1"
+                            tools:text="Hotel Transylvania 3: Summer Vacation" />
 
-                            <TextView
-                                android:id="@+id/overviewID"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <android.support.constraint.ConstraintLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:autoSizeTextType="uniform"
-                                android:background="@drawable/round"
-                                android:fontFamily="@font/carterone"
-                                android:textColor="@color/cardview_light_background"
-                                android:textSize="17sp" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
 
-                        </android.support.v4.widget.NestedScrollView>
+                                <ImageView
+                                    android:id="@+id/imdbposter"
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginStart="8dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/imdb2"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/imdbrate"
+                                    style="@style/TextCategory"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginStart="8dp"
+                                    android:text="7.8"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/imdbposter" />
 
-                        <TextView
-                            style="@style/TextCategoryRound"
+                            </android.support.constraint.ConstraintLayout>
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    android:id="@+id/tomatoesposter"
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginStart="8dp"
+                                    android:src="@drawable/fresh2"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                                <TextView
+                                    android:id="@+id/tomatoesrate"
+                                    style="@style/TextCategory"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginStart="8dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/tomatoesposter"
+                                    tools:text="7.8" />
+
+                            </android.support.constraint.ConstraintLayout>
+
+
+                        </LinearLayout>
+                        <ImageView style="@style/seperatorHorizontal" />
+
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
-                            android:text="Run Time"
-                            android:textColor="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/timeid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
+                            android:layout_margin="@dimen/_3sdp"
                             android:layout_weight="1"
-                            android:textColor="@color/cardview_light_background" />
+                            android:orientation="vertical">
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                        <TextView
-                            style="@style/TextCategoryRound"
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:autoSizeTextType="uniform"
+                                    android:lines="1"
+                                    android:text="Overview" />
+
+                                <android.support.v4.widget.NestedScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_100sdp">
+
+                                    <TextView
+                                        android:id="@+id/overviewID"
+                                        style="@style/TextNormalRound"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="@dimen/_18sdp"
+                                        android:autoSizeTextType="uniform"
+                                        android:textAlignment="textStart" />
+
+                                </android.support.v4.widget.NestedScrollView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:text="Run Time"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/timeid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/cardview_light_background" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:text="Release Time"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/releasetimeid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:autoSizeTextType="uniform" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:background="@drawable/round"
+                                    android:text="Genres"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/genresid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/cardview_light_background" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Budget"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/budgetid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight=".8"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Revenue"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/revenueid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Adult"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/adultid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Status"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/statusid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="3dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Rate"
+                                    android:textColor="@color/cardview_light_background" />
+
+                                <TextView
+                                    android:id="@+id/rateid"
+                                    style="@style/TextNormalLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/cardview_light_background" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <ImageView style="@style/seperatorHorizontal" />
+
+                        <LinearLayout
+                            android:id="@+id/actor_crew"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5"
-                            android:text="Release Time"
-                            android:textColor="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/releasetimeid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="8dp"
                             android:layout_weight="1"
-                            android:autoSizeTextType="uniform" />
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                tools:layout_editor_absoluteX="342dp">
 
-                        <TextView
-                            style="@style/TextCategoryRound"
+                                <Button
+                                    android:id="@+id/button_actors_id"
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/blue"
+                                    android:text="Actors"
+                                    tools:layout_editor_absoluteY="695dp" />
+
+                                <Button
+                                    android:id="@+id/button_crew_id"
+                                    style="@style/TextCategoryRound"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_weight="1"
+                                    android:autoSizeTextType="uniform"
+                                    android:background="@drawable/blue"
+                                    android:elevation="0dp"
+                                    android:fontFamily="@font/carterone"
+                                    android:lines="1"
+                                    android:text="Crew" />
+
+                            </LinearLayout>
+
+                            <FrameLayout
+                                android:id="@+id/actors_crews_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:background="@drawable/round"
-                            android:text="Genres"
-                            android:textColor="@color/cardview_light_background" />
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/genresid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:textColor="@color/cardview_light_background" />
+                            <FrameLayout
+                                android:id="@+id/productionframelayoutid"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1">
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/ReviewLayoutid"
+                                android:layout_width="match_parent"
+                                android:layout_height="250dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1">
+
+                            </FrameLayout>
+
+                            <android.support.v4.view.ViewPager
+                                android:id="@+id/viewPagerReviewid"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:visibility="visible"></android.support.v4.view.ViewPager>
+                        </LinearLayout>
+
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextCategoryRound"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:text="Budget"
-                            android:textColor="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/budgetid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight=".8"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextCategoryRound"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:text="Revenue"
-                            android:textColor="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/revenueid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextCategoryRound"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:text="Adult"
-                            android:textColor="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/adultid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextCategoryRound"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:text="Status"
-                            android:textColor="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/statusid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextCategoryRound"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:text="Rate"
-                            android:textColor="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/rateid"
-                            style="@style/TextNormalLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:textColor="@color/cardview_light_background" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/actor_crew"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        tools:layout_editor_absoluteX="342dp">
-
-                        <Button
-                            android:id="@+id/button_actors_id"
-                            style="@style/TextCategoryRound"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginRight="2dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/blue"
-                            android:text="Actors"
-                            tools:layout_editor_absoluteY="695dp" />
-
-                        <Button
-                            android:id="@+id/button_crew_id"
-                            style="@style/TextCategoryRound"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_weight="1"
-                            android:autoSizeTextType="uniform"
-                            android:background="@drawable/blue"
-                            android:elevation="0dp"
-                            android:fontFamily="@font/carterone"
-                            android:lines="1"
-                            android:text="Crew" />
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:id="@+id/actors_crews_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                    </FrameLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <FrameLayout
-                        android:id="@+id/productionframelayoutid"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1">
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/ReviewLayoutid"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1">
-
-                    </FrameLayout>
-
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/viewPagerReviewid"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:visibility="visible"></android.support.v4.view.ViewPager>
-                </LinearLayout>
-
-
+                </android.support.v4.widget.NestedScrollView>
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </LinearLayout>
 
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:forceHasOverlappingRendering="true"
-            >
-<include layout="@layout/fragment_content_side_bar" ></include>
+            <android.support.design.widget.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:forceHasOverlappingRendering="true">
 
-        </android.support.design.widget.NavigationView>
+                <include layout="@layout/fragment_content_side_bar"></include>
+
+            </android.support.design.widget.NavigationView>
 
 
-    </android.support.v4.widget.DrawerLayout>
+        </android.support.v4.widget.DrawerLayout>
     </RelativeLayout>
 </FrameLayout>

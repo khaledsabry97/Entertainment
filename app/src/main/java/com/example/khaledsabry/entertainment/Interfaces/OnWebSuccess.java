@@ -29,4 +29,10 @@ public interface OnWebSuccess {
         void onSuccess(ArrayList<News> news);
 
     }
+
+    public interface OnMovie
+    {
+        void onSuccess(Movie movie);
+
+    }
 }

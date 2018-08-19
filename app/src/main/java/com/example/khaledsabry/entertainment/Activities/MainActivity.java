@@ -77,59 +77,17 @@ public class MainActivity extends AppCompatActivity {
         //set the context for the volley library
         ApiConnections.getInstance().setContext(getApplicationContext());
 
-  /*      drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        poster = v.findViewById(R.id.nav_view).findViewById(R.id.poster);
-        backDrop = v.findViewById(R.id.backdrop);
-        title = v.findViewById(R.id.title);
-        email = v.findViewById(R.id.email);
-        setObjects();
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int id = item.getItemId();
-                Functions.stopConnectionsAndStartImageGlide();
-                switch (id) {
-                    case R.id.home:
-                        MainActivity.loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
-                        break;
-                    case R.id.searchid:
-                        loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
-                        break;
-
-                    case R.id.boxofficeid:
-                        loadFragmentNoReturn(R.id.mainContainer, BoxOfficeFragment.newInstance());
-                        break;
-
-                    case R.id.category:
-                        MainActivity.loadFragmentWithReturn(R.id.mainContainer, CategoryListFragment.newInstance());
-                        break;
-                    case R.id.news:
-                        loadFragmentNoReturn(R.id.mainContainer, NewsFragment.newInstance());
-                        break;
-                    default:
-                        break;
-                }
 
 
-                navigationView.setCheckedItem(id);
-                drawerLayout.closeDrawer(GravityCompat.START, true);
-                return true;
-
-            }
-        });
-
-*/
-        //   loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536,true));
-// hide the navigation bar and the status bar
         periodicHideNavigation();
-//loadFragmentNoReturn(R.id.mainContainer, SearchFragment.newInstance());
-        //    loadFragmentWithReturn(R.id.mainContainer, MainMenuFragment.newInstance());
 
-  //      Downloader.getInstance().downloadYoutube("https://www.youtube.com/watch?v=h7NLOLUOxh4", "Slender Man - Movie Review");
+WebApi.getInstance().imdbMovieDetails("tt4912910", new OnWebSuccess.OnMovie() {
+    @Override
+    public void onSuccess(Movie movie) {
 
-loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+    }
+});
+//loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
     }
 
 

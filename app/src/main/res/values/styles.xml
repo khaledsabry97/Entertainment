@@ -126,4 +126,22 @@
         <item name="android:textColor">@color/cardview_light_background</item>
     </style>
 
+
+    <style name="seperatorHorizontal">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_marginLeft">@dimen/_3sdp</item>
+        <item name="android:layout_marginRight">@dimen/_3sdp</item>
+        <item name="android:layout_marginTop">@dimen/_1sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_1sdp</item>
+
+    </style>
+
+
+    <style name="seperatorVertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

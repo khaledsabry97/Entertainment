@@ -78,6 +78,7 @@ public class CategoryListFragment extends Fragment {
         currentCategoryId = null;
 
 
+
         titleAdapter = new TitleAdapter();
         adapter = new CategoryAdapter();
         categoriesRecycle.setAdapter(titleAdapter);
