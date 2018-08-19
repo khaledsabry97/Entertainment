@@ -35,6 +35,15 @@ public class Movie {
     private String noWeeksInBoxOffice;
     private String totalRevenue;
     private String Budget;
+    private String mpaa;
+
+    public String getMpaa() {
+        return mpaa;
+    }
+
+    public void setMpaa(String mpaa) {
+        this.mpaa = mpaa;
+    }
 
     public String getTotalRevenue() {
         return totalRevenue;

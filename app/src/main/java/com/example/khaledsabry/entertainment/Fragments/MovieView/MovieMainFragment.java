@@ -2,7 +2,6 @@ package com.example.khaledsabry.entertainment.Fragments.MovieView;
 
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -17,20 +16,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
+import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
-import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -54,9 +51,11 @@ public class MovieMainFragment extends Fragment {
     TextView budget;
     TextView revenue;
     TextView rate;
-    TextView adult;
+    TextView mpaa;
     TextView status;
     ImageView favourite;
+    TextView imdbRating;
+    TextView tomatoesRating;
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
@@ -94,7 +93,7 @@ public class MovieMainFragment extends Fragment {
         budget = v.findViewById(R.id.budgetid);
         rate = v.findViewById(R.id.rateid);
         status = v.findViewById(R.id.statusid);
-        adult = v.findViewById(R.id.adultid);
+        mpaa = v.findViewById(R.id.mpaaid);
         viewPager = v.findViewById(R.id.viewPagerid);
         indicator = v.findViewById(R.id.indicator);
         revenue = v.findViewById(R.id.revenueid);
@@ -109,6 +108,8 @@ public class MovieMainFragment extends Fragment {
         writeNewCategoryLayout = v.findViewById(R.id.addnew);
         categoryNew = v.findViewById(R.id.categorytext);
         addCategoryButton = v.findViewById(R.id.addcategory);
+        imdbRating = v.findViewById(R.id.imdbrate);
+        tomatoesRating = v.findViewById(R.id.tomatoesrate);
         categoryController = new CategoryController();
         getMovieDetails();
         return v;
@@ -133,18 +134,18 @@ public class MovieMainFragment extends Fragment {
 
 
     private void setObjects(final Movie movie) {
-        loadCategories();
         this.movie = movie;
+        loadCategories();
+        getImdbInfo();
 
         overviewText.setText(movie.getOverView());
         releaseDate.setText(movie.getReleaseDate());
         runTimeText.setText(movie.getRunTime() + " min");
         genres.setText(movie.getGenreList());
         revenue.setText(movie.getRevneue(true));
-        adult.setText((movie.isAdult()));
         budget.setText(movie.getBudget());
         status.setText(movie.getStatus());
-        rate.setText(movie.getTmdbRate() + "/10");
+        rate.setText(movie.getTmdbRate()+"");
         title.setText(movie.getTitle());
         viewPagerAdapter = new MainPosterViewPager(movie.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
@@ -293,5 +294,18 @@ public class MovieMainFragment extends Fragment {
 
     }
 
+
+    public void getImdbInfo()
+    {
+        if(movie.getMovieImdbId() == null)
+            return;
+        WebApi.getInstance().imdbMovieDetails(movie.getMovieImdbId(), new OnWebSuccess.OnMovie() {
+            @Override
+            public void onSuccess(Movie movie) {
+                imdbRating.setText(String.valueOf( movie.getImdbRate()));
+                mpaa.setText(movie.getMpaa());
+            }
+        });
+    }
 
 }

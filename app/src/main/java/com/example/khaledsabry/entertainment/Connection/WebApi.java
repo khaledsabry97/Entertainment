@@ -528,37 +528,15 @@ e.printStackTrace();
                         return movie;
                     Elements results = doc.getElementsByTag("script");
                     results =    doc.getElementsByAttributeValue("type","application/ld+json");
-                    El
-                    String jsonObject = results.get(0).text();
-                    JSONObject jsonObject1 = new JSONObject(jsonObject);
-                    results.remove(0);
-                    results.remove(0);
+                    Element d = results.get(0);
+                    String stringJsonObject = d.childNode(0).toString();
+                    JSONObject jsonObject = new JSONObject(stringJsonObject);
+                   String mpaa = jsonObject.getString("contentRating");
+JSONObject ratings = jsonObject.getJSONObject("aggregateRating");
+String imdbRate = ratings.getString("ratingValue");
 
-                    results.remove(0);
-
-
-                    if (results == null)
-                        return movie;
-                    for (Element element : results) {
-                        Elements attributes = element.getElementsByTag("td");
-
-                        String title = attributes.get(2).text();
-                        String weekendGross = attributes.get(4).text();
-                        String totalGross = attributes.get(9).text();
-                        String budget = attributes.get(10).text();
-                        String daysInBoxOffice = attributes.get(11).text();
-
-
-                        budget += "M";
-
-
-                        movie.setTitle(title);
-                        movie.setRevneue(weekendGross);
-                        movie.setTotalRevenue(totalGross);
-                        movie.setBudget(budget);
-                        movie.setNoWeeksInBoxOffice(daysInBoxOffice);
-
-                    }
+movie.setImdbRate(Float.parseFloat(imdbRate));
+movie.setMpaa(mpaa);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

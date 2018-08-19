@@ -80,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         periodicHideNavigation();
-
+/*
 WebApi.getInstance().imdbMovieDetails("tt4912910", new OnWebSuccess.OnMovie() {
     @Override
     public void onSuccess(Movie movie) {
 
     }
-});
-//loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+});*/
+loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
     }
 
 
