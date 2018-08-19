@@ -28,9 +28,11 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
 
     Classification classification = new Classification();
 
-    public BoxOfficeAdapter(Classification classification) {
-        this.classification = classification;
-    }
+public void setData(Classification classification)
+{
+    this.classification = classification;
+    notifyDataSetChanged();
+}
 
     @NonNull
     @Override
@@ -240,12 +242,13 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                 totalrevenue.setVisibility(View.INVISIBLE);
                 noweeks.setVisibility(View.INVISIBLE);
                 this.position.setText(String.valueOf(position));
-                revenue.setText("Domestic Revenue : " + movie.getRevneue(false));
+                revenue.setText("Domestic Revenue : " + movie.getDomesticBudget());
 
             } else if (phase == 2) {
 
                 ImageController.putImageLowQuality(movie.getPosterImage(), poster);
-
+                title.setText(movie.getTitle());
+                this.position.setText(String.valueOf(position));
                 rate.setText(String.valueOf(movie.getTmdbRate()));
                 date.setText(movie.getReleaseDate());
 

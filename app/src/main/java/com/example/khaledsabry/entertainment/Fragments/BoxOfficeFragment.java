@@ -20,6 +20,7 @@ import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.BoxOfficeAdapter;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
+import com.example.khaledsabry.entertainment.Interfaces.OnRecyclerViewSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -34,10 +35,10 @@ public class BoxOfficeFragment extends Fragment {
     RecyclerView recyclerView;
     TextView header;
     BoxOfficeAdapter adapter;
-ViewPager viewPager;
-Fragment fragment;
+    BoxOfficeAdapter dailyAdapter;
     TabLayout tabLayout;
-
+    ViewPager viewPager;
+LinearLayoutManager linearLayoutManager;
     public static BoxOfficeFragment newInstance() {
         BoxOfficeFragment fragment = new BoxOfficeFragment();
         return fragment;
@@ -50,24 +51,29 @@ Fragment fragment;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_box_office, container, false);
         header = view.findViewById(R.id.header);
-        recyclerView = view.findViewById(R.id.recyclerid);
+        // recyclerView = view.findViewById(R.id.recyclerid);
         tabLayout = view.findViewById(R.id.tablayout);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        viewPager = view.findViewById(R.id.viewPagerid);
 
-        viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        adapter = new BoxOfficeAdapter();
+        dailyAdapter = new BoxOfficeAdapter();
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        viewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                switch (position)
-                {
+                switch (position) {
                     case 0:
-                        setBoxOffice();
-                        break;
+                        return setBoxOffice();
+
                     case 1:
-                        setDailyBoxOffice();
-                        break;
-                };
-                return fragment;
+                        return setDailyBoxOffice();
+                    default:
+                        return BoxOfficeFragment.newInstance();
+                }
+
+
             }
 
             @Override
@@ -75,84 +81,114 @@ Fragment fragment;
                 return 2;
             }
         });
-        setTabLayout();
         setBoxOffice();
 
         return view;
     }
 
 
-    private void setBoxOffice() {
+    private Fragment setBoxOffice() {
 
         //set the header title to box office
         header.setText("Box Office");
+ RecyclerViewPager fragment = RecyclerViewPager.newInstance(adapter, new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false), new OnRecyclerViewSuccess() {
+     @Override
+     public void onSuccess(RecyclerView recyclerView) {
+         AsyncTask.execute(new Runnable() {
+             @Override
+             public void run() {
+                 //get box office
+                 WebApi.getInstance().mojoBoxOffice(new OnWebSuccess.OnMovieList() {
+                     @Override
+                     public void onSuccess(ArrayList<Movie> movies) {
+                         final Classification classification = new Classification();
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                //get box office
-                WebApi.getInstance().mojoBoxOffice(new OnWebSuccess.OnMovieList() {
-                    @Override
-                    public void onSuccess(ArrayList<Movie> movies) {
-                        final Classification classification = new Classification();
+                         classification.setType(Classification.type.boxoffice);
+                         classification.setSearchItems(Functions.movies(movies, null, 10));
 
-                        classification.setType(Classification.type.boxoffice);
-                        classification.setSearchItems(Functions.movies(movies, null, 10));
+                         MainActivity.getActivity().runOnUiThread(new Runnable() {
+                             @Override
+                             public void run() {
+                                 adapter.setData(classification);
+                             }
+                         });
+                     }
+                 });
+             }
+         });
+     }
+ });
+              return fragment;
 
-                        MainActivity.getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                adapter = new BoxOfficeAdapter(classification);
-                                recyclerView.setHasFixedSize(true);
-                                recyclerView.setAdapter(adapter);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }
+ }
 
 
-    private void setDailyBoxOffice() {
-
+    private Fragment setDailyBoxOffice() {
         //set the header title to box office
         header.setText("Today's Box Office");
 
-        AsyncTask.execute(new Runnable() {
+     RecyclerViewPager fragment = RecyclerViewPager.newInstance(dailyAdapter, new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false), new OnRecyclerViewSuccess() {
             @Override
-            public void run() {
-                //get box office
-                WebApi.getInstance().mojoBoxOffice(new OnWebSuccess.OnMovieList() {
+            public void onSuccess(RecyclerView recyclerView) {
+                AsyncTask.execute(new Runnable() {
                     @Override
-                    public void onSuccess(ArrayList<Movie> movies) {
-                        final Classification classification = new Classification();
-
-                        classification.setType(Classification.type.dailyboxoffice);
-                        classification.setSearchItems(Functions.movies(movies, null, 10));
-
-                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        //get box office
+                        WebApi.getInstance().mojoDaily(0, new OnWebSuccess.OnMovieList() {
                             @Override
-                            public void run() {
-                                adapter = new BoxOfficeAdapter(classification);
-                                recyclerView.setHasFixedSize(true);
-                                recyclerView.setAdapter(adapter);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                            public void onSuccess(ArrayList<Movie> movies) {
+                                final Classification classification = new Classification();
 
+                                classification.setType(Classification.type.dailyboxoffice);
+                                classification.setSearchItems(Functions.movies(movies, null, 10));
+
+                                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        adapter.setData(classification);
+
+                                    }
+                                });
                             }
                         });
                     }
                 });
             }
         });
+
+     return fragment;
+
+
     }
 
 
-    //  setTabsTitles(tabLayout);
-private void setTabLayout()
-{
+    /* setTabsTitles(tabLayout);
+    private void setTabLayout() {
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        setBoxOffice();
+                        break;
+                    case 1:
+                        setDailyBoxOffice();
+                        break;
+                    default:
+                }
 
-}
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+    */
 }

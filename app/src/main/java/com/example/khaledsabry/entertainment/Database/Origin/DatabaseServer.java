@@ -79,6 +79,10 @@ public class DatabaseServer {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                20000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
     }

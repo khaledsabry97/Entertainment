@@ -83,9 +83,11 @@ public class CategoryListFragment extends Fragment {
         categoriesRecycle.setAdapter(titleAdapter);
         listRecycle.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         categoriesRecycle.setLayoutManager(linearLayoutManager);
-        listRecycle.setLayoutManager(linearLayoutManager);
+        listRecycle.setLayoutManager(linearLayoutManager2);
 
         deleteCategory.setOnClickListener(new View.OnClickListener() {
             @Override
