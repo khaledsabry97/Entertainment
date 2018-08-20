@@ -4,6 +4,8 @@ package com.example.khaledsabry.entertainment.Fragments.MovieView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
@@ -120,7 +122,7 @@ public class MovieMainFragment extends Fragment {
     }
 
     public void getMovieDetails() {
-        movie = MovieNavigationFragment.movie;
+       movie = MovieNavigationFragment.movie;
         if (movieId != currentMovieId) {
             TmdbController tmdbController = new TmdbController();
             tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {

@@ -1451,5 +1451,25 @@ season.setTvTitle(tvTitle);
     }
 
 
+    public Movie getMovieImdb(JSONObject object)
+    {
+        Movie movie = new Movie();
+
+        try {
+            int id = object.getInt(this.id);
+            String posterUrl = object.getString(this.poster_path);
+
+            movie.setPosterImage(posterUrl);
+            movie.setMovieId(id);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return movie;
+    }
 
 }

@@ -50,182 +50,185 @@
       <file leaf-file-name="MovieMainFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/MovieView/MovieMainFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2831">
-              <caret line="349" column="1" lean-forward="false" selection-start-line="349" selection-start-column="1" selection-end-line="349" selection-end-column="1" />
+            <state relative-caret-position="250">
+              <caret line="306" column="35" lean-forward="false" selection-start-line="306" selection-start-column="35" selection-end-line="306" selection-end-column="35" />
               <folding>
                 <element signature="method#newInstance#0;class#MovieMainFragment#0" expanded="false" />
-                <element signature="method#getMovieDetails#0;class#MovieMainFragment#0" expanded="false" />
-                <element signature="e#4743#5036#0" expanded="true" />
-                <element signature="e#5035#5036#0" expanded="true" />
+                <element signature="method#onCreateView#0;class#MovieMainFragment#0" expanded="false" />
                 <element signature="method#setObjects#0;class#MovieMainFragment#0" expanded="false" />
-                <element signature="class#5895:6293" expanded="false" />
-                <element signature="method#onPageScrolled#0;class#5895:6293" expanded="false" />
-                <element signature="method#onPageSelected#0;class#5895:6293" expanded="false" />
-                <element signature="method#onPageScrollStateChanged#0;class#5895:6293" expanded="false" />
-                <element signature="class#6610:6726" expanded="false" />
-                <element signature="method#onSuccess#0;class#6610:6726" expanded="false" />
-                <element signature="e#6767#7340#0" expanded="true" />
-                <element signature="e#7004#7314#0" expanded="true" />
-                <element signature="e#7313#7314#0" expanded="true" />
-                <element signature="e#7339#7340#0" expanded="true" />
-                <element signature="e#7382#7536#0" expanded="true" />
-                <element signature="e#7535#7536#0" expanded="true" />
-                <element signature="e#7577#7729#0" expanded="true" />
-                <element signature="e#7728#7729#0" expanded="true" />
+                <element signature="class#5987:6385" expanded="false" />
+                <element signature="method#onPageScrolled#0;class#5987:6385" expanded="false" />
+                <element signature="method#onPageSelected#0;class#5987:6385" expanded="false" />
+                <element signature="method#onPageScrollStateChanged#0;class#5987:6385" expanded="false" />
+                <element signature="class#6702:6818" expanded="false" />
+                <element signature="method#onSuccess#0;class#6702:6818" expanded="false" />
                 <element signature="method#loadProductionFragment#0;class#MovieMainFragment#0" expanded="false" />
-                <element signature="method#loadActorFragment#0;class#MovieMainFragment#0" expanded="false" />
                 <element signature="method#loadCrewFragment#0;class#MovieMainFragment#0" expanded="false" />
                 <element signature="method#loadReviewFragment#0;class#MovieMainFragment#0" expanded="false" />
                 <element signature="method#loadCategories#0;class#MovieMainFragment#0" expanded="false" />
-                <element signature="e#9200#9448#0" expanded="true" />
-                <element signature="e#9447#9448#0" expanded="true" />
-                <element signature="e#9495#9961#0" expanded="true" />
-                <element signature="e#9709#9935#0" expanded="true" />
-                <element signature="e#9934#9935#0" expanded="true" />
-                <element signature="e#9960#9961#0" expanded="true" />
                 <element signature="method#openCategoryAdd#0;class#MovieMainFragment#0" expanded="false" />
                 <element signature="method#setAddNewCategory#0;class#MovieMainFragment#0" expanded="false" />
-                <element signature="class#10465:10597" expanded="false" />
-                <element signature="method#onSuccess#0;class#10465:10597" expanded="false" />
-                <element signature="method#getImdbInfo#0;class#MovieMainFragment#0" expanded="false" />
-                <element signature="e#10959#11347#0" expanded="true" />
-                <element signature="e#11346#11347#0" expanded="true" />
-                <element signature="e#11426#13421#0" expanded="true" />
-                <element signature="e#11650#13359#0" expanded="true" />
-                <element signature="e#12104#13280#0" expanded="true" />
-                <element signature="e#13279#13280#0" expanded="true" />
-                <element signature="e#13358#13359#0" expanded="true" />
-                <element signature="e#13420#13421#0" expanded="true" />
+                <element signature="class#10557:10689" expanded="false" />
+                <element signature="method#onSuccess#0;class#10557:10689" expanded="false" />
+                <element signature="e#11051#11439#0" expanded="true" />
+                <element signature="e#11438#11439#0" expanded="true" />
+                <element signature="method#getRottenTomatoesInfo#0;class#MovieMainFragment#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rotten.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/rotten.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
+      <file leaf-file-name="WebApi.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="602" column="0" lean-forward="false" selection-start-line="602" selection-start-column="0" selection-end-line="602" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#WebApi#0" expanded="false" />
+                <element signature="method#WebApi#0;class#WebApi#0" expanded="false" />
+                <element signature="method#skyTorrent#0;class#WebApi#0" expanded="false" />
+                <element signature="class#1406:3793" expanded="false" />
+                <element signature="method#doInBackground#0;class#1406:3793" expanded="false" />
+                <element signature="method#onPostExecute#0;class#1406:3793" expanded="false" />
+                <element signature="method#mojoWorldWideGross#0;class#WebApi#0" expanded="false" />
+                <element signature="class#3981:6013" expanded="false" />
+                <element signature="method#doInBackground#0;class#3981:6013" expanded="false" />
+                <element signature="method#onPostExecute#0;class#3981:6013" expanded="false" />
+                <element signature="method#mojoAllTheTime#0;class#WebApi#0" expanded="false" />
+                <element signature="class#6180:8206" expanded="false" />
+                <element signature="method#doInBackground#0;class#6180:8206" expanded="false" />
+                <element signature="method#onPostExecute#0;class#6180:8206" expanded="false" />
+                <element signature="method#mojoYearlyBoxOffice#0;class#WebApi#0" expanded="false" />
+                <element signature="class#8379:10166" expanded="false" />
+                <element signature="method#doInBackground#0;class#8379:10166" expanded="false" />
+                <element signature="method#onPostExecute#0;class#8379:10166" expanded="false" />
+                <element signature="method#mojoBoxOffice#0;class#WebApi#0" expanded="false" />
+                <element signature="class#10332:12493" expanded="false" />
+                <element signature="method#doInBackground#0;class#10332:12493" expanded="false" />
+                <element signature="method#onPostExecute#0;class#10332:12493" expanded="false" />
+                <element signature="method#mojoDaily#0;class#WebApi#0" expanded="false" />
+                <element signature="class#12714:15073" expanded="false" />
+                <element signature="method#doInBackground#0;class#12714:15073" expanded="false" />
+                <element signature="method#onPostExecute#0;class#12714:15073" expanded="false" />
+                <element signature="method#imdbCelebrityNews#0;class#WebApi#0" expanded="false" />
+                <element signature="method#imdbNews#0;class#WebApi#0" expanded="false" />
+                <element signature="class#15806:19074" expanded="false" />
+                <element signature="method#doInBackground#0;class#15806:19074" expanded="false" />
+                <element signature="method#onPostExecute#0;class#15806:19074" expanded="false" />
+                <element signature="method#onPostExecute#0;class#19251:20707" expanded="false" />
+                <element signature="e#23738#23851#0" expanded="true" />
+                <element signature="e#23850#23851#0" expanded="true" />
+                <element signature="e#24152#24153#0" expanded="true" />
+                <element signature="e#24213#24214#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OnSuccess.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Interfaces/OnSuccess.java">
+      <file leaf-file-name="AsyncTask.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/os/AsyncTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <state relative-caret-position="80">
+              <caret line="442" column="19" lean-forward="false" selection-start-line="442" selection-start-column="19" selection-end-line="442" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_movie_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_movie_main.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
+      <file leaf-file-name="TmdbController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/TmdbController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="817">
-              <caret line="136" column="32" lean-forward="false" selection-start-line="136" selection-start-column="32" selection-end-line="136" selection-end-column="32" />
+            <state relative-caret-position="247">
+              <caret line="42" column="77" lean-forward="false" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
               <folding>
-                <element signature="e#4739#6496#0" expanded="false" />
-                <element signature="e#22263#25088#0" expanded="false" />
+                <element signature="e#12326#12694#0" expanded="true" />
+                <element signature="e#12693#12694#0" expanded="true" />
+                <element signature="e#12818#13427#0" expanded="true" />
+                <element signature="e#13426#13427#0" expanded="true" />
+                <element signature="e#13646#13847#0" expanded="true" />
+                <element signature="e#13846#13847#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ApiConnections.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/ApiConnections.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="54" column="18" lean-forward="false" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+              <folding>
+                <element signature="e#1686#1687#0" expanded="true" />
+                <element signature="e#1720#1721#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tmdb.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/Tmdb.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="1467" column="32" lean-forward="false" selection-start-line="1467" selection-start-column="32" selection-end-line="1467" selection-end-column="32" />
+              <folding>
+                <element signature="docComment;class#Tmdb#0" expanded="false" />
+                <element signature="method#Tmdb#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#showMovie#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#showRecommendationsAndSimilar#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getMovies#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getMovieVideosCreditsCategories#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getPostersBackdrops#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getPosters#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getReviews#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getSearchDone#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getSearchDoneMovie#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getSearchTv#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getSearchMovie#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getSearchArtist#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getGenres#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getPersonDetails#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getPersonRoles#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getPersonImages#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getTv#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getCharacters#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getCrew#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getGenre#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getSeasons#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getProductionCompanies#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getNetworks#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getPostersBackdrops#1;class#Tmdb#0" expanded="false" />
+                <element signature="method#getEpisodes#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getSeason#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getGuests#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getMovieNowPlaying#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getMoviePopular#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getMovieUpComing#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getMovieTopRated#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getTvAiringToday#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getTvOnAir#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getTvPopular#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getTvTopRated#0;class#Tmdb#0" expanded="false" />
+                <element signature="method#getArtistPopular#0;class#Tmdb#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="87" column="39" lean-forward="false" selection-start-line="87" selection-start-column="39" selection-end-line="87" selection-end-column="39" />
               <folding>
                 <element signature="method#onWindowFocusChanged#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#hideSystemUI#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#3439#3473#0" expanded="false" />
-                <element signature="e#3790#3852#0" expanded="false" />
+                <element signature="e#3622#3656#0" expanded="false" />
+                <element signature="e#3973#4035#0" expanded="false" />
                 <element signature="method#loadFragmentWithReturn#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#loadFragmentNoReturn#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#periodicHideNavigation#0;class#MainActivity#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebApi.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2223">
-              <caret line="590" column="55" lean-forward="false" selection-start-line="590" selection-start-column="55" selection-end-line="590" selection-end-column="55" />
-              <folding>
-                <element signature="docComment;class#WebApi#0" expanded="false" />
-                <element signature="method#WebApi#0;class#WebApi#0" expanded="false" />
-                <element signature="method#skyTorrent#0;class#WebApi#0" expanded="false" />
-                <element signature="class#1451:3838" expanded="false" />
-                <element signature="method#doInBackground#0;class#1451:3838" expanded="false" />
-                <element signature="method#onPostExecute#0;class#1451:3838" expanded="false" />
-                <element signature="method#mojoWorldWideGross#0;class#WebApi#0" expanded="false" />
-                <element signature="class#4026:6058" expanded="false" />
-                <element signature="method#doInBackground#0;class#4026:6058" expanded="false" />
-                <element signature="method#onPostExecute#0;class#4026:6058" expanded="false" />
-                <element signature="method#mojoAllTheTime#0;class#WebApi#0" expanded="false" />
-                <element signature="class#6225:8251" expanded="false" />
-                <element signature="method#doInBackground#0;class#6225:8251" expanded="false" />
-                <element signature="method#onPostExecute#0;class#6225:8251" expanded="false" />
-                <element signature="method#mojoYearlyBoxOffice#0;class#WebApi#0" expanded="false" />
-                <element signature="class#8424:10211" expanded="false" />
-                <element signature="method#doInBackground#0;class#8424:10211" expanded="false" />
-                <element signature="method#onPostExecute#0;class#8424:10211" expanded="false" />
-                <element signature="class#10377:12570" expanded="false" />
-                <element signature="method#doInBackground#0;class#10377:12570" expanded="false" />
-                <element signature="method#onPostExecute#0;class#10377:12570" expanded="false" />
-                <element signature="method#mojoDaily#0;class#WebApi#0" expanded="false" />
-                <element signature="method#imdbCelebrityNews#0;class#WebApi#0" expanded="false" />
-                <element signature="method#imdbNews#0;class#WebApi#0" expanded="false" />
-                <element signature="class#15879:19145" expanded="false" />
-                <element signature="method#doInBackground#0;class#15879:19145" expanded="false" />
-                <element signature="method#onPostExecute#0;class#15879:19145" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Movie.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Items/Movie.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="42" column="50" lean-forward="false" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
-              <folding>
-                <element signature="e#1229#1230#0" expanded="true" />
-                <element signature="e#1433#1434#0" expanded="true" />
-                <element signature="e#1477#1478#0" expanded="true" />
-                <element signature="e#1661#1662#0" expanded="true" />
-                <element signature="e#1702#1703#0" expanded="true" />
-                <element signature="e#1860#1861#0" expanded="true" />
-                <element signature="e#1887#1888#0" expanded="true" />
-                <element signature="e#1927#1928#0" expanded="true" />
-                <element signature="e#1959#1960#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Functions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/Functions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="45" column="46" lean-forward="false" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OnWebSuccess.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Interfaces/OnWebSuccess.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="34" column="34" lean-forward="false" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -2373,8 +2376,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/barlayout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/add_category.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/background_color.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/background_color.xml" />
@@ -2419,11 +2420,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Interfaces/OnWebSuccess.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_movie_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Items/Movie.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/MovieView/MovieMainFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/Tmdb.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/TmdbController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java" />
       </list>
     </option>
   </component>
@@ -2456,10 +2459,11 @@
     <property name="last_opened_file_path" value="D:/IDM/Compressed/youtube-recyclerview-master" />
     <property name="android.project.structure.last.selected" value="YoutubeSearch" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="device.picker.selection" value="BaytrailA010AD37" />
+    <property name="device.picker.selection" value="Pixel_XL_API_27" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://E:/Android Project/Entertainment/app/src/main/java/com/example/khaledsabry/entertainment/Items/Season.java&#10;prod&#9;PSI&#9;JAVA://com.example.khaledsabry.entertainment.Adapter.ProductionCompanyAdapter" />
     <property name="VectorAssetImportPath" value="E:\Android Project" />
+    <property name="android.profiler.active" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -2549,8 +2553,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="com.example.khaledsabry.entertainment.Main2Activity" />
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534700709909" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534805807743" />
       </method>
     </configuration>
     <configuration default="false" name="Main3Activity" type="AndroidRunConfigurationType" factoryName="Android App" temporary="true">
@@ -2598,8 +2601,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="com.example.khaledsabry.entertainment.Main3Activity" />
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534700709909" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534805807743" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -2671,8 +2673,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534700709909" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534805807743" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2719,8 +2720,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534700709910" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534805807743" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2752,27 +2752,6 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -2902,8 +2881,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534700709912" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1534805807744" />
       </method>
     </configuration>
     <list size="3">
@@ -2954,9 +2932,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.326572" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5060852" sideWeight="0.12864584" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.49791667" order="1" side_tool="false" content_ui="tabs" />
@@ -2965,14 +2942,13 @@
       <window_info id="AdbCommander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32352942" sideWeight="0.87135416" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32352942" sideWeight="0.87135416" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="simpleUML" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286004" sideWeight="0.46354166" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.334375" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Sequence" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2990,6 +2966,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.334375" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.49791667" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -3079,13 +3056,13 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java</url>
-          <line>213</line>
+          <line>210</line>
           <properties />
           <option name="timeStamp" value="369" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java</url>
-          <line>266</line>
+          <line>263</line>
           <properties />
           <option name="timeStamp" value="372" />
         </line-breakpoint>
@@ -3097,13 +3074,13 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/MovieView/MovieMainFragment.java</url>
-          <line>90</line>
+          <line>92</line>
           <properties />
           <option name="timeStamp" value="437" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/MovieView/MovieMainFragment.java</url>
-          <line>81</line>
+          <line>83</line>
           <properties />
           <option name="timeStamp" value="438" />
         </line-breakpoint>
@@ -3209,11 +3186,35 @@
           <properties />
           <option name="timeStamp" value="657" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java</url>
+          <line>521</line>
+          <properties />
+          <option name="timeStamp" value="669" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java</url>
+          <line>606</line>
+          <properties />
+          <option name="timeStamp" value="670" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java</url>
+          <line>602</line>
+          <properties />
+          <option name="timeStamp" value="671" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/TmdbController.java</url>
+          <line>417</line>
+          <properties />
+          <option name="timeStamp" value="673" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="669" />
+      <option name="time" value="674" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3224,34 +3225,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/NewsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/MainFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="223" column="47" lean-forward="false" selection-start-line="223" selection-start-column="47" selection-end-line="223" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_delete_forever_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_edit_black_24dp.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/add_category.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3311,13 +3284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2622">
           <caret line="162" column="0" lean-forward="false" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/ApiConnections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -3643,111 +3609,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2223">
-          <caret line="590" column="55" lean-forward="false" selection-start-line="590" selection-start-column="55" selection-end-line="590" selection-end-column="55" />
-          <folding>
-            <element signature="docComment;class#WebApi#0" expanded="false" />
-            <element signature="method#WebApi#0;class#WebApi#0" expanded="false" />
-            <element signature="method#skyTorrent#0;class#WebApi#0" expanded="false" />
-            <element signature="class#1451:3838" expanded="false" />
-            <element signature="method#doInBackground#0;class#1451:3838" expanded="false" />
-            <element signature="method#onPostExecute#0;class#1451:3838" expanded="false" />
-            <element signature="method#mojoWorldWideGross#0;class#WebApi#0" expanded="false" />
-            <element signature="class#4026:6058" expanded="false" />
-            <element signature="method#doInBackground#0;class#4026:6058" expanded="false" />
-            <element signature="method#onPostExecute#0;class#4026:6058" expanded="false" />
-            <element signature="method#mojoAllTheTime#0;class#WebApi#0" expanded="false" />
-            <element signature="class#6225:8251" expanded="false" />
-            <element signature="method#doInBackground#0;class#6225:8251" expanded="false" />
-            <element signature="method#onPostExecute#0;class#6225:8251" expanded="false" />
-            <element signature="method#mojoYearlyBoxOffice#0;class#WebApi#0" expanded="false" />
-            <element signature="class#8424:10211" expanded="false" />
-            <element signature="method#doInBackground#0;class#8424:10211" expanded="false" />
-            <element signature="method#onPostExecute#0;class#8424:10211" expanded="false" />
-            <element signature="class#10377:12570" expanded="false" />
-            <element signature="method#doInBackground#0;class#10377:12570" expanded="false" />
-            <element signature="method#onPostExecute#0;class#10377:12570" expanded="false" />
-            <element signature="method#mojoDaily#0;class#WebApi#0" expanded="false" />
-            <element signature="method#imdbCelebrityNews#0;class#WebApi#0" expanded="false" />
-            <element signature="method#imdbNews#0;class#WebApi#0" expanded="false" />
-            <element signature="class#15879:19145" expanded="false" />
-            <element signature="method#doInBackground#0;class#15879:19145" expanded="false" />
-            <element signature="method#onPostExecute#0;class#15879:19145" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/rotten.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/MovieView/MovieMainFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2831">
-          <caret line="349" column="1" lean-forward="false" selection-start-line="349" selection-start-column="1" selection-end-line="349" selection-end-column="1" />
-          <folding>
-            <element signature="method#newInstance#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="method#getMovieDetails#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="e#4743#5036#0" expanded="true" />
-            <element signature="e#5035#5036#0" expanded="true" />
-            <element signature="method#setObjects#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="class#5895:6293" expanded="false" />
-            <element signature="method#onPageScrolled#0;class#5895:6293" expanded="false" />
-            <element signature="method#onPageSelected#0;class#5895:6293" expanded="false" />
-            <element signature="method#onPageScrollStateChanged#0;class#5895:6293" expanded="false" />
-            <element signature="class#6610:6726" expanded="false" />
-            <element signature="method#onSuccess#0;class#6610:6726" expanded="false" />
-            <element signature="e#6767#7340#0" expanded="true" />
-            <element signature="e#7004#7314#0" expanded="true" />
-            <element signature="e#7313#7314#0" expanded="true" />
-            <element signature="e#7339#7340#0" expanded="true" />
-            <element signature="e#7382#7536#0" expanded="true" />
-            <element signature="e#7535#7536#0" expanded="true" />
-            <element signature="e#7577#7729#0" expanded="true" />
-            <element signature="e#7728#7729#0" expanded="true" />
-            <element signature="method#loadProductionFragment#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="method#loadActorFragment#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="method#loadCrewFragment#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="method#loadReviewFragment#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="method#loadCategories#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="e#9200#9448#0" expanded="true" />
-            <element signature="e#9447#9448#0" expanded="true" />
-            <element signature="e#9495#9961#0" expanded="true" />
-            <element signature="e#9709#9935#0" expanded="true" />
-            <element signature="e#9934#9935#0" expanded="true" />
-            <element signature="e#9960#9961#0" expanded="true" />
-            <element signature="method#openCategoryAdd#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="method#setAddNewCategory#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="class#10465:10597" expanded="false" />
-            <element signature="method#onSuccess#0;class#10465:10597" expanded="false" />
-            <element signature="method#getImdbInfo#0;class#MovieMainFragment#0" expanded="false" />
-            <element signature="e#10959#11347#0" expanded="true" />
-            <element signature="e#11346#11347#0" expanded="true" />
-            <element signature="e#11426#13421#0" expanded="true" />
-            <element signature="e#11650#13359#0" expanded="true" />
-            <element signature="e#12104#13280#0" expanded="true" />
-            <element signature="e#13279#13280#0" expanded="true" />
-            <element signature="e#13358#13359#0" expanded="true" />
-            <element signature="e#13420#13421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_movie_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="136" column="32" lean-forward="false" selection-start-line="136" selection-start-column="32" selection-end-line="136" selection-end-column="32" />
-          <folding>
-            <element signature="e#4739#6496#0" expanded="false" />
-            <element signature="e#22263#25088#0" expanded="false" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Interfaces/OnSuccess.java">
@@ -3758,18 +3622,196 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_movie_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2033">
+          <caret line="136" column="32" lean-forward="false" selection-start-line="136" selection-start-column="32" selection-end-line="136" selection-end-column="32" />
+          <folding>
+            <element signature="e#4739#6496#0" expanded="false" />
+            <element signature="e#22263#25088#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-core-utils/27.1.1/8fb37fd2f8dbc23482865700d2c340ae030ea561/support-core-utils-27.1.1-sources.jar!/android/support/v4/content/Loader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="54" column="23" lean-forward="false" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="87" column="39" lean-forward="false" selection-start-line="87" selection-start-column="39" selection-end-line="87" selection-end-column="39" />
           <folding>
             <element signature="method#onWindowFocusChanged#0;class#MainActivity#0" expanded="false" />
             <element signature="method#hideSystemUI#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#3439#3473#0" expanded="false" />
-            <element signature="e#3790#3852#0" expanded="false" />
+            <element signature="e#3622#3656#0" expanded="false" />
+            <element signature="e#3973#4035#0" expanded="false" />
             <element signature="method#loadFragmentWithReturn#0;class#MainActivity#0" expanded="false" />
             <element signature="method#loadFragmentNoReturn#0;class#MainActivity#0" expanded="false" />
             <element signature="method#periodicHideNavigation#0;class#MainActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Fragments/MovieView/MovieMainFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="306" column="35" lean-forward="false" selection-start-line="306" selection-start-column="35" selection-end-line="306" selection-end-column="35" />
+          <folding>
+            <element signature="method#newInstance#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="method#setObjects#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="class#5987:6385" expanded="false" />
+            <element signature="method#onPageScrolled#0;class#5987:6385" expanded="false" />
+            <element signature="method#onPageSelected#0;class#5987:6385" expanded="false" />
+            <element signature="method#onPageScrollStateChanged#0;class#5987:6385" expanded="false" />
+            <element signature="class#6702:6818" expanded="false" />
+            <element signature="method#onSuccess#0;class#6702:6818" expanded="false" />
+            <element signature="method#loadProductionFragment#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="method#loadCrewFragment#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="method#loadReviewFragment#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="method#loadCategories#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="method#openCategoryAdd#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="method#setAddNewCategory#0;class#MovieMainFragment#0" expanded="false" />
+            <element signature="class#10557:10689" expanded="false" />
+            <element signature="method#onSuccess#0;class#10557:10689" expanded="false" />
+            <element signature="e#11051#11439#0" expanded="true" />
+            <element signature="e#11438#11439#0" expanded="true" />
+            <element signature="method#getRottenTomatoesInfo#0;class#MovieMainFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/Tmdb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="1467" column="32" lean-forward="false" selection-start-line="1467" selection-start-column="32" selection-end-line="1467" selection-end-column="32" />
+          <folding>
+            <element signature="docComment;class#Tmdb#0" expanded="false" />
+            <element signature="method#Tmdb#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#showMovie#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#showRecommendationsAndSimilar#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMovies#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMovieVideosCreditsCategories#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPostersBackdrops#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPosters#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getReviews#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getSearchDone#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getSearchDoneMovie#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getSearchTv#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getSearchMovie#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getSearchArtist#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getGenres#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPersonDetails#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPersonRoles#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPersonImages#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getTv#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getCharacters#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getCrew#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getGenre#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getSeasons#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getProductionCompanies#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getNetworks#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getPostersBackdrops#1;class#Tmdb#0" expanded="false" />
+            <element signature="method#getEpisodes#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getSeason#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getGuests#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMovieNowPlaying#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMoviePopular#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMovieUpComing#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getMovieTopRated#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getTvAiringToday#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getTvOnAir#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getTvPopular#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getTvTopRated#0;class#Tmdb#0" expanded="false" />
+            <element signature="method#getArtistPopular#0;class#Tmdb#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Controllers/TmdbController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="42" column="77" lean-forward="false" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
+          <folding>
+            <element signature="e#12326#12694#0" expanded="true" />
+            <element signature="e#12693#12694#0" expanded="true" />
+            <element signature="e#12818#13427#0" expanded="true" />
+            <element signature="e#13426#13427#0" expanded="true" />
+            <element signature="e#13646#13847#0" expanded="true" />
+            <element signature="e#13846#13847#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/ApiConnections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="54" column="18" lean-forward="false" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+          <folding>
+            <element signature="e#1686#1687#0" expanded="true" />
+            <element signature="e#1720#1721#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/os/AsyncTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="442" column="19" lean-forward="false" selection-start-line="442" selection-start-column="19" selection-end-line="442" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/khaledsabry/entertainment/Connection/WebApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="602" column="0" lean-forward="false" selection-start-line="602" selection-start-column="0" selection-end-line="602" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#WebApi#0" expanded="false" />
+            <element signature="method#WebApi#0;class#WebApi#0" expanded="false" />
+            <element signature="method#skyTorrent#0;class#WebApi#0" expanded="false" />
+            <element signature="class#1406:3793" expanded="false" />
+            <element signature="method#doInBackground#0;class#1406:3793" expanded="false" />
+            <element signature="method#onPostExecute#0;class#1406:3793" expanded="false" />
+            <element signature="method#mojoWorldWideGross#0;class#WebApi#0" expanded="false" />
+            <element signature="class#3981:6013" expanded="false" />
+            <element signature="method#doInBackground#0;class#3981:6013" expanded="false" />
+            <element signature="method#onPostExecute#0;class#3981:6013" expanded="false" />
+            <element signature="method#mojoAllTheTime#0;class#WebApi#0" expanded="false" />
+            <element signature="class#6180:8206" expanded="false" />
+            <element signature="method#doInBackground#0;class#6180:8206" expanded="false" />
+            <element signature="method#onPostExecute#0;class#6180:8206" expanded="false" />
+            <element signature="method#mojoYearlyBoxOffice#0;class#WebApi#0" expanded="false" />
+            <element signature="class#8379:10166" expanded="false" />
+            <element signature="method#doInBackground#0;class#8379:10166" expanded="false" />
+            <element signature="method#onPostExecute#0;class#8379:10166" expanded="false" />
+            <element signature="method#mojoBoxOffice#0;class#WebApi#0" expanded="false" />
+            <element signature="class#10332:12493" expanded="false" />
+            <element signature="method#doInBackground#0;class#10332:12493" expanded="false" />
+            <element signature="method#onPostExecute#0;class#10332:12493" expanded="false" />
+            <element signature="method#mojoDaily#0;class#WebApi#0" expanded="false" />
+            <element signature="class#12714:15073" expanded="false" />
+            <element signature="method#doInBackground#0;class#12714:15073" expanded="false" />
+            <element signature="method#onPostExecute#0;class#12714:15073" expanded="false" />
+            <element signature="method#imdbCelebrityNews#0;class#WebApi#0" expanded="false" />
+            <element signature="method#imdbNews#0;class#WebApi#0" expanded="false" />
+            <element signature="class#15806:19074" expanded="false" />
+            <element signature="method#doInBackground#0;class#15806:19074" expanded="false" />
+            <element signature="method#onPostExecute#0;class#15806:19074" expanded="false" />
+            <element signature="method#onPostExecute#0;class#19251:20707" expanded="false" />
+            <element signature="e#23738#23851#0" expanded="true" />
+            <element signature="e#23850#23851#0" expanded="true" />
+            <element signature="e#24152#24153#0" expanded="true" />
+            <element signature="e#24213#24214#0" expanded="true" />
           </folding>
         </state>
       </provider>

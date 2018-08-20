@@ -48,9 +48,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static java.nio.file.Files.copy;
+import static java.nio.file.Files.list;
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     //to get the main activity in the app
@@ -70,13 +70,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-
         //get width and height for the mobile and tablet
         Settings.getInstance().setWidthAndHeight(getWindowManager());
         //set the context for the volley library
         ApiConnections.getInstance().setContext(getApplicationContext());
-
 
 
         periodicHideNavigation();
@@ -87,9 +84,15 @@ WebApi.getInstance().imdbMovieDetails("tt4912910", new OnWebSuccess.OnMovie() {
 
     }
 });*/
-loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
-    }
 
+WebApi.getInstance().imdbTop250Movies("", new OnWebSuccess.OnMovie() {
+    @Override
+    public void onSuccess(Movie movie) {
+
+    }
+});
+     //   loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+    }
 
 
     @Override
@@ -110,7 +113,7 @@ loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
                         // Set the content to appear under the system bars so that the
                         // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                       // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 
                         // Hide the nav bar and status bar

@@ -1,5 +1,6 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
+import android.support.v4.media.session.IMediaControllerCallback;
 import android.support.v4.view.PagerAdapter;
 
 import com.example.khaledsabry.entertainment.Connection.Tmdb;
@@ -407,6 +408,19 @@ listener.onSuccess(searchItems.get(0).getMovie());
                     movie.getGenres().get(i).setName(map.get(movie.getGenres().get(i).getId()));
                 }
 listener.onSuccess(movie);
+            }
+        });
+    }
+
+    public void getMovieByImdb(String imdbId, final OnMovieDataSuccess listener)
+    {
+        String url = "/find/"+ imdbId;
+url = makeBaseUrl(url)+"&external_source=imdb_id";
+        connection.connect(url, new OnSuccess.Json() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(controller.getMovieImdb(jsonObject));
+
             }
         });
     }

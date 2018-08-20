@@ -1,10 +1,10 @@
 package com.example.khaledsabry.entertainment.Connection;
 
 import android.annotation.SuppressLint;
-import android.icu.util.GregorianCalendar;
 import android.os.AsyncTask;
-import android.text.method.DateTimeKeyListener;
 
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -22,9 +22,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -320,9 +317,7 @@ public class WebApi {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
                 return movies;
@@ -408,28 +403,26 @@ public class WebApi {
 
     }
 
-    public void imdbCelebrityNews(final OnWebSuccess.OnNews listener)
-    {
-        imdbNews("celebrity",listener);
+    public void imdbCelebrityNews(final OnWebSuccess.OnNews listener) {
+        imdbNews("celebrity", listener);
     }
 
-    public void imdbTvNews(final OnWebSuccess.OnNews listener)
-    {
-        imdbNews("tv",listener);
+    public void imdbTvNews(final OnWebSuccess.OnNews listener) {
+        imdbNews("tv", listener);
     }
 
-    public void imdbIndieNews(final OnWebSuccess.OnNews listener)
-    {
-        imdbNews("indie",listener);
+    public void imdbIndieNews(final OnWebSuccess.OnNews listener) {
+        imdbNews("indie", listener);
     }
-    public void imdbMovieNews(final OnWebSuccess.OnNews listener)
-    {
-        imdbNews("movie",listener);
+
+    public void imdbMovieNews(final OnWebSuccess.OnNews listener) {
+        imdbNews("movie", listener);
     }
-public void imdbTopNews(final OnWebSuccess.OnNews listener)
-{
-    imdbNews("top",listener);
-}
+
+    public void imdbTopNews(final OnWebSuccess.OnNews listener) {
+        imdbNews("top", listener);
+    }
+
     private void imdbNews(final String type, final OnWebSuccess.OnNews listener) {
         AsyncTask<Void, Void, ArrayList<News>> task = new AsyncTask<Void, Void, ArrayList<News>>() {
             @Override
@@ -438,7 +431,7 @@ public void imdbTopNews(final OnWebSuccess.OnNews listener)
                 org.jsoup.nodes.Document
                         doc = null;
                 try {
-                    doc = Jsoup.connect("https://www.imdb.com/news/"+type).get();
+                    doc = Jsoup.connect("https://www.imdb.com/news/" + type).get();
 
                     if (doc == null)
                         return news;
@@ -450,7 +443,7 @@ public void imdbTopNews(final OnWebSuccess.OnNews listener)
                     for (Element element : results) {
                         Elements attributes = element.getElementsByClass("news-article__title");
                         String newsTitle = attributes.get(0).text();
-                        Elements sdf =attributes.get(0).getElementsByAttribute("href");
+                        Elements sdf = attributes.get(0).getElementsByAttribute("href");
                         String url = "https://www.imdb.com";
                         url += sdf.get(0).attr("href");
 
@@ -459,9 +452,8 @@ public void imdbTopNews(final OnWebSuccess.OnNews listener)
                         String writtenBy = "";
                         try {
                             attributes = element.getElementsByClass("ipl-inline-list__item news-article__author");
-                             writtenBy = attributes.get(0).text();
-                        }
-                        catch (Exception e) {
+                            writtenBy = attributes.get(0).text();
+                        } catch (Exception e) {
 
                         }
                         attributes = element.getElementsByClass("ipl-inline-list__item news-article__source");
@@ -472,20 +464,18 @@ public void imdbTopNews(final OnWebSuccess.OnNews listener)
                         String content = attributes.get(0).text();
                         String image = null;
                         try {
-                            attributes =element.getElementsByClass("news-article__image");
-                            Attributes  attributes1= attributes.get(0).attributes();
-                             image = attributes1.get("src");
-                            image = image.substring(0,image.indexOf("._")+1);
-                            image +="V1_SY600_SX400_AL_.jpg";
-                        }
-                        catch (Exception e)
-                        {
+                            attributes = element.getElementsByClass("news-article__image");
+                            Attributes attributes1 = attributes.get(0).attributes();
+                            image = attributes1.get("src");
+                            image = image.substring(0, image.indexOf("._") + 1);
+                            image += "V1_SY600_SX400_AL_.jpg";
+                        } catch (Exception e) {
 
                         }
 
 
-News news1 = new News();
-news1.setTitle(newsTitle);
+                        News news1 = new News();
+                        news1.setTitle(newsTitle);
                         news1.setContent(content);
                         news1.setImage(image);
                         news1.setSource(source);
@@ -500,7 +490,7 @@ news1.setTitle(newsTitle);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
-e.printStackTrace();
+                    e.printStackTrace();
                 }
                 return news;
             }
@@ -525,26 +515,24 @@ e.printStackTrace();
                 org.jsoup.nodes.Document
                         doc = null;
                 try {
-                    doc = Jsoup.connect("https://www.imdb.com/title/"+imdbId).get();
+                    doc = Jsoup.connect("https://www.imdb.com/title/" + imdbId).get();
 
                     if (doc == null)
                         return movie;
                     Elements results = doc.getElementsByTag("script");
-                    results =    doc.getElementsByAttributeValue("type","application/ld+json");
+                    results = doc.getElementsByAttributeValue("type", "application/ld+json");
                     Element d = results.get(0);
                     String stringJsonObject = d.childNode(0).toString();
                     JSONObject jsonObject = new JSONObject(stringJsonObject);
-                   String mpaa = jsonObject.getString("contentRating");
-JSONObject ratings = jsonObject.getJSONObject("aggregateRating");
-String imdbRate = ratings.getString("ratingValue");
+                    String mpaa = jsonObject.getString("contentRating");
+                    JSONObject ratings = jsonObject.getJSONObject("aggregateRating");
+                    String imdbRate = ratings.getString("ratingValue");
 
-movie.setImdbRate(Float.parseFloat(imdbRate));
-movie.setMpaa(mpaa);
+                    movie.setImdbRate(Float.parseFloat(imdbRate));
+                    movie.setMpaa(mpaa);
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
                 return movie;
@@ -568,30 +556,29 @@ movie.setMpaa(mpaa);
                 Movie movie1 = new Movie();
                 try {
                     JSONArray array = jsonObject.getJSONArray("movies");
-                    int i =0;
-                    while (!array.isNull(0))
-                    {
+                    int i = 0;
+                    while (!array.isNull(0)) {
                         JSONObject object = array.getJSONObject(i);
                         String ryear = String.valueOf(object.getInt("year"));
-                        if(year.equals(ryear))
+                        if (year.equals(ryear))
                             break;
                         else
-                        i++;
+                            i++;
 
 
                     }
-                    if(array.isNull(i))
+                    if (array.isNull(i))
                         return;
                     JSONObject object = array.getJSONObject(i);
 
-JSONObject ratings = object.getJSONObject("ratings");
-float score = ratings.getInt("critics_score");
-String criticsRatingType = ratings.getString("critics_rating");
-String tomatoesId = object.getString("id");
-movie1.setRottentTomatoesRatingType(criticsRatingType);
-movie1.setMovieRottenTomatoesId(tomatoesId);
-movie1.setRottenTomatoesRate(score/10);
-listener.onSuccess(movie1);
+                    JSONObject ratings = object.getJSONObject("ratings");
+                    float score = ratings.getInt("critics_score");
+                    String criticsRatingType = ratings.getString("critics_rating");
+                    String tomatoesId = object.getString("id");
+                    movie1.setRottentTomatoesRatingType(criticsRatingType);
+                    movie1.setMovieRottenTomatoesId(tomatoesId);
+                    movie1.setRottenTomatoesRate(score / 10);
+                    listener.onSuccess(movie1);
 
 
                 } catch (JSONException e) {
@@ -601,4 +588,59 @@ listener.onSuccess(movie1);
         });
 
     }
+
+
+    public void imdbTop250Movies(final String imdbId, final OnWebSuccess.OnMovie listener) {
+        AsyncTask<Void,Movie,Void> task = new AsyncTask<Void, Movie, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Movie movie = new Movie();
+                TmdbController tmdbController = new TmdbController();
+
+                org.jsoup.nodes.Document
+                        doc = null;
+                try {
+                    doc = Jsoup.connect("https://www.imdb.com/chart/top").get();
+
+                    if (doc == null)
+                        return null;
+                    Elements results = doc.getElementsByAttributeValue("class", "lister-list");
+                    Elements titleElement = doc.getElementsByAttributeValue("class", "titleColumn");
+                    Elements ratingElement = doc.getElementsByAttributeValue("class","ratingColumn imdbRating");
+                    Elements imdbIdElement  = doc.getElementsByAttributeValue("class","ratingColumn");
+                    for (int i =0 ; i < titleElement.size();i++) {
+
+                        Attributes s = imdbIdElement.get(0).attributes();
+                        String imdbId = imdbIdElement.get(0).attr("data-titleid");
+tmdbController.getMovieByImdb("", new OnMovieDataSuccess() {
+    @Override
+    public void onSuccess(Movie movie) {
+publishProgress(movie);
+    }
+});
+
+
+
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+
+                }
+                return null;
+
+            };
+
+
+            @Override
+            protected void onProgressUpdate(Movie... values) {
+                listener.onSuccess(values[0]);
+            }
+        };
+
+
+task.execute();
+    }
+
 }
