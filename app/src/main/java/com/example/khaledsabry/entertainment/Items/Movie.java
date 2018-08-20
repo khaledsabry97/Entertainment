@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Movie {
     private int movieId;
     private String movieImdbId;
+    private String movieRottenTomatoesId;
     private String title;
     private String overView;
     private String posterImage;
@@ -22,6 +23,7 @@ public class Movie {
     private String tagLine;
     private float tmdbRate;
     private float imdbRate;
+    private float rottenTomatoesRate;
     private int budget;
     private String revneue;
     private int runTime;
@@ -36,6 +38,31 @@ public class Movie {
     private String totalRevenue;
     private String Budget;
     private String mpaa;
+    private String rottentTomatoesRatingType;
+
+    public String getRottentTomatoesRatingType() {
+        return rottentTomatoesRatingType;
+    }
+
+    public void setRottentTomatoesRatingType(String rottentTomatoesRatingType) {
+        this.rottentTomatoesRatingType = rottentTomatoesRatingType;
+    }
+
+    public String getMovieRottenTomatoesId() {
+        return movieRottenTomatoesId;
+    }
+
+    public void setMovieRottenTomatoesId(String movieRottenTomatoesId) {
+        this.movieRottenTomatoesId = movieRottenTomatoesId;
+    }
+
+    public float getRottenTomatoesRate() {
+        return rottenTomatoesRate;
+    }
+
+    public void setRottenTomatoesRate(float rottenTomatoesRate) {
+        this.rottenTomatoesRate = rottenTomatoesRate;
+    }
 
     public String getMpaa() {
         return mpaa;

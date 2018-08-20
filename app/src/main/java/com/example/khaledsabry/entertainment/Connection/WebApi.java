@@ -5,11 +5,14 @@ import android.icu.util.GregorianCalendar;
 import android.os.AsyncTask;
 import android.text.method.DateTimeKeyListener;
 
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attribute;
@@ -557,5 +560,45 @@ movie.setMpaa(mpaa);
 
     }
 
+    public void rottenTomatoesMoviePreview(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
 
+        ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v1.0/movies?q=" + movie + " " + year, new OnSuccess.Json() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                Movie movie1 = new Movie();
+                try {
+                    JSONArray array = jsonObject.getJSONArray("movies");
+                    int i =0;
+                    while (!array.isNull(0))
+                    {
+                        JSONObject object = array.getJSONObject(i);
+                        String ryear = String.valueOf(object.getInt("year"));
+                        if(year.equals(ryear))
+                            break;
+                        else
+                        i++;
+
+
+                    }
+                    if(array.isNull(i))
+                        return;
+                    JSONObject object = array.getJSONObject(i);
+
+JSONObject ratings = object.getJSONObject("ratings");
+float score = ratings.getInt("critics_score");
+String criticsRatingType = ratings.getString("critics_rating");
+String tomatoesId = object.getString("id");
+movie1.setRottentTomatoesRatingType(criticsRatingType);
+movie1.setMovieRottenTomatoesId(tomatoesId);
+movie1.setRottenTomatoesRate(score/10);
+listener.onSuccess(movie1);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
 }

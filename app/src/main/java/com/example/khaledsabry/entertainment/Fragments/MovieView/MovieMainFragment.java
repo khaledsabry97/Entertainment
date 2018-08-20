@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Fragments.MovieView;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
@@ -59,6 +61,7 @@ public class MovieMainFragment extends Fragment {
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
+    ImageView tomatoesPoster;
 
     Button actorButton;
     Button crewButton;
@@ -110,6 +113,7 @@ public class MovieMainFragment extends Fragment {
         addCategoryButton = v.findViewById(R.id.addcategory);
         imdbRating = v.findViewById(R.id.imdbrate);
         tomatoesRating = v.findViewById(R.id.tomatoesrate);
+        tomatoesPoster = v.findViewById(R.id.tomatoesposter);
         categoryController = new CategoryController();
         getMovieDetails();
         return v;
@@ -137,6 +141,7 @@ public class MovieMainFragment extends Fragment {
         this.movie = movie;
         loadCategories();
         getImdbInfo();
+        getRottenTomatoesInfo();
 
         overviewText.setText(movie.getOverView());
         releaseDate.setText(movie.getReleaseDate());
@@ -145,7 +150,7 @@ public class MovieMainFragment extends Fragment {
         revenue.setText(movie.getRevneue(true));
         budget.setText(movie.getBudget());
         status.setText(movie.getStatus());
-        rate.setText(movie.getTmdbRate()+"");
+        rate.setText(movie.getTmdbRate() + "");
         title.setText(movie.getTitle());
         viewPagerAdapter = new MainPosterViewPager(movie.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
@@ -179,9 +184,9 @@ public class MovieMainFragment extends Fragment {
         categoryController.addHistory(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
+
             }
         });
-
 
         favourite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,7 +284,7 @@ public class MovieMainFragment extends Fragment {
     }
 
     public void setAddNewCategory(String categoryName) {
-        if(!categoryName.isEmpty()) {
+        if (!categoryName.isEmpty()) {
             categoryController.addMovieCategory(categoryName, new OnSuccess.bool() {
                 @Override
                 public void onSuccess(boolean state) {
@@ -288,24 +293,58 @@ public class MovieMainFragment extends Fragment {
             });
             writeNewCategoryLayout.setVisibility(View.GONE);
             categoryNew.setText("");
-        }
-        else
+        } else
             categoryController.toast("write a name for the category");
 
     }
 
 
-    public void getImdbInfo()
-    {
-        if(movie.getMovieImdbId() == null)
+    public void getImdbInfo() {
+        if (movie.getMovieImdbId() == null)
             return;
         WebApi.getInstance().imdbMovieDetails(movie.getMovieImdbId(), new OnWebSuccess.OnMovie() {
             @Override
             public void onSuccess(Movie movie) {
-                imdbRating.setText(String.valueOf( movie.getImdbRate()));
-                mpaa.setText(movie.getMpaa());
+                if (!String.valueOf(movie.getImdbRate()).equals("0.0"))
+                    imdbRating.setText(String.valueOf(movie.getImdbRate()));
+                if (!String.valueOf(movie.getMpaa()).equals(""))
+                    mpaa.setText(movie.getMpaa());
             }
         });
+    }
+
+    public void getRottenTomatoesInfo() {
+
+        AsyncTask.execute(new Runnable() {
+                              @Override
+                              public void run() {
+                                  WebApi.getInstance().rottenTomatoesMoviePreview(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
+                                      @Override
+                                      public void onSuccess(final Movie movie1) {
+                                          movie.setRottenTomatoesRate(movie1.getRottenTomatoesRate());
+                                          movie.setMovieRottenTomatoesId(movie1.getMovieRottenTomatoesId());
+                                          MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  if (movie1.getRottentTomatoesRatingType().equals("Certified Fresh"))
+                                                      Glide.with(getContext()).load(R.drawable.certified2).into(tomatoesPoster);
+                                                  else if (movie1.getRottentTomatoesRatingType().equals("Fresh"))
+                                                      Glide.with(getContext()).load(R.drawable.fresh2).into(tomatoesPoster);
+                                                  else if (movie1.getRottentTomatoesRatingType().equals("Rotten"))
+                                                      Glide.with(getContext()).load(R.drawable.rotten).into(tomatoesPoster);
+
+
+                                                  if (movie1.getRottenTomatoesRate() > 0)
+                                                      tomatoesRating.setText(String.valueOf(movie1.getRottenTomatoesRate()));
+
+                                              }
+                                          });
+
+                                      }
+                                  });
+                              }
+                          }
+        );
     }
 
 }
