@@ -19,7 +19,8 @@ public class Classification {
     {
         boxoffice,
         dailyboxoffice,
-        topGross;
+        topGross,
+        imdbTop250
     }
 
 

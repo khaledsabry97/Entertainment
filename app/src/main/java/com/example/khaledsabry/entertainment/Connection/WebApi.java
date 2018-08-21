@@ -594,31 +594,36 @@ public class WebApi {
         AsyncTask<Void,Movie,Void> task = new AsyncTask<Void, Movie, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                Movie movie = new Movie();
                 TmdbController tmdbController = new TmdbController();
 
                 org.jsoup.nodes.Document
                         doc = null;
                 try {
-                    doc = Jsoup.connect("https://www.imdb.com/chart/top").get();
+                    doc = Jsoup.connect("https://www.imdb.com/chart/top").timeout(10000).get();
 
                     if (doc == null)
                         return null;
-                    Elements results = doc.getElementsByAttributeValue("class", "lister-list");
-                    Elements titleElement = doc.getElementsByAttributeValue("class", "titleColumn");
+
                     Elements ratingElement = doc.getElementsByAttributeValue("class","ratingColumn imdbRating");
                     Elements imdbIdElement  = doc.getElementsByAttributeValue("class","ratingColumn");
-                    for (int i =0 ; i < titleElement.size();i++) {
+                    for (int i =0 ; i < ratingElement.size();i++) {
+                       final   Movie movie = new Movie();
 
-                        Attributes s = imdbIdElement.get(0).attributes();
-                        String imdbId = imdbIdElement.get(0).attr("data-titleid");
-tmdbController.getMovieByImdb("", new OnMovieDataSuccess() {
+                        Attributes s = imdbIdElement.get(i).childNode(1).attributes();
+                        String imdbId = s.get("data-titleid");
+                        String imdbRate = ratingElement.get(i).childNode(1).childNode(0).toString();
+
+                        movie.setImdbRate(Float.parseFloat(imdbRate));
+tmdbController.getMovieByImdb(imdbId, new OnMovieDataSuccess() {
     @Override
-    public void onSuccess(Movie movie) {
-publishProgress(movie);
+    public void onSuccess(Movie movie1) {
+movie1.setTmdbRate(movie.getImdbRate());
+
+publishProgress(movie1);
     }
 });
 
+                        Thread.sleep(50);
 
 
 

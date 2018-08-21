@@ -94,6 +94,7 @@ public class Tmdb {
     private String guest_stars = "guest_stars";
     private String episode_number = "episode_number";
     private String still_path = "still_path";
+    private String movie_results = "movie_results";
 
 
     private static final Tmdb ourInstance = new Tmdb();
@@ -1451,25 +1452,43 @@ season.setTvTitle(tvTitle);
     }
 
 
-    public Movie getMovieImdb(JSONObject object)
+    public Movie getMovieImdb(JSONObject object1)
     {
-        Movie movie = new Movie();
-
+Movie movie = new Movie();
         try {
+            JSONArray arrayObjects = object1.getJSONArray(this.movie_results);
+            JSONObject object = arrayObjects.getJSONObject(0);
+
             int id = object.getInt(this.id);
             String posterUrl = object.getString(this.poster_path);
 
+            ArrayList<Genre> genres = new ArrayList<>();
+            JSONArray array = object.getJSONArray(this.genre_ids);
+            int i =0;
+            while(!array.isNull(i))
+            {
+                int genreId = array.getInt(i);
+                Genre genre = new Genre(genreId);
+                genres.add(genre);
+
+
+                i++;
+            }
+
+            movie.setTitle(object.getString(this.title));
+            movie.setOverView(object.getString(this.overview));
+            movie.setReleaseDate(object.getString(this.release_date));
+            movie.setTmdbRate((float) object.getDouble(this.vote_average));
             movie.setPosterImage(posterUrl);
             movie.setMovieId(id);
-
+movie.setGenres(genres);
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+return movie;
 
-
-        return movie;
     }
 
 }

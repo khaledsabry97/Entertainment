@@ -28,11 +28,15 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
 
     Classification classification = new Classification();
 
-public void setData(Classification classification)
-{
-    this.classification = classification;
-    notifyDataSetChanged();
-}
+    public void setData(Classification classification) {
+        this.classification = classification;
+        notifyDataSetChanged();
+    }
+
+    public void addData(Classification classification) {
+        this.classification.getSearchItems().add(classification.getSearchItems().get(0));
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -91,107 +95,131 @@ public void setData(Classification classification)
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    //if the type of this classification is box office
-                    //so show it in this way
-                    if (classification.getType() == Classification.type.boxoffice) {
-//get the movie
-                        final Movie movie = searchItem.getMovie();
-                        TmdbController tmdbController = new TmdbController();
-                        //then check if this movie has a poster image or not
-                        //null : mean that you didn't get any link to the tmdb database
-                        // not null: means that you already have the link so don't enter again and search for the item on the tmdb database
-                        if (searchItem.getMovie().getPosterImage() != null) {
-                            MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //position + 1 : because the postion starts from 0
-                                    setBoxOffice(movie, position + 1, 2);
-                                }
-                            });
-                        } else {
-                            MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+
+                    switch (classification.getType()) {
+                        case boxoffice: {
+                            //get the movie
+                            final Movie movie = searchItem.getMovie();
+                            TmdbController tmdbController = new TmdbController();
+                            //then check if this movie has a poster image or not
+                            //null : mean that you didn't get any link to the tmdb database
+                            // not null: means that you already have the link so don't enter again and search for the item on the tmdb database
+                            if (searchItem.getMovie().getPosterImage() != null) {
+                                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //position + 1 : because the postion starts from 0
+                                        setBoxOffice(movie, position + 1, 2);
+                                    }
+                                });
+                            } else {
+                                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
 //phase 1: means that you got the data from boxofficemijo but you didn't get the data from tmdb
 //phase 2: means that you get the data from both boxofficemijo and tmdb
-                                    setBoxOffice(movie, position + 1, 1);
+                                        setBoxOffice(movie, position + 1, 1);
 
-                                }
-                            });
-                            //search in the tmdb on that movie by name
-                            tmdbController.getSearchOneMovie(searchItem.getMovie().getTitle(), searchItem.getMovie().getYear(), new OnMovieDataSuccess() {
-                                @Override
-                                public void onSuccess(Movie movie) {
-                                    searchItem.getMovie().setPosterImage(movie.getPosterImage());
-                                    searchItem.getMovie().setMovieId(movie.getMovieId());
-                                    searchItem.getMovie().setTmdbRate(movie.getTmdbRate());
-                                    searchItem.getMovie().setReleaseDate(movie.getReleaseDate());
-                                    // searchItem.getMovie().setGenres(movie.getGenres());
+                                    }
+                                });
+                                //search in the tmdb on that movie by name
+                                tmdbController.getSearchOneMovie(searchItem.getMovie().getTitle(), searchItem.getMovie().getYear(), new OnMovieDataSuccess() {
+                                    @Override
+                                    public void onSuccess(Movie movie) {
+                                        searchItem.getMovie().setPosterImage(movie.getPosterImage());
+                                        searchItem.getMovie().setMovieId(movie.getMovieId());
+                                        searchItem.getMovie().setTmdbRate(movie.getTmdbRate());
+                                        searchItem.getMovie().setReleaseDate(movie.getReleaseDate());
+                                        // searchItem.getMovie().setGenres(movie.getGenres());
 
-                                    movie = searchItem.getMovie();
-                                    final Movie finalMovie = movie;
-                                    MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
+                                        movie = searchItem.getMovie();
+                                        final Movie finalMovie = movie;
+                                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
 
-                                            setDailyBoxOffice(finalMovie, position + 1, 2);
-                                        }
-                                    });
-                                }
-                            });
+                                                setDailyBoxOffice(finalMovie, position + 1, 2);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                            break;
                         }
-                    } else if (classification.getType() == Classification.type.dailyboxoffice) {
-                        //get the movie
-                        final Movie movie = searchItem.getMovie();
-                        TmdbController tmdbController = new TmdbController();
-                        //then check if this movie has a poster image or not
-                        //null : mean that you didn't get any link to the tmdb database
-                        // not null: means that you already have the link so don't enter again and search for the item on the tmdb database
-                        if (searchItem.getMovie().getPosterImage() != null) {
-                            MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //position + 1 : because the postion starts from 0
-                                    setDailyBoxOffice(movie, position + 1, 2);
-                                }
-                            });
-                        } else {
-                            MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //phase 1: means that you got the data from boxofficemijo but you didn't get the data from tmdb
-                                    //phase 2: means that you get the data from both boxofficemijo and tmdb
-                                    setDailyBoxOffice(movie, position + 1, 1);
 
-                                }
-                            });
-                            //search in the tmdb on that movie by name
-                            tmdbController.getSearchOneMovie(searchItem.getMovie().getTitle(), searchItem.getMovie().getYear(), new OnMovieDataSuccess() {
-                                @Override
-                                public void onSuccess(Movie movie) {
-                                    searchItem.getMovie().setPosterImage(movie.getPosterImage());
-                                    searchItem.getMovie().setMovieId(movie.getMovieId());
-                                    searchItem.getMovie().setTmdbRate(movie.getTmdbRate());
-                                    searchItem.getMovie().setReleaseDate(movie.getReleaseDate());
-                                    // searchItem.getMovie().setGenres(movie.getGenres());
+                        case dailyboxoffice: {
+                            //get the movie
+                            final Movie movie = searchItem.getMovie();
+                            TmdbController tmdbController = new TmdbController();
+                            //then check if this movie has a poster image or not
+                            //null : mean that you didn't get any link to the tmdb database
+                            // not null: means that you already have the link so don't enter again and search for the item on the tmdb database
+                            if (searchItem.getMovie().getPosterImage() != null) {
+                                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //position + 1 : because the postion starts from 0
+                                        setDailyBoxOffice(movie, position + 1, 2);
+                                    }
+                                });
+                            } else {
+                                MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //phase 1: means that you got the data from boxofficemijo but you didn't get the data from tmdb
+                                        //phase 2: means that you get the data from both boxofficemijo and tmdb
+                                        setDailyBoxOffice(movie, position + 1, 1);
 
-                                    movie = searchItem.getMovie();
-                                    final Movie finalMovie = movie;
-                                    MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
+                                    }
+                                });
+                                //search in the tmdb on that movie by name
+                                tmdbController.getSearchOneMovie(searchItem.getMovie().getTitle(), searchItem.getMovie().getYear(), new OnMovieDataSuccess() {
+                                    @Override
+                                    public void onSuccess(Movie movie) {
+                                        searchItem.getMovie().setPosterImage(movie.getPosterImage());
+                                        searchItem.getMovie().setMovieId(movie.getMovieId());
+                                        searchItem.getMovie().setTmdbRate(movie.getTmdbRate());
+                                        searchItem.getMovie().setReleaseDate(movie.getReleaseDate());
+                                        // searchItem.getMovie().setGenres(movie.getGenres());
 
-                                            setDailyBoxOffice(finalMovie, position + 1, 2);
-                                        }
-                                    });
-                                }
-                            });
+                                        movie = searchItem.getMovie();
+                                        final Movie finalMovie = movie;
+                                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+                                                setDailyBoxOffice(finalMovie, position + 1, 2);
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+
+                            break;
                         }
+                        case imdbTop250:
+                        {
+                            setTop250();
+
+
+
+
+                            break;
+                        }
+                        default:
+
+
                     }
-
-
                 }
+
             });
+        }
+
+        private void setTop250(Movie movie) {
+            title.setText(movie.getTitle());
+            rate.setText((int) movie.getImdbRate());
+
+
 
 
         }

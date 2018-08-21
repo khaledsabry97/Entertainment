@@ -414,7 +414,7 @@ listener.onSuccess(movie);
 
     public void getMovieByImdb(String imdbId, final OnMovieDataSuccess listener)
     {
-        String url = "/find/"+ imdbId;
+        String url = "find/"+ imdbId;
 url = makeBaseUrl(url)+"&external_source=imdb_id";
         connection.connect(url, new OnSuccess.Json() {
             @Override
