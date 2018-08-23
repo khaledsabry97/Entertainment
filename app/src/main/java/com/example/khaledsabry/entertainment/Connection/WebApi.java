@@ -590,7 +590,7 @@ public class WebApi {
     }
 
 
-    public void imdbTop250Movies(final String imdbId, final OnWebSuccess.OnMovie listener) {
+    public void imdbTop250Movies( final OnWebSuccess.OnMovie listener) {
         AsyncTask<Void,Movie,Void> task = new AsyncTask<Void, Movie, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {

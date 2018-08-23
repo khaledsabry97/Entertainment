@@ -27,8 +27,8 @@ android:id="@+id/category"
                 android:id="@+id/boxofficeid"
                 android:title="Box Office"></item>
             <item
-                android:id="@+id/todayearnings"
-                android:title="Today Revenue"></item>
+                android:id="@+id/topGenres"
+                android:title="Top Genres"></item>
             <item
                 android:id="@+id/topgross"
                 android:title="Top Movies Earnings"></item>

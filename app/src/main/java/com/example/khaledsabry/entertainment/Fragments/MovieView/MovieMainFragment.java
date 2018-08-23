@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
@@ -117,11 +118,18 @@ public class MovieMainFragment extends Fragment {
         tomatoesRating = v.findViewById(R.id.tomatoesrate);
         tomatoesPoster = v.findViewById(R.id.tomatoesposter);
         categoryController = new CategoryController();
-        getMovieDetails();
+        try {
+            getMovieDetails();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return v;
     }
 
-    public void getMovieDetails() {
+    public void getMovieDetails() throws Exception {
        movie = MovieNavigationFragment.movie;
         if (movieId != currentMovieId) {
             TmdbController tmdbController = new TmdbController();
@@ -130,7 +138,14 @@ public class MovieMainFragment extends Fragment {
                 public void onSuccess(Movie movie) {
                     currentMovieId = movie.getMovieId();
                     MovieNavigationFragment.movie = movie;
-                    setObjects(movie);
+                    try {
+                        setObjects(movie);
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
 
                 }
             });
@@ -139,7 +154,7 @@ public class MovieMainFragment extends Fragment {
     }
 
 
-    private void setObjects(final Movie movie) {
+    private void setObjects(final Movie movie) throws Exception {
         this.movie = movie;
         loadCategories();
         getImdbInfo();
@@ -315,7 +330,7 @@ public class MovieMainFragment extends Fragment {
         });
     }
 
-    public void getRottenTomatoesInfo() {
+    public void getRottenTomatoesInfo() throws Exception {
 
         AsyncTask.execute(new Runnable() {
                               @Override
@@ -328,8 +343,9 @@ public class MovieMainFragment extends Fragment {
                                           MainActivity.getActivity().runOnUiThread(new Runnable() {
                                               @Override
                                               public void run() {
+
                                                   if (movie1.getRottentTomatoesRatingType().equals("Certified Fresh"))
-                                                      Glide.with(getContext()).load(R.drawable.certified2).into(tomatoesPoster);
+                                                      ImageController.putDrawableToImageView(R.drawable.certified2,tomatoesPoster);
                                                   else if (movie1.getRottentTomatoesRatingType().equals("Fresh"))
                                                       Glide.with(getContext()).load(R.drawable.fresh2).into(tomatoesPoster);
                                                   else if (movie1.getRottentTomatoesRatingType().equals("Rotten"))

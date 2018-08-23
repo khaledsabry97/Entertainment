@@ -20,7 +20,8 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <fragment
                     android:id="@+id/youtube_player_fragment"
@@ -51,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
-                android:forceHasOverlappingRendering="true"
+                android:forceHasOverlappingRendering="false"
                 >
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerid"

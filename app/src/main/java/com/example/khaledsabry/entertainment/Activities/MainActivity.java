@@ -85,13 +85,8 @@ WebApi.getInstance().imdbMovieDetails("tt4912910", new OnWebSuccess.OnMovie() {
     }
 });*/
 
-WebApi.getInstance().imdbTop250Movies("", new OnWebSuccess.OnMovie() {
-    @Override
-    public void onSuccess(Movie movie) {
 
-    }
-});
-     //   loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+        loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
     }
 
 

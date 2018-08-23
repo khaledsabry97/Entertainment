@@ -87,9 +87,26 @@ public class ImageController {
        // if(image == null || posterImage == null)
     //        return;
 
-        String url = posterImage;
-        // Picasso.get().load(url).into(image);
-        Glide.with(MainActivity.getActivity()).load(url).into(image);
+        try {
+            String url = posterImage;
+            // Picasso.get().load(url).into(image);
+            Glide.with(MainActivity.getActivity()).load(url).into(image);
+        }      catch (Exception e)
+        {
+
+        }
+
+    }
+
+    public static void putDrawableToImageView(int posterImage, ImageView image) {
+        try {
+
+            Glide.with(MainActivity.getActivity()).load(posterImage).into(image);
+        }      catch (Exception e)
+        {
+
+        }
+
     }
 
 

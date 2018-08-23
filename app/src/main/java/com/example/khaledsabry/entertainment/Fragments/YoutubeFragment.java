@@ -24,6 +24,7 @@ import com.example.khaledsabry.entertainment.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class YoutubeFragment extends Fragment {
         artist
     }
 
-  public static DrawerLayout drawerLayout;
+    public static DrawerLayout drawerLayout;
     NavigationView navigationView;
     static RecyclerView recyclerView;
     RecyclerView options;
@@ -46,7 +47,7 @@ public class YoutubeFragment extends Fragment {
     static Type type;
     public static YouTubePlayer youTubePlayer;
     ArrayList<String> youtubeVideoArrayList = new ArrayList<>();
-     ArrayList<Youtube> youtubes = new ArrayList<>();
+    ArrayList<Youtube> youtubes = new ArrayList<>();
     YouTubePlayerSupportFragment youTubePlayerFragment;
     static Movie movie;
     static Tv tv;
@@ -75,13 +76,12 @@ public class YoutubeFragment extends Fragment {
         options = v.findViewById(R.id.recycleroptionsid);
         drawerLayout = v.findViewById(R.id.drawer_layout);
         youTubePlayerFragment = (YouTubePlayerSupportFragment) getChildFragmentManager().findFragmentById(R.id.youtube_player_fragment);
-
-
+        youTubePlayerFragment.setAllowEnterTransitionOverlap(true);
         types = new ArrayList<>();
         titles = new ArrayList<>();
         initializeYoutubePlayer();
-
         options.setHasFixedSize(true);
+
         recyclerView.setHasFixedSize(true);
         options.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -123,8 +123,6 @@ public class YoutubeFragment extends Fragment {
 
         if (youTubePlayerFragment == null)
             return;
-
-
         youTubePlayerFragment.initialize(Settings.YoutubeApiKey, new YouTubePlayer.OnInitializedListener() {
 
             @Override
@@ -135,7 +133,72 @@ public class YoutubeFragment extends Fragment {
 
                     //set the player style default
                     youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
-youTubePlayer.play();
+                    youTubePlayer.play();
+
+                    youTubePlayer.setPlayerStateChangeListener(new YouTubePlayer.PlayerStateChangeListener() {
+                        @Override
+                        public void onLoading() {
+
+                        }
+
+                        @Override
+                        public void onLoaded(String s) {
+
+                        }
+
+                        @Override
+                        public void onAdStarted() {
+
+                        }
+
+                        @Override
+                        public void onVideoStarted() {
+
+                        }
+
+                        @Override
+                        public void onVideoEnded() {
+
+                        }
+
+                        @Override
+                        public void onError(YouTubePlayer.ErrorReason errorReason) {
+                            if (errorReason.toString().equals("UNAUTHORIZED_OVERLAY") && youTubePlayer != null) {
+
+                            }
+                        }
+
+
+                    });
+
+
+                    youTubePlayer.setPlaybackEventListener(new YouTubePlayer.PlaybackEventListener() {
+                        @Override
+                        public void onPlaying() {
+
+                        }
+
+                        @Override
+                        public void onPaused() {
+
+                        }
+
+                        @Override
+                        public void onStopped() {
+                            String error = "sdf";
+                            youTubePlayer.play();
+                        }
+
+                        @Override
+                        public void onBuffering(boolean b) {
+
+                        }
+
+                        @Override
+                        public void onSeekTo(int i) {
+
+                        }
+                    });
 
 //cue the 1st video by default
 //                    youTubePlayer.cueVideo(youtubes.get(0).getId());
@@ -160,9 +223,22 @@ youTubePlayer.play();
     public static void loadVideos(ArrayList<Youtube> youtubes) {
         YoutubeVideoAdapter adapter = new YoutubeVideoAdapter(youtubes);
         recyclerView.setAdapter(adapter);
-        drawerLayout.openDrawer(GravityCompat.END,true);
+        drawerLayout.openDrawer(GravityCompat.END, true);
         youTubePlayer.play();
 
     }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (youTubePlayer == null)
+            return;
+        youTubePlayer.play();
+
+
+    }
 }
+
+

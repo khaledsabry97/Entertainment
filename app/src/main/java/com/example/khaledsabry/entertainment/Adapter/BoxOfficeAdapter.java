@@ -199,9 +199,8 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                         }
                         case imdbTop250:
                         {
-                            setTop250();
 
-
+setTop250(searchItem.getMovie());
 
 
                             break;
