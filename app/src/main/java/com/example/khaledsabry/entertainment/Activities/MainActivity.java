@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
        //set if the device is tablet or mobile
        Constants.getInstance().setTablet(getResources().getBoolean(R.bool.isTablet));
 
-        //set the context for the volley library
-        ApiConnections.getInstance().setContext(getApplicationContext());
-
 
         periodicHideNavigation();
 

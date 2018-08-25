@@ -33,7 +33,6 @@ public class Functions {
   */
     public static void stopConnectionsAndStartImageGlide() {
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).start();
-        ApiConnections.getInstance().stopConnection();
         Glide.with(MainActivity.getActivity()).onStop();
         Glide.with(MainActivity.getActivity()).onStart();
     }
