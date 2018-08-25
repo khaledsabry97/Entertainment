@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Connection;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
@@ -15,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by KhALeD SaBrY on 14-Jul-18.
@@ -591,10 +593,10 @@ public class WebApi {
 
 
     public void imdbTop250Movies( final OnWebSuccess.OnMovie listener) {
-        AsyncTask<Void,Movie,Void> task = new AsyncTask<Void, Movie, Void>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void,Movie,Void> task = new AsyncTask<Void, Movie, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                TmdbController tmdbController = new TmdbController();
+                final TmdbController tmdbController = new TmdbController();
 
                 org.jsoup.nodes.Document
                         doc = null;
@@ -604,30 +606,62 @@ public class WebApi {
                     if (doc == null)
                         return null;
 
-                    Elements ratingElement = doc.getElementsByAttributeValue("class","ratingColumn imdbRating");
-                    Elements imdbIdElement  = doc.getElementsByAttributeValue("class","ratingColumn");
-                    for (int i =0 ; i < ratingElement.size();i++) {
-                       final   Movie movie = new Movie();
+                    final Elements ratingElement = doc.getElementsByAttributeValue("class","ratingColumn imdbRating");
+                    final Elements imdbIdElement  = doc.getElementsByAttributeValue("class","ratingColumn");
+/*
+                            for (int i =0 ; i < ratingElement.size();i++) {
+                                final Movie movie = new Movie();
 
-                        Attributes s = imdbIdElement.get(i).childNode(1).attributes();
-                        String imdbId = s.get("data-titleid");
-                        String imdbRate = ratingElement.get(i).childNode(1).childNode(0).toString();
+                                Attributes s = imdbIdElement.get(i).childNode(1).attributes();
+                                String imdbId = s.get("data-titleid");
+                                String imdbRate = ratingElement.get(i).childNode(1).childNode(0).toString();
 
-                        movie.setImdbRate(Float.parseFloat(imdbRate));
-tmdbController.getMovieByImdb(imdbId, new OnMovieDataSuccess() {
-    @Override
-    public void onSuccess(Movie movie1) {
-movie1.setTmdbRate(movie.getImdbRate());
-
-publishProgress(movie1);
-    }
-});
-
-                        Thread.sleep(50);
+                                movie.setImdbRate(Float.parseFloat(imdbRate));
+                                tmdbController.getMovieByImdb(imdbId, new OnMovieDataSuccess() {
+                                    @Override
+                                    public void onSuccess(Movie movie1) {
+                                        movie1.setImdbRate(movie.getImdbRate());
 
 
+                                        publishProgress(movie1);
+                                    }
+                                });
+                            }*/
 
-                    }
+final Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        int i = 0;
+                        @Override
+                        public void run() {
+                            final Movie movie = new Movie();
+
+                            Attributes s = imdbIdElement.get(i).childNode(1).attributes();
+                            String imdbId = s.get("data-titleid");
+                            String imdbRate = ratingElement.get(i).childNode(1).childNode(0).toString();
+
+                            movie.setImdbRate(Float.parseFloat(imdbRate));
+                            tmdbController.getMovieByImdb(imdbId, new OnMovieDataSuccess() {
+                                @Override
+                                public void onSuccess(Movie movie1) {
+                                    movie1.setImdbRate(movie.getImdbRate());
+
+
+                                    publishProgress(movie1);
+                                }
+                            });
+                            i++;
+                            if(i == ratingElement.size())
+                                timer.cancel();
+                        }
+
+                        @Override
+                        public long scheduledExecutionTime() {
+                            return super.scheduledExecutionTime();
+
+                        }
+                    },0,500);
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (Exception e) {

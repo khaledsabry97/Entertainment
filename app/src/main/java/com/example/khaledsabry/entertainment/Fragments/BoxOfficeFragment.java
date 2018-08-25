@@ -62,6 +62,12 @@ LinearLayoutManager linearLayoutManager;
         dailyAdapter = new BoxOfficeAdapter();
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         fragmentPagerAdapter = new FragmentPagerAdapter(getFragmentManager()) {
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+            }
+
             @Override
             public Fragment getItem(int position) {
                 switch (position) {

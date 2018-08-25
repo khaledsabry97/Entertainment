@@ -2,6 +2,7 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 
 import android.app.ActionBar;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.BoxOfficeAdapter;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
@@ -47,12 +49,12 @@ public class TopGenresFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_box_office, container, false);
+        View view = inflater.inflate(R.layout.fragment_top_genres, container, false);
         header = view.findViewById(R.id.header);
-        // recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recyclerid);
         tabLayout = view.findViewById(R.id.tablayout);
 
-        addTabs();
+        //addTabs();
 
 
 
@@ -69,19 +71,7 @@ public class TopGenresFragment extends Fragment {
                     //top 250
                     case 0:
                     {
-                        WebApi.getInstance().imdbTop250Movies(new OnWebSuccess.OnMovie() {
-                            @Override
-                            public void onSuccess(Movie movie) {
-                                Classification classification = new Classification();
-                                classification.setType(Classification.type.imdbTop250);
-                                ArrayList<SearchItem> searchItems = new ArrayList<>();
-                                SearchItem searchItem = new SearchItem();
-                                searchItem.setMovie(movie);
-                                searchItems.add(searchItem);
-                                classification.setSearchItems(searchItems);
-                                adapter.addData(classification);
-                            }
-                        });
+                        getImdbTop250Movies();
                     }
                 }
             }
@@ -97,13 +87,55 @@ public class TopGenresFragment extends Fragment {
             }
         });
 
+
+        try {
+            getImdbTop250Movies();
+
+        }
+catch (Exception e)
+{
+    e.printStackTrace();
+}
         return view;
     }
 
+    private void getImdbTop250Movies() {
+        WebApi.getInstance().imdbTop250Movies(new OnWebSuccess.OnMovie() {
+            @Override
+            public void onSuccess(final Movie movie) {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Classification classification = new Classification();
+                        classification.setType(Classification.type.imdbTop250);
+                        ArrayList<SearchItem> searchItems = new ArrayList<>();
+                        SearchItem searchItem = new SearchItem();
+                        searchItem.setMovie(movie);
+                        searchItems.add(searchItem);
+                        classification.setSearchItems(searchItems);
+
+
+                        MainActivity.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.addData(classification);
+                                adapter.notifyItemInserted(adapter.classification.getSearchItems().size());
+    //adapter.notifyDataSetChanged();
+
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
+    }
+/*
     private void addTabs() {
         TabItem tabItem = new TabItem(getContext());
+
         tabItem.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         tabLayout.addView(tabItem,0);
     }
-
+*/
 }
