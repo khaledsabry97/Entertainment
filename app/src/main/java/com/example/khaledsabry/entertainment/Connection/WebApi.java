@@ -35,18 +35,26 @@ import java.util.TimerTask;
 
 public class WebApi {
 
-    private static final WebApi ourInstance = new WebApi();
-
+    //Singleton Pattern
+    private static WebApi ourInstance;
 
     public static WebApi getInstance() {
+        if (ourInstance == null)
+            ourInstance = new WebApi();
         return ourInstance;
     }
 
     private WebApi() {
     }
 
-
+    /**
+     * get the torrent files by searching for it in the skytorrent website
+     *
+     * @param searchItem the index of the element to be removed
+     * @param listener   it returns a list of the torrent files after it gets it
+     */
     public void skyTorrent(final String searchItem, final OnWebSuccess.OnTorrentSearch listener) {
+
         AsyncTask<Void, Void, ArrayList<Torrent>> task = new AsyncTask<Void, Void, ArrayList<Torrent>>() {
             @Override
             protected ArrayList<Torrent> doInBackground(Void... voids) {
@@ -107,6 +115,12 @@ public class WebApi {
 
     }
 
+    /**
+     * get the world wide gross for a specific year
+     *
+     * @param year the specific year you want to know the top movies gross in it
+     * @param listener returns a list of movies
+     */
 
     public void mojoWorldWideGross(final int year, final OnWebSuccess.OnMovieList listener) {
         AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
@@ -163,6 +177,12 @@ public class WebApi {
 
     }
 
+    /**
+     * get the top movies in revenue worldwide all the time
+     *
+     * @param listener returns a list of movies
+     */
+
     public void mojoAllTheTime(final OnWebSuccess.OnMovieList listener) {
         AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
             @Override
@@ -218,7 +238,11 @@ public class WebApi {
 
     }
 
-
+    /**
+     * get the top movie in every year in the world wide revenue
+     *
+     * @param listener returns a list of movies
+     */
     public void mojoYearlyBoxOffice(final OnWebSuccess.OnMovieList listener) {
         AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
             @Override
@@ -271,6 +295,11 @@ public class WebApi {
 
     }
 
+    /**
+     * gets the box office of this weekend
+     *
+     * @param listener returns a list of movies of the top box office
+     */
     public void mojoBoxOffice(final OnWebSuccess.OnMovieList listener) {
         AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
             @Override
@@ -335,6 +364,12 @@ public class WebApi {
 
     }
 
+    /**
+     * gets the box office for specific day
+     * @param dayNumber to get today you put 0 value and to get the next day put 1 value
+     *                  and the previous day put -1 value
+     * @param listener returns a list of movies of the top box office in that day
+     */
     public void mojoDaily(final Integer dayNumber, final OnWebSuccess.OnMovieList listener) {
 
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, ArrayList<Movie>> task = new AsyncTask<Void, Void, ArrayList<Movie>>() {
@@ -392,8 +427,10 @@ public class WebApi {
 
             @Override
             protected void onPostExecute(ArrayList<Movie> movies) {
+                //if it returns null then there was an exception
                 if (movies == null)
                     return;
+                //if the size was 0 there must be no details in this day so get the before day
                 if (movies.size() == 0)
                     mojoDaily(dayNumber - 1, listener);
                 else
@@ -405,26 +442,56 @@ public class WebApi {
 
     }
 
+    /**
+     * get the news about celebrities from imdb website
+     *
+     * @param listener gets a list of news
+     */
     public void imdbCelebrityNews(final OnWebSuccess.OnNews listener) {
         imdbNews("celebrity", listener);
     }
 
+    /**
+     * get the tv news from imdb website
+     *
+     * @param listener gets a list of news
+     */
     public void imdbTvNews(final OnWebSuccess.OnNews listener) {
         imdbNews("tv", listener);
     }
 
+    /**
+     *
+     * @param listener gets a list of news
+     */
     public void imdbIndieNews(final OnWebSuccess.OnNews listener) {
         imdbNews("indie", listener);
     }
 
+    /**
+     * get movie news from imdb website
+     *
+     * @param listener gets a list of news
+     */
     public void imdbMovieNews(final OnWebSuccess.OnNews listener) {
         imdbNews("movie", listener);
     }
 
+    /**
+     * get the top trend news fron imdb website
+     *
+     * @param listener gets a list of news
+     */
     public void imdbTopNews(final OnWebSuccess.OnNews listener) {
         imdbNews("top", listener);
     }
 
+    /**
+     * this is the function that do the work for the past four functons
+     *
+     * @param type send to it the type of news (Top,Movie,Tv and Indie)
+     * @param listener gets a list of news
+     */
     private void imdbNews(final String type, final OnWebSuccess.OnNews listener) {
         AsyncTask<Void, Void, ArrayList<News>> task = new AsyncTask<Void, Void, ArrayList<News>>() {
             @Override
@@ -507,7 +574,12 @@ public class WebApi {
 
     }
 
-
+    /**
+     * get a details about movie from the id of the imdb
+     * specifically the rating and mpaa
+     * @param imdbId id of the imdb for the movie
+     * @param listener get the movie back with the details
+     */
     public void imdbMovieDetails(final String imdbId, final OnWebSuccess.OnMovie listener) {
 
         AsyncTask<Void, Void, Movie> task = new AsyncTask<Void, Void, Movie>() {
@@ -550,6 +622,13 @@ public class WebApi {
 
     }
 
+    /**
+     * gets the rating for a movie by searching for the name and the year
+     * and comparing the results to the year and choose the right movie
+     * @param movie the name of the movie
+     * @param year the year that the movie was created
+     * @param listener gets the movie back with information
+     */
     public void rottenTomatoesMoviePreview(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
 
         ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v1.0/movies?q=" + movie + " " + year, new OnSuccess.Json() {
@@ -591,9 +670,12 @@ public class WebApi {
 
     }
 
-
-    public void imdbTop250Movies( final OnWebSuccess.OnMovie listener) {
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void,Movie,Void> task = new AsyncTask<Void, Movie, Void>() {
+    /**
+     * gets the top 250 movies fron the imdb
+     * @param listener get one movie back in the process of publish progress
+     */
+    public void imdbTop250Movies(final OnWebSuccess.OnMovie listener) {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Movie, Void> task = new AsyncTask<Void, Movie, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 final TmdbController tmdbController = new TmdbController();
@@ -606,31 +688,14 @@ public class WebApi {
                     if (doc == null)
                         return null;
 
-                    final Elements ratingElement = doc.getElementsByAttributeValue("class","ratingColumn imdbRating");
-                    final Elements imdbIdElement  = doc.getElementsByAttributeValue("class","ratingColumn");
-/*
-                            for (int i =0 ; i < ratingElement.size();i++) {
-                                final Movie movie = new Movie();
+                    final Elements ratingElement = doc.getElementsByAttributeValue("class", "ratingColumn imdbRating");
+                    final Elements imdbIdElement = doc.getElementsByAttributeValue("class", "ratingColumn");
 
-                                Attributes s = imdbIdElement.get(i).childNode(1).attributes();
-                                String imdbId = s.get("data-titleid");
-                                String imdbRate = ratingElement.get(i).childNode(1).childNode(0).toString();
-
-                                movie.setImdbRate(Float.parseFloat(imdbRate));
-                                tmdbController.getMovieByImdb(imdbId, new OnMovieDataSuccess() {
-                                    @Override
-                                    public void onSuccess(Movie movie1) {
-                                        movie1.setImdbRate(movie.getImdbRate());
-
-
-                                        publishProgress(movie1);
-                                    }
-                                });
-                            }*/
-
-final Timer timer = new Timer();
+                   // this way to perform while loop without need to stop the tread
+                    final Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
                         int i = 0;
+
                         @Override
                         public void run() {
                             final Movie movie = new Movie();
@@ -650,7 +715,7 @@ final Timer timer = new Timer();
                                 }
                             });
                             i++;
-                            if(i == ratingElement.size())
+                            if (i == ratingElement.size())
                                 timer.cancel();
                         }
 
@@ -659,7 +724,7 @@ final Timer timer = new Timer();
                             return super.scheduledExecutionTime();
 
                         }
-                    },0,500);
+                    }, 0, 500);
 
 
                 } catch (IOException e) {
@@ -669,7 +734,9 @@ final Timer timer = new Timer();
                 }
                 return null;
 
-            };
+            }
+
+            ;
 
 
             @Override
@@ -679,7 +746,7 @@ final Timer timer = new Timer();
         };
 
 
-task.execute();
+        task.execute();
     }
 
 }

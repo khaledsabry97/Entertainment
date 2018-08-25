@@ -17,7 +17,7 @@
     <string name="title_activity_another">ANOTHER</string>
     <string name="title_activity_settings">Settings</string>
 
-    <!-- Strings related to Settings -->
+    <!-- Strings relatedConstantsings -->
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>

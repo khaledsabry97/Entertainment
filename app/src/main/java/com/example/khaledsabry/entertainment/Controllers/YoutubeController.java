@@ -23,7 +23,7 @@ public class YoutubeController {
 
     }
 
-    private String url = Settings.youtubeConnectionBaseUrl;
+    private String url = Constants.youtubeConnectionBaseUrl;
     private ApiConnections connection;
     private YoutubeJson youtubeJson;
 

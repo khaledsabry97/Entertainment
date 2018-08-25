@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Adapter.YoutubeOptionAdapter;
 import com.example.khaledsabry.entertainment.Adapter.YoutubeVideoAdapter;
-import com.example.khaledsabry.entertainment.Controllers.Settings;
+import com.example.khaledsabry.entertainment.Controllers.Constants;
 import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -24,11 +24,8 @@ import com.example.khaledsabry.entertainment.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class YoutubeFragment extends Fragment {
@@ -123,7 +120,7 @@ public class YoutubeFragment extends Fragment {
 
         if (youTubePlayerFragment == null)
             return;
-        youTubePlayerFragment.initialize(Settings.YoutubeApiKey, new YouTubePlayer.OnInitializedListener() {
+        youTubePlayerFragment.initialize(Constants.YoutubeApiKey, new YouTubePlayer.OnInitializedListener() {
 
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,

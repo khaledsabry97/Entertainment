@@ -96,18 +96,25 @@ public class Tmdb {
     private String still_path = "still_path";
     private String movie_results = "movie_results";
 
-
-    private static final Tmdb ourInstance = new Tmdb();
+    //Singleton Pattern
+    private static Tmdb ourInstance;
 
     public static Tmdb getInstance() {
+        if (ourInstance == null)
+            ourInstance = new Tmdb();
         return ourInstance;
     }
 
     private Tmdb() {
     }
 
-
-    public Movie showMovie(JSONObject movieDetails) {
+    /**
+     * get movie details,creditis,images,videos and reviews
+     *
+     * @param movieDetails it's the json object you got it from url
+     * @return a movie object with details
+     */
+    public Movie getMovieDetails(JSONObject movieDetails) {
 
         Movie movie = new Movie();
         try {
@@ -256,8 +263,13 @@ public class Tmdb {
 
     }
 
-
-    public ArrayList<Movie> showRecommendationsAndSimilar(JSONObject movieDetails) {
+    /**
+     * gets a list of movies
+     *
+     * @param movieDetails json object with multiple of movies
+     * @return a list of movies
+     */
+    public ArrayList<Movie> showRecommendationsOrSimilar(JSONObject movieDetails) {
         ArrayList<Movie> movies = new ArrayList<>();
         JSONArray jsonArray = null;
         try {
@@ -280,7 +292,12 @@ public class Tmdb {
         return movies;
     }
 
-
+    /**
+     * add to movie list movies objects
+     *
+     * @param movieDetails json object has info for movie object
+     * @param movies       an array list that we use to add several movies objects
+     */
     private void getMovies(JSONObject movieDetails, ArrayList<Movie> movies) {
         try {
 
@@ -321,7 +338,12 @@ public class Tmdb {
         }
     }
 
-
+    /**
+     * get movie videos and credits and category
+     *
+     * @param movieDetails json object has info to extract
+     * @return a movie object
+     */
     public Movie getMovieVideosCreditsCategories(JSONObject movieDetails) {
         Movie movie = new Movie();
         try {
@@ -417,7 +439,14 @@ public class Tmdb {
         return movie;
     }
 
-
+    /**
+     * gets posters and backdrops
+     *
+     * @param images json object with posters and back drops
+     * @param movie  the movie you want to add to these images
+     * @return this provide double functionality for this function
+     * you can return a movie or you change the movie object you sent it
+     */
     public Movie getPostersBackdrops(JSONObject images, Movie movie) {
 
         try {
@@ -463,6 +492,13 @@ public class Tmdb {
 
     }
 
+    /**
+     * get posters
+     *
+     * @param movieDetails json object has images info
+     * @param movie        movie to add to images to it
+     * @return a list of posters to add to movie later or not
+     */
     public ArrayList<String> getPosters(JSONObject movieDetails, Movie movie) {
         ArrayList<String> posters = new ArrayList<>();
 
@@ -496,6 +532,12 @@ public class Tmdb {
 
     }
 
+    /**
+     * get a reviews
+     *
+     * @param movieDetails json object have reviews
+     * @return a list of reviews
+     */
     public ArrayList<Review> getReviews(JSONObject movieDetails) {
         ArrayList<Review> reviews = new ArrayList<>();
 
@@ -527,7 +569,12 @@ public class Tmdb {
 
     }
 
-
+    /**
+     * gets a list of search items
+     *
+     * @param jsonObject sent it with search results
+     * @return a list of search items
+     */
     public ArrayList<SearchItem> getSearchDone(JSONObject jsonObject) {
         ArrayList<SearchItem> searchItems = new ArrayList<>();
 
@@ -560,6 +607,12 @@ public class Tmdb {
         return searchItems;
     }
 
+    /**
+     * get search items for a movie
+     *
+     * @param jsonObject json object has info to extract
+     * @return a list of search object with type movie
+     */
     public ArrayList<SearchItem> getSearchDoneMovie(JSONObject jsonObject) {
         ArrayList<SearchItem> searchItems = new ArrayList<>();
 
@@ -571,7 +624,7 @@ public class Tmdb {
                 JSONObject object = result.getJSONObject(i);
                 SearchItem searchItem = new SearchItem();
                 searchItem.setType("Movie");
-                    searchItem.setMovie(getSearchMovie(object));
+                searchItem.setMovie(getSearchMovie(object));
                 searchItems.add(searchItem);
                 i++;
             }
@@ -584,6 +637,13 @@ public class Tmdb {
 
         return searchItems;
     }
+
+    /**
+     * get from search a tv series info
+     *
+     * @param object json object has info to extract
+     * @return a tv object
+     */
     private Tv getSearchTv(JSONObject object) {
         Tv tv = new Tv();
         JSONArray jsonArray;
@@ -624,6 +684,12 @@ public class Tmdb {
         return tv;
     }
 
+    /**
+     * get from search a movie info
+     *
+     * @param object json object has info to extract
+     * @return a movie object
+     */
     private Movie getSearchMovie(JSONObject object) {
         Movie movie = new Movie();
 
@@ -668,6 +734,12 @@ public class Tmdb {
         return movie;
     }
 
+    /**
+     * get from search an artist info
+     *
+     * @param object json object has info to extract
+     * @return an artist object
+     */
     private Artist getSearchArtist(JSONObject object) {
         Artist artist = new Artist();
         ArrayList<Movie> movies = new ArrayList<>();
@@ -704,6 +776,12 @@ public class Tmdb {
         return artist;
     }
 
+    /**
+     * get genres ids and title
+     *
+     * @param jsonObject have a list of json objects of genres
+     * @return a movie has all the genres
+     */
     public Movie getGenres(JSONObject jsonObject) {
         Movie movie = new Movie();
         try {
@@ -731,7 +809,12 @@ public class Tmdb {
         return movie;
     }
 
-
+    /**
+     * get artist details
+     *
+     * @param object json object has all the info about an artist
+     * @return artis object
+     */
     public Artist getPersonDetails(JSONObject object) {
         Artist artist = new Artist();
         try {
@@ -755,7 +838,12 @@ public class Tmdb {
         return artist;
     }
 
-
+    /**
+     * gets an artist contribution to movies and tvs
+     *
+     * @param obj jsonObject has all the contributions
+     * @return an artist object with info
+     */
     public Artist getPersonRoles(JSONObject obj) {
         Artist artist = new Artist();
 
@@ -793,6 +881,12 @@ public class Tmdb {
         return artist;
     }
 
+    /**
+     * gets an artist images
+     *
+     * @param obj jsonObject with all the images
+     * @return an artist object with images
+     */
     public Artist getPersonImages(JSONObject obj) {
         Artist artist = new Artist();
 
@@ -815,7 +909,13 @@ public class Tmdb {
         return artist;
     }
 
-
+    /**
+     * gets tv details
+     *
+     * @param obj jsonObject with details
+     * @param tv  to change to current tv object
+     * @return to create new tv object
+     */
     public Tv getTv(JSONObject obj, Tv tv) {
 
         try {
@@ -854,7 +954,7 @@ public class Tmdb {
 
             tv.setReviews(getReviews(obj));
             tv.setPosters(getPosters(obj, new Movie()));
-            tv.setSeasons(getSeasons(obj,tv.getTitle()));
+            tv.setSeasons(getSeasons(obj, tv.getTitle()));
             tv.setProductionCompanies(getProductionCompanies(obj));
             tv.setNetworks(getNetworks(obj));
 
@@ -865,7 +965,12 @@ public class Tmdb {
         return tv;
     }
 
-
+    /**
+     * get characters in the movie/tv series
+     *
+     * @param obj json object has characters info
+     * @return a list of characters
+     */
     private ArrayList<Character> getCharacters(JSONObject obj) {
         int i = 0;
         JSONArray jsonArray;
@@ -899,7 +1004,12 @@ public class Tmdb {
         return actors;
     }
 
-
+    /**
+     * get the crew for a movie/tv
+     *
+     * @param obj json object that has info
+     * @return a list of artists
+     */
     private ArrayList<Artist> getCrew(JSONObject obj) {
         int i = 0;
         JSONArray jsonArray;
@@ -935,6 +1045,12 @@ public class Tmdb {
         return crew;
     }
 
+    /**
+     * get genres
+     *
+     * @param obj json object has genres info
+     * @return a list of genres
+     */
     private ArrayList<Genre> getGenre(JSONObject obj) {
         JSONArray jsonArray;
         int i = 0;
@@ -962,8 +1078,14 @@ public class Tmdb {
         return genre;
     }
 
-
-    private ArrayList<Season> getSeasons(JSONObject obj,String tvTitle) {
+    /**
+     * get seasons for a tv series
+     *
+     * @param obj     json object has info
+     * @param tvTitle add a tv series title for the season
+     * @return a list of season objects
+     */
+    private ArrayList<Season> getSeasons(JSONObject obj, String tvTitle) {
         ArrayList<Season> seasons = new ArrayList<>();
         try {
             JSONArray jsonArray = obj.getJSONArray(this.seasons);
@@ -987,7 +1109,7 @@ public class Tmdb {
                 season.setOverView(overview);
                 season.setPoster(poster);
                 season.setEpisodeCount(count);
-season.setTvTitle(tvTitle);
+                season.setTvTitle(tvTitle);
                 seasons.add(season);
 
 
@@ -1001,6 +1123,12 @@ season.setTvTitle(tvTitle);
         return seasons;
     }
 
+    /**
+     * get production companies
+     *
+     * @param obj json objects that has production companies info
+     * @return a list of production companies objects
+     */
     private ArrayList<ProductionCompany> getProductionCompanies(JSONObject obj) {
         ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
         try {
@@ -1029,7 +1157,12 @@ season.setTvTitle(tvTitle);
         return productionCompanies;
     }
 
-
+    /**
+     * get production companies
+     *
+     * @param obj json objects that has production companies info
+     * @return a list of production companies objects
+     */
     private ArrayList<ProductionCompany> getNetworks(JSONObject obj) {
         ArrayList<ProductionCompany> networks = new ArrayList<>();
         try {
@@ -1058,7 +1191,13 @@ season.setTvTitle(tvTitle);
         return networks;
     }
 
-
+    /**
+     * get posters and backdrops
+     *
+     * @param images jsonObject that has all the images
+     * @param tv     to change on a tv object
+     * @return to return a new tv object
+     */
     public Tv getPostersBackdrops(JSONObject images, Tv tv) {
 
         try {
@@ -1104,7 +1243,12 @@ season.setTvTitle(tvTitle);
 
     }
 
-
+    /**
+     * get episodes for a season
+     *
+     * @param obj json object has episodes info
+     * @return a list of episode objects
+     */
     public ArrayList<Episode> getEpisodes(JSONObject obj) {
         ArrayList<Episode> episodes = new ArrayList<>();
 
@@ -1140,6 +1284,12 @@ season.setTvTitle(tvTitle);
 
     }
 
+    /**
+     * get season episode and info
+     *
+     * @param obj jsonObject that has info
+     * @return season object
+     */
     public Season getSeason(JSONObject obj) {
         Season season = new Season();
         try {
@@ -1158,9 +1308,14 @@ season.setTvTitle(tvTitle);
 
     }
 
-
+    /**
+     * get a list of characters in movies
+     *
+     * @param obj json object has info
+     * @return a list of characters for a movie/ tv
+     */
     private ArrayList<Character> getGuests(JSONObject obj) {
-        int i = 0;
+        int i;
         JSONArray jsonArray;
         ArrayList<Character> actors = new ArrayList<>();
         try {
@@ -1191,9 +1346,13 @@ season.setTvTitle(tvTitle);
         return actors;
     }
 
-
-    public ArrayList<Movie> getMovieNowPlaying(JSONObject object)
-    {
+    /**
+     * gets a list of movies
+     *
+     * @param object json object that has all the info
+     * @return a list of movies
+     */
+    public ArrayList<Movie> getMovieNowPlaying(JSONObject object) {
         ArrayList<Movie> movies = new ArrayList<>();
 
         try {
@@ -1220,9 +1379,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-
-    public ArrayList<Movie> getMoviePopular(JSONObject object)
-    {
+    /**
+     * get movie popular list
+     *
+     * @param object jsonObject has all the movies
+     * @return a list of movies objects
+     */
+    public ArrayList<Movie> getMoviePopular(JSONObject object) {
         ArrayList<Movie> movies = new ArrayList<>();
 
         try {
@@ -1249,9 +1412,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-
-    public ArrayList<Movie> getMovieUpComing(JSONObject object)
-    {
+    /**
+     * get movie upcoming list
+     *
+     * @param object jsonobject has movies info
+     * @return a list of movie object
+     */
+    public ArrayList<Movie> getMovieUpComing(JSONObject object) {
         ArrayList<Movie> movies = new ArrayList<>();
 
         try {
@@ -1278,8 +1445,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-    public ArrayList<Movie> getMovieTopRated(JSONObject object)
-    {
+    /**
+     * get movie top rated
+     *
+     * @param object json object has movies info
+     * @return a list of movie objects
+     */
+    public ArrayList<Movie> getMovieTopRated(JSONObject object) {
         ArrayList<Movie> movies = new ArrayList<>();
 
         try {
@@ -1306,9 +1478,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-
-    public ArrayList<Tv> getTvAiringToday(JSONObject object)
-    {
+    /**
+     * get tv air today on tv
+     *
+     * @param object json object has info for tv
+     * @return a list of tv objects
+     */
+    public ArrayList<Tv> getTvAiringToday(JSONObject object) {
         ArrayList<Tv> tvs = new ArrayList<>();
 
         try {
@@ -1335,10 +1511,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-
-
-    public ArrayList<Tv> getTvOnAir(JSONObject object)
-    {
+    /**
+     * get tv series that is airing now days
+     *
+     * @param object json object that has tv series objects
+     * @return a list of tv objects
+     */
+    public ArrayList<Tv> getTvOnAir(JSONObject object) {
         ArrayList<Tv> tvs = new ArrayList<>();
 
         try {
@@ -1365,9 +1544,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-
-    public ArrayList<Tv> getTvPopular(JSONObject object)
-    {
+    /**
+     * get tv series popular
+     *
+     * @param object json object has tv popular info
+     * @return a list of tv objects
+     */
+    public ArrayList<Tv> getTvPopular(JSONObject object) {
         ArrayList<Tv> tvs = new ArrayList<>();
 
         try {
@@ -1394,8 +1577,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-    public ArrayList<Tv> getTvTopRated(JSONObject object)
-    {
+    /**
+     * get tv top rated movies
+     *
+     * @param object json object has info
+     * @return a list of tv objects
+     */
+    public ArrayList<Tv> getTvTopRated(JSONObject object) {
         ArrayList<Tv> tvs = new ArrayList<>();
 
         try {
@@ -1422,9 +1610,13 @@ season.setTvTitle(tvTitle);
 
     }
 
-
-    public ArrayList<Artist> getArtistPopular(JSONObject object)
-    {
+    /**
+     * get artist popular nowdays
+     *
+     * @param object json object has artists info
+     * @return a list of artist objects
+     */
+    public ArrayList<Artist> getArtistPopular(JSONObject object) {
         ArrayList<Artist> artists = new ArrayList<>();
 
         try {
@@ -1451,10 +1643,14 @@ season.setTvTitle(tvTitle);
 
     }
 
-
-    public Movie getMovieImdb(JSONObject object1)
-    {
-Movie movie = new Movie();
+    /**
+     * get movie from an imdb
+     *
+     * @param object1 json object has movie info
+     * @return a movie object
+     */
+    public Movie getMovieImdb(JSONObject object1) {
+        Movie movie = new Movie();
         try {
             JSONArray arrayObjects = object1.getJSONArray(this.movie_results);
             JSONObject object = arrayObjects.getJSONObject(0);
@@ -1464,9 +1660,8 @@ Movie movie = new Movie();
 
             ArrayList<Genre> genres = new ArrayList<>();
             JSONArray array = object.getJSONArray(this.genre_ids);
-            int i =0;
-            while(!array.isNull(i))
-            {
+            int i = 0;
+            while (!array.isNull(i)) {
                 int genreId = array.getInt(i);
                 Genre genre = new Genre(genreId);
                 genres.add(genre);
@@ -1481,13 +1676,13 @@ Movie movie = new Movie();
             movie.setTmdbRate((float) object.getDouble(this.vote_average));
             movie.setPosterImage(posterUrl);
             movie.setMovieId(id);
-movie.setGenres(genres);
+            movie.setGenres(genres);
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-return movie;
+        return movie;
 
     }
 

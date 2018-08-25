@@ -1,54 +1,19 @@
 package com.example.khaledsabry.entertainment.Activities;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.icu.util.Calendar;
-import android.net.Uri;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
-import com.example.khaledsabry.entertainment.Connection.Downloader;
-import com.example.khaledsabry.entertainment.Connection.WebApi;
-import com.example.khaledsabry.entertainment.Controllers.Controller;
-import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Database.UserData;
-import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
-import com.example.khaledsabry.entertainment.Fragments.CategoryListFragment;
-import com.example.khaledsabry.entertainment.Fragments.MainFragment;
-import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
-import com.example.khaledsabry.entertainment.Fragments.NewsFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
-import com.example.khaledsabry.entertainment.Fragments.UserProfile.ProfileFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
-import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.R;
-import com.example.khaledsabry.entertainment.Controllers.Settings;
+import com.example.khaledsabry.entertainment.Controllers.Constants;
 import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static java.nio.file.Files.copy;
-import static java.nio.file.Files.list;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivity = this;
     }
 
+    //reference to the main activity
     public static MainActivity getActivity() {
         return mainActivity;
     }
@@ -71,25 +37,22 @@ public class MainActivity extends AppCompatActivity {
 
 
         //get width and height for the mobile and tablet
-        Settings.getInstance().setWidthAndHeight(getWindowManager());
+       Constants.getInstance().setWidthAndHeight(getWindowManager());
+
+       //set if the device is tablet or mobile
+       Constants.getInstance().setTablet(getResources().getBoolean(R.bool.isTablet));
+
         //set the context for the volley library
         ApiConnections.getInstance().setContext(getApplicationContext());
 
 
         periodicHideNavigation();
-/*
-WebApi.getInstance().imdbMovieDetails("tt4912910", new OnWebSuccess.OnMovie() {
-    @Override
-    public void onSuccess(Movie movie) {
 
-    }
-});*/
-
-
+//load in the mainframe the sign in fragment
         loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
     }
 
-
+    //if the activity/app is not on the focus then hide systemUi
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -98,6 +61,7 @@ WebApi.getInstance().imdbMovieDetails("tt4912910", new OnWebSuccess.OnMovie() {
 
     }
 
+    //to hide the navigation bar and status bar
     public void hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
@@ -118,11 +82,13 @@ WebApi.getInstance().imdbMovieDetails("tt4912910", new OnWebSuccess.OnMovie() {
 
     }
 
-
+    //load fragment with ability to return
     public static void loadFragmentWithReturn(int idContainer, android.support.v4.app.Fragment fragment) {
 
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(idContainer, fragment).addToBackStack(null).commit();
     }
+
+    //load fragment with no ability to return
 
     public static void loadFragmentNoReturn(int idContainer, android.support.v4.app.Fragment fragment) {
 

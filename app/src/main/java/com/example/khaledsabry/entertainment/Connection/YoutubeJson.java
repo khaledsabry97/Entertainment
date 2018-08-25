@@ -30,8 +30,13 @@ public class YoutubeJson {
     private String tagline = "tagline";
 
 
-
-public ArrayList<Youtube> getVideos(JSONObject jsonObject)
+    /**
+     * gets a videos from json object fromthe youtube controller
+     *
+     * @param jsonObject a json object that sent by youtubeController
+     * @return returns a list of youtube videos
+     */
+    public ArrayList<Youtube> getVideos(JSONObject jsonObject)
 {
     ArrayList<Youtube> youtubes = new ArrayList<>();
     int i = 0 ;

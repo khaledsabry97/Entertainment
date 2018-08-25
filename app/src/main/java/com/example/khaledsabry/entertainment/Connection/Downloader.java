@@ -37,31 +37,34 @@ public class Downloader {
 
     }
 
-
-public void downloadYoutube(String link,String fileName)
-{
+    /**
+     * to download youtube videos
+     * @param link id of the youtube video
+     * @param fileName the file name you want it to have
+     */
+    public void downloadYoutube(String link, String fileName) {
 // Setting timeout globally for the download network requests:
-    PRDownloaderConfig config = PRDownloaderConfig.newBuilder()
-            .setDatabaseEnabled(true)
-            .setReadTimeout(30_000)
-            .setConnectTimeout(30_000)
-            .build();
-    PRDownloader.initialize(MainActivity.getActivity().getApplicationContext(), config);
-    File mydir = new File(Environment.getExternalStorageDirectory(), "MovitaDownload");
-    File s = new File(MainActivity.getActivity().getFilesDir(),"MovitaDownload");
-    s.mkdirs();
-    mydir.mkdirs();
+        PRDownloaderConfig config = PRDownloaderConfig.newBuilder()
+                .setDatabaseEnabled(true)
+                .setReadTimeout(30_000)
+                .setConnectTimeout(30_000)
+                .build();
+        PRDownloader.initialize(MainActivity.getActivity().getApplicationContext(), config);
+        File mydir = new File(Environment.getExternalStorageDirectory(), "MovitaDownload");
+        File s = new File(MainActivity.getActivity().getFilesDir(), "MovitaDownload");
+        s.mkdirs();
+        mydir.mkdirs();
 
-    new YouTubeExtractor(MainActivity.getActivity().getApplicationContext()) {
-        @Override
-        public void onExtractionComplete(SparseArray<YtFile> ytFiles, VideoMeta vMeta) {
-            if (ytFiles != null) {
-                int itag = 22;
-                String downloadUrl = ytFiles.get(itag).getUrl();
-                downloadUrl.toLowerCase();
+        new YouTubeExtractor(MainActivity.getActivity().getApplicationContext()) {
+            @Override
+            public void onExtractionComplete(SparseArray<YtFile> ytFiles, VideoMeta vMeta) {
+                if (ytFiles != null) {
+                    int itag = 22;
+                    String downloadUrl = ytFiles.get(itag).getUrl();
+                    downloadUrl.toLowerCase();
+                }
             }
-        }
-    }.extract(link, true, true);
+        }.extract(link, true, true);
 
     /*
 fileName +=".mp4";
@@ -106,9 +109,14 @@ fileName +=".mp4";
 
 
             });*/
-}
+    }
 
-    /* Checks if external storage is available for read and write */
+
+    /**
+     * Checks if external storage is available for read and write
+     *
+     * @return true if you can write on the external storage
+     */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
