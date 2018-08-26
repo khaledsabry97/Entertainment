@@ -5,7 +5,36 @@ package com.example.khaledsabry.entertainment.Items;
  */
 
 public class SearchItem {
-    private String type;
+  public   enum Type
+    {
+        movie,
+        artist,
+        tv
+    }
+    private Type type;
+  private String typeString;
+
+    public String getTypeString() {
+        return typeString.toLowerCase();
+    }
+
+    public void setType(String type)
+    {
+        if(type.equals("movie"))
+            this.type = Type.movie;
+        else if(type.equals("tv"))
+            this.type = Type.tv;
+        else if(type.equals("person"))
+            this.type = Type.artist;
+        typeString = type;
+    }
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     private Movie movie;
     private Artist artist;
@@ -25,13 +54,7 @@ public class SearchItem {
         this.tv = tv;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public Movie getMovie() {
         return movie;

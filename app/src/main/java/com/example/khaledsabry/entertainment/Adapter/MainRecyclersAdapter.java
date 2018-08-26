@@ -45,6 +45,8 @@ public class MainRecyclersAdapter extends RecyclerView.Adapter<MainRecyclersAdap
 
     @Override
     public int getItemCount() {
+        if (classifications == null)
+            return 0;
         return classifications.size();
     }
 
@@ -73,16 +75,13 @@ public class MainRecyclersAdapter extends RecyclerView.Adapter<MainRecyclersAdap
 
         void updateUi(final Classification classification) {
 
-                  setObjects(classification);
-
+            setObjects(classification);
 
 
         }
 
 
-
-        private void setObjects(Classification classification)
-        {
+        private void setObjects(Classification classification) {
             title.setText(classification.getTitle());
             poster.setImageResource(classification.getImage());
             ClassificationAdapter adapter = new ClassificationAdapter(classification.getSearchItems());
@@ -91,32 +90,6 @@ public class MainRecyclersAdapter extends RecyclerView.Adapter<MainRecyclersAdap
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
             linearLayoutManager.setSmoothScrollbarEnabled(true);
             recyclerView.setLayoutManager(linearLayoutManager);
-        }
-
-       private ArrayList<SearchItem> movies(ArrayList<Movie> movies, String type, Integer limit) {
-
-            ArrayList<SearchItem> items = new ArrayList<>();
-            int size;
-            if (limit == null)
-                size = movies.size();
-            else
-            {
-                if (limit > movies.size())
-                    size = movies.size();
-                else
-                    size = limit;
-            }
-
-            for (int i = 0; i < size; i++) {
-                SearchItem searchItem = new SearchItem();
-                if (type == null)
-                    searchItem.setType("movie");
-                else
-                    searchItem.setType(type);
-                searchItem.setMovie(movies.get(i));
-                items.add(searchItem);
-            }
-            return items;
         }
 
     }

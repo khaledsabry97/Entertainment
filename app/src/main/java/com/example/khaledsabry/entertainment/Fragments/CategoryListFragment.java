@@ -30,24 +30,30 @@ import com.example.khaledsabry.entertainment.R;
 import java.nio.InvalidMarkException;
 import java.util.ArrayList;
 
-
+/**
+ * class to show all the categories that you have in the database
+ */
 public class CategoryListFragment extends Fragment {
 
+    //these are for showing the categories names
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    RecyclerView listRecycle;
     RecyclerView categoriesRecycle;
-    CategoryController categoryController;
+    TitleAdapter titleAdapter;
+
+    //these for showing the items in categories
     TextView header;
+    RecyclerView listRecycle;
     TabLayout tabLayout;
     CategoryAdapter adapter;
-    TitleAdapter titleAdapter;
+
+    //these for adding,deleting and changing the names of categories and items
+    CategoryController categoryController;
     ImageView deleteCategory;
     ImageView addCategory;
     ImageView changeCategoryName;
     Integer currentCategoryId;
     String currentCategoryName;
-    static Context context;
 
     public static CategoryListFragment newInstance() {
         CategoryListFragment fragment = new CategoryListFragment();
@@ -72,23 +78,13 @@ public class CategoryListFragment extends Fragment {
         addCategory = view.findViewById(R.id.addcategory);
         changeCategoryName = view.findViewById(R.id.changename);
 
-        //context is for AlertBuilder In a static function to remove item from category;
-        context = getContext();
         currentCategoryName = "";
         currentCategoryId = null;
 
 
+        setTitleCategoriesAdapter();
+        setItemsAdapter();
 
-        titleAdapter = new TitleAdapter();
-        adapter = new CategoryAdapter();
-        categoriesRecycle.setAdapter(titleAdapter);
-        listRecycle.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-
-        linearLayoutManager.setSmoothScrollbarEnabled(true);
-        categoriesRecycle.setLayoutManager(linearLayoutManager);
-        listRecycle.setLayoutManager(linearLayoutManager2);
 
         deleteCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +115,64 @@ public class CategoryListFragment extends Fragment {
         return view;
     }
 
-    //get the categories and set it in the navigation view
+    /**
+     * set the category contents and show it on the recyclerview
+     */
+    private void setItemsAdapter() {
+        adapter = new CategoryAdapter();
+        listRecycle.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+        listRecycle.setLayoutManager(linearLayoutManager2);
+    }
+
+    /**
+     * set the category names and show it on the navigation bar
+     * inside recycler view
+     */
+    private void setTitleCategoriesAdapter() {
+        titleAdapter = new TitleAdapter();
+        categoriesRecycle.setAdapter(titleAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        categoriesRecycle.setLayoutManager(linearLayoutManager);
+
+    }
+
+    /**
+     * set the tablayout click listener
+     */
+    private void setTabLayout() {
+        //  setTabsTitles(tabLayout);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                adapter.setTypeToShow(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+    }
+
+
+
+    /**
+     * this function is called from catgoryController
+     * to set the navigation view with category names
+     *
+     * @param categoryNames category names that user has created it
+     * @param ids           ids for each of category
+     */
     public void setNavigationView(final ArrayList<String> categoryNames, final ArrayList<Integer> ids) {
         //this is to add a category
         titleAdapter.setData(categoryNames, new OnSuccess.Object() {
@@ -143,6 +196,13 @@ public class CategoryListFragment extends Fragment {
 
     }
 
+    /**
+     * get from the database the items of selected category
+     *
+     * @param categoryNames to set the header name depending on the selected index
+     * @param ids           to select index from it used to send to the database to get items for the category
+     * @param num           selected index
+     */
     private void getCategoryItems(final ArrayList<String> categoryNames, final ArrayList<Integer> ids, Integer num) {
         //if there is no categories so return
         if (ids.size() == 0)
@@ -155,43 +215,33 @@ public class CategoryListFragment extends Fragment {
         categoryController.getItemsByCategoryId(id);
     }
 
-    //from setNavigationView function call this to get items to specific category
-    public void setRecyclerView(ArrayList<Integer> itemsId, final ArrayList<Integer> contentId, ArrayList<Integer> types) {
+    /**
+     * called from categoryController after brings back the items for
+     * specific category
+     *
+     * @param itemsId the ids in the database for each item
+     * @param tmdbIds the tmdb id for each movie,tv or artist
+     * @param types   the type of the item
+     *                1 : movie
+     *                2: tv
+     *                3: artist
+     */
+    public void setRecyclerView(ArrayList<Integer> itemsId, final ArrayList<Integer> tmdbIds, ArrayList<Integer> types) {
+
         //itemsid: id for the categoryItem
-        //contentId: tmdb Id
+        //tmdbIds: tmdb Id
         //types : movie,tv or artist
         //categoryController: to use it later to delete a category item
-
-        adapter.setData(itemsId, contentId, types, currentCategoryId, currentCategoryName, categoryController);
-
-
-    }
-
-
-    //set an tab click listener
-    private void setTabLayout() {
-        //  setTabsTitles(tabLayout);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                adapter.setTypeToShow(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        adapter.setData(itemsId, tmdbIds, types, currentCategoryId, currentCategoryName, categoryController);
 
 
     }
 
 
+
+    /**
+     * to add new category
+     */
     void addCategory() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 // I'm using fragment here so I'm using getView() to provide ViewGroup
@@ -232,6 +282,9 @@ public class CategoryListFragment extends Fragment {
         builder.show();
     }
 
+    /**
+     * change currrent category name
+     */
     private void changeCategoryName() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 // I'm using fragment here so I'm using getView() to provide ViewGroup
@@ -273,6 +326,9 @@ public class CategoryListFragment extends Fragment {
         builder.show();
     }
 
+    /**
+     * delete current category
+     */
     private void deleteCategory() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
@@ -309,11 +365,21 @@ public class CategoryListFragment extends Fragment {
 
     }
 
-    public static void deleteCategoryItem(final int categoryItemId, final int categoryId, String categoryName, final CategoryController categoryController) {
+    /**
+     * delete item from current category
+     * called from the adapter
+     *
+     * @param categoryItemId     the item of the category id
+     * @param categoryId         the category id
+     * @param categoryName       the category name
+     * @param itemName           the item name
+     * @param categoryController controller to remove the item because it's a static function
+     */
+    public static void deleteCategoryItem(final int categoryItemId, final int categoryId, String categoryName, String itemName, final CategoryController categoryController) {
         try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.getActivity());
 
-            builder.setTitle("Do you want to remove this from ( " + categoryName + " ) ?");
+            builder.setTitle("Do you want to remove [ " + itemName + " ] from [ " + categoryName + " ] ?");
             builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

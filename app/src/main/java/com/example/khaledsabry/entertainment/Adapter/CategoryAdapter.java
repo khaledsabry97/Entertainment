@@ -1,28 +1,24 @@
 package com.example.khaledsabry.entertainment.Adapter;
 
-import android.media.Image;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.StringRequest;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.CategoryListFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
+import com.example.khaledsabry.entertainment.Fragments.Tv.TvNavigationFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
-import com.google.android.youtube.player.YouTubePlayer;
 
 import java.util.ArrayList;
 
@@ -32,7 +28,7 @@ import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
     ArrayList<Integer> itemsId = new ArrayList<>();
-    ArrayList<Integer> items = new ArrayList<>();
+    ArrayList<Integer> tmdbIds = new ArrayList<>();
     ArrayList<Integer> types = new ArrayList<>();
     CategoryController categoryController = new CategoryController();
     String categoryName;
@@ -40,9 +36,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private int typeToShow;
 
-    public void setData(ArrayList<Integer> itemsId, ArrayList<Integer> items, ArrayList<Integer> types,int categoryId,String categoryName,CategoryController categoryController) {
+    /**
+     * set the data in the adapter to show items of categories
+     *
+     * @param itemsId            the ids in the database for each item
+     * @param tmdbIds            tmdb id for each movie,tv or artist
+     * @param types              1:movie 2:tv 3:artist
+     * @param categoryId         the category id that this item in it
+     * @param categoryName       to send it the delete item function
+     * @param categoryController to call the delete item function
+     */
+    public void setData(ArrayList<Integer> itemsId, ArrayList<Integer> tmdbIds, ArrayList<Integer> types, int categoryId, String categoryName, CategoryController categoryController) {
         this.itemsId = itemsId;
-        this.items = items;
+        this.tmdbIds = tmdbIds;
         this.types = types;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
@@ -51,6 +57,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         notifyDataSetChanged();
     }
 
+    /**
+     * to show three types of content
+     * 0: all
+     * 1: movie
+     * 2: tv
+     * 3: artist
+     *
+     * @param typeToShow call it from the tab layout
+     */
     public void setTypeToShow(int typeToShow) {
         this.typeToShow = typeToShow;
         notifyDataSetChanged();
@@ -70,9 +85,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
-        if (items == null)
+        if (tmdbIds == null)
             return 0;
-        return items.size();
+        return tmdbIds.size();
     }
 
     class CategoryViewHolder extends RecyclerView.ViewHolder {
@@ -98,11 +113,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         }
 
-        void load(final int postion, int typeShown) {
-
-
-        }
-
         void updateUi(final int postion) {
             view.setVisibility(View.VISIBLE);
 
@@ -118,7 +128,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             switch (type) {
                 //movie
                 case 1:
-                    controller.getMovieGetDetails(Integer.valueOf(items.get(postion) + ""), new OnMovieDataSuccess() {
+                    controller.getMovieGetDetails(Integer.valueOf(tmdbIds.get(postion) + ""), new OnMovieDataSuccess() {
                         @Override
                         public void onSuccess(final Movie movie) {
 
@@ -127,12 +137,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                         }
                     });
                     break;
-//tv
+                //tv
                 case 2:
 
                     break;
 
-//artist
+                //artist
                 case 3:
 
                     break;
@@ -144,7 +154,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
 
-        private void setObjects(String title, float rate, String date, String posterUrl, final int removeItemId, final int type, final int movieId) {
+        private void setObjects(final String title, float rate, String date, String posterUrl, final int removeItemId, final int type, final int contentId) {
             this.title.setText(title);
             this.rate.setText(String.valueOf(rate));
             this.date.setText(date);
@@ -153,7 +163,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 @Override
                 public void onClick(View v) {
                     if (type == 1)
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movieId, true));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(contentId, true));
+                    else if (type == 2)
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(contentId, true));
+                    else if (type == 3)
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(contentId, true));
                 }
             });
 
@@ -162,7 +176,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 @Override
                 public void onClick(View v) {
                     //remove the movie,tv or artist from the categoryItem
-                    CategoryListFragment.deleteCategoryItem(removeItemId,categoryId,categoryName,categoryController);
+                    CategoryListFragment.deleteCategoryItem(removeItemId, categoryId, categoryName, title, categoryController);
                 }
             });
 

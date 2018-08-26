@@ -22,8 +22,13 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.TitleViewHol
 
     ArrayList<String> titles;
     public TitleViewHolder titleViewHolder;
-public OnSuccess.Object listener;
+    public OnSuccess.Object listener;
 
+    /**
+     * set a group of titles
+     * @param titles names for titles
+     * @param listener call it after you click on one of the names
+     */
     public void setData(ArrayList<String> titles, OnSuccess.Object listener) {
         this.titles = titles;
         this.listener = listener;
@@ -31,8 +36,11 @@ public OnSuccess.Object listener;
 
     }
 
-    public void addTitle(String title)
-    {
+    /**
+     * add title with no calling back feature
+     * @param title name to object
+     */
+    public void addTitle(String title) {
         titles.add(title);
         notifyDataSetChanged();
     }
@@ -41,8 +49,7 @@ public OnSuccess.Object listener;
     @Override
     public TitleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_title, parent, false);
-        titleViewHolder = new TitleViewHolder(view);
-        return titleViewHolder;
+        return new TitleViewHolder(view);
     }
 
     @Override
@@ -54,14 +61,15 @@ public OnSuccess.Object listener;
 
     @Override
     public int getItemCount() {
-        if(titles == null)
+        if (titles == null)
             return 0;
         return titles.size();
     }
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
-private View view;
+        private View view;
+
         public TitleViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
@@ -69,8 +77,7 @@ private View view;
 
         }
 
-        void updateUi(final int position)
-        {
+        void updateUi(final int position) {
             title.setText(titles.get(position));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,6 +86,7 @@ private View view;
                 }
             });
         }
+
         public TextView getTitle() {
             return title;
         }

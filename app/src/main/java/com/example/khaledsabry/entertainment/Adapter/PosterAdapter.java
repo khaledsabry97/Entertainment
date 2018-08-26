@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
 import com.example.khaledsabry.entertainment.R;
 
@@ -17,7 +19,7 @@ import java.util.ArrayList;
  */
 
 // for the posters and bacdrop for artist or movie or tv
-public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
+public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PosterViewHolder> {
 
     public ArrayList<String> imgs = new ArrayList<>();
 
@@ -51,4 +53,20 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterViewHolder> {
     public int getItemCount() {
         return imgs.size();
     }
+
+
+    class PosterViewHolder extends RecyclerView.ViewHolder {
+        ImageView posterImg;
+
+        public PosterViewHolder(View itemView) {
+            super(itemView);
+            posterImg = itemView.findViewById(R.id.posterimgid);
+        }
+
+
+        public void updateUi(String posterUrl) {
+            ImageController.putImageMidQuality(posterUrl, posterImg);
+        }
+    }
+
 }

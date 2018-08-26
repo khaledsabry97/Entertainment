@@ -68,7 +68,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
 
 
         void updateUi(final SearchItem searchItem) {
-            if (searchItem.getType().toLowerCase().equals("movie")) {
+            if (searchItem.getTypeString().equals("movie")) {
                 ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(), image);
                 this.title.setText(searchItem.getMovie().getTitle());
                 view.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), true)).addToBackStack(null).commit();
                     }
                 });
-            } else if (searchItem.getType().toLowerCase().equals("tv")) {
+            } else if (searchItem.getTypeString().equals("tv")) {
                 ImageController.putImageLowQuality(searchItem.getTv().getPosterImage(), image);
                 this.title.setText(searchItem.getTv().getTitle());
                 view.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +87,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                     }
                 });
 
-            } else if (searchItem.getType().toLowerCase().equals("artist")) {
+            } else if (searchItem.getTypeString().equals("artist")) {
                 ImageController.putImageLowQuality(searchItem.getArtist().getPosterImage(), image);
                 this.title.setText(searchItem.getArtist().getName());
 
@@ -97,7 +97,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, ArtistNavigationFragment.newInstance(searchItem.getArtist().getId(), true)).addToBackStack(null).commit();
                     }
                 });
-            } else if (searchItem.getType().toLowerCase().equals("mojomovie")) {
+            } else if (searchItem.getTypeString().equals("mojomovie")) {
                 TmdbController tmdbController = new TmdbController();
                 if (searchItem.getMovie().getPosterImage() != null)
                     ImageController.putImageLowQuality(searchItem.getMovie().getPosterImage(), image);

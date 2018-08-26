@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.R;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
  */
 
 //recycler view adapter for the production company
-public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCompanyViewHolder> {
+public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCompanyAdapter.ProductionCompanyViewHolder> {
 
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
 
@@ -50,5 +53,22 @@ public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCom
     @Override
     public int getItemCount() {
         return productionCompanies.size();
+    }
+
+
+    class ProductionCompanyViewHolder extends RecyclerView.ViewHolder {
+        TextView companyName;
+        ImageView poster;
+
+        public ProductionCompanyViewHolder(View itemView) {
+            super(itemView);
+            companyName = itemView.findViewById(R.id.companyid);
+            poster = itemView.findViewById(R.id.posterimageid);
+        }
+
+        public void updateUi(ProductionCompany productionCompany) {
+            companyName.setText(productionCompany.getName());
+            ImageController.putImageMidQuality(productionCompany.getCompanyImage(), poster);
+        }
     }
 }

@@ -101,7 +101,10 @@ public class CategoryController extends Controller {
         });
     }
 
-    //get categories to this user
+    /**
+     * get the categories from the database and send it back to
+     * show it on the navigation bar in categoryListFragment
+      */
     public void getCategories() {
 
         databaseController.selectController().categoryGet(UserData.getInstance().getUserId(), new OnDatabaseSuccess.array() {
@@ -126,7 +129,10 @@ public class CategoryController extends Controller {
 
     }
 
-
+    /**
+     * get items from the database and send it back to categorylistFragment
+     * @param categoryId to select the items that has this category id
+     */
     public void getItemsByCategoryId(final int categoryId) {
         databaseController.selectController().CategoryItemGetByCategory(categoryId, new OnDatabaseSuccess.array() {
             @Override
