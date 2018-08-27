@@ -80,9 +80,9 @@ public class MovieMainFragment extends Fragment {
 
     CategoryController categoryController = new CategoryController();
 
-    public static MovieMainFragment newInstance(int movieId) {
+    public static MovieMainFragment newInstance(Movie movie) {
         MovieMainFragment fragment = new MovieMainFragment();
-        fragment.movieId = movieId;
+        fragment.movie = movie;
         return fragment;
     }
 
@@ -119,16 +119,21 @@ public class MovieMainFragment extends Fragment {
         tomatoesPoster = v.findViewById(R.id.tomatoesposter);
         categoryController = new CategoryController();
         try {
+            setObjects();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+     /*   try {
             getMovieDetails();
 
         }
         catch (Exception e)
         {
             e.printStackTrace();
-        }
+        }*/
         return v;
     }
-
+/*
     public void getMovieDetails() throws Exception {
        movie = MovieNavigationFragment.movie;
         if (movieId != currentMovieId) {
@@ -153,9 +158,8 @@ public class MovieMainFragment extends Fragment {
             setObjects(movie);
     }
 
-
-    private void setObjects(final Movie movie) throws Exception {
-        this.movie = movie;
+*/
+    private void setObjects() throws Exception {
         loadCategories();
         getImdbInfo();
         getRottenTomatoesInfo();

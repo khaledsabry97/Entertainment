@@ -62,7 +62,7 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
         else if (id == mainView)
             loadFragment(TvMainFragment.newInstance(tvId));
         else if (id == images)
-            loadFragment(ImagesFragment.newInstance(tvId, ImagesFragment.Type.tv));
+            loadFragment(ImagesFragment.newInstance(null,null));
         else if (id == seasons)
             loadFragment(TvContentFragment.newInstance(tvId));
 

@@ -52,7 +52,7 @@ TmdbController tmdbController = new TmdbController();
 view.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(),true)).addToBackStack(null).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(),0)).addToBackStack(null).commit();
     }
 });
         return view;

@@ -254,7 +254,7 @@ public class Tmdb {
             JSONObject credit = movieDetails.getJSONObject(credits);
             movie.setCrews(getCrew(credit));
 
-            getPosters(movieDetails, movie);
+           getPosters(movieDetails, movie);
         } catch (JSONException e) {
             String s = e.toString();
 

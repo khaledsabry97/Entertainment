@@ -66,7 +66,7 @@ public boolean onNavigationItemSelected(@NonNull MenuItem item) {
          else if (id == mainView)
             loadFragment(ArtistMainFragment.newInstance(artistId));
         else if (id == images)
-        loadFragment(ImagesFragment.newInstance(artistId, ImagesFragment.Type.artist));
+        loadFragment(ImagesFragment.newInstance(null, null));
         else if (id == roles)
            loadFragment(ArtistRolesFragment.newInstance(artistId));
 

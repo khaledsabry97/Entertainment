@@ -74,7 +74,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), true)).addToBackStack(null).commit();
+                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), 0)).addToBackStack(null).commit();
                     }
                 });
             } else if (searchItem.getTypeString().equals("tv")) {
@@ -120,7 +120,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                     @Override
                     public void onClick(View v) {
 
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), true)).addToBackStack(null).commit();
+                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), 0)).addToBackStack(null).commit();
                     }
 
                 });

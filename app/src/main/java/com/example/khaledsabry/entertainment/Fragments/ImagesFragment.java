@@ -4,11 +4,15 @@ package com.example.khaledsabry.entertainment.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.PosterAdapter;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
@@ -22,21 +26,18 @@ import java.util.ArrayList;
 
 
 public class ImagesFragment extends Fragment {
-    static Movie movie;
-    static Tv tv;
 
-    static int currentId = -1;
-    static int contentId;
     RecyclerView recyclerView;
-    ArrayList<String> imgs = new ArrayList<>();
-    static Type type;
-    TmdbController tmdbController = new TmdbController();
     PosterAdapter posterAdapter;
+    ImageView poster;
+    ArrayList<String> posters;
+    ArrayList<String> backDrops;
+    Button fullScreen,fhd,hd,sd;
 
-    public static ImagesFragment newInstance(int contentId, Type type) {
+    public static ImagesFragment newInstance(ArrayList<String> posters,ArrayList<String> backDrops) {
         ImagesFragment fragment = new ImagesFragment();
-        ImagesFragment.contentId = contentId;
-        ImagesFragment.type = type;
+        fragment.posters = posters;
+        fragment.backDrops = backDrops;
 
 
         return fragment;
@@ -48,79 +49,21 @@ public class ImagesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_poster, container, false);
-
         recyclerView = view.findViewById(R.id.contentPanel);
+        poster = view.findViewById(R.id.posterzoom);
+        fullScreen = view.findViewById(R.id.fullscreen);
+        fhd = view.findViewById(R.id.fhd);
+        hd = view.findViewById(R.id.hd);
+        sd  = view.findViewById(R.id.sd);
 
 
-        if (type == Type.movie)
-            loadMovie();
-        else if (type == Type.tv)
-            loadTv();
-
-
+        posterAdapter = new PosterAdapter(poster);
+        posterAdapter.setData(posters);
+        recyclerView.setAdapter(posterAdapter);
         recyclerView.setHasFixedSize(true);
-         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3, GridLayoutManager.HORIZONTAL, false);
-     //   recyclerView.setLayoutManager(gridLayoutManager);
-    //    StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
         return view;
     }
 
-    private void setMovieImg() {
-        imgs.addAll(movie.getBackdrops());
-
-        imgs.addAll(movie.getPosters());
-        posterAdapter = new PosterAdapter(imgs);
-        recyclerView.setAdapter(posterAdapter);
-
-
-    }
-
-    private void loadMovie() {
-        if (contentId != currentId)
-            tmdbController.getMovieImages(contentId, new OnMovieDataSuccess() {
-                @Override
-                public void onSuccess(Movie movie) {
-                    ImagesFragment.movie = movie;
-                    ImagesFragment.currentId = contentId;
-
-                    setMovieImg();
-                }
-            });
-        else
-            setMovieImg();
-
-    }
-
-    private void loadTv() {
-        if (contentId != currentId)
-            tmdbController.getTvImages(contentId, new OnTvSuccess() {
-                @Override
-                public void onSuccess(Tv tv) {
-                    ImagesFragment.tv = tv;
-                    ImagesFragment.currentId = contentId;
-
-                    setTvImg();
-                }
-            });
-        else
-            setTvImg();
-    }
-
-    private void setTvImg() {
-
-        imgs.addAll(tv.getBackdrops());
-        imgs.addAll(tv.getPosters());
-
-         posterAdapter = new PosterAdapter(imgs);
-        recyclerView.setAdapter(posterAdapter);
-
-
-    }
-
-    public enum Type {
-        movie,
-        tv,
-        artist
-    }
 }

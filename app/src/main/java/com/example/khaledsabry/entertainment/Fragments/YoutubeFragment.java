@@ -182,8 +182,7 @@ public class YoutubeFragment extends Fragment {
 
                         @Override
                         public void onStopped() {
-                            String error = "sdf";
-                            youTubePlayer.play();
+
                         }
 
                         @Override

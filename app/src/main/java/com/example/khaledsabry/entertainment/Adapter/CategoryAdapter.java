@@ -163,7 +163,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 @Override
                 public void onClick(View v) {
                     if (type == 1)
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(contentId, true));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(contentId, 0));
                     else if (type == 2)
                         MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(contentId, true));
                     else if (type == 3)
