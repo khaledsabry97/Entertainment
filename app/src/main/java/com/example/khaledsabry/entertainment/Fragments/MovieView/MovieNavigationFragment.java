@@ -31,7 +31,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     int movieId;
 
     //to set latter the index of the navigation items
-    int index = -1;
+    static int index = -1;
 
     //navigation item ids
     int NavigationId;
@@ -52,14 +52,12 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_movie_navigation, container, false);
         BottomNavigationView bottomNavigationView = v.findViewById(R.id.navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         setNavigationIndex(index);
@@ -77,18 +75,22 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         NavigationId = item.getItemId();
         switch (item.getItemId()) {
             case R.id.navigation_home:
+                index = 0;
                 loadMovieMainFragment();
                 break;
             case R.id.navigation_back:
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;
             case R.id.navigation_images:
+                index = 2;
                 loadImagesFragment();
                 break;
             case R.id.navigation_download:
+                index = 3;
                 loadTorrentFragment();
                 break;
             case R.id.navigation_youtube:
+                index = 4;
                 loadYoutubeFragment();
                 break;
             default:
@@ -104,6 +106,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
 
     /**
      * to load all the fragments in view
+     *
      * @param fragment the fragment you want to show it
      */
     void loadFragment(Fragment fragment) {
@@ -136,7 +139,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 @Override
                 public void onSuccess(Movie movie) {
                     mainMovie = movie;
-                        loadFragment(TorrentFragment.newInstance(movie.getTitle() + " " + movie.getYear()));
+                    loadFragment(TorrentFragment.newInstance(movie.getTitle() + " " + movie.getYear()));
                 }
             });
         else
@@ -152,11 +155,11 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 @Override
                 public void onSuccess(Movie movies) {
                     imagesMovie = movies;
-                    loadFragment(ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
+                    MainActivity.loadFragmentWithReturn(R.id.moviedetailid, ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
                 }
             });
         } else {
-            loadFragment(ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
+            MainActivity.loadFragmentWithReturn(R.id.moviedetailid, ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
 
         }
     }
@@ -165,7 +168,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
      * load youtube for trailers
      */
     void loadYoutubeFragment() {
-        if(mainMovie == null)
+        if (mainMovie == null)
             tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
@@ -180,6 +183,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
 
     /**
      * to set navigationId to set later the index to show automatically
+     *
      * @param index
      */
     private void setNavigationIndex(int index) {

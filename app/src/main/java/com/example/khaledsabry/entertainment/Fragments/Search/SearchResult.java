@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.Adapter.ResultItemRecyclarView;
+import com.example.khaledsabry.entertainment.Adapter.ResultSearchItemsAdapter;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class SearchResult extends Fragment {
 
     RecyclerView recyclerView;
-    ResultItemRecyclarView resultItemRecyclarView;
+    ResultSearchItemsAdapter resultSearchItemsAdapter;
     static ArrayList<SearchItem> searchItems = new ArrayList<>();
 
     public static SearchResult newInstance(ArrayList<SearchItem> searchItems) {
@@ -39,14 +39,14 @@ public class SearchResult extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
         recyclerView = view.findViewById(R.id.itemsid);
-        resultItemRecyclarView = new ResultItemRecyclarView(searchItems);
-        recyclerView.setAdapter(resultItemRecyclarView);
+        resultSearchItemsAdapter = new ResultSearchItemsAdapter(searchItems);
+        recyclerView.setAdapter(resultSearchItemsAdapter);
 recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        resultItemRecyclarView.selectFirstItem();
+        resultSearchItemsAdapter.selectFirstItem();
 
         return view;
     }

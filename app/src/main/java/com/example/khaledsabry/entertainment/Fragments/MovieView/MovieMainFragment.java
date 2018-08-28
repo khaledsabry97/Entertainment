@@ -351,9 +351,9 @@ public class MovieMainFragment extends Fragment {
                                                   if (movie1.getRottentTomatoesRatingType().equals("Certified Fresh"))
                                                       ImageController.putDrawableToImageView(R.drawable.certified2,tomatoesPoster);
                                                   else if (movie1.getRottentTomatoesRatingType().equals("Fresh"))
-                                                      Glide.with(getContext()).load(R.drawable.fresh2).into(tomatoesPoster);
+                                                      ImageController.putDrawableToImageView(R.drawable.fresh2,tomatoesPoster);
                                                   else if (movie1.getRottentTomatoesRatingType().equals("Rotten"))
-                                                      Glide.with(getContext()).load(R.drawable.rotten).into(tomatoesPoster);
+                                                      ImageController.putDrawableToImageView(R.drawable.rotten,tomatoesPoster);
 
 
                                                   if (movie1.getRottenTomatoesRate() > 0)

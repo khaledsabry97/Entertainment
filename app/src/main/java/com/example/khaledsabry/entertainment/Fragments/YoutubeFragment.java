@@ -229,9 +229,6 @@ public class YoutubeFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        if (youTubePlayer == null)
-            return;
-        youTubePlayer.play();
 
 
     }

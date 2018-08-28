@@ -11,13 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.R;
 
 public class FullPoster extends Fragment {
+    //poster link
     static String poster;
+    //poster view
     ImageView fullPoster;
+    //counter for clicks to detect the double click
     int i = 0;
+    //to use the toast method
+    Controller controller = new Controller();
 
     public static FullPoster newInstance(String poster) {
         FullPoster fragment = new FullPoster();
@@ -34,28 +41,35 @@ public class FullPoster extends Fragment {
         fullPoster = v.findViewById(R.id.fullposterid);
         ImageController.putImageHighQuality(poster, fullPoster);
 
-
+        controller.toast("press double click to exit");
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                i++;
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (i > 1)
-                            getActivity().getSupportFragmentManager().popBackStack();
-                        i = 0;
-
-                    }
-                }, 400);
+                closeTheFragment();
 
             }
         });
 
 
         return v;
+    }
+
+    /**
+     * increment i every time you click and every  400 ms i = 0
+     */
+    void closeTheFragment() {
+        i++;
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (i > 1)
+                    getActivity().getSupportFragmentManager().popBackStack();
+                i = 0;
+
+            }
+        }, 400);
     }
 
 }
