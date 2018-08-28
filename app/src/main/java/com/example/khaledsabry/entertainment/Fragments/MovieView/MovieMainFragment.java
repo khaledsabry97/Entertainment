@@ -133,32 +133,7 @@ public class MovieMainFragment extends Fragment {
         }*/
         return v;
     }
-/*
-    public void getMovieDetails() throws Exception {
-       movie = MovieNavigationFragment.movie;
-        if (movieId != currentMovieId) {
-            TmdbController tmdbController = new TmdbController();
-            tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
-                @Override
-                public void onSuccess(Movie movie) {
-                    currentMovieId = movie.getMovieId();
-                    MovieNavigationFragment.movie = movie;
-                    try {
-                        setObjects(movie);
 
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-
-                }
-            });
-        } else
-            setObjects(movie);
-    }
-
-*/
     private void setObjects() throws Exception {
         loadCategories();
         getImdbInfo();

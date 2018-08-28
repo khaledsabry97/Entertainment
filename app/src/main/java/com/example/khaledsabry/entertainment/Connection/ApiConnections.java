@@ -26,6 +26,8 @@ import java.util.Map;
 public class ApiConnections {
 //this is the main and the only instance object of this class
     private  static ApiConnections ourInstance = new ApiConnections();
+    private ArrayList<JsonObjectRequest> jsonObjectRequestArrayList = new ArrayList<>();
+
 
     //Singleton pattern
     private ApiConnections()
@@ -60,12 +62,21 @@ public class ApiConnections {
             }
         }
         );
-
+        if(url.equals("search/multi"))
+jsonObjectRequestArrayList.add(jsonObjectRequest);
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(jsonObjectRequest);
 
     }
 
+    public void stopConnection()
+    {
+        for (JsonObjectRequest jsonObjectRequest:jsonObjectRequestArrayList
+                ) {
 
+            jsonObjectRequest.cancel();
+        }
+        jsonObjectRequestArrayList.clear();
+    }
 
 
 }

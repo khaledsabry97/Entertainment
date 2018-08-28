@@ -100,7 +100,7 @@ public class ResultSearchItemsAdapter extends RecyclerView.Adapter<ResultSearchI
         }
 
         public void updateUi(final SearchItem searchItem) {
-            switch (searchItems.get(0).getType()) {
+            switch (searchItem.getType()) {
                 case movie:
                     setMovie(searchItem.getMovie());
                     break;

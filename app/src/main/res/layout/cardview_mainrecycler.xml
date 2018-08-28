@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/posterrelativelayout"
-            tools:listitem="@layout/cardview_classificationitem" />
+            tools:listitem="@layout/cardview_classification_item" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"

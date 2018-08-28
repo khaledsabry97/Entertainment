@@ -254,7 +254,7 @@ public class Tmdb {
             JSONObject credit = movieDetails.getJSONObject(credits);
             movie.setCrews(getCrew(credit));
 
-           getPosters(movieDetails, movie);
+            getPosters(movieDetails, movie);
         } catch (JSONException e) {
             String s = e.toString();
 
@@ -294,6 +294,7 @@ public class Tmdb {
 
     /**
      * add to movie list movies objects
+     * call it from showRecommendationsOrSimilar function
      *
      * @param movieDetails json object has info for movie object
      * @param movies       an array list that we use to add several movies objects
@@ -328,7 +329,7 @@ public class Tmdb {
             movie.setTmdbRate(movieDetails.getInt(vote_average));
             movie.setAdult(movieDetails.getBoolean(adult));
             movie.setReleaseDate(movieDetails.getString(release_date));
-
+            movie.setBackDropPoster(movieDetails.getString(backdrop_path));
             movie.setGenres(genre);
             movies.add(movie);
 

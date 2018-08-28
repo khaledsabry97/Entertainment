@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,24 +10,91 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/posterrelativelayout"
+            android:id="@+id/backdrop_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/batman" />
+            tools:src="@drawable/avengers_infinity_war_back_drop" />
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/poster_image"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            tools:src="@drawable/avengers_infinity_war_poster"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:background="@drawable/view_shadow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title" />
 
         <TextView
-            android:id="@+id/rateid"
+            android:id="@+id/title"
+            style="@style/TextHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="8dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/poster_image"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/genresid"
+            tools:text="Avengers Infinity War (2018)" />
+
+        <TextView
+            android:id="@+id/genresid"
+            style="@style/TextCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="32dp"
-            android:fontFamily="@font/carterone"
-            android:text="7.5"
-            android:textColor="@android:color/background_light"
-            android:textSize="50sp"
+
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
+
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="Action, Adventure, Fantasy"
+            />
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintLeft_toRightOf="@+id/poster_image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <TextView
+                android:id="@+id/overview_id"
+                style="@style/TextNormal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="none"
+                android:textAlignment="textStart"
+                android:textSize="@dimen/_9sdp"
+                tools:text="As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain."
+                />
+            />
+
+
+        </android.support.v4.widget.NestedScrollView>
+
 
         <ImageView
             android:id="@+id/imageView2"
@@ -37,8 +103,11 @@
             android:layout_marginBottom="84dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/star"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

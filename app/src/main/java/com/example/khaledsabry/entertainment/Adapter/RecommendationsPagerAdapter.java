@@ -16,11 +16,16 @@ import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by KhALeD SaBrY on 02-Jul-18.
  */
 
 public class RecommendationsPagerAdapter extends PagerAdapter {
+    ImageView backdrop;
+    TextView title,genres,overview;
+    CircleImageView poster;
     ArrayList<Movie> movies;
 
     public RecommendationsPagerAdapter(ArrayList<Movie> movies) {
@@ -32,17 +37,25 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.recommendations, container, false);
-
         final Movie movie = movies.get(position);
-        ImageView poster = view.findViewById(R.id.posterrelativelayout);
-        TextView rate = view.findViewById(R.id.rateid);
 
-        ImageController.putImageMidQuality(movie.getPosterImage(), poster);
-        rate.setText(movie.getTmdbRate() + "");
+poster = view.findViewById(R.id.poster_image);
+backdrop = view.findViewById(R.id.backdrop_image);
+title = view.findViewById(R.id.title);
+genres = view.findViewById(R.id.genresid);
+overview = view.findViewById(R.id.overview_id);
+
+ImageController.putImageLowQuality(movie.getPosterImage(),poster);
+ImageController.putImageMidQuality(movie.getBackDropPoster(),backdrop);
+
+title.setText(movie.getTitle());
+genres.setText(movie.getGenreList());
+overview.setText(movie.getOverView());
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), 0)).commit();
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), 0));
             }
         });
 

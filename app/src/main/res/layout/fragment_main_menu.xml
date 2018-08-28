@@ -30,7 +30,7 @@
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/news"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:listitem="@layout/cardview_classificationitem" />
+        tools:listitem="@layout/cardview_classification_item" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/news"

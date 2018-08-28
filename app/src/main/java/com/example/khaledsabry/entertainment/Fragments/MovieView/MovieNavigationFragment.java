@@ -18,6 +18,7 @@ import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
@@ -40,9 +41,12 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     private Movie mainMovie = null;
     //imagesMovie gets the details for ImagesFragment
     private Movie imagesMovie = null;
-
+    private ArrayList<Movie> recommendedMovies = new ArrayList<>();
+    private ArrayList<Movie> similarMovies = new ArrayList<>();
     //to get info from the tmdb
     TmdbController tmdbController = new TmdbController();
+
+    BottomNavigationView bottomNavigationView;
 
     public static MovieNavigationFragment newInstance(int movieId, int index) {
         MovieNavigationFragment fragment = new MovieNavigationFragment();
@@ -57,15 +61,22 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_movie_navigation, container, false);
-        BottomNavigationView bottomNavigationView = v.findViewById(R.id.navigation);
+        bottomNavigationView = v.findViewById(R.id.navigation);
+
+        setUpBottomNavigation();
+        return v;
+    }
+
+    /**
+     * setup the settings of the navigation view
+     */
+    private void setUpBottomNavigation() {
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         setNavigationIndex(index);
         bottomNavigationView.setSelectedItemId(NavigationId);
         bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
 
-
-        return v;
     }
 
 
@@ -79,7 +90,8 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 loadMovieMainFragment();
                 break;
             case R.id.navigation_back:
-                getActivity().getSupportFragmentManager().popBackStack();
+                index = 1;
+                loadRecommendationFragment();
                 break;
             case R.id.navigation_images:
                 index = 2;
@@ -97,6 +109,42 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         }
 
         return true;
+    }
+
+    /**
+     * if there is no recommended movies go and get it from tmdb server
+     * if there is no similar movies go and get it from tmdb server
+     * when you get one of them check if the other is found or not if it's found
+     * load the fragment if not wait and the other will repeat this check
+     * if you are already have the two lists then you will load with the third option
+     */
+    private void loadRecommendationFragment() {
+        if (recommendedMovies.size() == 0) {
+            tmdbController.getRecommendations(movieId, new OnMovieList() {
+                @Override
+                public void onMovieList(ArrayList<Movie> movies) {
+                    recommendedMovies = movies;
+                    if (similarMovies.size() != 0)
+                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies,similarMovies));
+                }
+            });
+        }
+        if (similarMovies.size() == 0) {
+            tmdbController.getSimilar(movieId, new OnMovieList() {
+                @Override
+                public void onMovieList(ArrayList<Movie> movies) {
+                    similarMovies = movies;
+                    if (recommendedMovies.size() != 0)
+                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies,similarMovies));
+                }
+            });
+        }
+
+
+        if(similarMovies.size() != 0 && recommendedMovies.size() != 0)
+            loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies,similarMovies));
+
+
     }
 
     @Override

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnSearchSuccess;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
@@ -54,6 +55,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ApiConnections.getInstance().stopConnection();
                 tmdbController.search(String.valueOf(s), new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {

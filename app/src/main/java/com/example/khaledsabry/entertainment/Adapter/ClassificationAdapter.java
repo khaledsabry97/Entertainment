@@ -36,7 +36,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
     @NonNull
     @Override
     public ClassificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(MainActivity.getActivity()).inflate(R.layout.cardview_classificationitem, parent, false);
+        View view = LayoutInflater.from(MainActivity.getActivity()).inflate(R.layout.cardview_classification_item, parent, false);
         return new ClassificationViewHolder(view);
     }
 
