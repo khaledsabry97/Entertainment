@@ -24,9 +24,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecommendationsPagerAdapter extends PagerAdapter {
     ImageView backdrop;
-    TextView title,genres,overview;
+    TextView title, genres, overview, rate;
     CircleImageView poster;
     ArrayList<Movie> movies;
+
 
     public RecommendationsPagerAdapter(ArrayList<Movie> movies) {
         super();
@@ -36,22 +37,28 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.recommendations, container, false);
+        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.cardview_recommendations_similar, container, false);
         final Movie movie = movies.get(position);
 
-poster = view.findViewById(R.id.poster_image);
-backdrop = view.findViewById(R.id.backdrop_image);
-title = view.findViewById(R.id.title);
-genres = view.findViewById(R.id.genresid);
-overview = view.findViewById(R.id.overview_id);
+        //get the ui from the layout
+        poster = view.findViewById(R.id.poster_image);
+        backdrop = view.findViewById(R.id.backdrop_image);
+        title = view.findViewById(R.id.title);
+        genres = view.findViewById(R.id.genresid);
+        overview = view.findViewById(R.id.overview_id);
+        rate = view.findViewById(R.id.rate);
 
-ImageController.putImageLowQuality(movie.getPosterImage(),poster);
-ImageController.putImageMidQuality(movie.getBackDropPoster(),backdrop);
+        //upload the poster and backDropImage
+        ImageController.putImageLowQuality(movie.getPosterImage(), poster);
+        ImageController.putImageMidQuality(movie.getBackDropPoster(), backdrop);
 
-title.setText(movie.getTitle());
-genres.setText(movie.getGenreList());
-overview.setText(movie.getOverView());
+        //set the ui components
+        title.setText(movie.getTitle()+ " ["+movie.getYear()+"]");
+        genres.setText(movie.getGenreList());
+        overview.setText(movie.getOverView());
+        rate.setText(movie.getTmdbRate() + "");
 
+        //to let you watch the movie details when you click it
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +77,8 @@ overview.setText(movie.getOverView());
 
     @Override
     public int getCount() {
+        if(movies == null)
+            return 0;
         if (movies.size() > 20)
             return 20;
         return movies.size();

@@ -67,6 +67,7 @@ dependencies {
 
     //circle imageView
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-
+//switch
+    implementation 'com.github.angads25:toggle:1.0.0'
 
 }

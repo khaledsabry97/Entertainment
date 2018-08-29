@@ -91,7 +91,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 break;
             case R.id.navigation_back:
                 index = 1;
-                loadRecommendationFragment();
+                loadRecommendationSimilarFragment();
                 break;
             case R.id.navigation_images:
                 index = 2;
@@ -111,45 +111,10 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         return true;
     }
 
-    /**
-     * if there is no recommended movies go and get it from tmdb server
-     * if there is no similar movies go and get it from tmdb server
-     * when you get one of them check if the other is found or not if it's found
-     * load the fragment if not wait and the other will repeat this check
-     * if you are already have the two lists then you will load with the third option
-     */
-    private void loadRecommendationFragment() {
-        if (recommendedMovies.size() == 0) {
-            tmdbController.getRecommendations(movieId, new OnMovieList() {
-                @Override
-                public void onMovieList(ArrayList<Movie> movies) {
-                    recommendedMovies = movies;
-                    if (similarMovies.size() != 0)
-                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies,similarMovies));
-                }
-            });
-        }
-        if (similarMovies.size() == 0) {
-            tmdbController.getSimilar(movieId, new OnMovieList() {
-                @Override
-                public void onMovieList(ArrayList<Movie> movies) {
-                    similarMovies = movies;
-                    if (recommendedMovies.size() != 0)
-                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies,similarMovies));
-                }
-            });
-        }
-
-
-        if(similarMovies.size() != 0 && recommendedMovies.size() != 0)
-            loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies,similarMovies));
-
-
-    }
 
     @Override
     public void onNavigationItemReselected(@NonNull MenuItem item) {
-
+        return;
     }
 
     /**
@@ -175,6 +140,42 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
             });
         else
             loadFragment(MovieMainFragment.newInstance(mainMovie));
+
+    }
+
+    /**
+     * if there is no recommended movies go and get it from tmdb server
+     * if there is no similar movies go and get it from tmdb server
+     * when you get one of them check if the other is found or not if it's found
+     * load the fragment if not wait and the other will repeat this check
+     * if you are already have the two lists then you will load with the third option
+     */
+    private void loadRecommendationSimilarFragment() {
+        if (recommendedMovies.size() == 0) {
+            tmdbController.getRecommendations(movieId, new OnMovieList() {
+                @Override
+                public void onMovieList(ArrayList<Movie> movies) {
+                    recommendedMovies = movies;
+                    if (similarMovies.size() != 0)
+                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
+                }
+            });
+        }
+        if (similarMovies.size() == 0) {
+            tmdbController.getSimilar(movieId, new OnMovieList() {
+                @Override
+                public void onMovieList(ArrayList<Movie> movies) {
+                    similarMovies = movies;
+                    if (recommendedMovies.size() != 0)
+                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
+                }
+            });
+        }
+
+
+        if (similarMovies.size() != 0 && recommendedMovies.size() != 0)
+            loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
+
 
     }
 

@@ -301,6 +301,8 @@ public class MovieMainFragment extends Fragment {
         WebApi.getInstance().imdbMovieDetails(movie.getMovieImdbId(), new OnWebSuccess.OnMovie() {
             @Override
             public void onSuccess(Movie movie) {
+                if(imdbRating ==null || mpaa == null)
+                    return;
                 if (!String.valueOf(movie.getImdbRate()).equals("0.0"))
                     imdbRating.setText(String.valueOf(movie.getImdbRate()));
                 if (!String.valueOf(movie.getMpaa()).equals(""))
@@ -317,12 +319,14 @@ public class MovieMainFragment extends Fragment {
                                   WebApi.getInstance().rottenTomatoesMoviePreview(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
                                       @Override
                                       public void onSuccess(final Movie movie1) {
+
                                           movie.setRottenTomatoesRate(movie1.getRottenTomatoesRate());
                                           movie.setMovieRottenTomatoesId(movie1.getMovieRottenTomatoesId());
                                           MainActivity.getActivity().runOnUiThread(new Runnable() {
                                               @Override
                                               public void run() {
-
+                                                  if(tomatoesPoster == null || tomatoesRating == null)
+                                                      return;
                                                   if (movie1.getRottentTomatoesRatingType().equals("Certified Fresh"))
                                                       ImageController.putDrawableToImageView(R.drawable.certified2,tomatoesPoster);
                                                   else if (movie1.getRottentTomatoesRatingType().equals("Fresh"))
