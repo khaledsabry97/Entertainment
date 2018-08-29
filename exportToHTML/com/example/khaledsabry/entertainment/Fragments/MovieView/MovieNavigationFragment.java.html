@@ -1,0 +1,282 @@
+<html>
+<head>
+<title>MovieNavigationFragment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,0); }
+.s1 { color: rgb(0,0,128); font-weight: bold; }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(128,128,128); font-weight: bold; font-style: italic; }
+.s5 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MovieNavigationFragment.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0"> 
+</span><span class="s1">package </span><span class="s0">com.example.khaledsabry.entertainment.Fragments.MovieView; 
+ 
+</span><span class="s1">import </span><span class="s0">android.content.res.ColorStateList; 
+</span><span class="s1">import </span><span class="s0">android.graphics.Color; 
+</span><span class="s1">import </span><span class="s0">android.os.Bundle; 
+</span><span class="s1">import </span><span class="s0">android.support.annotation.NonNull; 
+</span><span class="s1">import </span><span class="s0">android.support.design.widget.BottomNavigationView; 
+</span><span class="s1">import </span><span class="s0">android.support.v4.app.Fragment; 
+</span><span class="s1">import </span><span class="s0">android.view.LayoutInflater; 
+</span><span class="s1">import </span><span class="s0">android.view.MenuItem; 
+</span><span class="s1">import </span><span class="s0">android.view.View; 
+</span><span class="s1">import </span><span class="s0">android.view.ViewGroup; 
+ 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Activities.MainActivity; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Controllers.Functions; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Controllers.TmdbController; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Fragments.ImagesFragment; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Fragments.TorrentFragment; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Interfaces.OnMovieList; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Items.Movie; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.R; 
+</span><span class="s1">import </span><span class="s0">com.example.khaledsabry.entertainment.Fragments.YoutubeFragment; 
+ 
+</span><span class="s1">import </span><span class="s0">java.util.ArrayList; 
+ 
+ 
+</span><span class="s1">public class </span><span class="s0">MovieNavigationFragment </span><span class="s1">extends </span><span class="s0">Fragment </span><span class="s1">implements </span><span class="s0">BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener { 
+ 
+    </span><span class="s2">//to set movie id</span><span class="s0"> 
+    </span><span class="s1">int </span><span class="s0">movieId; 
+ 
+    </span><span class="s2">//to set latter the index of the navigation items</span><span class="s0"> 
+    </span><span class="s1">static int </span><span class="s0">index = -</span><span class="s3">1</span><span class="s0">; 
+ 
+    </span><span class="s2">//navigation item ids</span><span class="s0"> 
+    </span><span class="s1">int </span><span class="s0">NavigationId; 
+ 
+    </span><span class="s2">//mainMovie get the details for (MovieMainFragment,DownloadFragment)</span><span class="s0"> 
+    </span><span class="s1">private </span><span class="s0">Movie mainMovie = </span><span class="s1">null</span><span class="s0">; 
+    </span><span class="s2">//imagesMovie gets the details for ImagesFragment</span><span class="s0"> 
+    </span><span class="s1">private </span><span class="s0">Movie imagesMovie = </span><span class="s1">null</span><span class="s0">; 
+    </span><span class="s1">private </span><span class="s0">ArrayList&lt;Movie&gt; recommendedMovies = </span><span class="s1">new </span><span class="s0">ArrayList&lt;&gt;(); 
+    </span><span class="s1">private </span><span class="s0">ArrayList&lt;Movie&gt; similarMovies = </span><span class="s1">new </span><span class="s0">ArrayList&lt;&gt;(); 
+    </span><span class="s2">//to get info from the tmdb</span><span class="s0"> 
+    TmdbController tmdbController = </span><span class="s1">new </span><span class="s0">TmdbController(); 
+ 
+    BottomNavigationView bottomNavigationView; 
+ 
+    </span><span class="s1">public static </span><span class="s0">MovieNavigationFragment newInstance(</span><span class="s1">int </span><span class="s0">movieId, </span><span class="s1">int </span><span class="s0">index) { 
+        MovieNavigationFragment fragment = </span><span class="s1">new </span><span class="s0">MovieNavigationFragment(); 
+        fragment.movieId = movieId; 
+        fragment.index = index; 
+        </span><span class="s1">return </span><span class="s0">fragment; 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s1">public </span><span class="s0">View onCreateView(LayoutInflater inflater, ViewGroup container, 
+                             Bundle savedInstanceState) { 
+        </span><span class="s2">// Inflate the layout for this fragment</span><span class="s0"> 
+        View v = inflater.inflate(R.layout.fragment_movie_navigation, container, </span><span class="s1">false</span><span class="s0">); 
+        bottomNavigationView = v.findViewById(R.id.navigation); 
+ 
+        setUpBottomNavigation(); 
+        </span><span class="s1">return </span><span class="s0">v; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * setup the settings of the navigation view 
+     */</span><span class="s0"> 
+    </span><span class="s1">private void </span><span class="s0">setUpBottomNavigation() { 
+        bottomNavigationView.setOnNavigationItemSelectedListener(</span><span class="s1">this</span><span class="s0">); 
+ 
+        setNavigationIndex(index); 
+        bottomNavigationView.setSelectedItemId(NavigationId); 
+        bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE)); 
+ 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s1">public boolean </span><span class="s0">onNavigationItemSelected(@NonNull MenuItem item) { 
+        Functions.stopConnectionsAndStartImageGlide(); 
+        NavigationId = item.getItemId(); 
+        </span><span class="s1">switch </span><span class="s0">(item.getItemId()) { 
+            </span><span class="s1">case </span><span class="s0">R.id.navigation_home: 
+                index = </span><span class="s3">0</span><span class="s0">; 
+                loadMovieMainFragment(); 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s0">R.id.navigation_back: 
+                index = </span><span class="s3">1</span><span class="s0">; 
+                loadRecommendationSimilarFragment(); 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s0">R.id.navigation_images: 
+                index = </span><span class="s3">2</span><span class="s0">; 
+                loadImagesFragment(); 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s0">R.id.navigation_download: 
+                index = </span><span class="s3">3</span><span class="s0">; 
+                loadTorrentFragment(); 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s0">R.id.navigation_youtube: 
+                index = </span><span class="s3">4</span><span class="s0">; 
+                loadYoutubeFragment(); 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">default</span><span class="s0">: 
+        } 
+ 
+        </span><span class="s1">return true</span><span class="s0">; 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s1">public void </span><span class="s0">onNavigationItemReselected(@NonNull MenuItem item) { 
+        </span><span class="s1">return</span><span class="s0">; 
+    } 
+ 
+    </span><span class="s2">/** 
+     * to load all the fragments in view 
+     * 
+     * </span><span class="s4">@param </span><span class="s2">fragment the fragment you want to show it 
+     */</span><span class="s0"> 
+    </span><span class="s1">void </span><span class="s0">loadFragment(Fragment fragment) { 
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, fragment).commit(); 
+    } 
+ 
+    </span><span class="s2">/** 
+     * load the movie main view 
+     */</span><span class="s0"> 
+    </span><span class="s1">void </span><span class="s0">loadMovieMainFragment() { 
+        </span><span class="s1">if </span><span class="s0">(mainMovie == </span><span class="s1">null</span><span class="s0">) 
+            tmdbController.getMovieGetDetails(movieId, </span><span class="s1">new </span><span class="s0">OnMovieDataSuccess() { 
+                @Override 
+                </span><span class="s1">public void </span><span class="s0">onSuccess(Movie movie) { 
+                    mainMovie = movie; 
+                    loadFragment(MovieMainFragment.newInstance(mainMovie)); 
+                } 
+            }); 
+        </span><span class="s1">else</span><span class="s0"> 
+            loadFragment(MovieMainFragment.newInstance(mainMovie)); 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * if there is no recommended movies go and get it from tmdb server 
+     * if there is no similar movies go and get it from tmdb server 
+     * when you get one of them check if the other is found or not if it's found 
+     * load the fragment if not wait and the other will repeat this check 
+     * if you are already have the two lists then you will load with the third option 
+     */</span><span class="s0"> 
+    </span><span class="s1">private void </span><span class="s0">loadRecommendationSimilarFragment() { 
+        </span><span class="s1">if </span><span class="s0">(recommendedMovies.size() == </span><span class="s3">0</span><span class="s0">) { 
+            tmdbController.getRecommendations(movieId, </span><span class="s1">new </span><span class="s0">OnMovieList() { 
+                @Override 
+                </span><span class="s1">public void </span><span class="s0">onMovieList(ArrayList&lt;Movie&gt; movies) { 
+                    recommendedMovies = movies; 
+                    </span><span class="s1">if </span><span class="s0">(similarMovies.size() != </span><span class="s3">0</span><span class="s0">) 
+                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies)); 
+                } 
+            }); 
+        } 
+        </span><span class="s1">if </span><span class="s0">(similarMovies.size() == </span><span class="s3">0</span><span class="s0">) { 
+            tmdbController.getSimilar(movieId, </span><span class="s1">new </span><span class="s0">OnMovieList() { 
+                @Override 
+                </span><span class="s1">public void </span><span class="s0">onMovieList(ArrayList&lt;Movie&gt; movies) { 
+                    similarMovies = movies; 
+                    </span><span class="s1">if </span><span class="s0">(recommendedMovies.size() != </span><span class="s3">0</span><span class="s0">) 
+                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies)); 
+                } 
+            }); 
+        } 
+ 
+ 
+        </span><span class="s1">if </span><span class="s0">(similarMovies.size() != </span><span class="s3">0 </span><span class="s0">&amp;&amp; recommendedMovies.size() != </span><span class="s3">0</span><span class="s0">) 
+            loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies)); 
+ 
+ 
+    } 
+ 
+    </span><span class="s2">/** 
+     * load the torrent download view 
+     */</span><span class="s0"> 
+    </span><span class="s1">private void </span><span class="s0">loadTorrentFragment() { 
+        </span><span class="s1">if </span><span class="s0">(mainMovie == </span><span class="s1">null</span><span class="s0">) 
+            tmdbController.getMovieGetDetails(movieId, </span><span class="s1">new </span><span class="s0">OnMovieDataSuccess() { 
+                @Override 
+                </span><span class="s1">public void </span><span class="s0">onSuccess(Movie movie) { 
+                    mainMovie = movie; 
+                    loadFragment(TorrentFragment.newInstance(movie.getTitle() + </span><span class="s5">&quot; &quot; </span><span class="s0">+ movie.getYear())); 
+                } 
+            }); 
+        </span><span class="s1">else</span><span class="s0"> 
+            loadFragment(TorrentFragment.newInstance(mainMovie.getTitle() + </span><span class="s5">&quot; &quot; </span><span class="s0">+ mainMovie.getYear())); 
+    } 
+ 
+    </span><span class="s2">/** 
+     * load posters and backdrop images 
+     */</span><span class="s0"> 
+    </span><span class="s1">void </span><span class="s0">loadImagesFragment() { 
+        </span><span class="s1">if </span><span class="s0">(imagesMovie == </span><span class="s1">null</span><span class="s0">) { 
+            tmdbController.getMovieImages(movieId, </span><span class="s1">new </span><span class="s0">OnMovieDataSuccess() { 
+                @Override 
+                </span><span class="s1">public void </span><span class="s0">onSuccess(Movie movies) { 
+                    imagesMovie = movies; 
+                    MainActivity.loadFragmentWithReturn(R.id.moviedetailid, ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops())); 
+                } 
+            }); 
+        } </span><span class="s1">else </span><span class="s0">{ 
+            MainActivity.loadFragmentWithReturn(R.id.moviedetailid, ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops())); 
+ 
+        } 
+    } 
+ 
+    </span><span class="s2">/** 
+     * load youtube for trailers 
+     */</span><span class="s0"> 
+    </span><span class="s1">void </span><span class="s0">loadYoutubeFragment() { 
+        </span><span class="s1">if </span><span class="s0">(mainMovie == </span><span class="s1">null</span><span class="s0">) 
+            tmdbController.getMovieGetDetails(movieId, </span><span class="s1">new </span><span class="s0">OnMovieDataSuccess() { 
+                @Override 
+                </span><span class="s1">public void </span><span class="s0">onSuccess(Movie movie) { 
+                    mainMovie = movie; 
+                    loadFragment(YoutubeFragment.newInstance(mainMovie, YoutubeFragment.Type.movie)); 
+ 
+                } 
+            }); 
+        </span><span class="s1">else</span><span class="s0"> 
+            loadFragment(YoutubeFragment.newInstance(mainMovie, YoutubeFragment.Type.movie)); 
+    } 
+ 
+    </span><span class="s2">/** 
+     * to set navigationId to set later the index to show automatically 
+     * 
+     * </span><span class="s4">@param </span><span class="s2">index 
+     */</span><span class="s0"> 
+    </span><span class="s1">private void </span><span class="s0">setNavigationIndex(</span><span class="s1">int </span><span class="s0">index) { 
+        </span><span class="s1">switch </span><span class="s0">(index) { 
+            </span><span class="s1">case </span><span class="s3">0</span><span class="s0">: 
+                NavigationId = R.id.navigation_home; 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s3">1</span><span class="s0">: 
+                NavigationId = R.id.navigation_back; 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s3">2</span><span class="s0">: 
+                NavigationId = R.id.navigation_images; 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s3">3</span><span class="s0">: 
+                NavigationId = R.id.navigation_download; 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">case </span><span class="s3">4</span><span class="s0">: 
+                NavigationId = R.id.navigation_youtube; 
+                </span><span class="s1">break</span><span class="s0">; 
+            </span><span class="s1">default</span><span class="s0">: 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>

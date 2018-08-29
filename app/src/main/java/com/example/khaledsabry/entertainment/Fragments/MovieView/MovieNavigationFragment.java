@@ -46,6 +46,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     //to get info from the tmdb
     TmdbController tmdbController = new TmdbController();
 
+    //to navigate to different topics for movie
     BottomNavigationView bottomNavigationView;
 
     public static MovieNavigationFragment newInstance(int movieId, int index) {

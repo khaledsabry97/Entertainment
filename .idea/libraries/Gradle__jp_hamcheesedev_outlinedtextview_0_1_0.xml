@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: jp.hamcheesedev:outlinedtextview-0.1.0">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/outlinedtextview-0.1.0.aar/e3f5118b1ad7330aae90eb2700c4c6a6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/outlinedtextview-0.1.0.aar/e3f5118b1ad7330aae90eb2700c4c6a6/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jp.hamcheesedev/outlinedtextview/0.1.0/cd5f2d77d9c8d9f564ac011a838496368961f661/outlinedtextview-0.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
