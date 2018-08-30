@@ -12,7 +12,7 @@ public class LocalInsertController extends DatabaseController {
     public void categoryAddHistory(String tmdbId, String imdbId, int type, OnDatabaseSuccess.number listener) {
         localDeleteController().categoryDeleteHistory(tmdbId);
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Category.categoryName, addqoutes("History"));
+        contentValues.put(Category.categoryName, "History");
         contentValues.put(Category.tmdbId, tmdbId);
         contentValues.put(Category.imdbId, imdbId);
         contentValues.put(Category.type, type);

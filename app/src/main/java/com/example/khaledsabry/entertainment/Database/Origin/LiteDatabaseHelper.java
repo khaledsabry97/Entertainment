@@ -12,7 +12,7 @@ import java.security.PublicKey;
 public class LiteDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String databaseName = "Movita.db";
-    public static final int databaseVersion = 2;
+    public static final int databaseVersion = 5;
 
     @Override
     public void onCreate(SQLiteDatabase db) {

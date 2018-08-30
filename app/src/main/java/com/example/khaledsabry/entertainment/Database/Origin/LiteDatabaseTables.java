@@ -8,9 +8,9 @@ public class LiteDatabaseTables {
            Category.categoryName+" TEXT NOT NULL,\n" +
             Category.tmdbId+" INTEGER NOT NULL,\n" +
             Category.imdbId+" INTEGER,\n" +
-            Category.type+" integer\n" +
+            Category.type+" integer, \n" +
+            " CONSTRAINT f UNIQUE ("+Category.categoryName+" ASC, "+Category.tmdbId+" ASC) ON CONFLICT REPLACE \n"+
             ");\n";
-
 
     public static final String deleteDataBaseSql = "Drop Table " + Category.tableName + " ; \n";
 

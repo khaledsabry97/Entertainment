@@ -256,7 +256,6 @@ if(cursor.getColumnName(i) != "")
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
 jsonObjects.add(jsonObject);
 
 

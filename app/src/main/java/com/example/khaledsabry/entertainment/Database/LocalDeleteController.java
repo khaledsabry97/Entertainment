@@ -18,7 +18,7 @@ public class LocalDeleteController extends DatabaseController {
 
 
       String query = createDeleteQuery(table, condition);
-      int s = getWritableDatabase().delete(table,condition,null);
+      query = "delete from "+Category.tableName + " where "+Category.categoryName + " LIKE " + addqoutes("History");
         getReadableDatabase().execSQL(query);
 
         Cursor q = getReadableDatabase().rawQuery("select * from "+Category.tableName,null);

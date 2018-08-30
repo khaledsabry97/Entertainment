@@ -132,69 +132,10 @@ public class YoutubeFragment extends Fragment {
                     youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
                     youTubePlayer.play();
 
-                    youTubePlayer.setPlayerStateChangeListener(new YouTubePlayer.PlayerStateChangeListener() {
-                        @Override
-                        public void onLoading() {
-
-                        }
-
-                        @Override
-                        public void onLoaded(String s) {
-
-                        }
-
-                        @Override
-                        public void onAdStarted() {
-
-                        }
-
-                        @Override
-                        public void onVideoStarted() {
-
-                        }
-
-                        @Override
-                        public void onVideoEnded() {
-
-                        }
-
-                        @Override
-                        public void onError(YouTubePlayer.ErrorReason errorReason) {
-                            if (errorReason.toString().equals("UNAUTHORIZED_OVERLAY") && youTubePlayer != null) {
-
-                            }
-                        }
 
 
-                    });
 
 
-                    youTubePlayer.setPlaybackEventListener(new YouTubePlayer.PlaybackEventListener() {
-                        @Override
-                        public void onPlaying() {
-
-                        }
-
-                        @Override
-                        public void onPaused() {
-
-                        }
-
-                        @Override
-                        public void onStopped() {
-
-                        }
-
-                        @Override
-                        public void onBuffering(boolean b) {
-
-                        }
-
-                        @Override
-                        public void onSeekTo(int i) {
-
-                        }
-                    });
 
 //cue the 1st video by default
 //                    youTubePlayer.cueVideo(youtubes.get(0).getId());

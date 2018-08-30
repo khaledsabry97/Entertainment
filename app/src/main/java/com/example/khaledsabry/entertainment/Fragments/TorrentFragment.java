@@ -159,16 +159,17 @@ public class TorrentFragment extends Fragment {
     private void setQuality() {
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
-        adapter.add("CAM");
-        adapter.add("TS");
-        adapter.add("HDTV");
-        adapter.add("DVDSCR");
-        adapter.add("HDRip");
-
-        adapter.add("WEBRip");
-        adapter.add("WEBDL");
-        adapter.add("BRRip");
         adapter.add("BluRay");
+        adapter.add("BRRip");
+        adapter.add("WEB-DL");
+        adapter.add("WEBRip");
+        adapter.add("HDRip");
+        adapter.add("DVDSCR");
+        adapter.add("HDTV");
+        adapter.add("TS");
+        adapter.add("CAM");
+
+
 
         quality.setItems(adapter);
         quality.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
