@@ -89,7 +89,7 @@ public class ResultSearchItemsAdapter extends RecyclerView.Adapter<ResultSearchI
         TextView type;
         TextView date;
         ImageView poster;
-
+View view;
 
         public ResultItemViewHolder(View itemView) {
             super(itemView);
@@ -97,9 +97,12 @@ public class ResultSearchItemsAdapter extends RecyclerView.Adapter<ResultSearchI
             poster = itemView.findViewById(R.id.posterrelativelayout);
             type = itemView.findViewById(R.id.type);
             date = itemView.findViewById(R.id.date);
+            view = itemView;
         }
 
         public void updateUi(final SearchItem searchItem) {
+            if(itemView == null)
+                return;
             switch (searchItem.getType()) {
                 case movie:
                     setMovie(searchItem.getMovie());

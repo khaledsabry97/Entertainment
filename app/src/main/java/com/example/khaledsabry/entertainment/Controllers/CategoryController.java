@@ -35,15 +35,15 @@ public class CategoryController extends Controller {
     }
 
 
-    public void addHistory(String tmdbId, String imdbId, int type, final OnSuccess.bool listener) {
+    public void addHistory(String tmdbId, String imdbId, int type) {
 
-/*
-        databaseController.insertController().categoryAdd(null,constants.history, userData.getUserId(), tmdbId, imdbId, type, null, new OnDatabaseSuccess.bool() {
+        databaseController.localInsertController().categoryAddHistory(tmdbId, imdbId, type, new OnDatabaseSuccess.number() {
             @Override
-            public void onSuccess(boolean state) {
-                listener.onSuccess(state);
+            public void onSuccess(int state) {
+                if(state == -1)
+                    toast("there went a problem in saving the history");
             }
-        });*/
+        });
     }
 
 

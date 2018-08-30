@@ -586,9 +586,10 @@ public class WebApi {
             @Override
             protected Movie doInBackground(Void... voids) {
                 Movie movie = new Movie();
-                org.jsoup.nodes.Document
-                        doc = null;
                 try {
+                org.jsoup.nodes.Document
+                        doc;
+
                     doc = Jsoup.connect("https://www.imdb.com/title/" + imdbId).get();
 
                     if (doc == null)

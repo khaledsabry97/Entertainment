@@ -1,9 +1,17 @@
 package com.example.khaledsabry.entertainment.Database.Origin;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.example.khaledsabry.entertainment.Database.DeleteController;
 import com.example.khaledsabry.entertainment.Database.InsertController;
+import com.example.khaledsabry.entertainment.Database.LocalDeleteController;
+import com.example.khaledsabry.entertainment.Database.LocalInsertController;
 import com.example.khaledsabry.entertainment.Database.SelectController;
 import com.example.khaledsabry.entertainment.Database.UpdateController;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +26,7 @@ public class DatabaseController {
     protected final String bigger = ">";
     protected final String lessOrEqual = "<=";
     protected final String biggerOrEqual = ">=";
-    protected String and = " and ";
+    protected String and = " AND ";
     protected String or = " or ";
 
     //variable to the database controller to use it latter in the childeren of the parent controller class
@@ -27,8 +35,8 @@ public class DatabaseController {
     protected DatabaseTables.category categoryTable = new DatabaseTables.category();
     protected DatabaseTables.categoryItem categoryItemTable = new DatabaseTables.categoryItem();
     protected DatabaseTables.image imageTable = new DatabaseTables.image();
-    protected DatabaseTables databaseTables = new DatabaseTables();
 
+   private LiteDatabaseHelper databaseHelper = new LiteDatabaseHelper();
     //quoutes that is used to let the query function correctly
     String quoute = "\"";
     //this is a refrence to the database server to access to the web
@@ -52,6 +60,18 @@ public class DatabaseController {
     //get a update controller variable
     public UpdateController updateController() {
         return new UpdateController();
+    }
+
+    //get insert controller for local database
+    public LocalInsertController localInsertController()
+    {
+        return new LocalInsertController();
+    }
+
+    //get delete controller for local database
+    public LocalDeleteController localDeleteController()
+    {
+        return new LocalDeleteController();
     }
 
     //add qoutes to a map
@@ -148,8 +168,8 @@ public class DatabaseController {
 
     protected String createDeleteQuery(String table, String condition) {
         String query;
-        query = "Delete From " + table;
-        query += "where " + condition;
+        query = "DELETE FROM " + table;
+        query += " WHERE " + condition;
 
         return query;
 
@@ -191,4 +211,59 @@ public class DatabaseController {
         return new DatabaseTables();
     }
 
+
+
+    protected SQLiteDatabase getWritableDatabase()
+    {
+        databaseHelper = new LiteDatabaseHelper();
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+        return db;
+    }
+
+    protected SQLiteDatabase getReadableDatabase()
+    {
+        databaseHelper = new LiteDatabaseHelper();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+        return db;
+    }
+
+    protected ArrayList<JSONObject> toJson(Cursor cursor)
+    {
+        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
+        if(cursor == null)
+            return jsonObjects;
+        int columnNo = cursor.getColumnCount();
+        cursor.moveToFirst();
+        cursor.moveToPosition(-1);
+        while(cursor.moveToNext())
+        {
+            JSONObject jsonObject = new JSONObject();
+            try {
+           for(int i = 0; i < columnNo ;i++)
+           {
+if(cursor.getColumnName(i) != "")
+{
+    if(cursor.getString(i) != null)
+        jsonObject.put(cursor.getColumnName(i),cursor.getString(i));
+    else
+        jsonObject.put(cursor.getColumnName(i),"");
+
+
+}
+
+
+           }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+jsonObjects.add(jsonObject);
+
+
+        }
+
+
+
+        return jsonObjects;
+    }
 }

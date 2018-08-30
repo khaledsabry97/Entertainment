@@ -1,11 +1,13 @@
 package com.example.khaledsabry.entertainment.Activities;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseHelper;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Constants;
 import com.example.khaledsabry.entertainment.Fragments.SignInFragment;

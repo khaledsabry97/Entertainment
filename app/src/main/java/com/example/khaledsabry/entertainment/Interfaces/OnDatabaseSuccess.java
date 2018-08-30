@@ -12,13 +12,17 @@ import java.util.HashMap;
 public interface OnDatabaseSuccess {
 
 
-     interface array
-    {
+    interface array {
         void onSuccess(ArrayList<JSONObject> jsonObjects);
 
     }
-    interface bool
-    {
+
+    interface bool {
         void onSuccess(boolean state);
 
-    }}
+    }
+    interface number {
+        void onSuccess(int state);
+
+    }
+}

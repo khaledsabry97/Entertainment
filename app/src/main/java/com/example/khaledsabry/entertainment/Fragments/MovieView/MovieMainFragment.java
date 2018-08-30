@@ -177,12 +177,6 @@ public class MovieMainFragment extends Fragment {
         loadReviewFragment();
         loadProductionFragment();
 
-        categoryController.addHistory(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
-            @Override
-            public void onSuccess(boolean state) {
-
-            }
-        });
 
         favourite.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,14 +9,6 @@ import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 
 public class DeleteController extends DatabaseController {
 
-    private final String equal = "=";
-    private final String less = "<";
-    private final String bigger = ">";
-    private final String lessOrEqual = "<=";
-    private final String biggerOrEqual = ">=";
-    private String and = " and ";
-    private String or = " or ";
-
     private String table ="";
     private String condition = "";
 

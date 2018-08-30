@@ -13,12 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
@@ -45,6 +48,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     private ArrayList<Movie> similarMovies = new ArrayList<>();
     //to get info from the tmdb
     TmdbController tmdbController = new TmdbController();
+    CategoryController categoryController = new CategoryController();
 
     //to navigate to different topics for movie
     BottomNavigationView bottomNavigationView;
@@ -53,6 +57,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         MovieNavigationFragment fragment = new MovieNavigationFragment();
         fragment.movieId = movieId;
         fragment.index = index;
+        fragment.categoryController.addHistory(String.valueOf(movieId), null, LiteDatabaseTables.Category.constantMovie);
         return fragment;
     }
 
