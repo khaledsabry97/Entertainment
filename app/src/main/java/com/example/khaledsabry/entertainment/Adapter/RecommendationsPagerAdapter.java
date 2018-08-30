@@ -44,7 +44,7 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
         poster = view.findViewById(R.id.poster_image);
         backdrop = view.findViewById(R.id.backdrop_image);
         title = view.findViewById(R.id.title);
-        genres = view.findViewById(R.id.genresid);
+        genres = view.findViewById(R.id.genres_id);
         overview = view.findViewById(R.id.overview_id);
         rate = view.findViewById(R.id.rate);
 

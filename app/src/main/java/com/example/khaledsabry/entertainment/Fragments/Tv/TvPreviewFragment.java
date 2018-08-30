@@ -20,12 +20,9 @@ public class TvPreviewFragment extends Fragment {
 
     static Tv tv;
 
-    ImageView poster;
-    TextView title;
-    TextView rate;
-    TextView airDate;
-    TextView overView;
-    TextView download;
+    ImageView backdrop;
+    TextView title, rate, airDate, overView,genres;
+View view;
 
     public static TvPreviewFragment newInstance(Tv tv) {
         TvPreviewFragment fragment = new TvPreviewFragment();
@@ -37,43 +34,60 @@ public class TvPreviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tv_preview, container, false);
-        title = view.findViewById(R.id.title);
-        rate = view.findViewById(R.id.rateid);
+         view = inflater.inflate(R.layout.fragment_movie_preview, container, false);
 
-        airDate = view.findViewById(R.id.airdateid);
-
-        overView = view.findViewById(R.id.overviewid);
-        poster = view.findViewById(R.id.posterrelativelayout);
-        download = view.findViewById(R.id.downloadid);
+        title = view.findViewById(R.id.title_id);
+        rate = view.findViewById(R.id.rate_id);
+        overView = view.findViewById(R.id.overview_id);
+        airDate = view.findViewById(R.id.release_data_id);
+        backdrop = view.findViewById(R.id.backdrop_id);
+        genres = view.findViewById(R.id.genres_id);
 
 
         setObjects();
-
-        if (tv != null)
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, TvNavigationFragment.newInstance(tv.getId(), true)).addToBackStack(null).commit();
-                }
-            });
 
 
         return view;
     }
 
+    /**
+     * set the objects on the ui fragment
+     */
     private void setObjects() {
-        if (tv != null) {
-            title.setText(tv.getTitle());
-            rate.setText(tv.getRateTmdb() + "/10");
-            airDate.setText("First Air Date : " + tv.getFirstAirDate());
-            overView.setText(tv.getOverView());
-            ImageController.putImageMidQuality(tv.getBackDrop(), poster);
-        }
+        if (tv == null)
+            return;
+        title.setText(tv.getTitle());
+        rate.setText(tv.getRateTmdb() + "/10");
+        airDate.setText("First Air Date : " + tv.getFirstAirDate());
+        overView.setText(tv.getOverView());
+        genres.setText(tv.getGenreList());
+        ImageController.putImageMidQuality(tv.getBackDrop(), backdrop);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(tv.getId(), true));
+            }
+        });
+
+        adjustView(title);
+        adjustView(rate);
+        adjustView(airDate);
+        adjustView(overView);
+        adjustView(genres);
+
 
     }
 
-
+    /**
+     * invisible the ui view if there is no text in it
+     * @param textView the ui element
+     */
+   void adjustView(TextView textView)
+    {
+        if(textView.getText().toString().equals(""))
+            textView.setVisibility(View.INVISIBLE);
+    }
 
 
 }

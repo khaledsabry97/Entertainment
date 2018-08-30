@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.khaledsabry.entertainment.Fragments.MovieView.ProductionCompanyFragment">
+    tools:context="com.example.khaledsabry.entertainment.Fragments.ProductionCompanyFragment">
 
     <!-- TOUpdatingdate blank fragment layout -->
 
@@ -24,7 +24,7 @@
             android:textSize="@dimen/size_main_category" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerid"
+            android:id="@+id/recycler_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

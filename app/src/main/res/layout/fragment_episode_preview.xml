@@ -23,7 +23,7 @@
                 android:layout_weight="1.5">
 
                 <ImageView
-                    android:id="@+id/posterrelativelayout"
+                    android:id="@+id/backdrop_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"></ImageView>
@@ -48,8 +48,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/posterrelativelayout"
-                    app:layout_constraintEnd_toEndOf="@+id/posterrelativelayout"
+                    app:layout_constraintBottom_toBottomOf="@+id/backdrop_id"
+                    app:layout_constraintEnd_toEndOf="@+id/backdrop_id"
                     app:layout_constraintStart_toStartOf="parent" />
             </android.support.constraint.ConstraintLayout>
 

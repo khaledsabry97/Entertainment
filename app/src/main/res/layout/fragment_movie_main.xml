@@ -305,7 +305,7 @@
                                     android:textColor="@color/cardview_light_background" />
 
                                 <TextView
-                                    android:id="@+id/genresid"
+                                    android:id="@+id/genres_id"
                                     style="@style/TextNormalLine"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"

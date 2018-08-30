@@ -3,31 +3,22 @@ package com.example.khaledsabry.entertainment.Fragments.MainMenu;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.MainRecyclersAdapter;
 import com.example.khaledsabry.entertainment.Adapter.NewsFeedAdpater;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
-import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Fragments.BoxOfficeFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Interfaces.OnTvList;
@@ -66,7 +57,7 @@ RecyclerView newsRecycler;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recycler_id);
 toolbar = view.findViewById(R.id.toolbar);
 newsRecycler = view.findViewById(R.id.news);
         MainActivity.getActivity().setSupportActionBar(toolbar);

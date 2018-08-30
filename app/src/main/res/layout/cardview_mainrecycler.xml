@@ -14,7 +14,7 @@
         android:background="@drawable/background">
 
         <ImageView
-            android:id="@+id/posterrelativelayout"
+            android:id="@+id/backdrop_id"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="2dp"
@@ -37,21 +37,21 @@
             android:background="@android:color/transparent"
             android:text="@string/hello_blank_fragment"
             android:textAlignment="viewStart"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerid"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_id"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout"
+            app:layout_constraintStart_toEndOf="@+id/backdrop_id"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerid"
+            android:id="@+id/recycler_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/posterrelativelayout"
+            app:layout_constraintTop_toBottomOf="@+id/backdrop_id"
             tools:listitem="@layout/cardview_classification_item" />
 
         <android.support.constraint.Guideline

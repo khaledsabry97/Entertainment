@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
+    android:layout_marginLeft="@dimen/_1sdp"
+    android:layout_marginRight="@dimen/_1sdp"
     android:background="@drawable/round"
-    android:padding="4dp"
+    android:padding="@dimen/_2sdp"
     tools:context="com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment">
 
     <!-- TOUpdatingdate blank fragment layout -->
@@ -21,23 +21,23 @@
             android:id="@+id/card_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/_150sdp"
-android:background="@drawable/round"            app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            >
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="@drawable/round"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
-                android:id="@+id/posterrelativelayout"
+                android:id="@+id/backdrop_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/batman"
-                android:visibility="visible"
+                tools:src="@drawable/batman"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,93 +46,80 @@ android:background="@drawable/round"            app:layout_constraintEnd_toEndOf
         </android.support.v7.widget.CardView>
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/title_id"
             style="@style/TextCategoryRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/carterone"
-            android:text="title"
-            android:textSize="@dimen/size_main_category"
-            android:textColor="@color/cardview_light_background"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            tools:text="title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_view" />
 
         <TextView
-            android:id="@+id/rateid"
+            android:id="@+id/rate_id"
             style="@style/TextCategoryRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/carterone"
-            android:text="rate"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="@dimen/size_main_category"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            tools:text="rate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_view" />
 
         <TextView
-            android:id="@+id/releaseDateid"
+            android:id="@+id/release_data_id"
             style="@style/TextNormalRoundLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/carterone"
-            android:text="release date :"
-            android:textColor="@color/cardview_light_background"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_6sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="release date :" />
 
         <TextView
-            android:id="@+id/genresid"
+            android:id="@+id/genres_id"
             style="@style/TextNormalRoundLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/round"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
             android:fontFamily="@font/carterone"
-            android:text="genres"
-            android:textColor="@color/cardview_light_background"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/releaseDateid"
+            app:layout_constraintEnd_toStartOf="@+id/release_data_id"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="genres" />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@+id/genresid"
+            app:layout_constraintBottom_toTopOf="@+id/genres_id"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title_id"
             app:layout_constraintVertical_bias="0.0">
 
             <TextView
-                android:id="@+id/contentid"
-                style="@style/TextNormalLine"
+                android:id="@+id/overview_id"
+                style="@style/TextNormalRound"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="@dimen/_13sdp"
                 android:autoSizeTextType="none"
-                android:background="@drawable/round"
-                android:fontFamily="@font/carterone"
-                android:paddingBottom="20dp"
-                android:paddingRight="10dp"
+                android:paddingBottom="@dimen/_18sdp"
+                android:paddingRight="@dimen/_8sdp"
                 android:textAlignment="viewStart"
-                android:textColor="@color/cardview_light_background"
-                android:textSize="@dimen/_7sdp" />
+                />
 
         </android.support.v4.widget.NestedScrollView>
 

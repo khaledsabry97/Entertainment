@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.Fragments.MovieView.CastFragment;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.CrewFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 

@@ -29,7 +29,7 @@
             android:textColor="@color/cardview_light_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout"
+            app:layout_constraintStart_toEndOf="@+id/backdrop_id"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -42,7 +42,7 @@
             tools:text="Avengers: Infinity War"
             android:textAlignment="viewStart"
             android:textColor="@color/cardview_light_background"
-            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout"
+            app:layout_constraintStart_toEndOf="@+id/backdrop_id"
             app:layout_constraintTop_toBottomOf="@+id/date" />
 
         <TextView
@@ -58,7 +58,7 @@
             android:textColor="@color/cardview_light_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout"
+            app:layout_constraintStart_toEndOf="@+id/backdrop_id"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
@@ -120,7 +120,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintStart_toEndOf="@+id/posterrelativelayout" />
+            app:layout_constraintStart_toEndOf="@+id/backdrop_id" />
 
         <ImageView
             android:id="@+id/delete"
@@ -134,7 +134,7 @@
             android:visibility="invisible"/>
         <RelativeLayout android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/posterrelativelayout">
+            android:id="@+id/backdrop_id">
 
             <ImageView
                 android:id="@+id/poster"

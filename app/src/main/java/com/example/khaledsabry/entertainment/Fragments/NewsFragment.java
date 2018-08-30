@@ -13,26 +13,19 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.NewsAdapter;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
-
-import static com.example.khaledsabry.entertainment.Activities.MainActivity.loadFragmentNoReturn;
-import static com.example.khaledsabry.entertainment.Fragments.YoutubeFragment.drawerLayout;
 
 
 public class NewsFragment extends Fragment {
@@ -58,7 +51,7 @@ public class NewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
-        recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recycler_id);
         header = view.findViewById(R.id.header);
         navigationView = view.findViewById(R.id.nav_view);
         drawerLayout = view.findViewById(R.id.drawer_layout);

@@ -69,7 +69,7 @@ public class YoutubeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_youtube, container, false);
-        recyclerView = v.findViewById(R.id.recyclerid);
+        recyclerView = v.findViewById(R.id.recycler_id);
         options = v.findViewById(R.id.recycleroptionsid);
         drawerLayout = v.findViewById(R.id.drawer_layout);
         youTubePlayerFragment = (YouTubePlayerSupportFragment) getChildFragmentManager().findFragmentById(R.id.youtube_player_fragment);

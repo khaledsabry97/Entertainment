@@ -58,7 +58,7 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         airDate = view.findViewById(R.id.airdateid);
 
         overView = view.findViewById(R.id.overviewid);
-        poster = view.findViewById(R.id.posterrelativelayout);
+        poster = view.findViewById(R.id.backdrop_id);
         download = view.findViewById(R.id.downloadid);
         name = view.findViewById(R.id.episodename);
         overviewLayout = view.findViewById(R.id.overviewlayout);

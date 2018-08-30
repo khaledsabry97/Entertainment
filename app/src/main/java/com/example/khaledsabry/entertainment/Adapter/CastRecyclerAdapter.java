@@ -4,9 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistNavigationFragment;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.R;
@@ -18,19 +21,20 @@ import java.util.ArrayList;
  */
 
 //the recycler adapter for the actors
-public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
-    ArrayList<Character> list = new ArrayList<>();
-
-    @Override
-    public CastViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View cardContent = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_cardview, parent, false);
-
-        return new CastViewHolder(cardContent);
-    }
+public class CastRecyclerAdapter extends RecyclerView.Adapter<CastRecyclerAdapter.CastViewHolder> {
+    //character is an artist but with the character name and the movie/tv he showed up in
+    ArrayList<Character> list;
 
     public CastRecyclerAdapter(ArrayList<Character> list) {
         this.list = list;
     }
+
+    @Override
+    public CastViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View cardContent = LayoutInflater.from(parent.getContext()).inflate(R.layout.character_cardview, parent, false);
+        return new CastViewHolder(cardContent);
+    }
+
 
     @Override
     public void onBindViewHolder(final CastViewHolder holder, final int position) {
@@ -41,7 +45,7 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, ArtistNavigationFragment.newInstance(list.get(position).getArtist().getId(),true)).addToBackStack(null).commit();
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(list.get(position).getArtist().getId(),true));
 
 
             }
@@ -52,7 +56,32 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastViewHolder> {
 
     @Override
     public int getItemCount() {
+        if(list == null)
+            return 0;
         return list.size();
     }
+
+    class CastViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView posterImage;
+        TextView characterName;
+        TextView actorName;
+
+        public CastViewHolder(View itemView) {
+            super(itemView);
+
+            posterImage = itemView.findViewById(R.id.profile_image);
+            characterName = itemView.findViewById(R.id.character_name);
+            actorName = itemView.findViewById(R.id.artist_name);
+        }
+
+        public void updateUi(final Character character) {
+            actorName.setText(character.getArtist().getName());
+            characterName.setText(character.getCharacterName());
+            ImageController.putImageLowQuality(character.getArtist().getPosterImage(), posterImage);
+        }
+
+    }
+
 
 }

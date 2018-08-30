@@ -34,7 +34,7 @@ public class SeasonRecyclerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_season_recycler, container, false);
-        recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recycler_id);
 
         SeasonAdapter seasonAdapter = new SeasonAdapter(seasons);
 

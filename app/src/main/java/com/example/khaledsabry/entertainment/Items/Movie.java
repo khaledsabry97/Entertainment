@@ -361,9 +361,9 @@ public class Movie {
         String s = "";
         for(int i = 0 ;i < genres.size();i++)
         {
-            s +=genres.get(i).getName();
+            s +=genres.get(i).getMovieGenreName();
             if(i+1 !=genres.size())
-                s+= "| ";
+                s+= ", ";
 
         }
         return s;

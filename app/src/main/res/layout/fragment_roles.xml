@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/itemsid"
+                android:id="@+id/items_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
@@ -87,7 +87,7 @@
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/searchresultitemid"
+            android:id="@+id/search_result_frame_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">

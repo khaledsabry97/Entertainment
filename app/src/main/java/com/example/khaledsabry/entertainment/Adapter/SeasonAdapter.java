@@ -60,7 +60,7 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.SeasonCard
         public SeasonCardView(View itemView) {
             super(itemView);
             seasonText = itemView.findViewById(R.id.seasonid);
-            poster = itemView.findViewById(R.id.posterrelativelayout);
+            poster = itemView.findViewById(R.id.backdrop_id);
             view = itemView;
         }
 

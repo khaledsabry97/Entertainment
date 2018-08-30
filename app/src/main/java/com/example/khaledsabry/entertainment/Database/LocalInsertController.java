@@ -10,7 +10,6 @@ import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 public class LocalInsertController extends DatabaseController {
 
     public void categoryAddHistory(String tmdbId, String imdbId, int type, OnDatabaseSuccess.number listener) {
-        localDeleteController().categoryDeleteHistory(tmdbId);
         ContentValues contentValues = new ContentValues();
         contentValues.put(Category.categoryName, "History");
         contentValues.put(Category.tmdbId, tmdbId);

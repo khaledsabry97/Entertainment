@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment.Fragments.MovieView;
+package com.example.khaledsabry.entertainment.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.CrewRecyclerAdapter;
 import com.example.khaledsabry.entertainment.Items.Artist;
-import com.example.khaledsabry.entertainment.Items.Character;
-import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -22,10 +20,11 @@ import java.util.ArrayList;
 
 public class CrewFragment extends Fragment {
     RecyclerView recyclerView;
-    private static  ArrayList<Artist> crew;
+    private   ArrayList<Artist> crew;
+
     public static CrewFragment newInstance(ArrayList<Artist> crew) {
         CrewFragment fragment = new CrewFragment();
-        CrewFragment.crew = crew;
+        fragment.crew = crew;
         return fragment;
     }
 
@@ -35,20 +34,28 @@ public class CrewFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_cast, container, false);
+        View v = inflater.inflate(R.layout.fragment_cast_crew, container, false);
 
-        recyclerView = v.findViewById(R.id.contentPanel);
-        recyclerView.setHasFixedSize(true);
+        recyclerView = v.findViewById(R.id.recycler_id);
+
+
+setupRecyclerView();
+        return v;
+    }
+
+    private void setupRecyclerView() {
+
 
 
         CrewRecyclerAdapter adapter = new CrewRecyclerAdapter(crew);
         recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-
-        return v;
     }
+
+
 }

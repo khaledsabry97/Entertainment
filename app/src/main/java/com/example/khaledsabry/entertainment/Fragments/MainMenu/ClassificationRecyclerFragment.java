@@ -37,9 +37,9 @@ public class ClassificationRecyclerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_classification_recyclar, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recycler_id);
         title = view.findViewById(R.id.title);
-        poster = view.findViewById(R.id.posterrelativelayout);
+        poster = view.findViewById(R.id.backdrop_id);
 
 title.setText(classifications.getTitle());
 poster.setImageResource(classifications.getImage());

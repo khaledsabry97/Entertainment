@@ -170,6 +170,8 @@ public class TmdbController {
      * gets all the genres in the tmdb
      *
      * @param listener returns movie with all the genres
+     * @deprecated this function is not used any more because,
+     * i put the genres names directly in the class
      */
     public void getGenres(final OnMovieDataSuccess listener) {
         urlAddition = "genre/movie/categoryItem";

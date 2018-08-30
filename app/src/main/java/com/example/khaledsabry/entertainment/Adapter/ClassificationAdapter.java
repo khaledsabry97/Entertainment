@@ -61,7 +61,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
 
         public ClassificationViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.posterrelativelayout);
+            image = itemView.findViewById(R.id.backdrop_id);
             title = itemView.findViewById(R.id.title);
             view = itemView;
         }

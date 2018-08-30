@@ -20,7 +20,7 @@
             android:layout_height="@dimen/_90sdp">
 
             <ImageView
-                android:id="@+id/posterrelativelayout"
+                android:id="@+id/backdrop_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -30,7 +30,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_25sdp"
-                android:layout_alignBottom="@+id/posterrelativelayout"
+                android:layout_alignBottom="@+id/backdrop_id"
                 android:background="@drawable/title_shadow"
                 android:scaleType="fitXY" />
 
@@ -40,7 +40,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/posterrelativelayout"
+                android:layout_alignBottom="@id/backdrop_id"
 
                 android:layout_marginLeft="@dimen/_2sdp"
 
@@ -64,7 +64,7 @@
             android:visibility="gone">
 
             <TextView
-                android:id="@+id/characterID"
+                android:id="@+id/character_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"

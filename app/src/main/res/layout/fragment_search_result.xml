@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/itemsid"
+            android:id="@+id/items_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="3dp"
@@ -33,12 +33,12 @@
         </android.support.v7.widget.RecyclerView>
 
         <FrameLayout
-            android:id="@+id/searchresultitemid"
+            android:id="@+id/search_result_frame_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/itemsid"
+            app:layout_constraintLeft_toRightOf="@+id/items_id"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class ResultSearchItemsAdapter extends RecyclerView.Adapter<ResultSearchItemsAdapter.ResultItemViewHolder> {
 
     ArrayList<SearchItem> searchItems = new ArrayList<>();
+    ;
 
     public ResultSearchItemsAdapter(ArrayList<SearchItem> movies) {
         this.searchItems = movies;
@@ -62,13 +63,12 @@ public class ResultSearchItemsAdapter extends RecyclerView.Adapter<ResultSearchI
     /**
      * show the first result on the preview screen
      */
-    public void selectFirstItem() {
+  /*  public void selectFirstItem() {
         if (searchItems.size() <= 0)
             return;
         Fragment fragment = null;
         switch (searchItems.get(0).getType()) {
             case tv:
-                fragment = TvPreviewFragment.newInstance(searchItems.get(0).getTv());
                 break;
             case movie:
                 fragment = MoviePreviewFragment.newInstance(searchItems.get(0).getMovie());
@@ -79,9 +79,11 @@ public class ResultSearchItemsAdapter extends RecyclerView.Adapter<ResultSearchI
             default:
         }
 
-        MainActivity.loadFragmentNoReturn(R.id.searchresultitemid, fragment);
+        MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, fragment);
 
     }
+
+*/
 
 
     class ResultItemViewHolder extends RecyclerView.ViewHolder {
@@ -89,19 +91,19 @@ public class ResultSearchItemsAdapter extends RecyclerView.Adapter<ResultSearchI
         TextView type;
         TextView date;
         ImageView poster;
-View view;
+        View view;
 
         public ResultItemViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            poster = itemView.findViewById(R.id.posterrelativelayout);
+            poster = itemView.findViewById(R.id.backdrop_id);
             type = itemView.findViewById(R.id.type);
             date = itemView.findViewById(R.id.date);
             view = itemView;
         }
 
         public void updateUi(final SearchItem searchItem) {
-            if(itemView == null)
+            if (itemView == null)
                 return;
             switch (searchItem.getType()) {
                 case movie:
@@ -120,65 +122,114 @@ View view;
         }
 
         void setMovie(final Movie movie) {
-            setDate(movie.getReleaseDate());
-
-            setTitle(movie.getTitle());
-
-            ImageController.putImageLowQuality(movie.getPosterImage(), poster);
+            //to select the first shown movie
+            if(movie.equals(searchItems.get(0).getMovie()))
+                MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, MoviePreviewFragment.newInstance(movie));
 
             type.setText("Movie");
+            setDate(movie.getReleaseDate());
+            setTitle(movie.getTitle());
+            ImageController.putImageLowQuality(movie.getPosterImage(), poster);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.loadFragmentNoReturn(R.id.searchresultitemid, MoviePreviewFragment.newInstance(movie));
+                    MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, MoviePreviewFragment.newInstance(movie));
                 }
             });
         }
 
         void setTv(final Tv tv) {
+            //to select the first shown tv
+          if(tv.equals(searchItems.get(0).getTv()))
+                MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, TvPreviewFragment.newInstance(tv));
+
             type.setText("Tv");
             setDate(tv.getFirstAirDate());
-
             setTitle(tv.getTitle());
-
             ImageController.putImageLowQuality(tv.getPosterImage(), poster);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.loadFragmentNoReturn(R.id.searchresultitemid, TvPreviewFragment.newInstance(tv));
+                    MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, TvPreviewFragment.newInstance(tv));
                 }
             });
         }
 
 
         void setArtist(final Artist artist) {
+            TmdbController tmdbController = new TmdbController();
+
+            //to select the first artist
+            if(artist.equals(searchItems.get(0).getArtist()))
+            {
+                // the problem here that the search api doesn't return the required info that i need
+                // so i call the api again to get the full details about the artist
+                MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, ArtistPreviewFragment.newInstance(artist));
+
+                final View view = itemView;
+
+                tmdbController.getPersonDetails(artist.getId(), new OnArtistDataSuccess() {
+                    @Override
+                    public void onSuccess(final Artist artist) {
+                        MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, ArtistPreviewFragment.newInstance(artist));
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, ArtistPreviewFragment.newInstance(artist));
+
+                            }
+                        });
+
+                    }
+                });
+            }
+            else
+            {
+                final View view = itemView;
+                tmdbController.getPersonDetails(artist.getId(), new OnArtistDataSuccess() {
+                    @Override
+                    public void onSuccess(final Artist artist) {
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, ArtistPreviewFragment.newInstance(artist));
+
+                            }
+                        });
+                    }
+                });
+
+            }
+            type.setText("Artist");
+
             setTitle(artist.getName());
             ImageController.putImageLowQuality(artist.getPosterImage(), poster);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    type.setText("Artist");
-                    TmdbController tmdbController = new TmdbController();
-                    tmdbController.getPersonDetails(artist.getId(), new OnArtistDataSuccess() {
-                        @Override
-                        public void onSuccess(Artist artist) {
-                            MainActivity.loadFragmentNoReturn(R.id.searchresultitemid, ArtistPreviewFragment.newInstance(artist));
-                        }
-                    });
-                }
-            });
+
         }
 
-
+        /**
+         * set the title of the search result item
+         *
+         * @param title
+         */
         private void setTitle(String title) {
             this.title.setText(title);
 
         }
 
 
+        /**
+         * set the date for movies/tv
+         *
+         * @param date the airdate or release date
+         */
         private void setDate(String date) {
-            if(date== null)
+            if (date == null)
                 return;
             if (!date.equals("")) {
                 date = date.substring(0, 4);

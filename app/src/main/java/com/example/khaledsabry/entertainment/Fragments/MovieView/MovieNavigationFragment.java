@@ -21,7 +21,6 @@ import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
-import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
@@ -42,10 +41,12 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
 
     //mainMovie get the details for (MovieMainFragment,DownloadFragment)
     private Movie mainMovie = null;
+
     //imagesMovie gets the details for ImagesFragment
     private Movie imagesMovie = null;
-    private ArrayList<Movie> recommendedMovies = new ArrayList<>();
-    private ArrayList<Movie> similarMovies = new ArrayList<>();
+    private ArrayList<Movie> recommendedMovies;
+    private ArrayList<Movie> similarMovies;
+
     //to get info from the tmdb
     TmdbController tmdbController = new TmdbController();
     CategoryController categoryController = new CategoryController();
@@ -157,30 +158,32 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
      * if you are already have the two lists then you will load with the third option
      */
     private void loadRecommendationSimilarFragment() {
-        if (recommendedMovies.size() == 0) {
+        //if the recommendedMovies is null
+        //then you didn't get the movies, and same for similarmovies
+        if (recommendedMovies == null) {
             tmdbController.getRecommendations(movieId, new OnMovieList() {
                 @Override
                 public void onMovieList(ArrayList<Movie> movies) {
                     recommendedMovies = movies;
-                    if (similarMovies.size() != 0)
-                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
+                    if (similarMovies != null)
+                        loadFragment(MovieRecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
                 }
             });
         }
-        if (similarMovies.size() == 0) {
+        if (similarMovies == null) {
             tmdbController.getSimilar(movieId, new OnMovieList() {
                 @Override
                 public void onMovieList(ArrayList<Movie> movies) {
                     similarMovies = movies;
-                    if (recommendedMovies.size() != 0)
-                        loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
+                    if (recommendedMovies != null)
+                        loadFragment(MovieRecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
                 }
             });
         }
 
 
-        if (similarMovies.size() != 0 && recommendedMovies.size() != 0)
-            loadFragment(RecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
+        if (similarMovies != null && recommendedMovies != null)
+            loadFragment(MovieRecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
 
 
     }

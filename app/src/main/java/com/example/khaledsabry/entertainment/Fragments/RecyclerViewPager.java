@@ -1,7 +1,6 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.content.ReceiverCallNotAllowedException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,8 +12,6 @@ import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.BoxOfficeAdapter;
-import com.example.khaledsabry.entertainment.Adapter.CastRecyclerAdapter;
-import com.example.khaledsabry.entertainment.Adapter.RecommendationsPagerAdapter;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Interfaces.OnRecyclerViewSuccess;
@@ -66,7 +63,7 @@ public class RecyclerViewPager extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycler_view_pager, container, false);
-        recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recycler_id);
         setRecycler();
         return view;
     }

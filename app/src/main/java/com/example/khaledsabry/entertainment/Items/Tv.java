@@ -225,7 +225,7 @@ private String status;
         String s = "";
         for(int i = 0 ;i < genres.size();i++)
         {
-            s +=genres.get(i).getName();
+            s +=genres.get(i).getTvGenreName();
             if(i+1 !=genres.size())
                 s+= ", ";
 

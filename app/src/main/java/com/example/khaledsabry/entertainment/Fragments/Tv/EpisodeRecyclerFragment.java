@@ -10,13 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapter.EpisodeAdapter;
-import com.example.khaledsabry.entertainment.Adapter.SeasonAdapter;
 import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
-
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 public class EpisodeRecyclerFragment extends Fragment {
@@ -37,7 +34,7 @@ fragment.episodes = episodes;
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_episode_recycler, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recycler_id);
 
         EpisodeAdapter episodeAdapter = new EpisodeAdapter(episodes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

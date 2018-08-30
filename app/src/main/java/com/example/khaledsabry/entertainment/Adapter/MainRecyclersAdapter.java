@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Items.Classification;
-import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -66,9 +64,9 @@ public class MainRecyclersAdapter extends RecyclerView.Adapter<MainRecyclersAdap
             super(itemView);
 
 
-            recyclerView = itemView.findViewById(R.id.recyclerid);
+            recyclerView = itemView.findViewById(R.id.recycler_id);
             title = itemView.findViewById(R.id.title);
-            poster = itemView.findViewById(R.id.posterrelativelayout);
+            poster = itemView.findViewById(R.id.backdrop_id);
 
             cardView = itemView.findViewById(R.id.cardview);
         }

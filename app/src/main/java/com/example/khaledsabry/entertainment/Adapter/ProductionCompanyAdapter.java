@@ -23,7 +23,7 @@ import java.util.ArrayList;
 //recycler view adapter for the production company
 public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCompanyAdapter.ProductionCompanyViewHolder> {
 
-    private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
+    private ArrayList<ProductionCompany> productionCompanies;
 
     public ProductionCompanyAdapter(ArrayList<ProductionCompany> productionCompanies) {
         this.productionCompanies = productionCompanies;
@@ -52,6 +52,8 @@ public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCom
 
     @Override
     public int getItemCount() {
+        if(productionCompanies == null)
+            return 0;
         return productionCompanies.size();
     }
 

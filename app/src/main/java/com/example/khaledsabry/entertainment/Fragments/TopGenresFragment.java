@@ -1,27 +1,21 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.app.ActionBar;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TabLayout.Tab;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.BoxOfficeAdapter;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
-import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -51,7 +45,7 @@ public class TopGenresFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_top_genres, container, false);
         header = view.findViewById(R.id.header);
-        recyclerView = view.findViewById(R.id.recyclerid);
+        recyclerView = view.findViewById(R.id.recycler_id);
         tabLayout = view.findViewById(R.id.tablayout);
 
         //addTabs();

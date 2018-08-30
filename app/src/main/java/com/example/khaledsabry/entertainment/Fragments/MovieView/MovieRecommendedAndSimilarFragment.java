@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 
 import com.example.khaledsabry.entertainment.Adapter.RecommendationsPagerAdapter;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -25,10 +24,10 @@ import me.relex.circleindicator.CircleIndicator;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RecommendedAndSimilarFragment#newInstance} factory method to
+ * Use the {@link MovieRecommendedAndSimilarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RecommendedAndSimilarFragment extends Fragment {
+public class MovieRecommendedAndSimilarFragment extends Fragment {
 
     //list of movies to show them
     private ArrayList<Movie> recommendedMovies = new ArrayList<>();
@@ -42,8 +41,8 @@ public class RecommendedAndSimilarFragment extends Fragment {
 
     RecommendationsPagerAdapter recommendationsPagerAdapter;
 
-    public static RecommendedAndSimilarFragment newInstance(ArrayList<Movie> recommendedMovies, ArrayList<Movie> similarMovies) {
-        RecommendedAndSimilarFragment fragment = new RecommendedAndSimilarFragment();
+    public static MovieRecommendedAndSimilarFragment newInstance(ArrayList<Movie> recommendedMovies, ArrayList<Movie> similarMovies) {
+        MovieRecommendedAndSimilarFragment fragment = new MovieRecommendedAndSimilarFragment();
         fragment.recommendedMovies = recommendedMovies;
         fragment.similarMovies = similarMovies;
         return fragment;

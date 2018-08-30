@@ -21,14 +21,14 @@ import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator;
 
 
-public class ReviewFragment extends Fragment {
+public class
+ReviewFragment extends Fragment {
 
     static int movieId;
     static int currentId;
 
     static Movie movie;
     ViewPager viewPager;
-    CircleIndicator circleIndicator;
     TmdbController tmdbController = new TmdbController();
     View v;
     private static ArrayList<Review> reviews = new ArrayList<>();
@@ -53,7 +53,7 @@ v.setOnClickListener(new View.OnClickListener() {
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid,ReviewFragment.newInstance(reviews)).commit();
     }
 });
-        loadFragment();
+        setObjects();
         return v;
     }
 

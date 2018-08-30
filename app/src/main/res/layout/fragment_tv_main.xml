@@ -241,7 +241,7 @@
                             android:textSize="@dimen/size_main_category" />
 
                         <TextView
-                            android:id="@+id/genresid"
+                            android:id="@+id/genres_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"

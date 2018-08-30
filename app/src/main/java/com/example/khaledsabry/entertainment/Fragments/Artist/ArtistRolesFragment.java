@@ -41,7 +41,7 @@ public class ArtistRolesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_roles, container, false);
         movie = v.findViewById(R.id.button_Movie_id);
         tv = v.findViewById(R.id.button_Tv_id);
-        recyclerView = v.findViewById(R.id.itemsid);
+        recyclerView = v.findViewById(R.id.items_id);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);

@@ -10,15 +10,9 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Fragments.Artist.ArtistPreviewFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment;
-import com.example.khaledsabry.entertainment.Fragments.Search.SearchArtistFragment;
 import com.example.khaledsabry.entertainment.Fragments.Tv.TvPreviewFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
-import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
@@ -76,7 +70,7 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
         public RoleViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            poster = itemView.findViewById(R.id.posterrelativelayout);
+            poster = itemView.findViewById(R.id.backdrop_id);
             type = itemView.findViewById(R.id.type);
             date = itemView.findViewById(R.id.date);
             type.setVisibility(View.GONE);
@@ -100,7 +94,7 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, MoviePreviewFragment.newInstance(movie)).commit();
+                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.search_result_frame_id, MoviePreviewFragment.newInstance(movie)).commit();
                 }
             });
         }
@@ -119,7 +113,7 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.searchresultitemid, TvPreviewFragment.newInstance(tv)).commit();
+                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.search_result_frame_id, TvPreviewFragment.newInstance(tv)).commit();
                 }
             });
         }

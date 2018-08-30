@@ -5,7 +5,7 @@
     tools:context="com.example.khaledsabry.entertainment.Fragments.RecyclerViewPager">
 
   <android.support.v7.widget.RecyclerView
-      android:id="@+id/recyclerid"
+      android:id="@+id/recycler_id"
       android:layout_width="match_parent"
       android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 

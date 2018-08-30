@@ -24,11 +24,11 @@ public class SearchResult extends Fragment {
 
     RecyclerView recyclerView;
     ResultSearchItemsAdapter resultSearchItemsAdapter;
-    static ArrayList<SearchItem> searchItems = new ArrayList<>();
+    ArrayList<SearchItem> searchItems = new ArrayList<>();
 
     public static SearchResult newInstance(ArrayList<SearchItem> searchItems) {
         SearchResult fragment = new SearchResult();
-        SearchResult.searchItems = searchItems;
+        fragment.searchItems = searchItems;
 
         return fragment;
     }
@@ -38,17 +38,24 @@ public class SearchResult extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
-        recyclerView = view.findViewById(R.id.itemsid);
+        recyclerView = view.findViewById(R.id.items_id);
+
+
+
+        setupRecyclerView();
+        return view;
+    }
+
+    private void setupRecyclerView() {
+
         resultSearchItemsAdapter = new ResultSearchItemsAdapter(searchItems);
         recyclerView.setAdapter(resultSearchItemsAdapter);
-recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        resultSearchItemsAdapter.selectFirstItem();
-
-        return view;
+       // resultSearchItemsAdapter.selectFirstItem();
     }
 
 }
