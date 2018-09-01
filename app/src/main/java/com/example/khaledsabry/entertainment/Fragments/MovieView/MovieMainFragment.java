@@ -46,32 +46,19 @@ public class MovieMainFragment extends Fragment {
     static FrameLayout reviewLayout;
     LinearLayout writeNewCategoryLayout;
 
-    TextView title;
-    TextView overviewText;
-    TextView releaseDate;
-    TextView runTimeText;
-    TextView genres;
-    TextView budget;
-    TextView revenue;
-    TextView rate;
-    TextView mpaa;
-    TextView status;
-    ImageView favourite;
-    TextView imdbRating;
-    TextView tomatoesRating;
+    TextView title,overviewText,releaseDate,runTimeText,genres,budget,revenue,rate,mpaa,status,imdbRating,tomatoesRating;
+
+    ImageView favourite,tomatoesPoster,addNewCategory,addToCategory;
+
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
-    ImageView tomatoesPoster;
 
-    Button actorButton;
-    Button crewButton;
+    Button actorButton,crewButton,addCategoryButton;
 
 
     EditText categoryNew;
-    Button addCategoryButton;
-    ImageView addNewCategory;
-    ImageView addToCategory;
+
     public static ArrayList<String> categoryNames;
     public static ArrayList<Integer> categoryIds;
     public static ArrayList<Boolean> categoryCheacks;

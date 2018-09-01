@@ -74,7 +74,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), 0)).addToBackStack(null).commit();
+                       MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), 0));
                     }
                 });
             } else if (searchItem.getTypeString().equals("tv")) {
@@ -83,7 +83,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, TvNavigationFragment.newInstance(searchItem.getTv().getId(), true)).addToBackStack(null).commit();
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(searchItem.getTv().getId(), true));
                     }
                 });
 
@@ -94,7 +94,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, ArtistNavigationFragment.newInstance(searchItem.getArtist().getId(), true)).addToBackStack(null).commit();
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(searchItem.getArtist().getId(), true));
                     }
                 });
             } else if (searchItem.getTypeString().equals("mojomovie")) {
@@ -120,7 +120,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                     @Override
                     public void onClick(View v) {
 
-                        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), 0)).addToBackStack(null).commit();
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(searchItem.getMovie().getMovieId(), 0));
                     }
 
                 });

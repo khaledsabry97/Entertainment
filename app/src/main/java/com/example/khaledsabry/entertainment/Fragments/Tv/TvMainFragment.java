@@ -71,7 +71,7 @@ public class TvMainFragment extends Fragment {
         genres = v.findViewById(R.id.genres_id);
         lastAirDate = v.findViewById(R.id.lastairdateid);
         rate = v.findViewById(R.id.rateid);
-        actorCrewLayout = v.findViewById(R.id.actor_crew_layout);
+        actorCrewLayout = v.findViewById(R.id.actors_crews_id);
         numberOfEpisodes = v.findViewById(R.id.numberofepisodesid);
         viewPager = v.findViewById(R.id.viewPagerid);
         indicator = v.findViewById(R.id.indicator);
