@@ -20,14 +20,10 @@ import java.util.ArrayList;
 
 public class TvContentFragment extends Fragment {
 
-    ArrayList<Season> seasons = new ArrayList<>();
-    int tvId;
-    static Tv tv;
-static ArrayList<Torrent> torrents = new ArrayList<>();
-static int currentId = -1;
-    public static TvContentFragment newInstance(int tvId) {
+     Tv tv;
+    public static TvContentFragment newInstance(Tv tv) {
         TvContentFragment fragment = new TvContentFragment();
-        fragment.tvId = tvId;
+        fragment.tv = tv;
         return fragment;
     }
 
@@ -36,28 +32,13 @@ static int currentId = -1;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_content, container, false);
-        loadFragment();
+        loadSeasonsFragment();
 
         return view;
 
 
     }
 
-    private void loadFragment() {
-        TmdbController tmdbController = new TmdbController();
-        if (tvId !=currentId) {
-            tmdbController.getTv(tvId, new OnTvSuccess() {
-                @Override
-                public void onSuccess(Tv tv) {
-                    TvContentFragment.tv = tv;
-                    currentId = tvId;
-                    loadSeasonsFragment();
-                }
-            });
-        } else {
-            loadSeasonsFragment();
-        }
-    }
 
     public static void loadEpisodesFragment(ArrayList<Episode> episodes) {
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.episodesId, EpisodeRecyclerFragment.newInstance(episodes)).commit();
@@ -65,19 +46,19 @@ static int currentId = -1;
     }
 
     private void loadSeasonsFragment() {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.seasonId, SeasonRecyclerFragment.newInstance(tv.getSeasons(), tvId)).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.seasonId, SeasonRecyclerFragment.newInstance(tv.getSeasons(), tv.getId())).commit();
 
     }
 
     public static void loadEpisodePreviewFragment(Episode episode) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv,null,episode)).commit();
+       // MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv,null,episode)).commit();
 
     }
 
 
 
     public static void loadSeasonPreviewFragment(Season season) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv,season,null)).commit();
+      //  MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv,season,null)).commit();
 
     }
 

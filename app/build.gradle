@@ -70,4 +70,7 @@ dependencies {
 //switch
     implementation 'com.github.angads25:toggle:1.0.0'
 
+//progress bar
+    implementation 'com.github.ybq:Android-SpinKit:1.1.0'
+
 }

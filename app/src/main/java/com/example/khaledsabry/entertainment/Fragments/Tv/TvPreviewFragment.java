@@ -66,7 +66,7 @@ View view;
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(tv.getId(), true));
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(tv.getId(), 0));
             }
         });
 

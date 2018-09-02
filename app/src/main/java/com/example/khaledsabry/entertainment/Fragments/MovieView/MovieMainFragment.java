@@ -46,15 +46,15 @@ public class MovieMainFragment extends Fragment {
     static FrameLayout reviewLayout;
     LinearLayout writeNewCategoryLayout;
 
-    TextView title,overviewText,releaseDate,runTimeText,genres,budget,revenue,rate,mpaa,status,imdbRating,tomatoesRating;
+    TextView title, overviewText, releaseDate, runTimeText, genres, budget, revenue, rate, mpaa, status, imdbRating, tomatoesRating;
 
-    ImageView favourite,tomatoesPoster,addNewCategory,addToCategory;
+    ImageView favourite, tomatoesPoster, addNewCategory, addToCategory;
 
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
 
-    Button actorButton,crewButton,addCategoryButton;
+    Button actorButton, crewButton, addCategoryButton;
 
 
     EditText categoryNew;
@@ -277,54 +277,97 @@ public class MovieMainFragment extends Fragment {
     public void getImdbInfo() {
         if (movie.getMovieImdbId() == null)
             return;
-        WebApi.getInstance().imdbMovieDetails(movie.getMovieImdbId(), new OnWebSuccess.OnMovie() {
-            @Override
-            public void onSuccess(Movie movie) {
-                if(imdbRating ==null || mpaa == null)
-                    return;
-                if (!String.valueOf(movie.getImdbRate()).equals("0.0"))
-                    imdbRating.setText(String.valueOf(movie.getImdbRate()));
-                if (!String.valueOf(movie.getMpaa()).equals(""))
-                    mpaa.setText(movie.getMpaa());
-            }
-        });
+
+        if (movie.getImdbRate() != 0.0)
+            setImdbPosterRating();
+        else
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    WebApi.getInstance().imdbMovieDetails(movie.getMovieImdbId(), new OnWebSuccess.OnMovie() {
+                        @Override
+                        public void onSuccess(Movie movie1) {
+                            movie.setImdbRate(movie1.getImdbRate());
+                            movie.setMpaa(movie1.getMpaa());
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    setImdbPosterRating();
+                                }
+                            });
+
+                        }
+                    });
+                }
+            });
+
     }
 
     public void getRottenTomatoesInfo() throws Exception {
+        if (movie.getRottenTomatoesRate() != 0.0) {
+            setTomatoesPosterRating();
+        } else {
+            AsyncTask.execute(new Runnable() {
+                                  @Override
+                                  public void run() {
+                                      WebApi.getInstance().rottenTomatoesMoviePreview(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
+                                          @Override
+                                          public void onSuccess(final Movie movie1) {
 
-        AsyncTask.execute(new Runnable() {
-                              @Override
-                              public void run() {
-                                  WebApi.getInstance().rottenTomatoesMoviePreview(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
-                                      @Override
-                                      public void onSuccess(final Movie movie1) {
+                                              movie.setRottentTomatoesRatingType(movie1.getRottentTomatoesRatingType());
+                                              movie.setRottenTomatoesRate(movie1.getRottenTomatoesRate());
+                                              movie.setMovieRottenTomatoesId(movie1.getMovieRottenTomatoesId());
+                                              MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                                  @Override
+                                                  public void run() {
+                                                      setTomatoesPosterRating();
 
-                                          movie.setRottenTomatoesRate(movie1.getRottenTomatoesRate());
-                                          movie.setMovieRottenTomatoesId(movie1.getMovieRottenTomatoesId());
-                                          MainActivity.getActivity().runOnUiThread(new Runnable() {
-                                              @Override
-                                              public void run() {
-                                                  if(tomatoesPoster == null || tomatoesRating == null)
-                                                      return;
-                                                  if (movie1.getRottentTomatoesRatingType().equals("Certified Fresh"))
-                                                      ImageController.putDrawableToImageView(R.drawable.certified2,tomatoesPoster);
-                                                  else if (movie1.getRottentTomatoesRatingType().equals("Fresh"))
-                                                      ImageController.putDrawableToImageView(R.drawable.fresh2,tomatoesPoster);
-                                                  else if (movie1.getRottentTomatoesRatingType().equals("Rotten"))
-                                                      ImageController.putDrawableToImageView(R.drawable.rotten,tomatoesPoster);
+                                                  }
+                                              });
 
-
-                                                  if (movie1.getRottenTomatoesRate() > 0)
-                                                      tomatoesRating.setText(String.valueOf(movie1.getRottenTomatoesRate()));
-
-                                              }
-                                          });
-
-                                      }
-                                  });
+                                          }
+                                      });
+                                  }
                               }
-                          }
-        );
+            );
+        }
+    }
+
+
+    /**
+     * set the poster of the imdb
+     * set the rate of the imdb
+     */
+    void setImdbPosterRating() {
+        if (imdbRating == null || mpaa == null)
+            return;
+        if (!String.valueOf(movie.getImdbRate()).equals("0.0")) {
+            imdbRating.setText(String.valueOf(movie.getImdbRate()));
+        }
+        if (!String.valueOf(movie.getMpaa()).equals("")) {
+            mpaa.setText(movie.getMpaa());
+        }
+    }
+
+    /**
+     * set the poster of the rotten tomatoes
+     * set the rate of the rotten tomatoes
+     */
+    void setTomatoesPosterRating() {
+        //check
+        if (tomatoesPoster == null || tomatoesRating == null)
+            return;
+        //poster
+        if (movie.getRottentTomatoesRatingType().equals("Certified Fresh"))
+            ImageController.putDrawableToImageView(R.drawable.certified2, tomatoesPoster);
+        else if (movie.getRottentTomatoesRatingType().equals("Fresh"))
+            ImageController.putDrawableToImageView(R.drawable.fresh2, tomatoesPoster);
+        else if (movie.getRottentTomatoesRatingType().equals("Rotten"))
+            ImageController.putDrawableToImageView(R.drawable.rotten, tomatoesPoster);
+
+        //rate
+        if (movie.getRottenTomatoesRate() > 0)
+            tomatoesRating.setText(String.valueOf(movie.getRottenTomatoesRate()));
     }
 
 }

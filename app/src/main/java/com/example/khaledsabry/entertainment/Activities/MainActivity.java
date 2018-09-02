@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         //load in the mainframe the sign in fragment
         loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
-
+/*
         WebApi.getInstance().watchSoMuchBluRay(new OnWebSuccess.OnMovie() {
             @Override
             public void onSuccess(Movie movie) {
 
             }
         });
-
+*/
     }
 
     //if the activity/app is not on the focus then hide systemUi

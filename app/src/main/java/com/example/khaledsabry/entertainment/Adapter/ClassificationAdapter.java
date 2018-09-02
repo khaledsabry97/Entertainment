@@ -83,7 +83,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(searchItem.getTv().getId(), true));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(searchItem.getTv().getId(), 0));
                     }
                 });
 

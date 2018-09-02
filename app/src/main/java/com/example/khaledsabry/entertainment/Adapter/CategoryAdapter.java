@@ -165,7 +165,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     if (type == 1)
                         MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(contentId, 0));
                     else if (type == 2)
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(contentId, true));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(contentId, 0));
                     else if (type == 3)
                         MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(contentId, true));
                 }

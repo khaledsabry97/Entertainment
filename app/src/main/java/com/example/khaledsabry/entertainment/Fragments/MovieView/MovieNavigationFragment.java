@@ -11,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Database.LocalDeleteController;
 import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
@@ -24,20 +26,27 @@ import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
+
+import static java.lang.Integer.valueOf;
 
 
 public class MovieNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
 
+    ProgressBar progressBar;
     //to set movie id
     int movieId;
 
-    //to set latter the index of the navigation items
+    //to set later the index of the navigation items
     static int index = -1;
 
     //navigation item ids
-    int NavigationId;
+    int navigationId;
+    //boolean must be called so you decide to reselect or not
+    boolean isFirstTime = false;
 
     //mainMovie get the details for (MovieMainFragment,DownloadFragment)
     private Movie mainMovie = null;
@@ -69,7 +78,8 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_movie_navigation, container, false);
         bottomNavigationView = v.findViewById(R.id.navigation);
-
+        progressBar = v.findViewById(R.id.progress_bar_id);
+        progressBar.setIndeterminateDrawable(new Wave());
         setUpBottomNavigation();
         return v;
     }
@@ -81,16 +91,22 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         setNavigationIndex(index);
-        bottomNavigationView.setSelectedItemId(NavigationId);
+        isFirstTime = true;
+        bottomNavigationView.setSelectedItemId(navigationId);
         bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
-
     }
+
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Functions.stopConnectionsAndStartImageGlide();
-        NavigationId = item.getItemId();
+        if(navigationId == item.getItemId() && !isFirstTime) {
+            return false;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        isFirstTime = false;
+        navigationId = item.getItemId();
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 index = 0;
@@ -130,6 +146,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
      * @param fragment the fragment you want to show it
      */
     void loadFragment(Fragment fragment) {
+        progressBar.setVisibility(View.INVISIBLE);
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, fragment).commit();
     }
 
@@ -213,11 +230,11 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 @Override
                 public void onSuccess(Movie movies) {
                     imagesMovie = movies;
-                    MainActivity.loadFragmentWithReturn(R.id.moviedetailid, ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
+                    loadFragment(ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
                 }
             });
         } else {
-            MainActivity.loadFragmentWithReturn(R.id.moviedetailid, ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
+            loadFragment(ImagesFragment.newInstance(imagesMovie.getPosters(), imagesMovie.getBackdrops()));
 
         }
     }
@@ -247,19 +264,19 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     private void setNavigationIndex(int index) {
         switch (index) {
             case 0:
-                NavigationId = R.id.navigation_home;
+                navigationId = R.id.navigation_home;
                 break;
             case 1:
-                NavigationId = R.id.navigation_back;
+                navigationId = R.id.navigation_back;
                 break;
             case 2:
-                NavigationId = R.id.navigation_images;
+                navigationId = R.id.navigation_images;
                 break;
             case 3:
-                NavigationId = R.id.navigation_download;
+                navigationId = R.id.navigation_download;
                 break;
             case 4:
-                NavigationId = R.id.navigation_youtube;
+                navigationId = R.id.navigation_youtube;
                 break;
             default:
         }
