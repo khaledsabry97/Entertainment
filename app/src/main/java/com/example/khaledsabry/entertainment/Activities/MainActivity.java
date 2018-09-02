@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Connection.ApiConnections;
+import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseHelper;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
+import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Constants;
 import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
@@ -39,16 +42,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         //get width and height for the mobile and tablet
-       Constants.getInstance().setWidthAndHeight(getWindowManager());
+        Constants.getInstance().setWidthAndHeight(getWindowManager());
 
-       //set if the device is tablet or mobile
-       Constants.getInstance().setTablet(getResources().getBoolean(R.bool.isTablet));
+        //set if the device is tablet or mobile
+        Constants.getInstance().setTablet(getResources().getBoolean(R.bool.isTablet));
 
 
         periodicHideNavigation();
 
-//load in the mainframe the sign in fragment
+        //load in the mainframe the sign in fragment
         loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+
+        WebApi.getInstance().watchSoMuchBluRay(new OnWebSuccess.OnMovie() {
+            @Override
+            public void onSuccess(Movie movie) {
+
+            }
+        });
+
     }
 
     //if the activity/app is not on the focus then hide systemUi

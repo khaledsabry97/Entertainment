@@ -17,12 +17,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -35,6 +37,7 @@ import java.util.TimerTask;
 
 public class WebApi {
 
+    private Server server = Server.getInstance();
     //Singleton Pattern
     private static WebApi ourInstance;
 
@@ -118,7 +121,7 @@ public class WebApi {
     /**
      * get the world wide gross for a specific year
      *
-     * @param year the specific year you want to know the top movies gross in it
+     * @param year     the specific year you want to know the top movies gross in it
      * @param listener returns a list of movies
      */
 
@@ -366,9 +369,10 @@ public class WebApi {
 
     /**
      * gets the box office for specific day
+     *
      * @param dayNumber to get today you put 0 value and to get the next day put 1 value
      *                  and the previous day put -1 value
-     * @param listener returns a list of movies of the top box office in that day
+     * @param listener  returns a list of movies of the top box office in that day
      */
     public void mojoDaily(final Integer dayNumber, final OnWebSuccess.OnMovieList listener) {
 
@@ -461,7 +465,6 @@ public class WebApi {
     }
 
     /**
-     *
      * @param listener gets a list of news
      */
     public void imdbIndieNews(final OnWebSuccess.OnNews listener) {
@@ -489,7 +492,7 @@ public class WebApi {
     /**
      * this is the function that do the work for the past four functons
      *
-     * @param type send to it the type of news (Top,Movie,Tv and Indie)
+     * @param type     send to it the type of news (Top,Movie,Tv and Indie)
      * @param listener gets a list of news
      */
     private void imdbNews(final String type, final OnWebSuccess.OnNews listener) {
@@ -577,7 +580,8 @@ public class WebApi {
     /**
      * get a details about movie from the id of the imdb
      * specifically the rating and mpaa
-     * @param imdbId id of the imdb for the movie
+     *
+     * @param imdbId   id of the imdb for the movie
      * @param listener get the movie back with the details
      */
     public void imdbMovieDetails(final String imdbId, final OnWebSuccess.OnMovie listener) {
@@ -587,8 +591,8 @@ public class WebApi {
             protected Movie doInBackground(Void... voids) {
                 Movie movie = new Movie();
                 try {
-                org.jsoup.nodes.Document
-                        doc;
+                    org.jsoup.nodes.Document
+                            doc;
 
                     doc = Jsoup.connect("https://www.imdb.com/title/" + imdbId).get();
 
@@ -626,8 +630,9 @@ public class WebApi {
     /**
      * gets the rating for a movie by searching for the name and the year
      * and comparing the results to the year and choose the right movie
-     * @param movie the name of the movie
-     * @param year the year that the movie was created
+     *
+     * @param movie    the name of the movie
+     * @param year     the year that the movie was created
      * @param listener gets the movie back with information
      */
     public void rottenTomatoesMoviePreview(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
@@ -673,6 +678,7 @@ public class WebApi {
 
     /**
      * gets the top 250 movies fron the imdb
+     *
      * @param listener get one movie back in the process of publish progress
      */
     public void imdbTop250Movies(final OnWebSuccess.OnMovie listener) {
@@ -684,7 +690,7 @@ public class WebApi {
                 org.jsoup.nodes.Document
                         doc = null;
                 try {
-                    doc = Jsoup.connect("https://www.imdb.com/chart/top").timeout(10000).get();
+                    doc = Jsoup.connect(server.getTop250Imdb()).timeout(10000).get();
 
                     if (doc == null)
                         return null;
@@ -692,7 +698,7 @@ public class WebApi {
                     final Elements ratingElement = doc.getElementsByAttributeValue("class", "ratingColumn imdbRating");
                     final Elements imdbIdElement = doc.getElementsByAttributeValue("class", "ratingColumn");
 
-                   // this way to perform while loop without need to stop the tread
+                    // this way to perform while loop without need to stop the tread
                     final Timer timer = new Timer();
                     timer.schedule(new TimerTask() {
                         int i = 0;
@@ -710,7 +716,7 @@ public class WebApi {
                                 @Override
                                 public void onSuccess(Movie movie1) {
                                     movie1.setImdbRate(movie.getImdbRate());
-
+                                    movie1.setMovieId(movie.getMovieId());
 
                                     publishProgress(movie1);
                                 }
@@ -749,5 +755,92 @@ public class WebApi {
 
         task.execute();
     }
+
+
+    public void watchSoMuchBluRay(final OnWebSuccess.OnMovie listener) {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Movie, Void> task = new AsyncTask<Void, Movie, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                final TmdbController tmdbController = new TmdbController();
+
+                org.jsoup.nodes.Document
+                        doc = null;
+                try {
+                    doc = Jsoup.connect("http://watchsomuch.info/RSS/Bluray-Newest/").timeout(10000).get();
+
+                    if (doc == null)
+                        return null;
+
+                    final Elements items = doc.getElementsByTag("item");
+
+                    // this way to perform while loop without need to stop the tread
+                    final Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        int i = 0;
+
+                        @Override
+                        public void run() {
+                            final Movie movie = new Movie();
+                            //get the the item at index i
+                            Element item = items.get(i);
+                            //get the title of the movie with year that it produced in
+                            String movieName = item.getElementsByTag("title").get(0).text();
+                            //get the last chars in movie name
+                            String year = movieName.substring(movieName.length() - 5, movieName.length() - 1);
+                            //then remove it from the movie name
+                            movieName = movieName.replace("(" + year + ")", "");
+
+                            //get the description text
+                            String descriptionHtml = item.getElementsByTag("description").html();
+                            //get the index that is start with this word
+                            int imdbRatingId = descriptionHtml.indexOf("Imdb Rating");
+                            //get the 3 chars from that index that will be the rating
+                            String imdbRating = descriptionHtml.substring(imdbRatingId + 13, imdbRatingId + 16);
+                            //set the rating to movie
+                            movie.setImdbRate(Float.parseFloat(imdbRating));
+                            //search to get all the info you want about the movie by its name and year to faster the search
+                            tmdbController.getSearchOneMovie(movieName, year, new OnMovieDataSuccess() {
+                                @Override
+                                public void onSuccess(Movie movie1) {
+                                    movie1.setImdbRate(movie.getImdbRate());
+
+                                    publishProgress(movie1);
+                                }
+                            });
+                            i++;
+                            if (i == items.size())
+                                timer.cancel();
+                        }
+
+                        @Override
+                        public long scheduledExecutionTime() {
+                            return super.scheduledExecutionTime();
+
+                        }
+                    }, 0, 500);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+
+                }
+                return null;
+
+            }
+
+            ;
+
+
+            @Override
+            protected void onProgressUpdate(Movie... values) {
+                listener.onSuccess(values[0]);
+            }
+        };
+
+
+        task.execute();
+    }
+
 
 }
