@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.khaledsabry.entertainment.Controllers.Constants;
+import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
 import com.example.khaledsabry.entertainment.Fragments.WebFragment;
 import com.example.khaledsabry.entertainment.R;
 
@@ -44,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //load in the mainframe the sign in fragment
-     //   loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
-        loadFragmentNoReturn(R.id.mainFrame, WebFragment.newInstance("sdf"));
+        loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+   //     loadFragmentNoReturn(R.id.mainFrame, WebFragment.newInstance("sdf"));
 /*
         WebApi.getInstance().watchSoMuchBluRay(new OnWebSuccess.OnMovie() {
             @Override

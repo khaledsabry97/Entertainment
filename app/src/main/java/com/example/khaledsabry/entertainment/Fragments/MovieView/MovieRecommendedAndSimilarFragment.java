@@ -61,7 +61,7 @@ public class MovieRecommendedAndSimilarFragment extends Fragment {
         autoChange = view.findViewById(R.id.auto_change);
 
         //to bring auto scoll to front
-        RelativeLayout relativeLayout = view.findViewById(R.id.relativeLayout);
+        RelativeLayout relativeLayout = view.findViewById(R.id.relative_layout_id);
         relativeLayout.bringChildToFront(autoChange);
 
         setObjects(recommendedMovies);

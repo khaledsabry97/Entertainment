@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
@@ -40,15 +41,13 @@ public class MovieMainFragment extends Fragment {
     int movieId;
     static int currentMovieId = -1;
     Movie movie = null;
-
     //Layouts
     NestedScrollView scrollView;
     static FrameLayout reviewLayout;
     LinearLayout writeNewCategoryLayout;
-
     TextView title, overviewText, releaseDate, runTimeText, genres, budget, revenue, rate, mpaa, status, imdbRating, tomatoesRating;
 
-    ImageView favourite, tomatoesPoster, addNewCategory, addToCategory;
+    ImageView  tomatoesPoster, addNewCategory, addToCategory,addFavourite,addWatchLater;
 
     CircleIndicator indicator;
     ViewPager viewPager;
@@ -75,48 +74,43 @@ public class MovieMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              // Inflate the layout for this fragment
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_movie_main, container, false);
-        title = v.findViewById(R.id.titleId);
-        overviewText = v.findViewById(R.id.overviewID);
-        releaseDate = v.findViewById(R.id.releasetimeid);
-        runTimeText = v.findViewById(R.id.timeid);
-        genres = v.findViewById(R.id.genres_id);
-        budget = v.findViewById(R.id.budgetid);
-        rate = v.findViewById(R.id.rateid);
-        status = v.findViewById(R.id.statusid);
-        mpaa = v.findViewById(R.id.mpaaid);
-        viewPager = v.findViewById(R.id.viewPagerid);
-        indicator = v.findViewById(R.id.indicator);
-        revenue = v.findViewById(R.id.revenueid);
-        actorButton = v.findViewById(R.id.button_actors_id);
-        crewButton = v.findViewById(R.id.button_crew_id);
-        scrollView = v.findViewById(R.id.sideid);
+        View view = inflater.inflate(R.layout.fragment_movie_main, container, false);
+        title = view.findViewById(R.id.titleId);
+        overviewText = view.findViewById(R.id.overviewID);
+        releaseDate = view.findViewById(R.id.releasetimeid);
+        runTimeText = view.findViewById(R.id.timeid);
+        genres = view.findViewById(R.id.genres_id);
+        budget = view.findViewById(R.id.budgetid);
+        rate = view.findViewById(R.id.rateid);
+        status = view.findViewById(R.id.statusid);
+        mpaa = view.findViewById(R.id.mpaaid);
+        viewPager = view.findViewById(R.id.viewPagerid);
+        indicator = view.findViewById(R.id.indicator);
+        revenue = view.findViewById(R.id.revenueid);
+        actorButton = view.findViewById(R.id.button_actors_id);
+        crewButton = view.findViewById(R.id.button_crew_id);
+        scrollView = view.findViewById(R.id.sideid);
         scrollView.setVisibility(View.INVISIBLE);
-        reviewLayout = v.findViewById(R.id.ReviewLayoutid);
-        favourite = v.findViewById(R.id.favourite);
-        addNewCategory = v.findViewById(R.id.addnewcategory);
-        addToCategory = v.findViewById(R.id.addtocategory);
-        writeNewCategoryLayout = v.findViewById(R.id.addnew);
-        categoryNew = v.findViewById(R.id.categorytext);
-        addCategoryButton = v.findViewById(R.id.addcategory);
-        imdbRating = v.findViewById(R.id.imdbrate);
-        tomatoesRating = v.findViewById(R.id.tomatoesrate);
-        tomatoesPoster = v.findViewById(R.id.tomatoesposter);
+        reviewLayout = view.findViewById(R.id.ReviewLayoutid);
+        addNewCategory = view.findViewById(R.id.addnewcategory);
+        addToCategory = view.findViewById(R.id.add_to_category_id);
+        writeNewCategoryLayout = view.findViewById(R.id.addnew);
+        categoryNew = view.findViewById(R.id.categorytext);
+        addCategoryButton = view.findViewById(R.id.addcategory);
+        imdbRating = view.findViewById(R.id.imdbrate);
+        tomatoesRating = view.findViewById(R.id.tomatoesrate);
+        tomatoesPoster = view.findViewById(R.id.tomatoesposter);
+        addWatchLater = view.findViewById(R.id.add_to_watch_later_id);
+        addFavourite = view.findViewById(R.id.add_to_favourite_id);
         categoryController = new CategoryController();
+
         try {
             setObjects();
         } catch (Exception e) {
             e.printStackTrace();
         }
-     /*   try {
-            getMovieDetails();
 
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }*/
-        return v;
+        return view;
     }
 
     private void setObjects() throws Exception {
@@ -136,23 +130,27 @@ public class MovieMainFragment extends Fragment {
         viewPagerAdapter = new MainPosterViewPager(movie.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(viewPager);
+addToCategory.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        setAddToCategory();
+    }
+});
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                // if
-            }
+addFavourite.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        setAddFavourite();
+    }
+});
 
-            @Override
-            public void onPageSelected(int position) {
 
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+addWatchLater.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        setAddWatchLater();
+    }
+});
 
 
         viewPagerAdapter.movePoster(viewPager, viewPagerAdapter, 7000, 4000);
@@ -163,19 +161,7 @@ public class MovieMainFragment extends Fragment {
         loadProductionFragment();
 
 
-        favourite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
-                    @Override
-                    public void onSuccess(boolean state) {
-                        if (state)
-                            categoryController.toast(movie.getTitle() + " has been added to your Favourite categoryItem");
 
-                    }
-                });
-            }
-        });
         actorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,14 +214,7 @@ public class MovieMainFragment extends Fragment {
 
 
     private void loadCategories() {
-        categoryController.getCategories(movieId);
-        addToCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (categoryIds != null)
-                    openCategoryAdd(categoryNames, categoryIds, categoryCheacks, movieId);
-            }
-        });
+        categoryController.getCategories(movie.getMovieId());
 
 
         addNewCategory.setOnClickListener(new View.OnClickListener() {
@@ -254,8 +233,8 @@ public class MovieMainFragment extends Fragment {
     }
 
 
-    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans, int movieId) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 1, String.valueOf(movieId))).commit();
+    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer,CategoryAddFragment.newInstance(names, ids, booleans, 1, String.valueOf(movie.getMovieId()))).commit();
     }
 
     public void setAddNewCategory(String categoryName) {
@@ -368,6 +347,30 @@ public class MovieMainFragment extends Fragment {
         //rate
         if (movie.getRottenTomatoesRate() > 0)
             tomatoesRating.setText(String.valueOf(movie.getRottenTomatoesRate()));
+    }
+
+
+    void setAddToCategory()
+    {
+        if (categoryIds != null)
+            openCategoryAdd(categoryNames, categoryIds, categoryCheacks);
+    }
+
+    void setAddFavourite()
+    {
+        categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                if (state)
+                    categoryController.toast(movie.getTitle() + " has been added to your Favourite categoryItem");
+
+            }
+        });
+    }
+
+    void setAddWatchLater()
+    {
+
     }
 
 }

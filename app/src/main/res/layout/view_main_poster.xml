@@ -1,16 +1,18 @@
-<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_layout_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_weight="1.5"
-    android:background="@drawable/blue"
-    android:visibility="visible"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:visibility="visible">
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPagerid"
         android:layout_width="match_parent"
-        android:layout_height="0dp"></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        tools:background="@drawable/avengers_infinity_war_poster"></android.support.v4.view.ViewPager>
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
@@ -23,22 +25,19 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="1dp"
-        android:background="@drawable/ic_turned_in_black_24dp"
-        android:visibility="invisible"
+        android:background="@drawable/ic_favourite_in_black_24dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/titleIds"
+    <include
+        android:id="@+id/category"
+        layout="@layout/view_categories_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/carterone"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="43dp" />
+        android:layout_alignParentBottom="true"
 
-</android.support.constraint.ConstraintLayout>
+        ></include>
+
+
+</RelativeLayout>

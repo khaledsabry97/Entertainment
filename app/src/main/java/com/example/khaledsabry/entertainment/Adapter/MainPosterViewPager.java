@@ -18,6 +18,8 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.FullPoster;
@@ -26,6 +28,7 @@ import com.example.khaledsabry.entertainment.R;
 
 import java.nio.InvalidMarkException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,14 +45,10 @@ private boolean allowToMove = true;
 
 
     public MainPosterViewPager(ArrayList<String> posters) {
-        images = posters;
-    /*    ImageController.downloadImage(images, 1,8, new OnImagesDownloaded() {
-            @Override
-            public void onSuccess(int position) {
-                imagesDownloaded.add(position,true);
-            }
-        });
-*/
+        if(posters.size() > 0) {
+            images = posters;
+          shuffle();
+        }
     }
 
     @Override
@@ -62,7 +61,7 @@ private boolean allowToMove = true;
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, FullPoster.newInstance(images.get(position))).addToBackStack(null).commit();
+                MainActivity.loadFragmentWithReturn(R.id.mainContainer, FullPoster.newInstance(images.get(position)));
             }
         });
         container.addView(view, 0);
@@ -70,40 +69,8 @@ private boolean allowToMove = true;
         return view;
 
     }
-/*
-    private void setImage(int position) {
-        allowToMove = false;
-        if(position==getCount()-1)
-            ImageController.downloadImage(images.get(0), new RequestListener<Drawable>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    allowToMove =true;
 
-                    return false;
-                }
 
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    allowToMove = true;
-                    return false;
-                }
-            });
-else
-        ImageController.downloadImage(images.get(position + 1), new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                allowToMove =true;
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                allowToMove = true;
-                return false;
-            }
-        });
-    }
-*/
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
@@ -122,6 +89,22 @@ else
         return view.equals(object);
     }
 
+    /**
+     * shuffle the deck of images to random one
+     * important: keep the main poster in his first place always
+     * this function is called at the start and when the view pager
+     * reaches the end of the recycler
+     */
+    void shuffle()
+    {
+        if(images.size() == 0)
+            return;
+
+        String mainPoster = images.get(0);
+        images.remove(0);
+        Collections.shuffle(images);
+        images.add(0,mainPoster);
+    }
 
     public void movePoster(final ViewPager viewPager, PagerAdapter viewPagerAdapter, int delayToStart, int repeatTime) {
         final ViewPager f_viewPager = viewPager;
@@ -134,8 +117,10 @@ else
             public void run() {
                 if (f_viewPagerAdapter == null || f_viewPager == null)
                     return;
-                if (f_viewPagerAdapter.getCount() == f_viewPager.getCurrentItem() + 1)
+                if (f_viewPagerAdapter.getCount() == f_viewPager.getCurrentItem() + 1) {
+                    shuffle();
                     f_viewPager.setCurrentItem(0, true);
+                }
                 else
                     f_viewPager.setCurrentItem(f_viewPager.getCurrentItem() + 1, true);
             }

@@ -24,8 +24,7 @@
                 android:backgroundTintMode="src_over"
                 android:orientation="horizontal">
 
-                <include layout="@layout/view_main_poster" />
-
+                <include layout="@layout/view_main_poster"></include>
                 <android.support.v4.widget.NestedScrollView
                     android:id="@+id/sideid"
                     android:layout_width="match_parent"

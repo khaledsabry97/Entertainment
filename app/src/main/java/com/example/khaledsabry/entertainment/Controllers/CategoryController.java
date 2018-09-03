@@ -23,15 +23,27 @@ public class CategoryController extends Controller {
         this.categoryListFragment = categoryListFragment;
     }
 
-    public void addFavourite(String tmdbId, String imdbId, int type, final OnSuccess.bool listener) {
-/*
+    public void addFavourite(final String tmdbId, final String imdbId, final int type, final OnSuccess.bool listener) {
 
-        databaseController.insertController().categoryAdd(null,constants.Favourite, userData.getUserId(), tmdbId, imdbId, type, null, new OnDatabaseSuccess.bool() {
+databaseController.selectController().categoryGet(UserData.getInstance().getUserId(), "Favourite", new OnDatabaseSuccess.array() {
+    @Override
+    public void onSuccess(ArrayList<JSONObject> jsonObjects) {
+
+        String id = ((String) getObject(categoryTable.id, jsonObjects));
+        if(id == null) {
+            listener.onSuccess(false);
+            return;
+        }
+
+        databaseController.insertController().itemAdd(Integer.parseInt(id), tmdbId, imdbId, type, new OnDatabaseSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
-                listener.onSuccess(state);
+                listener.onSuccess(true);
             }
-        });*/
+        });
+
+    }
+});
     }
 
 
@@ -79,7 +91,7 @@ public class CategoryController extends Controller {
                 final ArrayList<Integer> totalId = (ArrayList<Integer>) (Object) getArray(categoryTable.id, jsonObjects);
 
 
-                databaseController.selectController().listGetByTmdbId(UserData.getInstance().getUserId(), tmdbId, new OnDatabaseSuccess.array() {
+                databaseController.selectController().CategoryItemGetByTmdb(UserData.getInstance().getUserId(), tmdbId, new OnDatabaseSuccess.array() {
                     @Override
                     public void onSuccess(ArrayList<JSONObject> jsonObjects) {
                         ArrayList<Integer> id = (ArrayList<Integer>) (Object) getArray(categoryItemTable.categoryId, jsonObjects);

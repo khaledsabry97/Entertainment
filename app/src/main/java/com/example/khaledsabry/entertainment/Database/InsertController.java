@@ -39,14 +39,6 @@ public class InsertController extends DatabaseController {
     }
 
     public void itemAdd(int categoryId, String tmdbId, String imdbId, int type, OnDatabaseSuccess.bool listener) {
-    /*deleteController().CategoryItemRemove(categoryId, tmdbId, imdbId, new OnDatabaseSuccess.bool() {
-        @Override
-        public void onSuccess(boolean state) {
-
-        }
-    });
-
-    */
 
         insert.put(categoryItemTable.categoryId, String.valueOf(categoryId));
         insert.put(categoryItemTable.imdbId, imdbId);

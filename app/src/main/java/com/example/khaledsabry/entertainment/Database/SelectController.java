@@ -111,11 +111,10 @@ server.select(createSelectQuery(selects,tables,condition),listener);
     }
 
 
-    public void listGetByTmdbId(int userId, int tmdbId, OnDatabaseSuccess.array listener)
+    public void CategoryItemGetByTmdb(int userId, int tmdbId, OnDatabaseSuccess.array listener)
     {
 
         selects.add(categoryItemTable.categoryId);
-        selects.add(categoryItemTable.tmdbId);
 
 
         tables.put(categoryItemTable.tableName,null);
@@ -167,6 +166,21 @@ server.select(createSelectQuery(selects,tables,condition),listener);
        condition += imageTable.name + equal + name;
         String query = createSelectQuery(selects,tables,condition);
         server.select(query,listener);
+
+    }
+
+
+    public void categoryGet(int userId,String name,OnDatabaseSuccess.array listener)
+    {
+
+
+        name = addqoutes(name);
+        tables.put(categoryTable.tableName,null);
+        condition += userId +equal + categoryTable.userId;
+        condition += and;
+        condition += categoryTable.name + equal + name;
+
+        server.select(createSelectQuery(selects,tables,condition),listener);
 
     }
 }

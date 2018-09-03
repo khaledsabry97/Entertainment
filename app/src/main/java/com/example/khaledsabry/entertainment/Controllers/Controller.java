@@ -62,7 +62,6 @@ arrayList.add(object);
             e.printStackTrace();
             return null;
         }
-String name =object.toString();
         return object;
 
     }
