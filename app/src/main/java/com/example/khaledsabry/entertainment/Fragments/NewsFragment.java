@@ -157,7 +157,9 @@ public class NewsFragment extends Fragment {
 
 
     public void loadWebView(String url) {
-        MainActivity.loadFragmentWithReturn(R.id.web, WebFragment.newInstance(url));
+        WebFragment webFragment = WebFragment.newInstance(WebFragment.Type.all);
+        webFragment.loadUrl(url);
+        MainActivity.loadFragmentWithReturn(R.id.web, webFragment);
     }
 
 }

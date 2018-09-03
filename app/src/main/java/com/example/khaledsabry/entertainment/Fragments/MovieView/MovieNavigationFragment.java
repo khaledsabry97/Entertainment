@@ -17,17 +17,14 @@ import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Database.LocalDeleteController;
 import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
-import com.example.khaledsabry.entertainment.Fragments.YoutubeCustomFragment;
+import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
-import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
-import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
@@ -249,12 +246,12 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 @Override
                 public void onSuccess(Movie movie) {
                     mainMovie = movie;
-                    loadFragment(YoutubeCustomFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
+                    loadFragment(YoutubeFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
 
                 }
             });
         else
-            loadFragment(YoutubeCustomFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
+            loadFragment(YoutubeFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
     }
 
     /**

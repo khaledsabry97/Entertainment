@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.example.khaledsabry.entertainment.Controllers.Constants;
 import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
-import com.example.khaledsabry.entertainment.Fragments.WebFragment;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.Timer;

@@ -2,14 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.khaledsabry.entertainment.Fragments.WebFragment">
-
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+>
 
 
         <im.delight.android.webview.AdvancedWebView
@@ -17,9 +12,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/arrowleft"
+        android:background="@drawable/blue"/>
+    <include layout="@layout/view_progress_bar" />
 
 
-
-    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

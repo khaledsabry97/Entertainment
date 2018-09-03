@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.example.khaledsabry.entertainment.Adapter.YoutubeOptionAdapter;
 import com.example.khaledsabry.entertainment.R;
 
-import static com.example.khaledsabry.entertainment.Fragments.YoutubeFragment.recyclerView;
 
 public class NewMainMenuFragment extends Fragment {
 

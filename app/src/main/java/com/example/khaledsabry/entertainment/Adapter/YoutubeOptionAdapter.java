@@ -10,14 +10,13 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
-import com.example.khaledsabry.entertainment.Fragments.YoutubeCustomFragment;
+import com.example.khaledsabry.entertainment.Fragments.WebFragment;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnYoutubeSuccess;
 import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by KhALeD SaBrY on 25-Jul-18.
@@ -30,23 +29,37 @@ public class YoutubeOptionAdapter extends RecyclerView.Adapter<YoutubeOptionAdap
     private int selectedPosition = 0;
     String query;
     String year;
+    YoutubeFragment youtubeFragment;
+    WebFragment webFragment;
 
-    public YoutubeOptionAdapter(ArrayList<YoutubeController.Type> types, ArrayList<String> titles, String query, String year) {
+    /**
+     * constructor get
+     *
+     * @param types  types that youtube controller use it to identify the search query
+     * @param titles used later to write the buttons you choose from it
+     * @param query  the name of the movie,tv or the artist but without using the date
+     * @param year   the date of the product we search for
+     */
+    public YoutubeOptionAdapter(YoutubeFragment youtubeFragment,WebFragment webFragment, ArrayList<YoutubeController.Type> types, ArrayList<String> titles, String query, String year) {
         this.types = types;
         this.titles = titles;
         this.query = query;
         this.year = year;
+        this.youtubeFragment = youtubeFragment;
+        this.webFragment = webFragment;
         select();
     }
 
-    public void select()
-    {
+    /**
+     * search for youtube videos according to selected index in types
+     */
+    public void select() {
         YoutubeController youtubeController = new YoutubeController();
         youtubeController.search(query, year, types.get(selectedPosition), new OnYoutubeSuccess() {
             @Override
             public void onSuccess(ArrayList<Youtube> youtubes) {
-               // YoutubeFragment.loadVideos(youtubes);
-                YoutubeCustomFragment.loadVideos(youtubes);
+                if (youtubeFragment != null)
+                    youtubeFragment.loadVideos(youtubes);
             }
         });
     }
@@ -68,12 +81,14 @@ public class YoutubeOptionAdapter extends RecyclerView.Adapter<YoutubeOptionAdap
             holder.cardView.setCardBackgroundColor(ContextCompat.getColor(MainActivity.getActivity().getApplicationContext(), android.R.color.white));
         }
 
-        holder.updateUi(types.get(position), titles.get(position),position);
+        holder.updateUi(types.get(position), titles.get(position), position);
 
     }
 
     @Override
     public int getItemCount() {
+        if (types == null)
+            return 0;
         return types.size();
     }
 
@@ -99,19 +114,26 @@ public class YoutubeOptionAdapter extends RecyclerView.Adapter<YoutubeOptionAdap
 
         }
 
+        /**
+         * update the options recycler view
+         *
+         * @param type     defiend in youtube controller to adjust search query in youtube api
+         * @param name     the title of the button
+         * @param position the position of the button
+         */
         private void updateUi(final YoutubeController.Type type, String name, final int position) {
             title.setText(name);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    YoutubeController youtubeController = new YoutubeController();
-                    youtubeController.search(query, year, type, new OnYoutubeSuccess() {
-                        @Override
-                        public void onSuccess(ArrayList<Youtube> youtubes) {
-                            YoutubeCustomFragment.loadVideos(youtubes);
-                            setSelectedPosition(position);
-                        }
-                    });
+                    if(type == YoutubeController.Type.soundtrack)
+                        if(webFragment !=null)
+                            webFragment.setType(WebFragment.Type.youtube_music);
+
+                    if(webFragment != null)
+                        webFragment.setType(WebFragment.Type.youtube);
+                    setSelectedPosition(position);
+                    select();
 
                 }
             });

@@ -3,38 +3,38 @@ package com.example.khaledsabry.entertainment.Fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.R;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import im.delight.android.webview.AdvancedWebView;
 
-public class WebFragment extends Fragment implements AdvancedWebView.Listener{
-
-    String url;
+public class WebFragment extends Fragment implements AdvancedWebView.Listener {
+    private String url;
     AdvancedWebView webView;
+    ProgressBar progressBar;
     ImageView imageView;
-    static WebFragment fragment = null;
 
-    public static WebFragment newInstance(String url) {
-        fragment = new WebFragment();
-        fragment.url = url;
+    public enum Type {
+        all,
+        youtube,
+        youtube_music
+    }
+
+    Type type;
+
+    public static WebFragment newInstance(Type type) {
+        WebFragment fragment = new WebFragment();
+        fragment.type = type;
         return fragment;
     }
 
@@ -43,79 +43,71 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_web, container, false);
-imageView = view.findViewById(R.id.back);
+        View view = inflater.inflate(R.layout.fragment_youtube_web, container, false);
         webView = view.findViewById(R.id.web_view);
-webView.setInitialScale(1);
+        progressBar = view.findViewById(R.id.progress_bar_id);
+        imageView = view.findViewById(R.id.back);
 
-        webView.setListener(MainActivity.getActivity(),this);
-      //  webView.setWebViewClient(new WebViewClient());
+        setupWepView();
+
+
+        return view;
+    }
+
+    private void setupWepView() {
+        webView.setListener(MainActivity.getActivity(), this);
         webView.setDesktopMode(true);
-        webView.setWebChromeClient(new MyChrome());
+        webView.setWebChromeClient(new WebFragment.MyChrome());
         webView.setKeepScreenOn(true);
         webView.getSettings().setBuiltInZoomControls(false);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAppCacheEnabled(false);
-     //   webView.getSettings().setAllowContentAccess(true);
-        webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        // webView.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
-        //webView.loadUrl("https://www.youtube-nocookie.com/embed/BnwB8Oh628Q?autoplay=1&rel=0");
-        //webView.loadUrl(url);
-        webView.loadUrl("https://www.youtube-nocookie.com/embed/BnwB8Oh628Q?autoplay=1&modestbranding=1&rel=0");
+        if (type == Type.youtube) {
+            webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
+            imageView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        } else if (type == Type.all) {
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        webView.loadUrl("https://www.youtube-nocookie.com/embed/raYkwmxuXEc?autoplay=1&modestbranding=1&rel=0");
-
-        MainActivity.getActivity().getSupportFragmentManager().popBackStack();
-    }
-});
-        webView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.setVisibility(View.VISIBLE);
-            }
-        });
-        return view;
+                    MainActivity.getActivity().getSupportFragmentManager().popBackStack();
+                }
+            });
+        }
     }
 
 
+    public void setType(Type type) {
+        this.type = type;
+    }
 
+    public void loadYoutubeVideoId(String videoId) {
+        if (type == Type.youtube_music)
+            webView.loadUrl("https://www.youtube-nocookie.com/embed/" + videoId + "?modestbranding=1&rel=0");
+        else
+            webView.loadUrl("https://www.youtube-nocookie.com/embed/" + videoId + "?autoplay=1&modestbranding=1&rel=0");
 
-    public static void finish() {
-        if (fragment != null)
-            fragment.onStop();
+    }
 
+    public void loadUrl(String url) {
+        webView.loadUrl(url);
     }
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
-      //  webView.setVisibility(View.INVISIBLE);
-
-
+        if (type == Type.youtube)
+            return;
+        webView.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onPageFinished(String url) {
-
-new Timer().schedule(new TimerTask() {
-    @Override
-    public void run() {
-        MainActivity.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                webView.setVisibility(View.VISIBLE);
-              //  webView.setClickable(true);
-                webView.performClick();
-
-
-
-            }
-        });
-    }
-},700);
+        if (type == Type.youtube)
+            return;
+        webView.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -130,7 +122,7 @@ new Timer().schedule(new TimerTask() {
 
     @Override
     public void onExternalPageRequest(String url) {
-url.toCharArray();
+
     }
 
 
@@ -151,9 +143,9 @@ url.toCharArray();
             if (mCustomView == null) {
                 return BitmapFactory.decodeResource(MainActivity.getActivity().getApplicationContext().getResources(), R.drawable.black);
 
-       //         return null;
+                //         return null;
             }
-           return BitmapFactory.decodeResource(MainActivity.getActivity().getApplicationContext().getResources(), R.drawable.avengers_infinity_war_back_drop);
+            return BitmapFactory.decodeResource(MainActivity.getActivity().getApplicationContext().getResources(), R.drawable.avengers_infinity_war_back_drop);
 
         }
 
@@ -179,4 +171,5 @@ url.toCharArray();
             MainActivity.getActivity().getWindow().getDecorView().setSystemUiVisibility(3846);
         }
     }
+
 }

@@ -2,6 +2,7 @@ package com.example.khaledsabry.entertainment.Adapter;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +13,9 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.YoutubeCustomFragment;
+import com.example.khaledsabry.entertainment.Fragments.WebFragment;
 import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
-import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
 
 import java.util.ArrayList;
 
@@ -23,23 +23,28 @@ import java.util.ArrayList;
  * Created by KhALeD SaBrY on 24-Jul-18.
  */
 
+/**
+ * adapter to put youtube videos in the navigation recycler view
+ * and select from it
+ */
 public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapter.YoutubeViewHolder> {
 
     private ArrayList<Youtube> youtubes;
     //position to check which position is selected
     private int selectedPosition = 0;
+    private DrawerLayout drawerLayout;
+    WebFragment webFragment;
 
-
-    public YoutubeVideoAdapter(ArrayList<Youtube> youtubes) {
+    public YoutubeVideoAdapter(DrawerLayout drawerLayout, ArrayList<Youtube> youtubes, WebFragment webFragment) {
         this.youtubes = youtubes;
-
+        this.webFragment = webFragment;
+        this.drawerLayout = drawerLayout;
         if (youtubes.size() > 0) {
-            if(YoutubeCustomFragment.youTubePlayer != null) {
-                YoutubeCustomFragment.youTubePlayer.loadVideo(youtubes.get(0).getId(),0);
-            }
+            if (webFragment != null)
+                webFragment.loadYoutubeVideoId(youtubes.get(0).getId());
         }
-
     }
+
 
     @Override
     public YoutubeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -100,14 +105,11 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setSelectedPosition(position);
-                  //  YoutubeFragment.youTubePlayer.cueVideo(videoId);
-                  //  YoutubeFragment.youTubePlayer.play();
-                    //YoutubeFragment.drawerLayout.closeDrawer(GravityCompat.END,true);
-                    YoutubeCustomFragment.youTubePlayer.loadVideo(videoId,0);
 
-                    YoutubeCustomFragment.drawerLayout.closeDrawer(GravityCompat.END,true);
-setSelectedPosition(position);
+                    webFragment.loadYoutubeVideoId(videoId);
+                    if (drawerLayout != null)
+                        drawerLayout.closeDrawer(GravityCompat.END, true);
+                    setSelectedPosition(position);
 
                 }
             });
