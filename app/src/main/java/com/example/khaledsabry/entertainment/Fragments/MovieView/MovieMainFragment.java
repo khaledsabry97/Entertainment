@@ -289,7 +289,7 @@ public class MovieMainFragment extends Fragment {
                         public void onSuccess(Movie movie1) {
                             movie.setImdbRate(movie1.getImdbRate());
                             movie.setMpaa(movie1.getMpaa());
-                            getActivity().runOnUiThread(new Runnable() {
+                            MainActivity.getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     setImdbPosterRating();

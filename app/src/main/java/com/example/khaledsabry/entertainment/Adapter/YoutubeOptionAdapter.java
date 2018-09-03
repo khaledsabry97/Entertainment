@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
+import com.example.khaledsabry.entertainment.Fragments.YoutubeCustomFragment;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnYoutubeSuccess;
 import com.example.khaledsabry.entertainment.Items.Youtube;
@@ -44,7 +45,8 @@ public class YoutubeOptionAdapter extends RecyclerView.Adapter<YoutubeOptionAdap
         youtubeController.search(query, year, types.get(selectedPosition), new OnYoutubeSuccess() {
             @Override
             public void onSuccess(ArrayList<Youtube> youtubes) {
-                YoutubeFragment.loadVideos(youtubes);
+               // YoutubeFragment.loadVideos(youtubes);
+                YoutubeCustomFragment.loadVideos(youtubes);
             }
         });
     }
@@ -106,7 +108,7 @@ public class YoutubeOptionAdapter extends RecyclerView.Adapter<YoutubeOptionAdap
                     youtubeController.search(query, year, type, new OnYoutubeSuccess() {
                         @Override
                         public void onSuccess(ArrayList<Youtube> youtubes) {
-                            YoutubeFragment.loadVideos(youtubes);
+                            YoutubeCustomFragment.loadVideos(youtubes);
                             setSelectedPosition(position);
                         }
                     });

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Fragments.YoutubeCustomFragment;
 import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
@@ -33,9 +34,8 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
         this.youtubes = youtubes;
 
         if (youtubes.size() > 0) {
-            if(YoutubeFragment.youTubePlayer != null) {
-                YoutubeFragment.youTubePlayer.cueVideo(youtubes.get(0).getId());
-                YoutubeFragment.youTubePlayer.play();
+            if(YoutubeCustomFragment.youTubePlayer != null) {
+                YoutubeCustomFragment.youTubePlayer.loadVideo(youtubes.get(0).getId(),0);
             }
         }
 
@@ -101,9 +101,12 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoAdapte
                 @Override
                 public void onClick(View v) {
                     setSelectedPosition(position);
-                    YoutubeFragment.youTubePlayer.cueVideo(videoId);
-                    YoutubeFragment.youTubePlayer.play();
-                    YoutubeFragment.drawerLayout.closeDrawer(GravityCompat.END,true);
+                  //  YoutubeFragment.youTubePlayer.cueVideo(videoId);
+                  //  YoutubeFragment.youTubePlayer.play();
+                    //YoutubeFragment.drawerLayout.closeDrawer(GravityCompat.END,true);
+                    YoutubeCustomFragment.youTubePlayer.loadVideo(videoId,0);
+
+                    YoutubeCustomFragment.drawerLayout.closeDrawer(GravityCompat.END,true);
 setSelectedPosition(position);
 
                 }

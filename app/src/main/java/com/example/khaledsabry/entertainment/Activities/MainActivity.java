@@ -1,24 +1,16 @@
 package com.example.khaledsabry.entertainment.Activities;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
-import com.example.khaledsabry.entertainment.Connection.ApiConnections;
-import com.example.khaledsabry.entertainment.Connection.WebApi;
-import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseHelper;
-import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
-import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.R;
 import com.example.khaledsabry.entertainment.Controllers.Constants;
-import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
+import com.example.khaledsabry.entertainment.Fragments.WebFragment;
+import com.example.khaledsabry.entertainment.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static java.nio.file.Files.copy;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         periodicHideNavigation();
 
+
         //load in the mainframe the sign in fragment
-        loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+     //   loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+        loadFragmentNoReturn(R.id.mainFrame, WebFragment.newInstance("sdf"));
 /*
         WebApi.getInstance().watchSoMuchBluRay(new OnWebSuccess.OnMovie() {
             @Override

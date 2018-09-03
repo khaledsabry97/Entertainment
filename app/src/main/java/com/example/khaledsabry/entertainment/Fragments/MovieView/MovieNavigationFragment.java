@@ -21,6 +21,7 @@ import com.example.khaledsabry.entertainment.Database.LocalDeleteController;
 import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
+import com.example.khaledsabry.entertainment.Fragments.YoutubeCustomFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -248,12 +249,12 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 @Override
                 public void onSuccess(Movie movie) {
                     mainMovie = movie;
-                    loadFragment(YoutubeFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
+                    loadFragment(YoutubeCustomFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
 
                 }
             });
         else
-            loadFragment(YoutubeFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
+            loadFragment(YoutubeCustomFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
     }
 
     /**
