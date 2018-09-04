@@ -31,10 +31,12 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
     }
 
     Type type;
+    WebFragment webFragment;
 
     public static WebFragment newInstance(Type type) {
         WebFragment fragment = new WebFragment();
         fragment.type = type;
+
         return fragment;
     }
 
@@ -47,7 +49,7 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
         webView = view.findViewById(R.id.web_view);
         progressBar = view.findViewById(R.id.progress_bar_id);
         imageView = view.findViewById(R.id.back);
-
+        webFragment = this;
         setupWepView();
 
 
@@ -150,7 +152,7 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
         }
 
         public void onHideCustomView() {
-            ((FrameLayout) MainActivity.getActivity().getWindow().getDecorView()).removeView(this.mCustomView);
+            ((FrameLayout) webFragment.getActivity().getWindow().getDecorView()).removeView(this.mCustomView);
             this.mCustomView = null;
             MainActivity.getActivity().getWindow().getDecorView().setSystemUiVisibility(this.mOriginalSystemUiVisibility);
             MainActivity.getActivity().setRequestedOrientation(this.mOriginalOrientation);
@@ -167,9 +169,15 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
             this.mOriginalSystemUiVisibility = MainActivity.getActivity().getWindow().getDecorView().getSystemUiVisibility();
             this.mOriginalOrientation = MainActivity.getActivity().getRequestedOrientation();
             this.mCustomViewCallback = paramCustomViewCallback;
-            ((FrameLayout) MainActivity.getActivity().getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
-            MainActivity.getActivity().getWindow().getDecorView().setSystemUiVisibility(3846);
+            ((FrameLayout) webFragment.getActivity().getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
+         //   MainActivity.getActivity().getWindow().getDecorView().setSystemUiVisibility(3846);
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        webFragment.onDestroy();
+        webFragment = null;
+    }
 }
