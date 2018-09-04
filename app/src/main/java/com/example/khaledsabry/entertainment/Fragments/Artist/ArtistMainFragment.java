@@ -56,7 +56,7 @@ TmdbController tmdbController = new TmdbController();
         birhtDate = v.findViewById(R.id.birthdayid);
         diedIn = v.findViewById(R.id.diedid);
         placeOfBirth = v.findViewById(R.id.placeofbirthid);
-        viewPager = v.findViewById(R.id.viewPagerid);
+        viewPager = v.findViewById(R.id.view_pager_id);
         indicator = v.findViewById(R.id.indicator);
 loadFragment();
         return v;

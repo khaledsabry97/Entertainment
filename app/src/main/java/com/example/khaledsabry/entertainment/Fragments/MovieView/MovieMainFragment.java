@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
@@ -84,7 +83,7 @@ public class MovieMainFragment extends Fragment {
         rate = view.findViewById(R.id.rateid);
         status = view.findViewById(R.id.statusid);
         mpaa = view.findViewById(R.id.mpaaid);
-        viewPager = view.findViewById(R.id.viewPagerid);
+        viewPager = view.findViewById(R.id.view_pager_id);
         indicator = view.findViewById(R.id.indicator);
         revenue = view.findViewById(R.id.revenueid);
         actorButton = view.findViewById(R.id.button_actors_id);

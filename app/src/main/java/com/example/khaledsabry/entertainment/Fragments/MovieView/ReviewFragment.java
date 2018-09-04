@@ -18,8 +18,6 @@ import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
 
-import me.relex.circleindicator.CircleIndicator;
-
 
 public class
 ReviewFragment extends Fragment {
@@ -45,7 +43,7 @@ ReviewFragment extends Fragment {
         // Inflate the layout for this fragment
          v = inflater.inflate(R.layout.fragment_review, container, false);
 
-        viewPager = v.findViewById(R.id.viewPagerid);
+        viewPager = v.findViewById(R.id.view_pager_id);
         //    circleIndicator = v.findViewById(R.id.circleIndicatorid);
 v.setOnClickListener(new View.OnClickListener() {
     @Override
