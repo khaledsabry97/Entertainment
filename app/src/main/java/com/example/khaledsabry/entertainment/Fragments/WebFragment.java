@@ -174,10 +174,5 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        webFragment.onDestroy();
-        webFragment = null;
-    }
+
 }

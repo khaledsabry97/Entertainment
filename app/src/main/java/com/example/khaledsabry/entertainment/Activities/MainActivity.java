@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Constants.getInstance().setTablet(getResources().getBoolean(R.bool.isTablet));
 
 
-        periodicHideNavigation();
+       periodicHideNavigation();
 
 
         //load in the mainframe the sign in fragment
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
         // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
+        /*decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
                         // Set the content to appear under the system bars so that the
                         // content doesn't resize when the system bars hide and show.
@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);*/
+        decorView.setSystemUiVisibility(3846);
 
 
     }

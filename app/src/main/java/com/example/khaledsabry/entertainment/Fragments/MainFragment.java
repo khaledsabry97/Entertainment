@@ -101,8 +101,9 @@ public class MainFragment extends Fragment {
                         break;
                     case R.id.news:
                         MainActivity.getActivity().loadFragmentNoReturn(R.id.mainContainer, NewsFragment.newInstance());
+                        break;
                     case R.id.topGenres:
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer,TopGenresFragment.newInstance());
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TopGenresFragment.newInstance());
                         break;
                     default:
                         break;
