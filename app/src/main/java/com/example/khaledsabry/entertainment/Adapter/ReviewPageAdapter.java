@@ -26,7 +26,7 @@ public class ReviewPageAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View v = LayoutInflater.from(container.getContext()).inflate(R.layout.review, container, false);
+        View v = LayoutInflater.from(container.getContext()).inflate(R.layout.cardview_review, container, false);
         TextView name = v.findViewById(R.id.title);
         TextView content = v.findViewById(R.id.contentid);
 

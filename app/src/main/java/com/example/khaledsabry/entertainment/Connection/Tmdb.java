@@ -225,7 +225,9 @@ public class Tmdb {
                 JSONObject object = jsonArray.getJSONObject(i);
                 String name = object.getString(this.author);
                 String content = object.getString(this.content);
-                Review review = new Review(content, name);
+                Review review = new Review();
+                review.setContent(content);
+                review.setAuthor(name);
                 reviews1.add(review);
                 i++;
             }
@@ -555,8 +557,9 @@ public class Tmdb {
                 JSONObject object = jsonArray.getJSONObject(i);
                 String author = object.getString(this.author);
                 String content = object.getString(this.content);
-                Review review = new Review(content, author);
-
+                Review review = new Review();
+                review.setContent(content);
+                review.setAuthor(name);
                 reviews.add(review);
                 i++;
             }

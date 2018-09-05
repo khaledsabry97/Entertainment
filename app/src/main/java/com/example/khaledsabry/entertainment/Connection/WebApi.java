@@ -10,6 +10,7 @@ import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.News;
+import com.example.khaledsabry.entertainment.Items.Review;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 
 import org.json.JSONArray;
@@ -24,7 +25,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -637,40 +637,153 @@ public class WebApi {
      */
     public void rottenTomatoesMoviePreview(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
 
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v1.0/movies?q=" + movie + " " + year, new OnSuccess.Json() {
+                    @Override
+                    public void onSuccess(JSONObject jsonObject) {
+                        final Movie movie1 = new Movie();
+                        try {
+                            JSONArray array = jsonObject.getJSONArray("movies");
+                            int i = 0;
+                            while (!array.isNull(0)) {
+                                JSONObject object = array.getJSONObject(i);
+                                String ryear = String.valueOf(object.getInt("year"));
+                                if (year.equals(ryear))
+                                    break;
+                                else
+                                    i++;
+
+
+                            }
+                            if (array.isNull(i))
+                                return;
+                            JSONObject object = array.getJSONObject(i);
+
+                            JSONObject ratings = object.getJSONObject("ratings");
+                            float score = ratings.getInt("critics_score");
+                            String criticsRatingType = ratings.getString("critics_rating");
+                            String tomatoesId = object.getString("id");
+                            movie1.setRottentTomatoesRatingType(criticsRatingType);
+                            movie1.setMovieRottenTomatoesId(tomatoesId);
+                            movie1.setRottenTomatoesRate(score / 10);
+                            MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    listener.onSuccess(movie1);
+
+                                }
+                            });
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+
+
+    }
+
+    public void rottenTomatoesMovieReviews(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
+
         ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v1.0/movies?q=" + movie + " " + year, new OnSuccess.Json() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
-                Movie movie1 = new Movie();
-                try {
-                    JSONArray array = jsonObject.getJSONArray("movies");
-                    int i = 0;
-                    while (!array.isNull(0)) {
-                        JSONObject object = array.getJSONObject(i);
-                        String ryear = String.valueOf(object.getInt("year"));
-                        if (year.equals(ryear))
-                            break;
-                        else
-                            i++;
+            public void onSuccess(final JSONObject jsonObject) {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Movie movie1 = new Movie();
+
+                        try {
+                            JSONArray array = jsonObject.getJSONArray("movies");
+                            int i = 0;
+                            while (!array.isNull(0)) {
+                                JSONObject object = array.getJSONObject(i);
+                                String ryear = String.valueOf(object.getInt("year"));
+                                if (year.equals(ryear))
+                                    break;
+                                else
+                                    i++;
 
 
+                            }
+                            if (array.isNull(i))
+                                return;
+                            JSONObject object = array.getJSONObject(i);
+
+                            JSONObject links = object.getJSONObject("links");
+
+                            String movieLink = links.getString("alternate");
+                            String reviewLink = movieLink + "reviews";
+
+                            Document doc = Jsoup.connect(reviewLink).timeout(10000).get();
+                            if (doc == null) {
+                                listener.onSuccess(movie1);
+                                return;
+                            }
+
+                            Elements reviews = doc.getElementsByClass("row review_table_row");
+
+                            ArrayList<Review> reviews1 = new ArrayList<>();
+                            for (int j = 0; j < reviews.size(); j++) {
+                                try {
+
+
+                                    Element review = reviews.get(i);
+                                    Element name = review.getElementsByClass("unstyled bold articleLink").get(0);
+                                    Element image = review.getElementsByClass("critic_thumb fullWidth").get(0);
+                                    Elements reviewText = review.getElementsByClass("the_review");
+                                    Elements date = review.getElementsByClass("review_date subtle small");
+                                    Elements reviewIcons = review.getElementsByClass("col-xs-16 review_container");
+                                    Elements reviewIconss = reviewIcons.get(0).children();
+
+                                    String reviewerName = name.text();
+                                    String imageUrl = image.attr("src");
+
+                                    String reviewMeter = reviewIconss.get(0).className();
+                                    String certificate = "";
+                                    if (reviewMeter.contains("small fresh"))
+                                        certificate = "Fresh";
+                                    else if (reviewMeter.contains("small rotten"))
+                                        certificate = "Rotten";
+
+                                    String movieReview = reviewText.get(0).text();
+                                    String reviewDate = date.get(0).text();
+
+
+                                    Review review1 = new Review();
+                                    review1.setAuthor(reviewerName);
+                                    review1.setAuthorImage(imageUrl);
+                                    review1.setRottenTomatoesType(certificate);
+                                    review1.setReviewDate(reviewDate);
+                                    review1.setContent(movieReview);
+
+
+                                    reviews1.add(review1);
+
+                                } catch (Exception e) {
+
+                                }
+                            }
+
+                            movie1.setReviews(reviews1);
+
+
+                            listener.onSuccess(movie1);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    if (array.isNull(i))
-                        return;
-                    JSONObject object = array.getJSONObject(i);
 
-                    JSONObject ratings = object.getJSONObject("ratings");
-                    float score = ratings.getInt("critics_score");
-                    String criticsRatingType = ratings.getString("critics_rating");
-                    String tomatoesId = object.getString("id");
-                    movie1.setRottentTomatoesRatingType(criticsRatingType);
-                    movie1.setMovieRottenTomatoesId(tomatoesId);
-                    movie1.setRottenTomatoesRate(score / 10);
-                    listener.onSuccess(movie1);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                });
             }
         });
 

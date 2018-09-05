@@ -5,8 +5,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.Constants;
 import com.example.khaledsabry.entertainment.Fragments.SignInFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
+import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.Timer;
@@ -44,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         //load in the mainframe the sign in fragment
-        loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+       // loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
    //     loadFragmentNoReturn(R.id.mainFrame, WebFragment.newInstance("sdf"));
-/*
-        WebApi.getInstance().watchSoMuchBluRay(new OnWebSuccess.OnMovie() {
+
+        WebApi.getInstance().rottenTomatoesMovieReviews("avengers infinity war","2018",new OnWebSuccess.OnMovie() {
             @Override
             public void onSuccess(Movie movie) {
 
             }
         });
-*/
+
     }
 
     //if the activity/app is not on the focus then hide systemUi
