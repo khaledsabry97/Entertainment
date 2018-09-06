@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Fragments.MovieView;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -61,11 +62,17 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     //to navigate to different topics for movie
     BottomNavigationView bottomNavigationView;
 
-    public static MovieNavigationFragment newInstance(int movieId, int index) {
-        MovieNavigationFragment fragment = new MovieNavigationFragment();
+    public static MovieNavigationFragment newInstance(final int movieId, int index) {
+        final MovieNavigationFragment fragment = new MovieNavigationFragment();
         fragment.movieId = movieId;
         fragment.index = index;
-        fragment.categoryController.addHistory(String.valueOf(movieId), null, LiteDatabaseTables.Category.constantMovie);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                fragment.categoryController.addHistory(String.valueOf(movieId), null, LiteDatabaseTables.Category.constantMovie);
+
+            }
+        });
         return fragment;
     }
 
@@ -95,11 +102,10 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     }
 
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Functions.stopConnectionsAndStartImageGlide();
-        if(navigationId == item.getItemId() && !isFirstTime) {
+        if (navigationId == item.getItemId() && !isFirstTime) {
             return false;
         }
         progressBar.setVisibility(View.VISIBLE);

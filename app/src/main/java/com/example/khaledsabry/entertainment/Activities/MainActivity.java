@@ -47,15 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //load in the mainframe the sign in fragment
-       // loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
+        loadFragmentWithReturn(R.id.mainFrame, SignInFragment.newInstance());
    //     loadFragmentNoReturn(R.id.mainFrame, WebFragment.newInstance("sdf"));
 
-        WebApi.getInstance().rottenTomatoesMovieReviews("avengers infinity war","2018",new OnWebSuccess.OnMovie() {
-            @Override
-            public void onSuccess(Movie movie) {
 
-            }
-        });
 
     }
 

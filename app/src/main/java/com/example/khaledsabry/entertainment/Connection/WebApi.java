@@ -591,9 +591,9 @@ public class WebApi {
             protected Movie doInBackground(Void... voids) {
                 Movie movie = new Movie();
                 try {
-                    org.jsoup.nodes.Document
-                            doc;
-
+                    Document doc;
+if(imdbId == null || imdbId.isEmpty())
+    return movie;
                     doc = Jsoup.connect("https://www.imdb.com/title/" + imdbId).get();
 
                     if (doc == null)
@@ -688,7 +688,7 @@ public class WebApi {
 
     }
 
-    public void rottenTomatoesMovieReviews(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
+    private void rottenTomatoesMovieReviews(final String movie, final String year, final String addition, final OnWebSuccess.OnMovie listener) {
 
         ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v1.0/movies?q=" + movie + " " + year, new OnSuccess.Json() {
             @Override
@@ -696,7 +696,7 @@ public class WebApi {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        Movie movie1 = new Movie();
+                        final Movie movie1 = new Movie();
 
                         try {
                             JSONArray array = jsonObject.getJSONArray("movies");
@@ -719,7 +719,8 @@ public class WebApi {
 
                             String movieLink = links.getString("alternate");
                             String reviewLink = movieLink + "reviews";
-
+                            if (!addition.isEmpty())
+                                reviewLink += addition;
                             Document doc = Jsoup.connect(reviewLink).timeout(10000).get();
                             if (doc == null) {
                                 listener.onSuccess(movie1);
@@ -733,7 +734,7 @@ public class WebApi {
                                 try {
 
 
-                                    Element review = reviews.get(i);
+                                    Element review = reviews.get(j);
                                     Element name = review.getElementsByClass("unstyled bold articleLink").get(0);
                                     Element image = review.getElementsByClass("critic_thumb fullWidth").get(0);
                                     Elements reviewText = review.getElementsByClass("the_review");
@@ -772,8 +773,13 @@ public class WebApi {
 
                             movie1.setReviews(reviews1);
 
+                            MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    listener.onSuccess(movie1);
 
-                            listener.onSuccess(movie1);
+                                }
+                            });
 
 
                         } catch (JSONException e) {
@@ -788,6 +794,26 @@ public class WebApi {
         });
 
     }
+
+    public void rottenTomatoesMovieReviewsAllCritics(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesMovieReviews(movie, year,"", listener);
+    }
+
+    public void rottenTomatoesMovieReviewsTopCritics(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesMovieReviews(movie, year,"/?type=top_critics", listener);
+
+    }
+
+    public void rottenTomatoesMovieReviewsFresh(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesMovieReviews(movie, year,"/?sort=fresh", listener);
+
+    }
+
+    public void rottenTomatoesMovieReviewsRotten(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesMovieReviews(movie, year,"/?sort=rotten", listener);
+
+    }
+
 
     /**
      * gets the top 250 movies fron the imdb

@@ -3,9 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_3sdp"
+    android:padding="@dimen/_5sdp"
     app:cardCornerRadius="7dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:background="@drawable/red1">
 
+
+        <TextView
+            android:id="@+id/date_id"
+            style="@style/TextNormalRoundLine"
+            android:textColor="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            tools:text="February 21, 2018" />
+
+        <TextView
+            android:id="@+id/reviewer_name_id"
+            style="@style/TextCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:autoSizeTextType="none"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+            tools:text="Todd Everett " />
+
+
+        <ImageView
+            android:id="@+id/reviewer_poster_id"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_below="@+id/reviewer_name_id"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+
+            android:scaleType="fitXY"
+            tools:src="@drawable/batman" />
+
+        <ImageView
+            android:id="@+id/tomatoes_poster_id"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+
+            android:layout_alignBottom="@+id/reviewer_poster_id"
+android:layout_alignLeft="@+id/reviewer_poster_id"
+            android:layout_alignRight="@+id/reviewer_poster_id"
+            android:layout_centerHorizontal="true"
+            tools:src="@drawable/fresh" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_below="@+id/reviewer_name_id"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_toRightOf="@+id/reviewer_poster_id"
+            android:background="@drawable/round"
+            app:layout_constraintBottom_toBottomOf="parent"
+          >
+
+            <TextView
+                android:id="@+id/review_content_id"
+                style="@style/TextNormal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:textAlignment="textStart" />
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

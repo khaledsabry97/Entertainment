@@ -53,8 +53,9 @@ private boolean allowToMove = true;
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
-
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.slideshowimage, container, false);
+
+
         ImageView imageView = view.findViewById(R.id.imageids);
         ImageController.putImageMidQuality(images.get(position), imageView);
 
@@ -64,7 +65,9 @@ private boolean allowToMove = true;
                 MainActivity.loadFragmentWithReturn(R.id.mainContainer, FullPoster.newInstance(images.get(position)));
             }
         });
-        container.addView(view, 0);
+        //container.addView(view, 0);
+        container.addView(view,0);
+
 
         return view;
 
