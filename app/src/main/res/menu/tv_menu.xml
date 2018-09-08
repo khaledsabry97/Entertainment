@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/backButtonid"
+        android:id="@+id/navigation_recommendation"
         android:icon="@drawable/arrowleft"
         android:title="return" />
 
@@ -19,6 +19,11 @@
         android:id="@+id/images"
         android:icon="@drawable/images"
         android:title="Photos" />
+
+    <item
+        android:id="@+id/navigation_youtube"
+        android:icon="@drawable/youtube"
+        android:title="Videos" />
 
 
 </menu>

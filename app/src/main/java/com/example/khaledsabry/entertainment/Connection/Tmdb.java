@@ -689,6 +689,28 @@ public class Tmdb {
     }
 
     /**
+     * get the tv recommendations
+     * @param jsonObject a json object contain all the recommendation and simialr to tv
+     * @return a list of tvs object
+     */
+    public ArrayList<Tv> getTvRecommendationOrSimilar(JSONObject jsonObject) {
+        ArrayList<Tv> tvs = new ArrayList<>();
+
+        try {
+            JSONArray array = jsonObject.getJSONArray(this.results);
+            int i = 0;
+            while (!array.isNull(i)) {
+                tvs.add(getSearchTv(array.getJSONObject(i)));
+                i++;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return tvs;
+    }
+
+    /**
      * get from search a movie info
      *
      * @param object json object has info to extract

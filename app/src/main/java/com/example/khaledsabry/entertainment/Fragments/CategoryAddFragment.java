@@ -86,7 +86,7 @@ fragment.type = type;
                     else {
                         String s = String.valueOf(keys.get(i));
                         Integer id = Integer.valueOf(s);
-                        categoryController.removeItem(id, tmdbId, new OnSuccess.bool() {
+                        categoryController.removeItem(id, tmdbId,type, new OnSuccess.bool() {
                             @Override
                             public void onSuccess(boolean state) {
 

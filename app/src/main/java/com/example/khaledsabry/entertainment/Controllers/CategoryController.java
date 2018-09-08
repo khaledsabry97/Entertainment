@@ -70,8 +70,8 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
 
     }
 
-    public void removeItem(int categoryId, String tmdbId, OnSuccess.bool listener) {
-        databaseController.deleteController().CategoryItemRemove(categoryId, tmdbId, new OnDatabaseSuccess.bool() {
+    public void removeItem(int categoryId, String tmdbId,int constantType, OnSuccess.bool listener) {
+        databaseController.deleteController().CategoryItemRemove(categoryId, tmdbId,constantType, new OnDatabaseSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
 
@@ -80,10 +80,7 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
     }
 
     //get categories to select from them to add to the category
-    public void getCategories(final int tmdbId) {
-        MovieMainFragment.categoryNames = null;
-        MovieMainFragment.categoryCheacks = null;
-        MovieMainFragment.categoryIds = null;
+    public void getCategories(final int tmdbId, final int constantContent, final OnSuccess.objects listener) {
         databaseController.selectController().categoryGet(UserData.getInstance().getUserId(), new OnDatabaseSuccess.array() {
             @Override
             public void onSuccess(ArrayList<JSONObject> jsonObjects) {
@@ -91,7 +88,7 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
                 final ArrayList<Integer> totalId = (ArrayList<Integer>) (Object) getArray(categoryTable.id, jsonObjects);
 
 
-                databaseController.selectController().CategoryItemGetByTmdb(UserData.getInstance().getUserId(), tmdbId, new OnDatabaseSuccess.array() {
+                databaseController.selectController().CategoryItemGetByTmdb(UserData.getInstance().getUserId(), tmdbId,constantContent, new OnDatabaseSuccess.array() {
                     @Override
                     public void onSuccess(ArrayList<JSONObject> jsonObjects) {
                         ArrayList<Integer> id = (ArrayList<Integer>) (Object) getArray(categoryItemTable.categoryId, jsonObjects);
@@ -103,9 +100,13 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
                                 booleans.add(false);
                         }
 
-                        MovieMainFragment.categoryNames = names;
-                        MovieMainFragment.categoryCheacks = booleans;
-                        MovieMainFragment.categoryIds = totalId;
+                        ArrayList<Object> objects = new ArrayList<Object>();
+                        objects.add(totalId);
+                        objects.add(names);
+                        objects.add(booleans);
+                        listener.onSuccess(objects);
+
+
 
                     }
                 });

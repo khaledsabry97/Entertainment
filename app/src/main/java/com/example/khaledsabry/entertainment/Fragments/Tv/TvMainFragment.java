@@ -3,59 +3,46 @@ package com.example.khaledsabry.entertainment.Fragments.Tv;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
-import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Fragments.CastFragment;
-import com.example.khaledsabry.entertainment.Fragments.CrewFragment;
-import com.example.khaledsabry.entertainment.Fragments.ProductionCompanyFragment;
+import com.example.khaledsabry.entertainment.Controllers.CategoryController;
+import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.ReviewFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
+
+import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
 
 public class TvMainFragment extends Fragment {
 
-    static int tvId;
-    TextView title;
-    static Tv tv = null;
-
-    static int currentTvId = -1;
-    TextView overviewText;
-    TextView firstAirDate;
-    TextView lastAirDate;
-    TextView runTimeText;
-    TextView genres;
-
-    TextView numberOfSeasons;
-    TextView numberOfEpisodes;
-
-    TextView rate;
-    TextView status;
+    Tv tv;
+    ImageView addToCategory, addFavourite, addWatchLater;
+    TextView reviews, overview;
+    DrawerLayout drawerLayout;
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
-    Button actorButton;
-    Button crewButton;
-    NestedScrollView scrollView;
-    View actorCrewLayout;
-    static FrameLayout reviewLayout;
 
-    public static TvMainFragment newInstance(int tvId) {
+    CategoryController categoryController = new CategoryController();
+    public  ArrayList<String> categoryNames;
+    public  ArrayList<Integer> categoryIds;
+    public  ArrayList<Boolean> categoryChecked;
+
+    public static TvMainFragment newInstance(Tv tv) {
         TvMainFragment fragment = new TvMainFragment();
-        TvMainFragment.tvId = tvId;
+        fragment.tv = tv;
         return fragment;
     }
 
@@ -63,110 +50,143 @@ public class TvMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              // Inflate the layout for this fragment
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_tv_main, container, false);
-        title = v.findViewById(R.id.titleId);
-        overviewText = v.findViewById(R.id.overviewID);
-        firstAirDate = v.findViewById(R.id.firstairdateid);
-        runTimeText = v.findViewById(R.id.runtimeid);
-        genres = v.findViewById(R.id.genres_id);
-        lastAirDate = v.findViewById(R.id.lastairdateid);
-        rate = v.findViewById(R.id.rateid);
-        actorCrewLayout = v.findViewById(R.id.actors_crews_id);
-        numberOfEpisodes = v.findViewById(R.id.numberofepisodesid);
-        viewPager = v.findViewById(R.id.view_pager_id);
-        indicator = v.findViewById(R.id.indicator);
-        numberOfSeasons = v.findViewById(R.id.numberofseasonsid);
-        actorButton = v.findViewById(R.id.button_actors_id);
-        crewButton = v.findViewById(R.id.button_crew_id);
-        scrollView = v.findViewById(R.id.sideid);
-        scrollView.setVisibility(View.INVISIBLE);
-        reviewLayout = v.findViewById(R.id.ReviewLayoutid);
-        getMovieDetails();
-        return v;
+        View view = inflater.inflate(R.layout.fragment_tv_main, container, false);
+
+        viewPager = view.findViewById(R.id.view_pager_id);
+        indicator = view.findViewById(R.id.indicator);
+        reviews = view.findViewById(R.id.reviews_id);
+        overview = view.findViewById(R.id.overview_id);
+        addToCategory = view.findViewById(R.id.add_to_category_id);
+        drawerLayout = view.findViewById(R.id.drawer_layout);
+        addWatchLater = view.findViewById(R.id.add_to_watch_later_id);
+        addFavourite = view.findViewById(R.id.add_to_favourite_id);
+        categoryController = new CategoryController();
+        setObjects();
+        return view;
     }
 
 
-    private void setObjects(Tv tv) {
-        overviewText.setText(tv.getOverView());
-        firstAirDate.setText(tv.getFirstAirDate());
-        runTimeText.setText(tv.getRunTime() + " min");
-        genres.setText(tv.getGenreList());
-        numberOfSeasons.setText(String.valueOf(tv.getNumberOfSeasons()));
-        numberOfEpisodes.setText(String.valueOf(tv.getNumberOfEpisodes()));
-        lastAirDate.setText(tv.getLastAirDate());
-        rate.setText(tv.getRateTmdb() + "/10");
-        title.setText(tv.getTitle());
-        viewPagerAdapter = new MainPosterViewPager(tv.getPosters());
-        viewPager.setAdapter(viewPagerAdapter);
-        indicator.setViewPager(viewPager);
-        if (tv.getActors().size() == 0)
-            actorCrewLayout.setVisibility(View.GONE);
-        loadActorFragment();
-        loadReviewFragment();
-        loadProductionFragment();
+    private void setObjects() {
 
-        Functions functions = new Functions();
-        functions.movePoster(viewPager, viewPagerAdapter, 3000, 2000);
-        scrollView.setVisibility(View.VISIBLE);
+        setUpViewPager();
 
+        setUpCategories();
 
-        actorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadActorFragment();
+        setUpOverviewFragment();
+        setUpReviewsFragment();
 
-            }
-        });
+        loadOverviewFragment();
 
-        crewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadCrewFragment();
-            }
-        });
 
     }
 
-    private void loadProductionFragment() {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.productionframelayoutid, ProductionCompanyFragment.newInstance(tv.getProductionCompanies())).commit();
-
-    }
-
-
-    public void getMovieDetails() {
-        TmdbController tmdbController = new TmdbController();
-        if (tvId != currentTvId)
-            tmdbController.getTv(tvId, new OnTvSuccess() {
-                @Override
-                public void onSuccess(Tv tv) {
-                    TvMainFragment.tv = tv;
-
-                    setObjects(tv);
-                }
-            });
-
-        else
-            setObjects(tv);
-    }
-
-    private void loadActorFragment() {
-        CastFragment castFragment = CastFragment.newInstance(tv.getActors());
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, castFragment).commit();
-    }
-
-    private void loadCrewFragment() {
-        CrewFragment crewFragment = CrewFragment.newInstance(tv.getCrew());
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, crewFragment).commit();
-    }
 
     private void loadReviewFragment() {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ReviewLayoutid, ReviewFragment.newInstance(tv.getReviews())).commit();
     }
 
-    public static void hideReviewView() {
-        reviewLayout.setVisibility(View.GONE);
+
+    private void loadOverviewFragment() {
+        loadFragment(TvOverViewFragment.newInstance(tv));
     }
 
+    private void setUpReviewsFragment() {
+        reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(ReviewFragment.newInstance(tv));
+            }
+        });
+    }
+
+    void loadFragment(Fragment fragment) {
+        drawerLayout.closeDrawer(GravityCompat.END, true);
+        MainActivity.loadFragmentNoReturn(R.id.half_frame_layout, fragment);
+    }
+
+    private void setUpOverviewFragment() {
+        overview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadOverviewFragment();
+            }
+        });
+    }
+
+    private void setUpCategories() {
+        loadCategories();
+        addToCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAddToCategory();
+            }
+        });
+
+        addFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAddFavourite();
+            }
+        });
+
+
+        addWatchLater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAddWatchLater();
+            }
+        });
+
+
+    }
+
+    private void setUpViewPager() {
+        viewPagerAdapter = new MainPosterViewPager(tv.getPosters());
+        viewPager.setAdapter(viewPagerAdapter);
+        indicator.setViewPager(viewPager);
+
+        viewPagerAdapter.movePoster(viewPager, viewPagerAdapter, 7000, 4000);
+
+    }
+
+    private void loadCategories() {
+        categoryController.getCategories(tv.getId(), 2, new OnSuccess.objects() {
+            @Override
+            public void onSuccess(ArrayList<Object> objects) {
+                categoryIds = (ArrayList<Integer>) objects.get(0);
+                categoryNames = (ArrayList<String>) objects.get(1);
+                categoryChecked = (ArrayList<Boolean>) objects.get(2);
+            }
+        });
+    }
+
+
+    void setAddToCategory() {
+        if (categoryIds != null)
+            openCategoryAdd(categoryNames, categoryIds, categoryChecked);
+        else
+            loadCategories();
+    }
+
+    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 2, String.valueOf(tv.getId()))).commit();
+    }
+
+
+    void setAddFavourite() {
+        categoryController.addFavourite(String.valueOf(tv.getId()), null, categoryController.constants.tv, new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                if (state)
+                    categoryController.toast(tv.getTitle() + " has been added to your Favourite categoryItem");
+
+            }
+        });
+    }
+
+    void setAddWatchLater() {
+
+    }
 }
 
 

@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment.Fragments.MovieView;
+package com.example.khaledsabry.entertainment.Fragments.Tv;
 
 
 import android.os.Bundle;
@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.khaledsabry.entertainment.Adapter.MovieRecommendationsPagerAdapter;
+import com.example.khaledsabry.entertainment.Adapter.TvRecommendationsPagerAdapter;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 import com.github.angads25.toggle.LabeledSwitch;
 import com.github.angads25.toggle.interfaces.OnToggledListener;
@@ -22,11 +24,12 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class MovieRecommendedAndSimilarFragment extends Fragment {
-
+public class TvRecommendedAndSimilarFragment extends Fragment {
     //list of movies to show them
-    private ArrayList<Movie> recommendedMovies = new ArrayList<>();
-    private ArrayList<Movie> similarMovies = new ArrayList<>();
+
+    ArrayList<Tv> recommendedTvs;
+    ArrayList<Tv> similarTvs;
+
     //to stop auto scroll
     LabeledSwitch autoChange;
 
@@ -34,15 +37,15 @@ public class MovieRecommendedAndSimilarFragment extends Fragment {
     ViewPager viewPager;
     CircleIndicator indicator;
 
-    MovieRecommendationsPagerAdapter movieRecommendationsPagerAdapter;
 
-    public static MovieRecommendedAndSimilarFragment newInstance(ArrayList<Movie> recommendedMovies, ArrayList<Movie> similarMovies) {
-        MovieRecommendedAndSimilarFragment fragment = new MovieRecommendedAndSimilarFragment();
-        fragment.recommendedMovies = recommendedMovies;
-        fragment.similarMovies = similarMovies;
+    TvRecommendationsPagerAdapter tvRecommendationsPagerAdapter;
+
+    public static TvRecommendedAndSimilarFragment newInstance(ArrayList<Tv> recommendedTvs, ArrayList<Tv> similarTvs) {
+        TvRecommendedAndSimilarFragment fragment = new TvRecommendedAndSimilarFragment();
+        fragment.recommendedTvs = recommendedTvs;
+        fragment.similarTvs = similarTvs;
         return fragment;
     }
-
 
 
     @Override
@@ -59,17 +62,18 @@ public class MovieRecommendedAndSimilarFragment extends Fragment {
         RelativeLayout relativeLayout = view.findViewById(R.id.relative_layout_id);
         relativeLayout.bringChildToFront(autoChange);
 
-        setObjects(recommendedMovies);
+        setObjects(recommendedTvs);
         moveFragment();
         return view;
     }
 
     /**
      * we pass a list of movies to show similar/recommended
-     * @param movies list of movies to show
+     *
+     * @param tvs list of movies to show
      */
-    private void setObjects(ArrayList<Movie> movies) {
-        movieRecommendationsPagerAdapter = new MovieRecommendationsPagerAdapter(movies);
+    private void setObjects(ArrayList<Tv> tvs) {
+        tvRecommendationsPagerAdapter = new TvRecommendationsPagerAdapter(tvs);
 
         autoChange.setOnToggledListener(new OnToggledListener() {
             @Override
@@ -77,7 +81,7 @@ public class MovieRecommendedAndSimilarFragment extends Fragment {
                 autoChange.setEnabled(!autoChange.isEnabled());
             }
         });
-        viewPager.setAdapter(movieRecommendationsPagerAdapter);
+        viewPager.setAdapter(tvRecommendationsPagerAdapter);
         indicator.setViewPager(viewPager);
     }
 
@@ -89,9 +93,9 @@ public class MovieRecommendedAndSimilarFragment extends Fragment {
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (movieRecommendationsPagerAdapter == null || !autoChange.isOn())
+                if (tvRecommendationsPagerAdapter == null || !autoChange.isOn())
                     return;
-                if (movieRecommendationsPagerAdapter.getCount() == viewPager.getCurrentItem() + 1)
+                if (tvRecommendationsPagerAdapter.getCount() == viewPager.getCurrentItem() + 1)
                     viewPager.setCurrentItem(0, true);
                 else
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);

@@ -12,13 +12,15 @@ public class DeleteController extends DatabaseController {
     private String table ="";
     private String condition = "";
 
-    public void CategoryItemRemove(int categoryId, String tmdbId, OnDatabaseSuccess.bool listener) {
+    public void CategoryItemRemove(int categoryId, String tmdbId,int type, OnDatabaseSuccess.bool listener) {
 
         tmdbId = addqoutes(tmdbId);
 
         condition += categoryItemTable.categoryId + equal + categoryId;
         condition += and;
         condition += categoryItemTable.tmdbId + equal + tmdbId;
+        condition +=and;
+        condition += categoryItemTable.type +equal + type;
 
         server.delete(createDeleteQuery(categoryItemTable.tableName, condition), listener);
 

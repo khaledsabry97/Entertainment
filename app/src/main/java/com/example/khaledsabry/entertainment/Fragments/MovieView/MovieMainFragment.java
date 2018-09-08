@@ -1,46 +1,29 @@
 package com.example.khaledsabry.entertainment.Fragments.MovieView;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
-import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
-import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.CastFragment;
+import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
-import com.example.khaledsabry.entertainment.Fragments.CrewFragment;
-import com.example.khaledsabry.entertainment.Fragments.ProductionCompanyFragment;
-import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
-import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
-
-import static com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment.movie;
 
 
 public class MovieMainFragment extends Fragment {
@@ -55,9 +38,9 @@ public class MovieMainFragment extends Fragment {
 
 
     CategoryController categoryController = new CategoryController();
-    public static ArrayList<String> categoryNames;
-    public static ArrayList<Integer> categoryIds;
-    public static ArrayList<Boolean> categoryCheacks;
+    public  ArrayList<String> categoryNames;
+    public  ArrayList<Integer> categoryIds;
+    public  ArrayList<Boolean> categoryChecked;
 
     public static MovieMainFragment newInstance(Movie movie) {
         MovieMainFragment fragment = new MovieMainFragment();
@@ -75,7 +58,7 @@ public class MovieMainFragment extends Fragment {
         reviews = view.findViewById(R.id.reviews_id);
         overview = view.findViewById(R.id.overview_id);
         addToCategory = view.findViewById(R.id.add_to_category_id);
-drawerLayout = view.findViewById(R.id.drawer_layout);
+        drawerLayout = view.findViewById(R.id.drawer_layout);
         addWatchLater = view.findViewById(R.id.add_to_watch_later_id);
         addFavourite = view.findViewById(R.id.add_to_favourite_id);
         categoryController = new CategoryController();
@@ -119,7 +102,7 @@ drawerLayout = view.findViewById(R.id.drawer_layout);
 
     void loadFragment(Fragment fragment) {
         drawerLayout.closeDrawer(GravityCompat.END, true);
-        MainActivity.loadFragmentNoReturn(R.id.half_movie_id, fragment);
+        MainActivity.loadFragmentNoReturn(R.id.half_frame_layout, fragment);
     }
 
     private void setUpOverviewFragment() {
@@ -169,13 +152,22 @@ drawerLayout = view.findViewById(R.id.drawer_layout);
 
 
     private void loadCategories() {
-        categoryController.getCategories(movie.getMovieId());
+        categoryController.getCategories(movie.getMovieId(), 1, new OnSuccess.objects() {
+            @Override
+            public void onSuccess(ArrayList<Object> objects) {
+                categoryIds = (ArrayList<Integer>) objects.get(0);
+                categoryNames = (ArrayList<String>) objects.get(1);
+                categoryChecked = (ArrayList<Boolean>) objects.get(2);
+            }
+        });
     }
 
 
     void setAddToCategory() {
         if (categoryIds != null)
-            openCategoryAdd(categoryNames, categoryIds, categoryCheacks);
+            openCategoryAdd(categoryNames, categoryIds, categoryChecked);
+        else
+            loadCategories();
     }
 
     public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {

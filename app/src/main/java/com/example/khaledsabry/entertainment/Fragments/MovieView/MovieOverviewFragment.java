@@ -144,13 +144,6 @@ fragment.movie = movie;
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.actors_crews_id, crewFragment).commit();
     }
 
-    private void loadReviewFragment() {
-        if (movie == null)
-            return;
-        MainActivity.loadFragmentNoReturn(R.id.half_movie_id, ReviewFragment.newInstance(movie));
-    }
-
-
 
 
 

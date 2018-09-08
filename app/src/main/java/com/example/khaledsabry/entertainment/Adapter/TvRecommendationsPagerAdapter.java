@@ -11,34 +11,32 @@ import android.widget.TextView;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
+import com.example.khaledsabry.entertainment.Fragments.Tv.TvNavigationFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by KhALeD SaBrY on 02-Jul-18.
- */
-
-public class RecommendationsPagerAdapter extends PagerAdapter {
+public class TvRecommendationsPagerAdapter extends PagerAdapter {
     ImageView backdrop;
     TextView title, genres, overview, rate;
     CircleImageView poster;
-    ArrayList<Movie> movies;
+    ArrayList<Tv> tvs;
 
-
-    public RecommendationsPagerAdapter(ArrayList<Movie> movies) {
+    public TvRecommendationsPagerAdapter(ArrayList<Tv> tvs) {
         super();
-        this.movies = movies;
+        this.tvs = tvs;
     }
+
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.cardview_recommendations_similar, container, false);
-        final Movie movie = movies.get(position);
+        final Tv tv = tvs.get(position);
 
         //get the ui from the layout
         poster = view.findViewById(R.id.poster_image);
@@ -49,20 +47,20 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
         rate = view.findViewById(R.id.rate);
 
         //upload the poster and backDropImage
-        ImageController.putImageLowQuality(movie.getPosterImage(), poster);
-        ImageController.putImageMidQuality(movie.getBackDropPoster(), backdrop);
+        ImageController.putImageLowQuality(tv.getPosterImage(), poster);
+        ImageController.putImageMidQuality(tv.getBackDrop(), backdrop);
 
         //set the ui components
-        title.setText(movie.getTitle()+ " ["+movie.getYear()+"]");
-        genres.setText(movie.getGenreList());
-        overview.setText(movie.getOverView());
-        rate.setText(movie.getTmdbRate() + "");
+        title.setText(tv.getTitle() + " [" + tv.getYear() + "]");
+        genres.setText(tv.getGenreList());
+        overview.setText(tv.getOverView());
+        rate.setText(tv.getRateTmdb() + "");
 
         //to let you watch the movie details when you click it
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), 0));
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(tv.getId(), 0));
             }
         });
 
@@ -77,11 +75,11 @@ public class RecommendationsPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if(movies == null)
+        if (tvs == null)
             return 0;
-        if (movies.size() > 20)
+        if (tvs.size() > 20)
             return 20;
-        return movies.size();
+        return tvs.size();
     }
 
     @Override

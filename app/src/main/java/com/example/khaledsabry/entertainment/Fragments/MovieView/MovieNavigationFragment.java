@@ -40,7 +40,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     int movieId;
 
     //to set later the index of the navigation items
-    static int index = -1;
+     int index = -1;
 
     //navigation item ids
     int navigationId;
@@ -101,6 +101,31 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
     }
 
+    /**
+     * to set navigationId to set later the index to show automatically
+     *
+     * @param index
+     */
+    private void setNavigationIndex(int index) {
+        switch (index) {
+            case 0:
+                navigationId = R.id.navigation_home;
+                break;
+            case 1:
+                navigationId = R.id.navigation_recommendation;
+                break;
+            case 2:
+                navigationId = R.id.navigation_images;
+                break;
+            case 3:
+                navigationId = R.id.navigation_download;
+                break;
+            case 4:
+                navigationId = R.id.navigation_youtube;
+                break;
+            default:
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -116,7 +141,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
                 index = 0;
                 loadMovieMainFragment();
                 break;
-            case R.id.navigation_back:
+            case R.id.navigation_recommendation:
                 index = 1;
                 loadRecommendationSimilarFragment();
                 break;
@@ -260,29 +285,5 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
             loadFragment(YoutubeFragment.newInstance(mainMovie, YoutubeFragment.Type.movie));
     }
 
-    /**
-     * to set navigationId to set later the index to show automatically
-     *
-     * @param index
-     */
-    private void setNavigationIndex(int index) {
-        switch (index) {
-            case 0:
-                navigationId = R.id.navigation_home;
-                break;
-            case 1:
-                navigationId = R.id.navigation_back;
-                break;
-            case 2:
-                navigationId = R.id.navigation_images;
-                break;
-            case 3:
-                navigationId = R.id.navigation_download;
-                break;
-            case 4:
-                navigationId = R.id.navigation_youtube;
-                break;
-            default:
-        }
-    }
+
 }

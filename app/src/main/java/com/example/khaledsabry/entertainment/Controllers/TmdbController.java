@@ -451,6 +451,33 @@ public class TmdbController {
         });
     }
 
+    public void getTvRecommendation(int tvId,final OnTvList listener) {
+        urlAddition = "tv/"+tvId+"/recommendations";
+        String URL = makeBaseUrl(urlAddition);
+        connection.connect(URL, new OnSuccess.Json() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+                listener.onSuccess(controller.getTvRecommendationOrSimilar(jsonObject));
+
+            }
+        });
+    }
+
+
+    public void getTvSimilar(int tvId,final OnTvList listener) {
+        urlAddition = "tv/"+tvId+"/similar";
+        String URL = makeBaseUrl(urlAddition);
+        connection.connect(URL, new OnSuccess.Json() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                // getMovieCast(jsonObject);
+                listener.onSuccess(controller.getTvRecommendationOrSimilar(jsonObject));
+
+            }
+        });
+    }
+
     /**
      * get artists that are popular meanwhile
      *

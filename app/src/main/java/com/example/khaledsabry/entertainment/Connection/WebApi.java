@@ -592,8 +592,8 @@ public class WebApi {
                 Movie movie = new Movie();
                 try {
                     Document doc;
-if(imdbId == null || imdbId.isEmpty())
-    return movie;
+                    if (imdbId == null || imdbId.isEmpty())
+                        return movie;
                     doc = Jsoup.connect("https://www.imdb.com/title/" + imdbId).get();
 
                     if (doc == null)
@@ -796,24 +796,151 @@ if(imdbId == null || imdbId.isEmpty())
     }
 
     public void rottenTomatoesMovieReviewsAllCritics(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesMovieReviews(movie, year,"", listener);
+        rottenTomatoesMovieReviews(movie, year, "", listener);
     }
 
     public void rottenTomatoesMovieReviewsTopCritics(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesMovieReviews(movie, year,"/?type=top_critics", listener);
+        rottenTomatoesMovieReviews(movie, year, "/?type=top_critics", listener);
 
     }
 
     public void rottenTomatoesMovieReviewsFresh(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesMovieReviews(movie, year,"/?sort=fresh", listener);
+        rottenTomatoesMovieReviews(movie, year, "/?sort=fresh", listener);
 
     }
 
     public void rottenTomatoesMovieReviewsRotten(final String movie, final String year, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesMovieReviews(movie, year,"/?sort=rotten", listener);
+        rottenTomatoesMovieReviews(movie, year, "/?sort=rotten", listener);
 
     }
 
+
+    private void rottenTomatoesTvReviews(final String tv, final String year, final String addition, final Integer season, final Integer episode, final OnWebSuccess.OnMovie listener) {
+
+        ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v2.0/search?q" + tv, new OnSuccess.Json() {
+            @Override
+            public void onSuccess(final JSONObject jsonObject) {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Movie movie1 = new Movie();
+
+                        try {
+                            JSONArray array = jsonObject.getJSONArray("tvSeries");
+                            int i = 0;
+                            while (!array.isNull(0)) {
+                                JSONObject object = array.getJSONObject(i);
+                                String ryear = String.valueOf(object.getInt("startYear"));
+                                if (year.equals(ryear))
+                                    break;
+                                else
+                                    i++;
+
+
+                            }
+                            if (array.isNull(i))
+                                return;
+                            JSONObject object = array.getJSONObject(i);
+
+                            String movieLink = "https://www.rottentomatoes.com" + object.getString("url") + "/" + season;
+                            if (episode != null)
+                                movieLink += "/" + episode + "/";
+
+                            String reviewLink = movieLink + "reviews";
+                            if (!addition.isEmpty())
+                                reviewLink += addition;
+                            Document doc = Jsoup.connect(reviewLink).timeout(10000).get();
+                            if (doc == null) {
+                                listener.onSuccess(movie1);
+                                return;
+                            }
+
+                            Elements reviews = doc.getElementsByClass("row review_table_row");
+
+                            ArrayList<Review> reviews1 = new ArrayList<>();
+                            for (int j = 0; j < reviews.size(); j++) {
+                                try {
+
+
+                                    Element review = reviews.get(j);
+                                    Element name = review.getElementsByClass("unstyled bold articleLink").get(0);
+                                    Element image = review.getElementsByClass("critic_thumb fullWidth").get(0);
+                                    Elements reviewText = review.getElementsByClass("the_review");
+                                    Elements date = review.getElementsByClass("review_date subtle small");
+                                    Elements reviewIcons = review.getElementsByClass("col-xs-16 review_container");
+                                    Elements reviewIconss = reviewIcons.get(0).children();
+
+                                    String reviewerName = name.text();
+                                    String imageUrl = image.attr("src");
+
+                                    String reviewMeter = reviewIconss.get(0).className();
+                                    String certificate = "";
+                                    if (reviewMeter.contains("small fresh"))
+                                        certificate = "Fresh";
+                                    else if (reviewMeter.contains("small rotten"))
+                                        certificate = "Rotten";
+
+                                    String movieReview = reviewText.get(0).text();
+                                    String reviewDate = date.get(0).text();
+
+
+                                    Review review1 = new Review();
+                                    review1.setAuthor(reviewerName);
+                                    review1.setAuthorImage(imageUrl);
+                                    review1.setRottenTomatoesType(certificate);
+                                    review1.setReviewDate(reviewDate);
+                                    review1.setContent(movieReview);
+
+
+                                    reviews1.add(review1);
+
+                                } catch (Exception e) {
+
+                                }
+                            }
+
+                            movie1.setReviews(reviews1);
+
+                            MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    listener.onSuccess(movie1);
+
+                                }
+                            });
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                });
+            }
+        });
+
+    }
+
+    public void rottenTomatoesTvReviewsAllCritics(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesTvReviews(tv, year, "",season,episode, listener);
+    }
+
+    public void rottenTomatoesTvReviewsTopCritics(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesTvReviews(tv, year, "/?type=top_critics",season,episode, listener);
+
+    }
+
+    public void rottenTomatoesTvReviewsFresh(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesTvReviews(tv, year, "/?sort=fresh",season,episode, listener);
+
+    }
+
+    public void rottenTomatoesTvReviewsRotten(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
+        rottenTomatoesTvReviews(tv, year, "/?sort=rotten",season,episode, listener);
+
+    }
 
     /**
      * gets the top 250 movies fron the imdb

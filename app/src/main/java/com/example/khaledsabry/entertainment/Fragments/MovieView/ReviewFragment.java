@@ -121,7 +121,67 @@ ReviewFragment extends Fragment {
 
         if (movie != null)
             getMovieReviews(pos);
+        if(tv != null)
+            getTvReviews(pos);
 
+    }
+
+   void setReviews(ArrayList<Review> reviews)
+   {
+       progressBar.setVisibility(View.INVISIBLE);
+       reviewAdapter.setReviews(reviews);
+
+   }
+
+    private void getTvReviews(int position) {
+        if(position == lastIndex)
+            return;
+        lastIndex = position;
+        reviewAdapter.setReviews(null);
+        progressBar.setVisibility(View.VISIBLE);
+        switch (position) {
+            case 0:
+                WebApi.getInstance().rottenTomatoesMovieReviewsAllCritics(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
+                            @Override
+                            public void onSuccess(Movie movie1) {
+                                setReviews(movie1.getReviews());
+
+                            }
+                        }
+                );
+                break;
+            case 1:
+                WebApi.getInstance().rottenTomatoesMovieReviewsTopCritics(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
+                            @Override
+                            public void onSuccess(Movie movie1) {
+                                setReviews(movie1.getReviews());
+
+                            }
+                        }
+                );
+                break;
+
+            case 2:
+                WebApi.getInstance().rottenTomatoesMovieReviewsFresh(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
+                            @Override
+                            public void onSuccess(Movie movie1) {
+                                setReviews(movie1.getReviews());
+
+                            }
+                        }
+                );
+                break;
+            case 3:
+                WebApi.getInstance().rottenTomatoesMovieReviewsRotten(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
+                            @Override
+                            public void onSuccess(Movie movie1) {
+                                setReviews(movie1.getReviews());
+
+                            }
+                        }
+                );
+                break;
+        }
     }
 
     public void getMovieReviews(int position) {
@@ -135,9 +195,8 @@ ReviewFragment extends Fragment {
             WebApi.getInstance().rottenTomatoesMovieReviewsAllCritics(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
                         @Override
                         public void onSuccess(Movie movie1) {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            movie.setReviews(movie1.getReviews());
-                            reviewAdapter.setReviews(movie1.getReviews());
+                            setReviews(movie1.getReviews());
+
 
                         }
                     }
@@ -147,9 +206,7 @@ ReviewFragment extends Fragment {
                 WebApi.getInstance().rottenTomatoesMovieReviewsTopCritics(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
                             @Override
                             public void onSuccess(Movie movie1) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                movie.setReviews(movie1.getReviews());
-                                reviewAdapter.setReviews(movie1.getReviews());
+                                setReviews(movie1.getReviews());
 
                             }
                         }
@@ -160,9 +217,8 @@ ReviewFragment extends Fragment {
                 WebApi.getInstance().rottenTomatoesMovieReviewsFresh(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
                             @Override
                             public void onSuccess(Movie movie1) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                movie.setReviews(movie1.getReviews());
-                                reviewAdapter.setReviews(movie1.getReviews());
+                                setReviews(movie1.getReviews());
+
 
                             }
                         }
@@ -172,9 +228,7 @@ ReviewFragment extends Fragment {
                 WebApi.getInstance().rottenTomatoesMovieReviewsRotten(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
                             @Override
                             public void onSuccess(Movie movie1) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                movie.setReviews(movie1.getReviews());
-                                reviewAdapter.setReviews(movie1.getReviews());
+                                setReviews(movie1.getReviews());
 
                             }
                         }

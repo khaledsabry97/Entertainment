@@ -111,18 +111,27 @@ server.select(createSelectQuery(selects,tables,condition),listener);
     }
 
 
-    public void CategoryItemGetByTmdb(int userId, int tmdbId, OnDatabaseSuccess.array listener)
+    /**
+     * get all the categories ids that a content is related to
+     * @param userId to specify the user
+     * @param tmdbId to specify the id for tmdb
+     * @param constantContent to specify movie,tv or artist
+     * @param listener to get it back from the server
+     */
+    public void CategoryItemGetByTmdb(int userId, int tmdbId, int constantContent, OnDatabaseSuccess.array listener)
     {
 
         selects.add(categoryItemTable.categoryId);
 
 
-        tables.put(categoryItemTable.tableName,null);
-        tables.put(categoryTable.tableName,null);
+        tables.put(categoryItemTable.tableName,"i");
+        tables.put(categoryTable.tableName,"c");
 
         condition += userId +equal + categoryTable.userId;
         condition += and;
         condition += tmdbId +equal + categoryItemTable.tmdbId;
+        condition +=and;
+       condition += constantContent + equal + "i."+categoryItemTable.type;
 
         server.select(createSelectQuery(selects,tables,condition),listener);
 

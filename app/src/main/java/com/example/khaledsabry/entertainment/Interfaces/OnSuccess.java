@@ -1,10 +1,10 @@
 package com.example.khaledsabry.entertainment.Interfaces;
 
-import android.support.v4.util.ObjectsCompat;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.lang.Object;
 
 /**
  * Created by KhALeD SaBrY on 27-Jun-18.
@@ -33,5 +33,10 @@ public interface OnSuccess {
     interface arrayMap
     {
         void onSuccess(String key, ArrayList<Object> values);
+    }
+
+    interface objects
+    {
+        void onSuccess(ArrayList<java.lang.Object> objects);
     }
 }

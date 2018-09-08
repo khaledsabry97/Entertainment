@@ -70,9 +70,22 @@ public class YoutubeFragment extends Fragment {
         setupYoutubeVideoFragment();
         setupVideos();
         setupOptions();
+        setupObjectType();
 
         return view;
     }
+
+    private void setupObjectType() {
+        switch (type) {
+            case movie:
+                loadMovie();
+                break;
+            case tv:
+                loadTv();
+                break;
+        }
+    }
+
 
     /**
      * load the webfragment to upload later the videos
@@ -101,23 +114,40 @@ public class YoutubeFragment extends Fragment {
     private void setupOptions() {
         options.setHasFixedSize(true);
         options.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
-        switch (type) {
-            case tv:
-
-                break;
-            case movie:
-                loadMovie();
-                break;
-            default:
-        }
     }
 
     /**
      * get videos for movie
      */
     private void loadMovie() {
+        tv = (Tv) item;
+        ArrayList<YoutubeController.Type> types;
+        ArrayList<String> titles;
+        types = new ArrayList<>();
+        titles = new ArrayList<>();
+
+        //the searchs types you want
+        types.add(YoutubeController.Type.trailer);
+        types.add(YoutubeController.Type.movie_review);
+        types.add(YoutubeController.Type.featurette);
+        types.add(YoutubeController.Type.behind_the_scenes);
+        types.add(YoutubeController.Type.soundtrack);
+
+
+        titles.add("Trailer");
+        titles.add("Reviews");
+        titles.add("Featurette");
+        titles.add("Behind the Scenes");
+        titles.add("SoundTrack");
+
+
+        optionAdapter = new YoutubeOptionAdapter(this,webFragment, types, titles, movie.getTitle(), movie.getYear());
+        options.setAdapter(optionAdapter);
+
+
+    }
+
+    private void loadTv() {
         movie = (Movie) item;
         ArrayList<YoutubeController.Type> types;
         ArrayList<String> titles;
@@ -138,9 +168,8 @@ public class YoutubeFragment extends Fragment {
         titles.add("SoundTrack");
 
 
-        optionAdapter = new YoutubeOptionAdapter(this,webFragment, types, titles, movie.getTitle(), movie.getYear());
+        optionAdapter = new YoutubeOptionAdapter(this,webFragment, types, titles, tv.getTitle(), tv.getYear());
         options.setAdapter(optionAdapter);
-
 
     }
 

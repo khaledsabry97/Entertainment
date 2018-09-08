@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/navigation_back"
-        android:icon="@drawable/arrowleft"
+        android:id="@+id/navigation_recommendation"
+        android:icon="@drawable/ic_home"
         android:title="return" />
     <item
         android:id="@+id/navigation_home"
@@ -16,7 +15,7 @@
         android:title="Images" />
     <item
         android:id="@+id/navigation_download"
-        android:icon="@drawable/download"
+        android:icon="@drawable/ic_file_download_black_24dp"
         android:title="Download" />
     <item
         android:id="@+id/navigation_youtube"
