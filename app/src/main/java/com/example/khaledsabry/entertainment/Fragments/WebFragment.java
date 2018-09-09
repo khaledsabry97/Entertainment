@@ -56,6 +56,12 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        onDestroy();
+    }
+
     private void setupWepView() {
         webView.setListener(MainActivity.getActivity(), this);
         webView.setDesktopMode(true);

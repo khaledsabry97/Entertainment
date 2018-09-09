@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     app:cardCornerRadius="6dp"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+    android:id="@+id/card_view_id">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layout"
@@ -46,7 +47,7 @@
             app:layout_constraintTop_toBottomOf="@+id/date" />
 
         <TextView
-            android:id="@+id/writtenBy"
+            android:id="@+id/genres_id"
             style="@style/TextNormalLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -122,6 +123,35 @@
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toEndOf="@+id/backdrop_id" />
 
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/overview_layout_id"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/round"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genres_id"
+            app:layout_constraintLeft_toRightOf="@+id/rate"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="@dimen/_3sdp"
+
+
+            >
+
+            <TextView
+                android:id="@+id/overview_id"
+
+                style="@style/TextNormal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                tools:text= "sdfsdfsdfsdf"
+                android:textAlignment="textStart" />
+
+        </android.support.v4.widget.NestedScrollView>
+
+
         <ImageView
             android:id="@+id/delete"
             android:layout_width="wrap_content"
@@ -139,7 +169,7 @@
             <ImageView
                 android:id="@+id/poster"
                 android:layout_width="@dimen/_130sdp"
-                android:layout_height="@dimen/_170sdp"
+                android:layout_height="@dimen/_173sdp"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 tools:src="@tools:sample/avatars"

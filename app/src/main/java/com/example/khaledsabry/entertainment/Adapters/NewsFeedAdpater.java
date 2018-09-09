@@ -56,12 +56,7 @@ public class NewsFeedAdpater extends RecyclerView.Adapter<NewsFeedAdpater.NewsFe
 
         public void updateUi(News news) {
             title.setText(news.getTitle());
-            title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new Controller().toast("hello");
-                }
-            });
+
         }
     }
 }

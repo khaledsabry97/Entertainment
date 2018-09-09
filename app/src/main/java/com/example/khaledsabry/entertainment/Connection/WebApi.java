@@ -1086,7 +1086,7 @@ public class WebApi {
                                 @Override
                                 public void onSuccess(Movie movie1) {
                                     movie1.setImdbRate(movie.getImdbRate());
-                                    movie1.setMovieId(movie.getMovieId());
+                                    movie1.setMovieId(movie.getId());
 
                                     publishProgress(movie1);
                                 }

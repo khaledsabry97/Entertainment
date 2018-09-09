@@ -12,5 +12,6 @@
     <drawable name="MainBackground">@drawable/background3</drawable>
     <drawable name="ContentTitle">@drawable/red6</drawable>
     <drawable name="poster_loading_image">@drawable/blue</drawable>
+    <drawable name="bottom_navigation_background">@color/red</drawable>
 
 </resources>

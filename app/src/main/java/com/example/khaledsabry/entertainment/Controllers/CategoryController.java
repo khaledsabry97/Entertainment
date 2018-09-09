@@ -2,7 +2,6 @@ package com.example.khaledsabry.entertainment.Controllers;
 
 import com.example.khaledsabry.entertainment.Database.UserData;
 import com.example.khaledsabry.entertainment.Fragments.CategoryListFragment;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieMainFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnDatabaseSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 
@@ -25,35 +24,41 @@ public class CategoryController extends Controller {
 
     public void addFavourite(final String tmdbId, final String imdbId, final int type, final OnSuccess.bool listener) {
 
-databaseController.selectController().categoryGet(UserData.getInstance().getUserId(), "Favourite", new OnDatabaseSuccess.array() {
-    @Override
-    public void onSuccess(ArrayList<JSONObject> jsonObjects) {
-
-        String id = ((String) getObject(categoryTable.id, jsonObjects));
-        if(id == null) {
-            listener.onSuccess(false);
-            return;
-        }
-
-        databaseController.insertController().itemAdd(Integer.parseInt(id), tmdbId, imdbId, type, new OnDatabaseSuccess.bool() {
+        databaseController.selectController().categoryGet(UserData.getInstance().getUserId(), "Favourite", new OnDatabaseSuccess.array() {
             @Override
-            public void onSuccess(boolean state) {
-                listener.onSuccess(true);
+            public void onSuccess(ArrayList<JSONObject> jsonObjects) {
+
+                String id = ((String) getObject(categoryTable.id, jsonObjects));
+                if (id == null) {
+                    listener.onSuccess(false);
+                    return;
+                }
+
+                databaseController.insertController().itemAdd(Integer.parseInt(id), tmdbId, imdbId, type, new OnDatabaseSuccess.bool() {
+                    @Override
+                    public void onSuccess(boolean state) {
+                        listener.onSuccess(true);
+                    }
+                });
+
             }
         });
-
-    }
-});
     }
 
-
+    /**
+     * add the content to your local database
+     *
+     * @param tmdbId the tmdb id for the content
+     * @param imdbId the imdb id if found for the content
+     * @param type   the type of the content movie,tv or artist
+     */
     public void addHistory(String tmdbId, String imdbId, int type) {
 
         databaseController.localInsertController().categoryAddHistory(tmdbId, imdbId, type, new OnDatabaseSuccess.number() {
             @Override
             public void onSuccess(int state) {
-                if(state == -1)
-                    toast("there went a problem in saving the history");
+                if (state == -1)
+                    Toasts.warning("there went a problem in saving the history");
             }
         });
     }
@@ -70,8 +75,8 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
 
     }
 
-    public void removeItem(int categoryId, String tmdbId,int constantType, OnSuccess.bool listener) {
-        databaseController.deleteController().CategoryItemRemove(categoryId, tmdbId,constantType, new OnDatabaseSuccess.bool() {
+    public void removeItem(int categoryId, String tmdbId, int constantType, OnSuccess.bool listener) {
+        databaseController.deleteController().CategoryItemRemove(categoryId, tmdbId, constantType, new OnDatabaseSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
 
@@ -88,7 +93,7 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
                 final ArrayList<Integer> totalId = (ArrayList<Integer>) (Object) getArray(categoryTable.id, jsonObjects);
 
 
-                databaseController.selectController().CategoryItemGetByTmdb(UserData.getInstance().getUserId(), tmdbId,constantContent, new OnDatabaseSuccess.array() {
+                databaseController.selectController().CategoryItemGetByTmdb(UserData.getInstance().getUserId(), tmdbId, constantContent, new OnDatabaseSuccess.array() {
                     @Override
                     public void onSuccess(ArrayList<JSONObject> jsonObjects) {
                         ArrayList<Integer> id = (ArrayList<Integer>) (Object) getArray(categoryItemTable.categoryId, jsonObjects);
@@ -107,7 +112,6 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
                         listener.onSuccess(objects);
 
 
-
                     }
                 });
             }
@@ -117,7 +121,7 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
     /**
      * get the categories from the database and send it back to
      * show it on the navigation bar in categoryListFragment
-      */
+     */
     public void getCategories() {
 
         databaseController.selectController().categoryGet(UserData.getInstance().getUserId(), new OnDatabaseSuccess.array() {
@@ -144,6 +148,7 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
 
     /**
      * get items from the database and send it back to categorylistFragment
+     *
      * @param categoryId to select the items that has this category id
      */
     public void getItemsByCategoryId(final int categoryId) {
@@ -155,7 +160,7 @@ databaseController.selectController().categoryGet(UserData.getInstance().getUser
                 ArrayList<Integer> types = (ArrayList<Integer>) (Object) getArray(categoryItemTable.type, jsonObjects);
 
 
-                categoryListFragment.setRecyclerView(ids, contentIds, types);
+                categoryListFragment.setContentsInRecyclerView(ids, contentIds, types);
 
             }
         });

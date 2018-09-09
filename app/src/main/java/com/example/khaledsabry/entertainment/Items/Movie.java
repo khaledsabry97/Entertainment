@@ -192,7 +192,7 @@ public class Movie {
     }
 
 
-    public int getMovieId() {
+    public int getId() {
         return movieId;
     }
 

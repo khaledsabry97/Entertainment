@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.R;
 
@@ -41,7 +42,7 @@ public class FullPoster extends Fragment {
         fullPoster = v.findViewById(R.id.fullposterid);
         ImageController.putImageHighQuality(poster, fullPoster);
 
-        controller.toast("press double click to exit");
+        Toasts.info("press double click to exit");
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

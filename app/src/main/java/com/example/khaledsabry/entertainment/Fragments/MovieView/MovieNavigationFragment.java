@@ -1,22 +1,17 @@
 
 package com.example.khaledsabry.entertainment.Fragments.MovieView;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
-import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Database.Origin.LiteDatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.ImagesFragment;
@@ -26,14 +21,18 @@ import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieList;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
+import com.felix.bottomnavygation.BottomNav;
+import com.felix.bottomnavygation.ItemNav;
 import com.github.ybq.android.spinkit.style.Wave;
+import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationItem;
+import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItemClickListener;
 
 import java.util.ArrayList;
 
 import static java.lang.Integer.valueOf;
 
 
-public class MovieNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
+public class MovieNavigationFragment extends Fragment implements OnBottomNavigationItemClickListener {
 
     ProgressBar progressBar;
     //to set movie id
@@ -55,12 +54,13 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     private ArrayList<Movie> recommendedMovies;
     private ArrayList<Movie> similarMovies;
 
+    BottomNav bottomNav;
     //to get info from the tmdb
     TmdbController tmdbController = new TmdbController();
     CategoryController categoryController = new CategoryController();
 
     //to navigate to different topics for movie
-    BottomNavigationView bottomNavigationView;
+   // BottomNavigationView bottomNavigationView;
 
     public static MovieNavigationFragment newInstance(final int movieId, int index) {
         final MovieNavigationFragment fragment = new MovieNavigationFragment();
@@ -81,24 +81,89 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_movie_navigation, container, false);
-        bottomNavigationView = v.findViewById(R.id.navigation);
-        progressBar = v.findViewById(R.id.progress_bar_id);
+        View view = inflater.inflate(R.layout.fragment_movie_navigation, container, false);
+       // bottomNavigationView = view.findViewById(R.id.navigation);
+        bottomNav = view.findViewById(R.id.bottom_navigation_id);
+
+setUpBottomNav();
+        progressBar = view.findViewById(R.id.progress_bar_id);
         progressBar.setIndeterminateDrawable(new Wave());
         setUpBottomNavigation();
-        return v;
+        return view;
     }
 
+
+    private void setUpBottomNav()
+    {
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_home_black_24dp, "Info").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.mipmap.outline_theaters_black_18,"Similars").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_favorite_black_24dp, "Recommendations").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.images,"Images").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.download,"Download").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube,"Youtube").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube, R.drawable.download).isProfileItem().addProfileColorAtive(R.color.white).addProfileColorInative(R.color.blue));
+
+
+        bottomNav.setTabSelectedListener(new BottomNav.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int i) {
+                setNavigationIndex(i);
+            }
+
+            @Override
+            public void onTabLongSelected(int i) {
+
+            }
+        });
+        bottomNav.build();
+        bottomNav.selectTab(index);
+    }
+
+    private void set(View view)
+    {
+        com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView bottomNavigationView = (com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView) view.findViewById(R.id.bottom_navigation_id);
+        BottomNavigationItem bottomNavigationItem = new BottomNavigationItem
+                ("Info", ContextCompat.getColor(getContext(), R.color.blue), R.drawable.black);
+
+        BottomNavigationItem bottomNavigationItem1 = new BottomNavigationItem
+                ("Images", ContextCompat.getColor(getContext(), R.color.gray), R.drawable.black);
+        BottomNavigationItem bottomNavigationItem2 = new BottomNavigationItem
+                ("Download", ContextCompat.getColor(getContext(), R.color.gray), R.drawable.black);
+
+        BottomNavigationItem bottomNavigationItem3 = new BottomNavigationItem
+                ("Youtube", ContextCompat.getColor(getContext(), R.color.gray), R.drawable.black);
+        BottomNavigationItem bottomNavigationItem4 = new BottomNavigationItem
+                ("Youtube", ContextCompat.getColor(getContext(), R.color.gray), R.drawable.black);
+        BottomNavigationItem bottomNavigationItem5 = new BottomNavigationItem
+                ("Youtube", ContextCompat.getColor(getContext(), R.color.gray), R.drawable.black);
+
+        bottomNavigationView.addTab(bottomNavigationItem);
+        bottomNavigationView.addTab(bottomNavigationItem1);
+        bottomNavigationView.addTab(bottomNavigationItem2);
+        bottomNavigationView.addTab(bottomNavigationItem3);
+        bottomNavigationView.addTab(bottomNavigationItem4);
+        bottomNavigationView.addTab(bottomNavigationItem5);
+        bottomNavigationView.setOnBottomNavigationItemClickListener( this);
+        bottomNavigationView.selectTab(0);
+        bottomNavigationView.disableShadow();
+    }
     /**
      * setup the settings of the navigation view
      */
     private void setUpBottomNavigation() {
+
+
+
+
+
+
+/*
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         setNavigationIndex(index);
         isFirstTime = true;
         bottomNavigationView.setSelectedItemId(navigationId);
-        bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
+        bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));*/
     }
 
     /**
@@ -109,24 +174,33 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     private void setNavigationIndex(int index) {
         switch (index) {
             case 0:
+                loadMovieMainFragment();
                 navigationId = R.id.navigation_home;
                 break;
             case 1:
+                loadRecommendationSimilarFragment();
                 navigationId = R.id.navigation_recommendation;
                 break;
             case 2:
+                loadRecommendationSimilarFragment();
                 navigationId = R.id.navigation_images;
                 break;
             case 3:
+                loadImagesFragment();
                 navigationId = R.id.navigation_download;
                 break;
             case 4:
+                loadTorrentFragment();
+                navigationId = R.id.navigation_youtube;
+                break;
+            case 5:
+                loadYoutubeFragment();
                 navigationId = R.id.navigation_youtube;
                 break;
             default:
         }
     }
-
+/*
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Functions.stopConnectionsAndStartImageGlide();
@@ -163,11 +237,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
         return true;
     }
 
-
-    @Override
-    public void onNavigationItemReselected(@NonNull MenuItem item) {
-        return;
-    }
+    */
 
     /**
      * to load all the fragments in view
@@ -184,7 +254,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
      */
     void loadMovieMainFragment() {
         if (mainMovie == null)
-            tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
+            tmdbController.getMovie(movieId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
                     mainMovie = movie;
@@ -239,7 +309,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
      */
     private void loadTorrentFragment() {
         if (mainMovie == null)
-            tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
+            tmdbController.getMovie(movieId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
                     mainMovie = movie;
@@ -273,7 +343,7 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
      */
     void loadYoutubeFragment() {
         if (mainMovie == null)
-            tmdbController.getMovieGetDetails(movieId, new OnMovieDataSuccess() {
+            tmdbController.getMovie(movieId, new OnMovieDataSuccess() {
                 @Override
                 public void onSuccess(Movie movie) {
                     mainMovie = movie;
@@ -286,4 +356,8 @@ public class MovieNavigationFragment extends Fragment implements BottomNavigatio
     }
 
 
+    @Override
+    public void onNavigationItemClick(int index) {
+        loadMovieMainFragment();
+    }
 }

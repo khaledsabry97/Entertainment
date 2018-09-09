@@ -23,9 +23,9 @@ public class SignInUpController extends Controller {
             @Override
             public void onSuccess(boolean listener) {
                 if (listener)
-                    toast("True");
+                    Toasts.success("True");
                 else
-                    toast("false");
+                    Toasts.error("false");
             }
         });
 

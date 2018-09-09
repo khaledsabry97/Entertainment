@@ -11,12 +11,8 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
-
-import java.util.HashMap;
 
 
 public class MoviePreviewFragment extends Fragment {
@@ -70,7 +66,7 @@ View view;
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.loadFragmentNoReturn(R.id.mainContainer,MovieNavigationFragment.newInstance(movie.getMovieId(),0));
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer,MovieNavigationFragment.newInstance(movie.getId(),0));
             }
         });
 

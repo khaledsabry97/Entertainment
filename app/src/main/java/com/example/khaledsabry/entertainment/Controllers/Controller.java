@@ -27,10 +27,10 @@ public class Controller {
 
     protected UserData userData = UserData.getInstance();
     //to show a msg on screen
-    public void toast(String msg) {
+ /*   public void toast(String msg) {
         Toast.makeText(MainActivity.getActivity().getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
-
+*/
     //to convert an array of json objects to an array of values that has the same name in the database
     protected ArrayList<Object> getArray(String key, ArrayList<JSONObject> jsonObjects) {
         ArrayList<Object> arrayList = new ArrayList<>();

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapters.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieView.ReviewFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
@@ -178,7 +179,9 @@ public class TvMainFragment extends Fragment {
             @Override
             public void onSuccess(boolean state) {
                 if (state)
-                    categoryController.toast(tv.getTitle() + " has been added to your Favourite categoryItem");
+                    Toasts.success(tv.getTitle() + " has been added to your favourites");
+                else
+                    Toasts.error(tv.getTitle() + " has failed to be added to your favourites");
 
             }
         });

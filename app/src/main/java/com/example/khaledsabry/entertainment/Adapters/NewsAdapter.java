@@ -76,7 +76,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                     content = itemView.findViewById(R.id.content);
                     time = itemView.findViewById(R.id.date);
                     source = itemView.findViewById(R.id.source);
-                    writtenBy = itemView.findViewById(R.id.writtenBy);
+                    writtenBy = itemView.findViewById(R.id.genres_id);
                     viewSource = itemView.findViewById(R.id.viewfull);
                     poster = itemView.findViewById(R.id.poster);
 

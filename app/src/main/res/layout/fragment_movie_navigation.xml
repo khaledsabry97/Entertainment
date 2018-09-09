@@ -6,33 +6,31 @@
     tools:context="com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment">
 
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/moviedetailid"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/navigation"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_id"
+            app:layout_constraintTop_toTopOf="parent"
             android:background="@color/blue">
 
 
         </FrameLayout>
         <include layout="@layout/view_progress_bar"></include>
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation"
+        <com.felix.bottomnavygation.BottomNav
+            android:id="@+id/bottom_navigation_id"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_25sdp"
-            android:background="@drawable/background3"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_navigation_background"
+            app:layout_constraintBottom_toBottomOf="parent" >
 
-android:layout_alignParentBottom="true"
-            app:menu="@menu/movie_navigation">
-
-        </android.support.design.widget.BottomNavigationView>
-
-    </RelativeLayout>
+        </com.felix.bottomnavygation.BottomNav>
+    </android.support.constraint.ConstraintLayout>
 
 
 </FrameLayout>

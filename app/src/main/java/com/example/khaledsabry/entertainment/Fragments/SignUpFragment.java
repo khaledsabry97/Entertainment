@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Controllers.SignInUpController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
 
@@ -121,7 +122,7 @@ public class SignUpFragment extends Fragment {
 
     private boolean checkPassWord() {
         if (password.getText().toString().isEmpty() || password.getText().toString().length() < 4) {
-            signInUpController.toast("please check your password");
+            Toasts.warning("please check your password");
             return false;
         }
 
@@ -130,14 +131,14 @@ public class SignUpFragment extends Fragment {
 
     private boolean checkUserName() {
         if (username.getText().toString().isEmpty() || username.getText().toString().length() < 4) {
-            signInUpController.toast("check your username");
+            Toasts.warning("check your username");
             return false;
         }
 
 
         if (userNamechecked)
             if (!userNameAvailable) {
-                signInUpController.toast("there is another one has this username");
+                Toasts.warning("there is another one has this username");
                 return false;
             }
 
@@ -146,12 +147,12 @@ public class SignUpFragment extends Fragment {
 
     private boolean checkEmail() {
         if (email.getText().toString().isEmpty() || email.getText().toString().length() < 5 || !email.getText().toString().contains("@")) {
-            signInUpController.toast("check your email");
+            Toasts.warning("check your email");
             return false;
         }
         if (emailchecked)
             if (!emailAvailable) {
-                signInUpController.toast("there is another one has this email");
+                Toasts.warning("there is another one has this email");
                 return false;
             }
         return true;
@@ -160,7 +161,7 @@ public class SignUpFragment extends Fragment {
 
     private boolean checkAge() {
         if (age.getText().toString().isEmpty() || age.getText().toString().length() < 1) {
-            signInUpController.toast("check your age");
+            Toasts.warning("check your age");
             return false;
         }
         try {
@@ -170,7 +171,7 @@ public class SignUpFragment extends Fragment {
                 return false;
         } catch (Exception e) {
             e.printStackTrace();
-            signInUpController.toast("check your age if he has any letter");
+            Toasts.warning("check your age if he has any letter");
             return false;
         }
 
@@ -181,7 +182,7 @@ public class SignUpFragment extends Fragment {
 
     private boolean checkPhone() {
         if (phone.getText().toString().isEmpty() || phone.getText().toString().length() < 6) {
-            signInUpController.toast("check your phone");
+            Toasts.warning("check your phone");
             return false;
         }
 
@@ -192,7 +193,7 @@ public class SignUpFragment extends Fragment {
                 return false;
         } catch (Exception e) {
             e.printStackTrace();
-            signInUpController.toast("check your phone if he has any letter");
+            Toasts.warning("check your phone if he has any letter");
             return false;
         }
 

@@ -51,7 +51,7 @@
             />
 
         <TextView
-            android:id="@+id/writtenBy"
+            android:id="@+id/genres_id"
             style="@style/TextNormalLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             android:layout_marginEnd="2dp"
             android:layout_marginStart="4dp"
             android:text="| 2018"
-            app:layout_constraintLeft_toRightOf="@+id/writtenBy"
+            app:layout_constraintLeft_toRightOf="@+id/genres_id"
             app:layout_constraintTop_toBottomOf="@+id/title"
 
             />
@@ -90,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toEndOf="@+id/backdrop_id"
-            app:layout_constraintTop_toBottomOf="@+id/writtenBy" >
+            app:layout_constraintTop_toBottomOf="@+id/genres_id" >
 
             <TextView
                 android:id="@+id/content"

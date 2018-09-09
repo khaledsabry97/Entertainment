@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.SignInUpController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
@@ -81,7 +82,7 @@ signIn();
          @Override
          public void onSuccess(boolean state) {
              if(!state)
-                 controller.toast("check your username/password");
+                 Toasts.warning("check your username/password");
              else
                  MainActivity.loadFragmentNoReturn(R.id.mainFrame, MainFragment.newInstance());
          }
@@ -100,7 +101,7 @@ signIn();
     {
         if(username.getText().toString().length() == 0)
         {
-            controller.toast("write your username");
+            Toasts.warning("write your username");
             return false;
         }
         return true;
@@ -110,7 +111,7 @@ signIn();
     {
         if(password.getText().toString().length() == 0)
         {
-            controller.toast("write your password");
+            Toasts.warning("write your password");
             return false;
         }
         return true;

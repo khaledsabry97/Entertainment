@@ -27,8 +27,10 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.PreferencesController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Database.UserData;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
 import com.example.khaledsabry.entertainment.Fragments.TvView.TvNavigationFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
@@ -120,7 +122,7 @@ public class MainFragment extends Fragment {
 
 
         //  MainActivity.loadFragmentNoReturn(R.id.mainContainer, MainMenuFragment.newInstance());
-        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(48866, 0));
+        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536, 0));
 
         return view;
     }
@@ -222,7 +224,9 @@ public class MainFragment extends Fragment {
                 public void onSuccess(boolean state) {
 
                     if (state)
-                        preferencesController.toast("Profile Image successfully added!");
+                        Toasts.success("Profile Image successfully added!");
+                    else
+                        Toasts.error("Failed to add the profile image");
                 }
             });
         } else {
@@ -231,7 +235,10 @@ public class MainFragment extends Fragment {
                 public void onSuccess(boolean state) {
 
                     if (state)
-                        preferencesController.toast("BackDrop Image successfully added!");
+                        Toasts.success("BackDrop Image successfully added!");
+                    else
+                        Toasts.error("Failed to add the backdrop image");
+
                 }
             });
         }

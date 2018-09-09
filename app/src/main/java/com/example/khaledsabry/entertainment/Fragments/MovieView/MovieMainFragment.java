@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Adapters.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -151,7 +152,7 @@ public class MovieMainFragment extends Fragment {
 
 
     private void loadCategories() {
-        categoryController.getCategories(movie.getMovieId(), 1, new OnSuccess.objects() {
+        categoryController.getCategories(movie.getId(), 1, new OnSuccess.objects() {
             @Override
             public void onSuccess(ArrayList<Object> objects) {
                 categoryIds = (ArrayList<Integer>) objects.get(0);
@@ -170,16 +171,18 @@ public class MovieMainFragment extends Fragment {
     }
 
     public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 1, String.valueOf(movie.getMovieId()))).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 1, String.valueOf(movie.getId()))).commit();
     }
 
 
     void setAddFavourite() {
-        categoryController.addFavourite(String.valueOf(movie.getMovieId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
+        categoryController.addFavourite(String.valueOf(movie.getId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
                 if (state)
-                    categoryController.toast(movie.getTitle() + " has been added to your Favourite categoryItem");
+                    Toasts.success(movie.getTitle() + " has been added to your favourites");
+                else
+                    Toasts.error(movie.getTitle() + " failed to be added to your favourites");
 
             }
         });

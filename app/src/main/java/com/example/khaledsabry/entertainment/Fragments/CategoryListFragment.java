@@ -22,10 +22,23 @@ import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapters.CategoryAdapter;
 import com.example.khaledsabry.entertainment.Adapters.TitleAdapter;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
+import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
+import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnTvSuccess;
+import com.example.khaledsabry.entertainment.Items.Artist;
+import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
+import com.felix.bottomnavygation.BottomNav;
+import com.felix.bottomnavygation.ItemNav;
+import com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * class to show all the categories that you have in the database
@@ -46,12 +59,17 @@ public class CategoryListFragment extends Fragment {
 
     //these for adding,deleting and changing the names of categories and items
     CategoryController categoryController;
-    ImageView deleteCategory;
-    ImageView addCategory;
-    ImageView changeCategoryName;
     Integer currentCategoryId;
     String currentCategoryName;
 
+    //to get details for the items
+    TmdbController controller;
+    ArrayList<Integer> itemsId;
+    ArrayList<Integer> tmdbIds;
+    ArrayList<Integer> types;
+    ArrayList<Object> objects;
+
+    BottomNav bottomNav;
     public static CategoryListFragment newInstance() {
         CategoryListFragment fragment = new CategoryListFragment();
 
@@ -71,38 +89,17 @@ public class CategoryListFragment extends Fragment {
         navigationView = view.findViewById(R.id.nav_view);
         drawerLayout = view.findViewById(R.id.drawer_layout);
         tabLayout = view.findViewById(R.id.tablayout);
-        deleteCategory = view.findViewById(R.id.deletecategory);
-        addCategory = view.findViewById(R.id.addcategory);
-        changeCategoryName = view.findViewById(R.id.changename);
+        bottomNav = view.findViewById(R.id.bottom_navigation_id);
 
         currentCategoryName = "";
         currentCategoryId = null;
-
+        controller = new TmdbController();
 
         setTitleCategoriesAdapter();
         setItemsAdapter();
 
 
-        deleteCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteCategory();
-            }
-        });
-
-        addCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addCategory();
-            }
-        });
-
-        changeCategoryName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeCategoryName();
-            }
-        });
+        setUpBottomNav();
 
         setTabLayout();
         categoryController.setCategoryListFragment(this);
@@ -110,6 +107,41 @@ public class CategoryListFragment extends Fragment {
 
 
         return view;
+    }
+
+    /**
+     * setup the bottom navigation for add and change and delete the categories
+     */
+    private void setUpBottomNav()
+    {
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_playlist_add_black_24dp, "Add").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_edit_black_24dp, "Edit").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_delete_forever_black_24dp,"Delete").addColorAtive(R.color.white));
+
+
+        bottomNav.setTabSelectedListener(new BottomNav.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int i) {
+                switch (i)
+                {
+                    case 0:
+                        addCategory();
+                        break;
+                    case 1:
+                        changeCategoryName();
+                        break;
+                    case 2:
+                        deleteCategory();
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabLongSelected(int i) {
+
+            }
+        });
+        bottomNav.build();
     }
 
     /**
@@ -160,7 +192,6 @@ public class CategoryListFragment extends Fragment {
 
 
     }
-
 
 
     /**
@@ -223,17 +254,21 @@ public class CategoryListFragment extends Fragment {
      *                2: tv
      *                3: artist
      */
-    public void setRecyclerView(ArrayList<Integer> itemsId, final ArrayList<Integer> tmdbIds, ArrayList<Integer> types) {
+    public void setContentsInRecyclerView(ArrayList<Integer> itemsId, final ArrayList<Integer> tmdbIds, ArrayList<Integer> types) {
 
         //itemsid: id for the categoryItem
         //tmdbIds: tmdb Id
         //types : movie,tv or artist
         //categoryController: to use it later to delete a category item
-        adapter.setData(itemsId, tmdbIds, types, currentCategoryId, currentCategoryName, categoryController);
+        adapter.clearData();
+        this.itemsId = itemsId;
+        this.tmdbIds = tmdbIds;
+        this.types = types;
+        adapter.setBase(currentCategoryId, currentCategoryName, categoryController);
+        getDetails();
 
 
     }
-
 
 
     /**
@@ -261,10 +296,10 @@ public class CategoryListFragment extends Fragment {
                     @Override
                     public void onSuccess(boolean state) {
                         if (state) {
-                            categoryController.toast(newName + " has been added");
+                            Toasts.success(newName + " has been added");
                             categoryController.getCategories();
                         } else
-                            categoryController.toast("failed to add the category");
+                            Toasts.error("failed to add the category");
                     }
                 });
             }
@@ -305,10 +340,10 @@ public class CategoryListFragment extends Fragment {
                     @Override
                     public void onSuccess(boolean state) {
                         if (state) {
-                            categoryController.toast(currentCategoryName + " has been changed to " + newName);
+                            Toasts.success(currentCategoryName + " has been changed to " + newName);
                             titleAdapter.addTitle(newName);
                         } else
-                            categoryController.toast("failed to change Name");
+                            Toasts.error("failed to change Name");
                     }
                 });
             }
@@ -327,6 +362,8 @@ public class CategoryListFragment extends Fragment {
      * delete current category
      */
     private void deleteCategory() {
+        if(currentCategoryName.toLowerCase().equals("favourite"))
+            return;
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         builder.setTitle("Do you want to delete this category ( " + currentCategoryName + " ) ?");
@@ -339,10 +376,10 @@ public class CategoryListFragment extends Fragment {
                     @Override
                     public void onSuccess(boolean state) {
                         if (state) {
-                            categoryController.toast("category " + currentCategoryName + " has been deleted successfully");
+                            Toasts.success("category " + currentCategoryName + " has been deleted successfully");
                             MainActivity.loadFragmentNoReturn(R.id.mainContainer, CategoryListFragment.newInstance());
                         } else {
-                            categoryController.toast("failed to delete the category ( " + currentCategoryName + " )");
+                            Toasts.error("failed to delete the category ( " + currentCategoryName + " )");
                         }
                     }
                 });
@@ -385,11 +422,11 @@ public class CategoryListFragment extends Fragment {
                         @Override
                         public void onSuccess(boolean state) {
                             if (state) {
-                                categoryController.toast("Deleted successfully");
+                                Toasts.success("Deleted successfully");
                                 categoryController.getItemsByCategoryId(categoryId);
                                 MainActivity.loadFragmentNoReturn(R.id.mainContainer, CategoryListFragment.newInstance());
                             } else {
-                                categoryController.toast("failed to delete");
+                                Toasts.error("failed to delete");
                             }
                         }
                     });
@@ -413,4 +450,72 @@ public class CategoryListFragment extends Fragment {
 
     }
 
+    /**
+     * get the details for the tmdbs and aad it to the adapter
+     */
+    public void getDetails() {
+   final Timer timer =     new Timer();
+           timer.schedule(new TimerTask() {
+            int i = 0;
+            @Override
+            public void run() {
+                if(tmdbIds == null) {
+                    timer.cancel();
+                    return;
+                }
+                if(i== tmdbIds.size()) {
+                    timer.cancel();
+                    return;
+                }
+
+                final Integer type = Integer.parseInt(String.valueOf(types.get(i)));
+                final Integer itemId = Integer.parseInt(String.valueOf(itemsId.get(i)));
+                Integer tmdbId = Integer.parseInt(String.valueOf(tmdbIds.get(i)));
+                final Integer position = i;
+                switch (type)
+                {
+                    case 1:
+                        controller.getMovie(tmdbId, new OnMovieDataSuccess() {
+                            @Override
+                            public void onSuccess(Movie movie) {
+                                addToAdapter(movie,type,itemId,position);
+                            }
+                        });
+                        break;
+                    case 2:
+                        controller.getTv(tmdbId, new OnTvSuccess() {
+                            @Override
+                            public void onSuccess(Tv tv) {
+                                addToAdapter(tv,type,itemId,position);
+                            }
+                        });
+                        break;
+                    case 3:
+                        controller.getPersonDetails(tmdbId, new OnArtistDataSuccess() {
+                            @Override
+                            public void onSuccess(Artist artist) {
+                                addToAdapter(artist,type,itemId,position);
+                            }
+                        });
+
+                }
+
+
+                i++;
+            }
+        },0,250);
+    }
+
+
+    /**
+     * after you get the info from database then from tmdb id
+     * @param object movie,tv or artist
+     * @param type 1 for movie 2 for tv 3 for artist
+     * @param itemId the id for the item in the database
+     * @param position position you got it from the database
+     */
+    private void addToAdapter(Object object, Integer type,Integer itemId,Integer position)
+    {
+        adapter.setData(object,type,itemId,position);
+    }
 }

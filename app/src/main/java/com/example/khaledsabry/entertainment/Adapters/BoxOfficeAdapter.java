@@ -78,7 +78,7 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
             position = itemView.findViewById(R.id.position);
             rate = itemView.findViewById(R.id.rate);
             title = itemView.findViewById(R.id.title);
-            genres = itemView.findViewById(R.id.writtenBy);
+            genres = itemView.findViewById(R.id.genres_id);
             revenue = itemView.findViewById(R.id.revenue);
             date = itemView.findViewById(R.id.date);
             poster = itemView.findViewById(R.id.poster);
@@ -124,7 +124,7 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                             @Override
                             public void onSuccess(Movie movie) {
                                 searchItem.getMovie().setPosterImage(movie.getPosterImage());
-                                searchItem.getMovie().setMovieId(movie.getMovieId());
+                                searchItem.getMovie().setMovieId(movie.getId());
                                 searchItem.getMovie().setTmdbRate(movie.getTmdbRate());
                                 searchItem.getMovie().setReleaseDate(movie.getReleaseDate());
                                 // searchItem.getMovie().setGenres(movie.getGenres());
@@ -174,7 +174,7 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                             @Override
                             public void onSuccess(Movie movie) {
                                 searchItem.getMovie().setPosterImage(movie.getPosterImage());
-                                searchItem.getMovie().setMovieId(movie.getMovieId());
+                                searchItem.getMovie().setMovieId(movie.getId());
                                 searchItem.getMovie().setTmdbRate(movie.getTmdbRate());
                                 searchItem.getMovie().setReleaseDate(movie.getReleaseDate());
                                 // searchItem.getMovie().setGenres(movie.getGenres());
@@ -262,7 +262,7 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), 0));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getId(), 0));
                     }
                 });
 
@@ -293,7 +293,7 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getMovieId(), 0));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(movie.getId(), 0));
                     }
                 });
 

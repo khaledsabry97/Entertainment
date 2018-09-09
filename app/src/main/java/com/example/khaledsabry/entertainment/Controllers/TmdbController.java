@@ -50,7 +50,7 @@ public class TmdbController {
      * @param movieID  the id of the tmdb
      * @param listener returns movie with the details
      */
-    public void getMovieGetDetails(int movieID, final OnMovieDataSuccess listener) {
+    public void getMovie(int movieID, final OnMovieDataSuccess listener) {
         urlAddition = "movie/" + movieID;
         String URL = makeBaseUrl(urlAddition) + "&append_to_response=credits,images,videos,reviews";
 

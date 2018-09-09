@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import com.example.khaledsabry.entertainment.Adapters.ImagesAdapter;
 import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class ImagesFragment extends Fragment {
         backDropsButton = view.findViewById(R.id.button_back_drop_id);
         optionsLayout = view.findViewById(R.id.options_quality);
 
-        controller.toast("press on the big poster\n to see it in full screen");
+        Toasts.info("press on the big poster\n to see it in full screen");
 
         setupRecyclerView();
 
