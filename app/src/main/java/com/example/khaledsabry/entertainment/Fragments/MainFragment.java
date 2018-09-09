@@ -30,6 +30,7 @@ import com.example.khaledsabry.entertainment.Controllers.PreferencesController;
 import com.example.khaledsabry.entertainment.Database.UserData;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
+import com.example.khaledsabry.entertainment.Fragments.TvView.TvNavigationFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
 
@@ -111,14 +112,15 @@ public class MainFragment extends Fragment {
 
 
                 navigationView.setCheckedItem(id);
-                drawerLayout.closeDrawer(GravityCompat.START, true);
+                Functions.closeDrawerLayout(drawerLayout);
                 return true;
 
             }
         });
 
 
-        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+        //  MainActivity.loadFragmentNoReturn(R.id.mainContainer, MainMenuFragment.newInstance());
+        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(48866, 0));
 
         return view;
     }

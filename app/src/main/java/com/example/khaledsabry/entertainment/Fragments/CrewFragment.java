@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.Adapter.CrewRecyclerAdapter;
+import com.example.khaledsabry.entertainment.Adapters.CrewRecyclerAdapter;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.R;
 

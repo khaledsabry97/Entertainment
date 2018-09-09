@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Adapter.MainRecyclersAdapter;
-import com.example.khaledsabry.entertainment.Adapter.NewsFeedAdpater;
+import com.example.khaledsabry.entertainment.Adapters.MainRecyclersAdapter;
+import com.example.khaledsabry.entertainment.Adapters.NewsFeedAdpater;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;

@@ -252,7 +252,7 @@ public class TmdbController {
      */
     public void getTv(int tvId, final OnTvSuccess listener) {
         urlAddition = "tv/" + tvId;
-        String URL = makeBaseUrl(urlAddition) + "&append_to_response=credits,images,videos,reviews";
+        String URL = makeBaseUrl(urlAddition) + "&append_to_response=credits,images,external_ids";
 
         connection.connect(URL, new OnSuccess.Json() {
             @Override

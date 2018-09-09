@@ -6,15 +6,17 @@
         android:icon="@drawable/arrowleft"
         android:title="return" />
 
+
+    <item
+        android:id="@+id/navigation_seasons"
+        android:icon="@drawable/bookopenpagevariant"
+        android:title="Seasons" />
+
     <item
         android:id="@+id/home"
         android:icon="@drawable/commentaccountoutline"
         android:title="Info" />
 
-    <item
-        android:id="@+id/seasons"
-        android:icon="@drawable/bookopenpagevariant"
-        android:title="Seasons" />
     <item
         android:id="@+id/images"
         android:icon="@drawable/images"

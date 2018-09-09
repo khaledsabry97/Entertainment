@@ -3,6 +3,7 @@ package com.example.khaledsabry.entertainment.Interfaces;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.Items.Torrent;
+import com.example.khaledsabry.entertainment.Items.Tv;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,12 @@ public interface OnWebSuccess {
     public interface OnMovie
     {
         void onSuccess(Movie movie);
+
+    }
+
+     interface OnTv
+    {
+        void onSuccess(Tv tv);
 
     }
 }

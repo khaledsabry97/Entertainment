@@ -1,9 +1,7 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -21,13 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Adapter.CategoryAdapter;
-import com.example.khaledsabry.entertainment.Adapter.TitleAdapter;
+import com.example.khaledsabry.entertainment.Adapters.CategoryAdapter;
+import com.example.khaledsabry.entertainment.Adapters.TitleAdapter;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
 
-import java.nio.InvalidMarkException;
 import java.util.ArrayList;
 
 /**

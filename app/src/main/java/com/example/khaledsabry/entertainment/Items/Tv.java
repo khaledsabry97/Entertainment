@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Tv {
     private int id;
+    private String imdbId;
     private String title;
     private String posterImage;
     private String backDrop;
@@ -20,7 +21,11 @@ public class Tv {
     private int numberOfSeasons;
     private double popularity;
     private double rateTmdb;
-private String status;
+    private String status;
+    private Float imdbRate = 0.0f;
+    private String mpaa;
+    private String rottenTomatoesRatingType;
+    private Float rottenTomatoesRate = 0.0f;
     private ArrayList<Genre> genres = new ArrayList<>();
     private ArrayList<ProductionCompany> networks = new ArrayList<>();
     private ArrayList<ProductionCompany> productionCompanies = new ArrayList<>();
@@ -31,6 +36,45 @@ private String status;
     private ArrayList<String> backdrops = new ArrayList<>();
     private ArrayList<Torrent> torrents = new ArrayList<>();
 
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    public Float getRottenTomatoesRate() {
+        return rottenTomatoesRate;
+    }
+
+    public void setRottenTomatoesRate(Float rottenTomatoesRate) {
+        this.rottenTomatoesRate = rottenTomatoesRate;
+    }
+
+    public String getRottenTomatoesRatingType() {
+        return rottenTomatoesRatingType;
+    }
+
+    public void setRottenTomatoesRatingType(String rottenTomatoesRatingType) {
+        this.rottenTomatoesRatingType = rottenTomatoesRatingType;
+    }
+
+    public String getMpaa() {
+        return mpaa;
+    }
+
+    public void setMpaa(String mpaa) {
+        this.mpaa = mpaa;
+    }
+
+    public Float getImdbRate() {
+        return imdbRate;
+    }
+
+    public void setImdbRate(Float imdbRate) {
+        this.imdbRate = imdbRate;
+    }
 
     public String getStatus() {
         return status;
@@ -220,14 +264,12 @@ private String status;
         this.reviews = reviews;
     }
 
-    public String  getGenreList()
-    {
+    public String getGenreList() {
         String s = "";
-        for(int i = 0 ;i < genres.size();i++)
-        {
-            s +=genres.get(i).getTvGenreName();
-            if(i+1 !=genres.size())
-                s+= ", ";
+        for (int i = 0; i < genres.size(); i++) {
+            s += genres.get(i).getTvGenreName();
+            if (i + 1 != genres.size())
+                s += ", ";
 
         }
         return s;
@@ -242,10 +284,9 @@ private String status;
     }
 
 
-    public String getYear()
-    {
+    public String getYear() {
         String date = firstAirDate;
-        if(date == null || date.equals(""))
+        if (date == null || date.equals(""))
             return null;
         char[] d = new char[4];
         d[0] = date.charAt(0);

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.khaledsabry.entertainment.Adapter.BoxOfficeAdapter;
+import com.example.khaledsabry.entertainment.Adapters.BoxOfficeAdapter;
 import com.example.khaledsabry.entertainment.R;
 
 

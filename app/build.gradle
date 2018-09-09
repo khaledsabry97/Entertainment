@@ -77,4 +77,7 @@ dependencies {
 
     //Youtube Custom Implementations
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:8.0.1'
+
+    implementation 'com.21buttons:bottom-navigation-view:1.0.0'
+
 }

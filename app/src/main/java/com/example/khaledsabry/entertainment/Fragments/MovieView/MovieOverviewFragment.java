@@ -4,29 +4,22 @@ package com.example.khaledsabry.entertainment.Fragments.MovieView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
-import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Fragments.CastFragment;
-import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Fragments.CrewFragment;
 import com.example.khaledsabry.entertainment.Fragments.ProductionCompanyFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
-
-import java.util.ArrayList;
 
 
 public class MovieOverviewFragment extends Fragment {
@@ -55,15 +48,15 @@ fragment.movie = movie;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_movie_overview, container, false);
-        title = view.findViewById(R.id.titleId);
-        overviewText = view.findViewById(R.id.overviewID);
+        title = view.findViewById(R.id.title_id);
+        overviewText = view.findViewById(R.id.overview_id);
         releaseDate = view.findViewById(R.id.releasetimeid);
         runTimeText = view.findViewById(R.id.timeid);
         genres = view.findViewById(R.id.genres_id);
         budget = view.findViewById(R.id.budgetid);
-        rate = view.findViewById(R.id.rateid);
+        rate = view.findViewById(R.id.rate_id);
         status = view.findViewById(R.id.statusid);
-        mpaa = view.findViewById(R.id.mpaaid);
+        mpaa = view.findViewById(R.id.mpaa_id);
         revenue = view.findViewById(R.id.revenueid);
         actorButton = view.findViewById(R.id.button_actors_id);
         crewButton = view.findViewById(R.id.button_crew_id);

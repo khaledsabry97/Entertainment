@@ -12,6 +12,7 @@ import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.News;
 import com.example.khaledsabry.entertainment.Items.Review;
 import com.example.khaledsabry.entertainment.Items.Torrent;
+import com.example.khaledsabry.entertainment.Items.Tv;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -627,6 +628,50 @@ public class WebApi {
 
     }
 
+    public void imdbTvDetails(final String imdbId, final OnWebSuccess.OnTv listener) {
+
+        AsyncTask<Void, Void, Tv> task = new AsyncTask<Void, Void, Tv>() {
+            @Override
+            protected Tv doInBackground(Void... voids) {
+                Tv tv = new Tv();
+                try {
+                    Document doc;
+                    if (imdbId == null || imdbId.isEmpty())
+                        return tv;
+                    doc = Jsoup.connect("https://www.imdb.com/title/" + imdbId).get();
+
+                    if (doc == null)
+                        return tv;
+                    Elements results = doc.getElementsByTag("script");
+                    results = doc.getElementsByAttributeValue("type", "application/ld+json");
+                    Element d = results.get(0);
+                    String stringJsonObject = d.childNode(0).toString();
+                    JSONObject jsonObject = new JSONObject(stringJsonObject);
+                    String mpaa = jsonObject.getString("contentRating");
+                    JSONObject ratings = jsonObject.getJSONObject("aggregateRating");
+                    String imdbRate = ratings.getString("ratingValue");
+
+                    tv.setImdbRate(Float.parseFloat(imdbRate));
+                    tv.setMpaa(mpaa);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+
+                }
+                return tv;
+            }
+
+            @Override
+            protected void onPostExecute(Tv tv) {
+                listener.onSuccess(tv);
+
+            }
+        };
+        task.execute();
+
+    }
+
+
     /**
      * gets the rating for a movie by searching for the name and the year
      * and comparing the results to the year and choose the right movie
@@ -672,6 +717,65 @@ public class WebApi {
                                 @Override
                                 public void run() {
                                     listener.onSuccess(movie1);
+
+                                }
+                            });
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+
+
+    }
+
+
+    /**
+     * gets the rating for a tv by searching for the name and the year
+     * and comparing the results to the year and choose the right tv
+     *
+     * @param tv    the name of the tv
+     * @param year     the year that the tv was created
+     * @param listener gets the tv back with information
+     */
+    public void rottenTomatoesTvPreview(final String tv, final String year, final OnWebSuccess.OnTv listener) {
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v2.0/search?q=" + tv, new OnSuccess.Json() {
+                    @Override
+                    public void onSuccess(JSONObject jsonObject) {
+                        final Tv tv1 = new Tv();
+                        try {
+                            JSONArray array = jsonObject.getJSONArray("tvSeries");
+                            int i = 0;
+                            while (!array.isNull(0)) {
+                                JSONObject object = array.getJSONObject(i);
+                                String ryear = String.valueOf(object.getInt("startYear"));
+                                if (year.equals(ryear))
+                                    break;
+                                else
+                                    i++;
+
+
+                            }
+                            if (array.isNull(i))
+                                return;
+                            JSONObject object = array.getJSONObject(i);
+
+                            float score = object.getInt("meterScore");
+                            String criticsRatingType = object.getString("meterClass");
+                            tv1.setRottenTomatoesRatingType(criticsRatingType);
+                            tv1.setRottenTomatoesRate(score / 10);
+                            MainActivity.getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    listener.onSuccess(tv1);
 
                                 }
                             });

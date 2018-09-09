@@ -134,8 +134,8 @@
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/white</item>
-        <item name="android:layout_marginLeft">@dimen/_3sdp</item>
-        <item name="android:layout_marginRight">@dimen/_3sdp</item>
+        <item name="android:layout_marginLeft">@dimen/_2sdp</item>
+        <item name="android:layout_marginRight">@dimen/_2sdp</item>
         <item name="android:layout_marginTop">@dimen/_1sdp</item>
         <item name="android:layout_marginBottom">@dimen/_1sdp</item>
 

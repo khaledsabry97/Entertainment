@@ -12,9 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.khaledsabry.entertainment.Adapter.MainPosterViewPager;
+import com.example.khaledsabry.entertainment.Adapters.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
-import com.example.khaledsabry.entertainment.Database.Origin.DatabaseTables;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Movie;

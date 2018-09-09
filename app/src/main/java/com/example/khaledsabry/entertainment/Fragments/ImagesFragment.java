@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-import com.example.khaledsabry.entertainment.Adapter.ImagesAdapter;
+import com.example.khaledsabry.entertainment.Adapters.ImagesAdapter;
 import com.example.khaledsabry.entertainment.Controllers.Controller;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.R;

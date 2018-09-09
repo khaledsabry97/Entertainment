@@ -1,17 +1,13 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.Adapter.YoutubeOptionAdapter;
 import com.example.khaledsabry.entertainment.R;
 
 

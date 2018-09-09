@@ -4,51 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background3"
-    tools:context="com.example.khaledsabry.entertainment.Fragments.Tv.TvContentFragment">
+    tools:context="com.example.khaledsabry.entertainment.Fragments.TvView.TvContentFragment">
 
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-        <LinearLayout
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <LinearLayout
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraint_layout_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:forceHasOverlappingRendering="true">
 
-                <FrameLayout
-                    android:id="@+id/episodesId"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="15">
+                    android:orientation="vertical">
 
-                </FrameLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                <FrameLayout
-                    android:id="@+id/previewId"
+                        <FrameLayout
+                            android:id="@+id/episodesId"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="15">
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/previewId"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/navigation_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+
+                android:background="#010025">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    tools:listitem="@layout/cardview_seasons" />
 
-                </FrameLayout>
-            </LinearLayout>
+            </android.support.design.widget.NavigationView>
 
-            <FrameLayout
-                android:id="@+id/seasonId"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                app:layout_constraintTop_toTopOf="parent">
 
-            </FrameLayout>
+        </android.support.v4.widget.DrawerLayout>
+    </RelativeLayout>
 
-        </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
 </FrameLayout>

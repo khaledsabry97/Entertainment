@@ -7,7 +7,7 @@
     android:layout_marginRight="2dp"
     android:background="@drawable/round"
     android:padding="4dp"
-    tools:context="com.example.khaledsabry.entertainment.Fragments.Tv.TvPreviewFragment">
+    tools:context="com.example.khaledsabry.entertainment.Fragments.TvView.TvPreviewFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@id/backdrop_id" />
 
         <TextView
-            android:id="@+id/rateid"
+            android:id="@+id/rate_id"
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         </android.support.v4.widget.NestedScrollView>
 
         <TextView
-            android:id="@+id/airdateid"
+            android:id="@+id/air_date_id"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"

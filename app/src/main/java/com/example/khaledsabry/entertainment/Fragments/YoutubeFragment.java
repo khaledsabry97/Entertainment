@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Adapter.YoutubeOptionAdapter;
-import com.example.khaledsabry.entertainment.Adapter.YoutubeVideoAdapter;
+import com.example.khaledsabry.entertainment.Adapters.YoutubeOptionAdapter;
+import com.example.khaledsabry.entertainment.Adapters.YoutubeVideoAdapter;
 import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -120,7 +120,7 @@ public class YoutubeFragment extends Fragment {
      * get videos for movie
      */
     private void loadMovie() {
-        tv = (Tv) item;
+        movie = (Movie) item;
         ArrayList<YoutubeController.Type> types;
         ArrayList<String> titles;
         types = new ArrayList<>();
@@ -148,7 +148,7 @@ public class YoutubeFragment extends Fragment {
     }
 
     private void loadTv() {
-        movie = (Movie) item;
+        tv = (Tv) item;
         ArrayList<YoutubeController.Type> types;
         ArrayList<String> titles;
         types = new ArrayList<>();

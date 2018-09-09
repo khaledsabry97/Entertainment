@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
-import com.example.khaledsabry.entertainment.Adapter.TorrentAdapter;
+import com.example.khaledsabry.entertainment.Adapters.TorrentAdapter;
 import com.example.khaledsabry.entertainment.Controllers.TorrentController;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
 import com.example.khaledsabry.entertainment.Items.Torrent;

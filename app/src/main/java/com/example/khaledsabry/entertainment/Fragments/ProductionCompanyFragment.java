@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.Adapter.ProductionCompanyAdapter;
+import com.example.khaledsabry.entertainment.Adapters.ProductionCompanyAdapter;
 import com.example.khaledsabry.entertainment.Items.ProductionCompany;
 import com.example.khaledsabry.entertainment.R;
 

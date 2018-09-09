@@ -95,6 +95,14 @@ public class Tmdb {
     private String episode_number = "episode_number";
     private String still_path = "still_path";
     private String movie_results = "movie_results";
+    private String external_ids="external_ids";
+    private String freebase_mid = "freebase_mid";
+    private String freebase_id = "freebase_id";
+    private String tvdb_id = "tvdb_id";
+    private String tvrage_id="tvrage_id";
+    private String facebook_id = "facebook_id";
+    private String instagram_id = "instagram_id";
+    private String twitter_id="twitter_id";
 
     //Singleton Pattern
     private static Tmdb ourInstance;
@@ -978,11 +986,15 @@ public class Tmdb {
             tv.setCrew(getCrew(credit));
             tv.setActors(getCharacters(obj));
 
-            tv.setReviews(getReviews(obj));
             tv.setPosters(getPosters(obj, new Movie()));
             tv.setSeasons(getSeasons(obj, tv.getTitle()));
             tv.setProductionCompanies(getProductionCompanies(obj));
             tv.setNetworks(getNetworks(obj));
+
+            JSONObject externalIds = obj.getJSONObject(this.external_ids);
+            tv.setImdbId(externalIds.getString(this.imdb_id));
+
+
 
         } catch (JSONException e) {
             e.printStackTrace();

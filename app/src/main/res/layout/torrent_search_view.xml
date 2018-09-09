@@ -31,12 +31,12 @@
                 android:textAlignment="center"
                 style="@style/TextCategory"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/downloadid"
+                app:layout_constraintEnd_toStartOf="@+id/download_id"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/downloadid"
+                android:id="@+id/download_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_2sdp"

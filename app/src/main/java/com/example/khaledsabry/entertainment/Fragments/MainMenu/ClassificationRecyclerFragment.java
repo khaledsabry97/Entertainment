@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.khaledsabry.entertainment.Adapter.ClassificationAdapter;
+import com.example.khaledsabry.entertainment.Adapters.ClassificationAdapter;
 import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.R;
 

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.example.khaledsabry.entertainment.Adapter.MovieRecommendationsPagerAdapter;
+import com.example.khaledsabry.entertainment.Adapters.MovieRecommendationsPagerAdapter;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.R;
 import com.github.angads25.toggle.LabeledSwitch;

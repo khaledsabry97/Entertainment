@@ -1,8 +1,10 @@
 package com.example.khaledsabry.entertainment.Controllers;
 
 import android.os.Handler;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -115,6 +117,23 @@ public class Functions {
     }
 
 
+    public static void closeDrawerLayout(final DrawerLayout drawerLayout)
+    {
+        android.os.Handler handler = new android.os.Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(drawerLayout != null)
+                {
+                    if(drawerLayout.isDrawerOpen(GravityCompat.END))
+                        drawerLayout.closeDrawer(GravityCompat.END, true);
+                    else if(drawerLayout.isDrawerOpen(GravityCompat.START))
+                        drawerLayout.closeDrawer(GravityCompat.START, true);
+                }
+            }
+        },500);
+
+    }
 
 
 }

@@ -155,7 +155,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/titleId"
+                    android:id="@+id/title_id"
                     style="@style/TextCategory"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

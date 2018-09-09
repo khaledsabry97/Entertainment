@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.khaledsabry.entertainment.Adapter.ResultSearchItemsAdapter;
+import com.example.khaledsabry.entertainment.Adapters.ResultSearchItemsAdapter;
 import com.example.khaledsabry.entertainment.Items.SearchItem;
 import com.example.khaledsabry.entertainment.R;
 

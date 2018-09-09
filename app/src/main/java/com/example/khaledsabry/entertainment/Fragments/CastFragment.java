@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.example.khaledsabry.entertainment.Items.Character;
 import com.example.khaledsabry.entertainment.R;
 
-import com.example.khaledsabry.entertainment.Adapter.CastRecyclerAdapter;
+import com.example.khaledsabry.entertainment.Adapters.CastRecyclerAdapter;
 
 import java.util.ArrayList;
 
