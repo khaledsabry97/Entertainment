@@ -1,6 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/season_episode"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.khaledsabry.entertainment.Fragments.TvView.EpisodeSeasonPreviewFragment">
@@ -39,119 +41,131 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
-
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/season_episode_half"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/poster_layout_id"
+            android:layout_toRightOf="@+id/poster_layout_id">
 
-            android:background="@drawable/blue">
-
-            <LinearLayout
-                android:id="@+id/titleoverview"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:background="@drawable/blue">
 
-
-                <include layout="@layout/view_main_title"></include>
-
-                <include
-                    android:id="@+id/overview_layout_id"
-
-                    layout="@layout/view_overview"
+                <LinearLayout
+                    android:id="@+id/titleoverview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <include layout="@layout/view_main_title"></include>
+
+                    <include
+                        android:id="@+id/overview_layout_id"
+
+                        layout="@layout/view_overview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_3sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/titleoverview"
                     android:layout_marginLeft="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_3sdp" />
+                    android:layout_marginTop="@dimen/_3sdp"
 
-            </LinearLayout>
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/titleoverview"
-                android:layout_marginLeft="@dimen/_3sdp"
-
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/name_layout_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/TextCategoryRound"
+                    <LinearLayout
+                        android:id="@+id/name_layout_id"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="Name" />
-
-                    <TextView
-                        android:id="@+id/episode_name_id"
-                        style="@style/TextNormalLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_2sdp"
                         android:layout_weight="1"
-                        tools:text="" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextCategoryRound"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Name" />
+
+                        <TextView
+                            android:id="@+id/episode_name_id"
+                            style="@style/TextNormalLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            tools:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextCategoryRound"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Air Date" />
+
+                        <TextView
+                            android:id="@+id/air_date_id"
+                            style="@style/TextNormalLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/rate_layout_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextCategoryRound"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Rate" />
+
+                        <TextView
+                            android:id="@+id/rate_id"
+                            style="@style/TextNormalLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
+                <com.felix.bottomnavygation.BottomNav
+                    android:id="@+id/bottom_navigation_id"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
 
-                    <TextView
-                        style="@style/TextCategoryRound"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="Air Date" />
+                    ></com.felix.bottomnavygation.BottomNav>
 
-                    <TextView
-                        android:id="@+id/air_date_id"
-                        style="@style/TextNormalLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+            </RelativeLayout>
+        </FrameLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/rate_layout_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/TextCategoryRound"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="Rate" />
-
-                    <TextView
-                        android:id="@+id/rate_id"
-                        style="@style/TextNormalLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
     </RelativeLayout>
 
 

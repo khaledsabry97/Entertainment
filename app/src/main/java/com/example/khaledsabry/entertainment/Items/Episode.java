@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Episode {
     private String airDate;
     private int episodeNumber;
+    private String tvTitle;
 
     private String name;
 
@@ -25,6 +26,14 @@ public class Episode {
     private ArrayList<String> videos = new ArrayList<>();
     private ArrayList<Torrent> torrents = new ArrayList<>();
 
+    public String getTvTitle() {
+
+        return tvTitle;
+    }
+
+    public void setTvTitle(String tvTitle) {
+        this.tvTitle = tvTitle;
+    }
 
     public String getAirDate() {
         return airDate;

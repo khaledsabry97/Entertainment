@@ -11,11 +11,15 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
+import com.example.khaledsabry.entertainment.Fragments.MovieView.ReviewFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
+import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
 import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
+import com.felix.bottomnavygation.BottomNav;
+import com.felix.bottomnavygation.ItemNav;
 
 
 public class EpisodeSeasonPreviewFragment extends Fragment {
@@ -36,7 +40,8 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
     View overviewLayout;
     View nameLayout;
     View rateLayout;
-
+    BottomNav bottomNav;
+     String finalSearchString="";
     public static EpisodeSeasonPreviewFragment newInstance(Tv tv, Object object) {
         EpisodeSeasonPreviewFragment fragment = new EpisodeSeasonPreviewFragment();
         fragment.tv = tv;
@@ -63,13 +68,35 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         nameLayout = view.findViewById(R.id.name_layout_id);
         rateLayout = view.findViewById(R.id.rate_layout_id);
         ratetext = view.findViewById(R.id.rate_id);
-
+bottomNav = view.findViewById(R.id.bottom_navigation_id);
 
         setObjects();
 
+setUpBottomNav();
         return view;
     }
 
+    private void setUpBottomNav()
+    {
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube,"Youtube").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.download,"Download").addColorAtive(R.color.white));
+        if(season != null)
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_home_black_24dp, "Reviews").addColorAtive(R.color.white));
+
+
+        bottomNav.setTabSelectedListener(new BottomNav.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int i) {
+                setBottomSelectedIndex(i);
+            }
+
+            @Override
+            public void onTabLongSelected(int i) {
+
+            }
+        });
+        bottomNav.build();
+    }
     private void setObjects() {
         if (object instanceof Season) {
             season = (Season) object;
@@ -132,11 +159,11 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         }
 
 
-        final String finalSearchString = searchString;
+       finalSearchString  = searchString;
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, TorrentFragment.newInstance(finalSearchString)).addToBackStack(null).commit();
+                MainActivity.loadFragmentNoReturn(R.id.season_episode, TorrentFragment.newInstance(finalSearchString));
             }
         });
 
@@ -163,5 +190,28 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         zero += number;
         return zero;
     }
+
+    public void setBottomSelectedIndex(int bottomSelectedIndex) {
+        switch (bottomSelectedIndex)
+        {
+            case 0:
+                if(season == null)
+                MainActivity.loadFragmentNoReturn(R.id.season_episode, YoutubeFragment.newInstance(object, YoutubeFragment.Type.episode));
+                else if(season !=null)
+                    MainActivity.loadFragmentNoReturn(R.id.season_episode, YoutubeFragment.newInstance(object, YoutubeFragment.Type.season));
+
+                break;
+            case 1:
+                MainActivity.loadFragmentNoReturn(R.id.season_episode,TorrentFragment.newInstance(finalSearchString));
+                break;
+            case 2:
+                MainActivity.loadFragmentNoReturn(R.id.season_episode_half, ReviewFragment.newInstance(object));
+                break;
+
+        }
+
+    }
+
+
 
 }

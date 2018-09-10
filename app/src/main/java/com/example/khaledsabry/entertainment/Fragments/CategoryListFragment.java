@@ -247,9 +247,9 @@ public class CategoryListFragment extends Fragment {
      * called from categoryController after brings back the items for
      * specific category
      *
-     * @param itemsId the ids in the database for each item
+     * @param itemsId the ids in the database for each object
      * @param tmdbIds the tmdb id for each movie,tv or artist
-     * @param types   the type of the item
+     * @param types   the type of the object
      *                1 : movie
      *                2: tv
      *                3: artist
@@ -259,7 +259,7 @@ public class CategoryListFragment extends Fragment {
         //itemsid: id for the categoryItem
         //tmdbIds: tmdb Id
         //types : movie,tv or artist
-        //categoryController: to use it later to delete a category item
+        //categoryController: to use it later to delete a category object
         adapter.clearData();
         this.itemsId = itemsId;
         this.tmdbIds = tmdbIds;
@@ -400,14 +400,14 @@ public class CategoryListFragment extends Fragment {
     }
 
     /**
-     * delete item from current category
+     * delete object from current category
      * called from the adapter
      *
-     * @param categoryItemId     the item of the category id
+     * @param categoryItemId     the object of the category id
      * @param categoryId         the category id
      * @param categoryName       the category name
-     * @param itemName           the item name
-     * @param categoryController controller to remove the item because it's a static function
+     * @param itemName           the object name
+     * @param categoryController controller to remove the object because it's a static function
      */
     public static void deleteCategoryItem(final int categoryItemId, final int categoryId, String categoryName, String itemName, final CategoryController categoryController) {
         try {
@@ -511,7 +511,7 @@ public class CategoryListFragment extends Fragment {
      * after you get the info from database then from tmdb id
      * @param object movie,tv or artist
      * @param type 1 for movie 2 for tv 3 for artist
-     * @param itemId the id for the item in the database
+     * @param itemId the id for the object in the database
      * @param position position you got it from the database
      */
     private void addToAdapter(Object object, Integer type,Integer itemId,Integer position)

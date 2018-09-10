@@ -14,8 +14,10 @@ import android.widget.ProgressBar;
 import com.example.khaledsabry.entertainment.Adapters.ReviewAdapter;
 import com.example.khaledsabry.entertainment.Connection.WebApi;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
+import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Review;
+import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -28,6 +30,8 @@ ReviewFragment extends Fragment {
 
     Object content;
     Movie movie;
+    Season season;
+    Episode episode;
     Tv tv;
 
     RecyclerView recyclerView;
@@ -57,7 +61,7 @@ ReviewFragment extends Fragment {
 
         progressBar.setIndeterminateDrawable(new Wave());
         determineTheContent();
-       setUpRecycler();
+        setUpRecycler();
         setUpTabLayout();
         return view;
     }
@@ -97,20 +101,12 @@ ReviewFragment extends Fragment {
      * if the conversion works then return if not try on tv
      */
     private void determineTheContent() {
-        try {
+        if (content instanceof Movie)
             movie = (Movie) content;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (movie != null)
-            return;
-        try {
-            tv = (Tv) content;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        else if (content instanceof Season)
+            season = (Season) content;
+        else if (content instanceof Episode)
+            episode = (Episode) content;
     }
 
 
@@ -118,20 +114,105 @@ ReviewFragment extends Fragment {
 
         if (movie != null)
             getMovieReviews(pos);
-        if(tv != null)
-            getTvReviews(pos);
+        else if (season != null)
+            getSeasonReviews(pos);
+        else if (episode != null) ;
+        getEpisodeReviews(pos);
 
     }
 
-   void setReviews(ArrayList<Review> reviews)
-   {
-       progressBar.setVisibility(View.INVISIBLE);
-       reviewAdapter.setReviews(reviews);
+    void getEpisodeReviews(int position) {
+        if (position == lastIndex)
+            return;
+        lastIndex = position;
+        reviewAdapter.setReviews(null);
+        progressBar.setVisibility(View.VISIBLE);
+        switch (position) {
+            case 0:
+                WebApi.getInstance().rottenTomatoesTvReviewsAllCritics(episode.getTvTitle(), episode.getSeasonNumber(), episode.getEpisodeNumber(), new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
+                break;
+            case 1:
+                WebApi.getInstance().rottenTomatoesTvReviewsTopCritics(episode.getTvTitle(), episode.getSeasonNumber(), episode.getEpisodeNumber(), new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
 
-   }
+            case 2:
+                WebApi.getInstance().rottenTomatoesTvReviewsFresh(episode.getTvTitle(), episode.getSeasonNumber(), episode.getEpisodeNumber(), new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
+                break;
+            case 3:
+                WebApi.getInstance().rottenTomatoesTvReviewsRotten(episode.getTvTitle(), episode.getSeasonNumber(), episode.getEpisodeNumber(), new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
+                break;
+        }
+    }
 
-    private void getTvReviews(int position) {
-        if(position == lastIndex)
+    void setReviews(ArrayList<Review> reviews) {
+        progressBar.setVisibility(View.INVISIBLE);
+        reviewAdapter.setReviews(reviews);
+
+    }
+
+    private void getSeasonReviews(int position) {
+        if (position == lastIndex)
+            return;
+        lastIndex = position;
+        reviewAdapter.setReviews(null);
+        progressBar.setVisibility(View.VISIBLE);
+        switch (position) {
+            case 0:
+                WebApi.getInstance().rottenTomatoesTvReviewsAllCritics(season.getTvTitle(), season.getSeasonNumber(), null, new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
+                break;
+            case 1:
+                WebApi.getInstance().rottenTomatoesTvReviewsTopCritics(season.getTvTitle(), season.getSeasonNumber(), null, new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
+
+            case 2:
+                WebApi.getInstance().rottenTomatoesTvReviewsFresh(season.getTvTitle(), season.getSeasonNumber(), null, new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
+                break;
+            case 3:
+                WebApi.getInstance().rottenTomatoesTvReviewsRotten(season.getTvTitle(), season.getSeasonNumber(), null, new OnWebSuccess.OnReviews() {
+                    @Override
+                    public void onSuccess(ArrayList<Review> reviews) {
+                        setReviews(reviews);
+                    }
+                });
+                break;
+        }
+    }
+
+    public void getMovieReviews(int position) {
+        if (position == lastIndex)
             return;
         lastIndex = position;
         reviewAdapter.setReviews(null);
@@ -143,62 +224,11 @@ ReviewFragment extends Fragment {
                             public void onSuccess(Movie movie1) {
                                 setReviews(movie1.getReviews());
 
-                            }
-                        }
-                );
-                break;
-            case 1:
-                WebApi.getInstance().rottenTomatoesMovieReviewsTopCritics(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
-                            @Override
-                            public void onSuccess(Movie movie1) {
-                                setReviews(movie1.getReviews());
 
                             }
                         }
                 );
                 break;
-
-            case 2:
-                WebApi.getInstance().rottenTomatoesMovieReviewsFresh(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
-                            @Override
-                            public void onSuccess(Movie movie1) {
-                                setReviews(movie1.getReviews());
-
-                            }
-                        }
-                );
-                break;
-            case 3:
-                WebApi.getInstance().rottenTomatoesMovieReviewsRotten(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
-                            @Override
-                            public void onSuccess(Movie movie1) {
-                                setReviews(movie1.getReviews());
-
-                            }
-                        }
-                );
-                break;
-        }
-    }
-
-    public void getMovieReviews(int position) {
-        if(position == lastIndex)
-            return;
-        lastIndex = position;
-        reviewAdapter.setReviews(null);
-        progressBar.setVisibility(View.VISIBLE);
-        switch (position) {
-            case 0:
-            WebApi.getInstance().rottenTomatoesMovieReviewsAllCritics(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
-                        @Override
-                        public void onSuccess(Movie movie1) {
-                            setReviews(movie1.getReviews());
-
-
-                        }
-                    }
-            );
-            break;
             case 1:
                 WebApi.getInstance().rottenTomatoesMovieReviewsTopCritics(movie.getTitle(), movie.getYear(), new OnWebSuccess.OnMovie() {
                             @Override

@@ -919,56 +919,63 @@ public class WebApi {
     }
 
 
-    private void rottenTomatoesTvReviews(final String tv, final String year, final String addition, final Integer season, final Integer episode, final OnWebSuccess.OnMovie listener) {
+    private void rottenTomatoesTvReviews(final String tv, final String addition, final Integer season, final Integer episode, final OnWebSuccess.OnReviews listener) {
 
-        ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v2.0/search?q" + tv, new OnSuccess.Json() {
+        tv.toLowerCase();
+        ApiConnections.getInstance().connect("https://www.rottentomatoes.com/api/private/v2.0/search?q=" + tv, new OnSuccess.Json() {
             @Override
             public void onSuccess(final JSONObject jsonObject) {
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        final Movie movie1 = new Movie();
+                        final ArrayList<Review> reviews = new ArrayList<>();
 
                         try {
                             JSONArray array = jsonObject.getJSONArray("tvSeries");
                             int i = 0;
                             while (!array.isNull(0)) {
                                 JSONObject object = array.getJSONObject(i);
-                                String ryear = String.valueOf(object.getInt("startYear"));
-                                if (year.equals(ryear))
                                     break;
+                            }
+                            if (array.isNull(i)) {
+                                listener.onSuccess(reviews);
+                                return;
+                            }
+                            JSONObject object = array.getJSONObject(i);
+String seasonText;
+                            if (season < 10)
+                                seasonText ="s0"+season;
+                            else
+                                seasonText ="s"+season;
+                            String tvLink = "https://www.rottentomatoes.com" + object.getString("url") + "/" + seasonText;
+                            String episodeText = "";
+                            if (episode != null)
+                            {
+                                if (episode < 10)
+                                    episodeText ="e0"+episode;
                                 else
-                                    i++;
-
+                                    episodeText ="s"+episode;
+                                tvLink += "/" + episodeText + "/";
 
                             }
-                            if (array.isNull(i))
-                                return;
-                            JSONObject object = array.getJSONObject(i);
 
-                            String movieLink = "https://www.rottentomatoes.com" + object.getString("url") + "/" + season;
-                            if (episode != null)
-                                movieLink += "/" + episode + "/";
-
-                            String reviewLink = movieLink + "reviews";
+                            String reviewLink = tvLink + "/reviews";
                             if (!addition.isEmpty())
                                 reviewLink += addition;
                             Document doc = Jsoup.connect(reviewLink).timeout(10000).get();
                             if (doc == null) {
-                                listener.onSuccess(movie1);
+                                listener.onSuccess(reviews);
                                 return;
                             }
 
-                            Elements reviews = doc.getElementsByClass("row review_table_row");
-
-                            ArrayList<Review> reviews1 = new ArrayList<>();
-                            for (int j = 0; j < reviews.size(); j++) {
+                            Elements row_review_table_row = doc.getElementsByClass("row review_table_row");
+                            for (int j = 0; j < row_review_table_row.size(); j++) {
                                 try {
 
 
-                                    Element review = reviews.get(j);
+                                    Element review = row_review_table_row.get(j);
                                     Element name = review.getElementsByClass("unstyled bold articleLink").get(0);
-                                    Element image = review.getElementsByClass("critic_thumb fullWidth").get(0);
+                                    Element image = review.getElementsByClass("critic_thumb pull-left").get(0);
                                     Elements reviewText = review.getElementsByClass("the_review");
                                     Elements date = review.getElementsByClass("review_date subtle small");
                                     Elements reviewIcons = review.getElementsByClass("col-xs-16 review_container");
@@ -996,19 +1003,17 @@ public class WebApi {
                                     review1.setContent(movieReview);
 
 
-                                    reviews1.add(review1);
+                                    reviews.add(review1);
 
                                 } catch (Exception e) {
 
                                 }
                             }
 
-                            movie1.setReviews(reviews1);
-
                             MainActivity.getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    listener.onSuccess(movie1);
+                                    listener.onSuccess(reviews);
 
                                 }
                             });
@@ -1027,22 +1032,22 @@ public class WebApi {
 
     }
 
-    public void rottenTomatoesTvReviewsAllCritics(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesTvReviews(tv, year, "",season,episode, listener);
+    public void rottenTomatoesTvReviewsAllCritics(final String tv,Integer season,Integer episode, final OnWebSuccess.OnReviews listener) {
+        rottenTomatoesTvReviews(tv, "",season,episode, listener);
     }
 
-    public void rottenTomatoesTvReviewsTopCritics(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesTvReviews(tv, year, "/?type=top_critics",season,episode, listener);
-
-    }
-
-    public void rottenTomatoesTvReviewsFresh(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesTvReviews(tv, year, "/?sort=fresh",season,episode, listener);
+    public void rottenTomatoesTvReviewsTopCritics(final String tv,Integer season,Integer episode, final OnWebSuccess.OnReviews listener) {
+        rottenTomatoesTvReviews(tv, "/?type=top_critics",season,episode, listener);
 
     }
 
-    public void rottenTomatoesTvReviewsRotten(final String tv, final String year,Integer season,Integer episode, final OnWebSuccess.OnMovie listener) {
-        rottenTomatoesTvReviews(tv, year, "/?sort=rotten",season,episode, listener);
+    public void rottenTomatoesTvReviewsFresh(final String tv,Integer season,Integer episode, final OnWebSuccess.OnReviews listener) {
+        rottenTomatoesTvReviews(tv, "/?sort=fresh",season,episode, listener);
+
+    }
+
+    public void rottenTomatoesTvReviewsRotten(final String tv,Integer season,Integer episode, final OnWebSuccess.OnReviews listener) {
+        rottenTomatoesTvReviews(tv, "/?sort=rotten",season,episode, listener);
 
     }
 

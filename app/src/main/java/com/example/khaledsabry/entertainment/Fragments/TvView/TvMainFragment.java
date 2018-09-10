@@ -35,11 +35,12 @@ public class TvMainFragment extends Fragment {
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
+    View v;
 
     CategoryController categoryController = new CategoryController();
-    public  ArrayList<String> categoryNames;
-    public  ArrayList<Integer> categoryIds;
-    public  ArrayList<Boolean> categoryChecked;
+    public ArrayList<String> categoryNames;
+    public ArrayList<Integer> categoryIds;
+    public ArrayList<Boolean> categoryChecked;
 
     public static TvMainFragment newInstance(Tv tv) {
         TvMainFragment fragment = new TvMainFragment();
@@ -63,6 +64,7 @@ public class TvMainFragment extends Fragment {
         addFavourite = view.findViewById(R.id.add_to_favourite_id);
         categoryController = new CategoryController();
         setObjects();
+        v =view;
         return view;
     }
 
@@ -102,7 +104,8 @@ public class TvMainFragment extends Fragment {
 
     void loadFragment(Fragment fragment) {
         drawerLayout.closeDrawer(GravityCompat.END, true);
-        MainActivity.loadFragmentNoReturn(R.id.half_frame_layout, fragment);
+        if (v != null)
+            MainActivity.loadFragmentNoReturn(R.id.half_frame_layout, fragment);
     }
 
     private void setUpOverviewFragment() {

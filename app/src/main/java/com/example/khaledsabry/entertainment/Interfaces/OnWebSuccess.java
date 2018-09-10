@@ -2,6 +2,7 @@ package com.example.khaledsabry.entertainment.Interfaces;
 
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.News;
+import com.example.khaledsabry.entertainment.Items.Review;
 import com.example.khaledsabry.entertainment.Items.Torrent;
 import com.example.khaledsabry.entertainment.Items.Tv;
 
@@ -41,5 +42,10 @@ public interface OnWebSuccess {
     {
         void onSuccess(Tv tv);
 
+    }
+
+    interface OnReviews
+    {
+        void onSuccess(ArrayList<Review> reviews);
     }
 }

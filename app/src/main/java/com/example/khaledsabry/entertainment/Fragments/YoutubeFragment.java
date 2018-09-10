@@ -17,6 +17,7 @@ import com.example.khaledsabry.entertainment.Adapters.YoutubeVideoAdapter;
 import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.Items.Movie;
+import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.Items.Youtube;
 import com.example.khaledsabry.entertainment.R;
@@ -28,7 +29,9 @@ public class YoutubeFragment extends Fragment {
     public enum Type {
         movie,
         tv,
-        artist
+        artist,
+        season,
+        episode
     }
 
     //open it and close it
@@ -44,7 +47,7 @@ public class YoutubeFragment extends Fragment {
     Artist artist;
 
     //movie,tv or artist object
-    Object item;
+    Object object;
 
     YoutubeOptionAdapter optionAdapter;
     WebFragment webFragment;
@@ -52,7 +55,7 @@ public class YoutubeFragment extends Fragment {
     public static YoutubeFragment newInstance(Object item, YoutubeFragment.Type type) {
         YoutubeFragment fragment = new YoutubeFragment();
         fragment.type = type;
-        fragment.item = item;
+        fragment.object = item;
         return fragment;
     }
 
@@ -83,7 +86,38 @@ public class YoutubeFragment extends Fragment {
             case tv:
                 loadTv();
                 break;
+
+            case artist:
+                break;
+            case season:
+                loadSeason();
+                break;
         }
+    }
+
+    private void loadSeason() {
+      Season  season = (Season) object;
+        ArrayList<YoutubeController.Type> types;
+        ArrayList<String> titles;
+        types = new ArrayList<>();
+        titles = new ArrayList<>();
+
+        types.add(YoutubeController.Type.trailer);
+        types.add(YoutubeController.Type.movie_review);
+        types.add(YoutubeController.Type.featurette);
+        types.add(YoutubeController.Type.behind_the_scenes);
+        types.add(YoutubeController.Type.soundtrack);
+
+
+        titles.add("Trailer");
+        titles.add("Reviews");
+        titles.add("Featurette");
+        titles.add("Behind the Scenes");
+        titles.add("SoundTrack");
+
+
+        optionAdapter = new YoutubeOptionAdapter(this,webFragment, types, titles, season.getTvTitle()+ " "+ season.getSeasonNumber(), "");
+        options.setAdapter(optionAdapter);
     }
 
 
@@ -120,7 +154,7 @@ public class YoutubeFragment extends Fragment {
      * get videos for movie
      */
     private void loadMovie() {
-        movie = (Movie) item;
+        movie = (Movie) object;
         ArrayList<YoutubeController.Type> types;
         ArrayList<String> titles;
         types = new ArrayList<>();
@@ -148,7 +182,7 @@ public class YoutubeFragment extends Fragment {
     }
 
     private void loadTv() {
-        tv = (Tv) item;
+        tv = (Tv) object;
         ArrayList<YoutubeController.Type> types;
         ArrayList<String> titles;
         types = new ArrayList<>();

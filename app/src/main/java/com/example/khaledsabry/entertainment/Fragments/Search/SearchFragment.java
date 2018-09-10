@@ -56,6 +56,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ApiConnections.getInstance().stopConnection();
+                Functions.stopConnectionsAndStartImageGlide();
                 tmdbController.search(String.valueOf(s), new OnSearchSuccess() {
                     @Override
                     public void onSuccess(ArrayList<SearchItem> searchItems) {
