@@ -38,6 +38,8 @@ public class TorrentFragment extends Fragment {
     TorrentController torrentController;
     String search = "";
 
+    TorrentAdapter torrentAdapter;
+
     public static TorrentFragment newInstance(String searchName) {
         TorrentFragment fragment = new TorrentFragment();
         TorrentFragment.searchName = searchName;
@@ -57,6 +59,7 @@ public class TorrentFragment extends Fragment {
         codec = view.findViewById(R.id.codecspinnerid);
         features = view.findViewById(R.id.featuresspinnerid);
         torrentController = new TorrentController();
+        setupRecyclerView();
 
         setResolution();
         setQuality();
@@ -68,11 +71,24 @@ public class TorrentFragment extends Fragment {
         search();
 
 
-
         return view;
     }
 
+    /**
+     * setup the recycler view to show the torrents files
+     */
+    private void setupRecyclerView() {
+        torrentAdapter = new TorrentAdapter();
+        recyclerView.setAdapter(torrentAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
+    }
+
+    /**
+     * the function that is responsible for the search to torrents
+     */
     private void search() {
         String mprovider = "";
         String mquality = "";
@@ -80,7 +96,7 @@ public class TorrentFragment extends Fragment {
         String mcodec = "";
         String mfeatures = "";
 
-        if(features.getItems().get(features.getSelectedIndex()).toString().equals("SoundTrack"))
+        if (features.getItems().get(features.getSelectedIndex()).toString().equals("SoundTrack"))
             mfeatures = " " + features.getItems().get(features.getSelectedIndex()).toString();
 
         if (!resolution.getItems().get(resolution.getSelectedIndex()).toString().equals("All"))
@@ -95,14 +111,14 @@ public class TorrentFragment extends Fragment {
         if (!provider.getItems().get(provider.getSelectedIndex()).toString().equals("All"))
             mprovider = " " + provider.getItems().get(provider.getSelectedIndex()).toString();
 
-        String searchString = searchName + mresolution + mquality + mcodec + mprovider+mfeatures;
+        String searchString = searchName + mresolution + mquality + mcodec + mprovider + mfeatures;
         if (!search.equals(searchString)) {
             search = searchString;
             torrentController.downloadSkyTorrent(search, new OnWebSuccess.OnTorrentSearch() {
                 @Override
                 public void onSuccess(ArrayList<Torrent> torrents) {
 
-                    setObjects(torrents);
+                    torrentAdapter.setTorrents(torrents);
 
                 }
             });
@@ -111,8 +127,9 @@ public class TorrentFragment extends Fragment {
     }
 
 
-
-
+    /**
+     * set the different types of codecs
+     */
     private void setCodec() {
         ArrayList<String> adapter = new ArrayList<>();
 
@@ -132,6 +149,9 @@ public class TorrentFragment extends Fragment {
         });
     }
 
+    /**
+     * set the different types of providers
+     */
     private void setProvider() {
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
@@ -156,6 +176,9 @@ public class TorrentFragment extends Fragment {
         });
     }
 
+    /**
+     * set the different types of qualities
+     */
     private void setQuality() {
         ArrayList<String> adapter = new ArrayList<>();
         adapter.add("All");
@@ -168,7 +191,6 @@ public class TorrentFragment extends Fragment {
         adapter.add("HDTV");
         adapter.add("TS");
         adapter.add("CAM");
-
 
 
         quality.setItems(adapter);
@@ -188,6 +210,9 @@ public class TorrentFragment extends Fragment {
         });
     }
 
+    /**
+     * set the differnet types of resolutions
+     */
     private void setResolution() {
 
         ArrayList<String> adapter = new ArrayList<>();
@@ -206,6 +231,9 @@ public class TorrentFragment extends Fragment {
         });
     }
 
+    /**
+     * set the different types of features
+     */
     private void setFeatures() {
         ArrayList<String> adapter = new ArrayList<>();
 
@@ -227,26 +255,17 @@ public class TorrentFragment extends Fragment {
     }
 
 
-    private void setObjects(ArrayList<Torrent> torrents) {
-        TorrentAdapter torrentAdapter = new TorrentAdapter(torrents);
-        recyclerView.setAdapter(torrentAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        linearLayoutManager.setSmoothScrollbarEnabled(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-
-    }
-
-
-    private void setCustomSearch()
-    {
+    /**
+     * @deprecated this is deprecated and only the app will decide which string will search on
+     */
+    private void setCustomSearch() {
         customSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 torrentController.downloadSkyTorrent(query, new OnWebSuccess.OnTorrentSearch() {
                     @Override
                     public void onSuccess(ArrayList<Torrent> torrents) {
-                        setObjects(torrents);
+                        torrentAdapter.setTorrents(torrents);
                     }
                 });
 
@@ -262,32 +281,31 @@ public class TorrentFragment extends Fragment {
             }
 
 
+        });
+
+    }
 
 
-    });
-
-}
-
-
-
-    private void resetResolution()
-    {
+    /**
+     * reset resolution,quality,provider,codec and features
+     */
+    private void resetResolution() {
         resolution.setSelectedIndex(0);
     }
-    private void resetQuality()
-    {
+
+    private void resetQuality() {
         quality.setSelectedIndex(0);
     }
-    private void resetProvider()
-    {
+
+    private void resetProvider() {
         provider.setSelectedIndex(0);
     }
-    private void resetCodec()
-    {
+
+    private void resetCodec() {
         codec.setSelectedIndex(0);
     }
-    private void resetFeatures()
-    {
+
+    private void resetFeatures() {
         features.setSelectedIndex(0);
     }
 }

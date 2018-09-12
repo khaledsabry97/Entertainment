@@ -29,34 +29,37 @@ import java.util.List;
  */
 
 public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.TorrentViewHolder> {
-ArrayList<Torrent> torrents = new ArrayList<>();
+    ArrayList<Torrent> torrents;
 
-    public TorrentAdapter(ArrayList<Torrent> torrents) {
+
+    public void setTorrents(ArrayList<Torrent> torrents) {
         this.torrents = torrents;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public TorrentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_torrent,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_torrent, parent, false);
 
         return new TorrentViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TorrentViewHolder holder, int position) {
-Torrent torrent = torrents.get(position);
-holder.updateUi(torrent);
+        Torrent torrent = torrents.get(position);
+        holder.updateUi(torrent);
         YoYo.with(Techniques.FadeIn).playOn(holder.itemView);
     }
 
     @Override
     public int getItemCount() {
+        if (torrents == null)
+            return 0;
         return torrents.size();
     }
 
-    class TorrentViewHolder extends RecyclerView.ViewHolder
-    {
+    class TorrentViewHolder extends RecyclerView.ViewHolder {
         Button downloadImage;
         TextView title;
         TextView seeders;
@@ -64,6 +67,7 @@ holder.updateUi(torrent);
         TextView size;
         TextView date;
         CardView cardView;
+
         public TorrentViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
@@ -77,8 +81,7 @@ holder.updateUi(torrent);
         }
 
 
-        public void updateUi(final Torrent torrent)
-        {
+        public void updateUi(final Torrent torrent) {
             title.setText(torrent.getTitle());
             seeders.setText(torrent.getSeeders());
             leechers.setText(torrent.getLeechers());
@@ -87,31 +90,45 @@ holder.updateUi(torrent);
             downloadImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-String magnet = torrent.getMagnet();
+                    String magnet = torrent.getMagnet();
 /*
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setDataAndType(Uri.parse(magnet), "application/x-bittorrent");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     MainActivity.getActivity().startActivity(intent);*/
 
-               //     Intent intent = new Intent(Intent.ACTION_ALL_APPS);
-                 //   intent.setData(Uri.parse(magnet));
-              //      MainActivity.getActivity().startActivity(intent);
+                    //     Intent intent = new Intent(Intent.ACTION_ALL_APPS);
+                    //   intent.setData(Uri.parse(magnet));
+                    //      MainActivity.getActivity().startActivity(intent);
 
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.addCategory(Intent.CATEGORY_DEFAULT);
-                    i.setType("application/x-bittorrent");
-                    i.setData(Uri.parse(torrent.getMagnet()));
-                 Intent intent =    generateTorrentIntent(MainActivity.getActivity().getApplicationContext(),i);
-
-                 MainActivity.getActivity().startActivity(Intent.createChooser(intent,"send to"));
-
+                    readyAndDownload(magnet);
                 }
             });
         }
 
+        /**
+         * set the data to be sent and send it
+         *
+         * @param magnet the magnet link for the torrent file
+         */
+        void readyAndDownload(String magnet) {
 
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.addCategory(Intent.CATEGORY_DEFAULT);
+            i.setType("application/x-bittorrent");
+            i.setData(Uri.parse(magnet));
+            Intent intent = generateTorrentIntent(MainActivity.getActivity().getApplicationContext(), i);
 
+            MainActivity.getActivity().startActivity(Intent.createChooser(intent, "send to"));
+        }
+
+        /**
+         * search for the apps that downloads the torrent magnet
+         *
+         * @param context the context of the app
+         * @param intent  the intent that specify which app we look for and send with it the data
+         * @return an intent to call it with founded apps
+         */
         public Intent generateTorrentIntent(Context context, Intent intent) {
             final PackageManager packageManager = context.getPackageManager();
             List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
@@ -119,7 +136,7 @@ String magnet = torrent.getMagnet();
             if (resolveInfo.size() > 0) {
                 List<Intent> targetedShareIntents = new ArrayList<Intent>();
                 for (ResolveInfo r : resolveInfo) {
-                    Intent progIntent = (Intent)intent.clone();
+                    Intent progIntent = (Intent) intent.clone();
                     String packageName = r.activityInfo.packageName;
 
                     progIntent.setPackage(packageName);
@@ -132,7 +149,7 @@ String magnet = torrent.getMagnet();
                             "Select app to download");
 
                     chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
-                            targetedShareIntents.toArray(new Parcelable[] {}));
+                            targetedShareIntents.toArray(new Parcelable[]{}));
 
                     return chooserIntent;
                 }

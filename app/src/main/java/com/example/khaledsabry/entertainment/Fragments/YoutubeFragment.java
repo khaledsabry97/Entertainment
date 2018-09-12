@@ -1,6 +1,7 @@
 package com.example.khaledsabry.entertainment.Fragments;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -130,6 +131,8 @@ public class YoutubeFragment extends Fragment {
         MainActivity.loadFragmentNoReturn(R.id.youtube_player_view, webFragment);
 
     }
+
+
 
     /**
      * setup the recycler view that takes the videos

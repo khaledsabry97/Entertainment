@@ -19,7 +19,7 @@
 
         <include
             android:id="@+id/searchid"
-            layout="@layout/torrent_search_view"
+            layout="@layout/fragment_torrent_search_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
