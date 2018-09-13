@@ -26,7 +26,7 @@
             android:id="@+id/bottom_navigation_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bottom_navigation_background"
+            android:background="@color/shadow"
             app:layout_constraintBottom_toBottomOf="parent" >
 
         </com.felix.bottomnavygation.BottomNav>

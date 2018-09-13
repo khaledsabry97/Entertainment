@@ -218,7 +218,7 @@ itemView.findViewById(R.id.overview_layout_id).setVisibility(View.VISIBLE);
                     else if (type == 2)
                         MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(contentId, 0));
                     else if (type == 3)
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(contentId, true));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(contentId, 0));
                 }
             });
 

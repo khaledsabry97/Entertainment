@@ -29,8 +29,6 @@ import com.luseen.luseenbottomnavigation.BottomNavigation.OnBottomNavigationItem
 
 import java.util.ArrayList;
 
-import static java.lang.Integer.valueOf;
-
 
 public class MovieNavigationFragment extends Fragment implements OnBottomNavigationItemClickListener {
 
@@ -39,7 +37,7 @@ public class MovieNavigationFragment extends Fragment implements OnBottomNavigat
     int movieId;
 
     //to set later the index of the navigation items
-     int index = -1;
+    int index = -1;
 
     //navigation item ids
     int navigationId;
@@ -60,7 +58,7 @@ public class MovieNavigationFragment extends Fragment implements OnBottomNavigat
     CategoryController categoryController = new CategoryController();
 
     //to navigate to different topics for movie
-   // BottomNavigationView bottomNavigationView;
+    // BottomNavigationView bottomNavigationView;
 
     public static MovieNavigationFragment newInstance(final int movieId, int index) {
         final MovieNavigationFragment fragment = new MovieNavigationFragment();
@@ -82,10 +80,10 @@ public class MovieNavigationFragment extends Fragment implements OnBottomNavigat
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_navigation, container, false);
-       // bottomNavigationView = view.findViewById(R.id.navigation);
+        // bottomNavigationView = view.findViewById(R.id.navigation);
         bottomNav = view.findViewById(R.id.bottom_navigation_id);
 
-setUpBottomNav();
+        setUpBottomNav();
         progressBar = view.findViewById(R.id.progress_bar_id);
         progressBar.setIndeterminateDrawable(new Wave());
         setUpBottomNavigation();
@@ -93,14 +91,13 @@ setUpBottomNav();
     }
 
 
-    private void setUpBottomNav()
-    {
+    private void setUpBottomNav() {
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_home_black_24dp, "Info").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(getContext(), R.mipmap.outline_theaters_black_18,"Similars").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.mipmap.outline_theaters_black_18, "Similars").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_favorite_black_24dp, "Recommendations").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.images,"Images").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.download,"Download").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube,"Youtube").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.images, "Images").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.download, "Download").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube, "Youtube").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube, R.drawable.download).isProfileItem().addProfileColorAtive(R.color.white).addProfileColorInative(R.color.blue));
 
 
@@ -119,8 +116,7 @@ setUpBottomNav();
         bottomNav.selectTab(index);
     }
 
-    private void set(View view)
-    {
+    private void set(View view) {
         com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView bottomNavigationView = (com.luseen.luseenbottomnavigation.BottomNavigation.BottomNavigationView) view.findViewById(R.id.bottom_navigation_id);
         BottomNavigationItem bottomNavigationItem = new BottomNavigationItem
                 ("Info", ContextCompat.getColor(getContext(), R.color.blue), R.drawable.black);
@@ -143,10 +139,11 @@ setUpBottomNav();
         bottomNavigationView.addTab(bottomNavigationItem3);
         bottomNavigationView.addTab(bottomNavigationItem4);
         bottomNavigationView.addTab(bottomNavigationItem5);
-        bottomNavigationView.setOnBottomNavigationItemClickListener( this);
+        bottomNavigationView.setOnBottomNavigationItemClickListener(this);
         bottomNavigationView.selectTab(0);
         bottomNavigationView.disableShadow();
     }
+
     /**
      * setup the settings of the navigation view
      */

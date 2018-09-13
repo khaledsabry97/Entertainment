@@ -94,7 +94,7 @@ public class ClassificationAdapter extends RecyclerView.Adapter<ClassificationAd
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(searchItem.getArtist().getId(), true));
+                        MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(searchItem.getArtist().getId(), 0));
                     }
                 });
             } else if (searchItem.getTypeString().equals("mojomovie")) {

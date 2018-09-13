@@ -863,7 +863,7 @@ public class Tmdb {
             artist.setBiography(object.getString(this.biography));
             artist.setPlaceOfBirth(object.getString(this.place_of_birth));
             artist.setImdbId(object.getString(this.imdb_id));
-
+artist.setImages(getPersonImages(object.getJSONObject(this.images)).getImages());
 
         } catch (JSONException e) {
             e.printStackTrace();

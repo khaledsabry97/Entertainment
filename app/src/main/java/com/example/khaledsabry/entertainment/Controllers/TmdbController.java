@@ -195,7 +195,7 @@ public class TmdbController {
     public void getPersonDetails(int personId, final OnArtistDataSuccess listener) {
         urlAddition = "person/" + personId;
         String URL = makeBaseUrl(urlAddition);
-
+URL +="&&append_to_response=images";
         connection.connect(URL, new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {

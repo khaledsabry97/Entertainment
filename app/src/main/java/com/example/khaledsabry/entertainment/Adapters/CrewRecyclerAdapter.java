@@ -42,7 +42,7 @@ public class CrewRecyclerAdapter extends RecyclerView.Adapter<CrewRecyclerAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(crew.getId(),true));
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(crew.getId(),0));
             }
         });
 

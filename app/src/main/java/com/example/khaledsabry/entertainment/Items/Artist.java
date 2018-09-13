@@ -239,4 +239,8 @@ public class Artist {
         return 5;
     }
 
+    public String getMovieImdbId() {
+
+        return null;
+    }
 }

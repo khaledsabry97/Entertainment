@@ -181,8 +181,10 @@ public class TvMainFragment extends Fragment {
         categoryController.addFavourite(String.valueOf(tv.getId()), null, categoryController.constants.tv, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
-                if (state)
+                if (state) {
+                    loadCategories();
                     Toasts.success(tv.getTitle() + " has been added to your favourites");
+                }
                 else
                     Toasts.error(tv.getTitle() + " has failed to be added to your favourites");
 

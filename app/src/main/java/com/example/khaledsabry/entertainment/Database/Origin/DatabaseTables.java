@@ -21,7 +21,7 @@ public class DatabaseTables {
         //for category table "content type"
         public final  int movie = 1;
         public final  int tv = 2;
-        public final  int artist = 2;
+        public final  int artist = 3;
 
         //for friend table  "type"
         public final  int friend = 1;

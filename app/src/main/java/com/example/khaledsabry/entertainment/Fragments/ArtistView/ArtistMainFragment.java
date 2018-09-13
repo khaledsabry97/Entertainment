@@ -4,15 +4,23 @@ package com.example.khaledsabry.entertainment.Fragments.ArtistView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapters.MainPosterViewPager;
+import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
+import com.example.khaledsabry.entertainment.Controllers.Toasts;
+import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.R;
 
@@ -21,25 +29,20 @@ import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator;
 
 public class ArtistMainFragment extends Fragment {
-    TextView name;
-    TextView biography;
-    TextView birhtDate;
-    TextView diedIn;
-    TextView placeOfBirth;
-    TextView profession;
+
     ViewPager viewPager;
     MainPosterViewPager mainPosterViewPager;
     CircleIndicator indicator;
-    static Artist artist;
-static int id;
-static int currentId = -1;
-static int currentImagesId =-1;
-static ArrayList<String> images = new ArrayList<>();
-TmdbController tmdbController = new TmdbController();
-    public static ArtistMainFragment newInstance(int artistId) {
+     Artist artist;
+    ImageView addToCategory, addFavourite, addWatchLater;
+    DrawerLayout drawerLayout;
+    CategoryController categoryController = new CategoryController();
+    public  ArrayList<String> categoryNames;
+    public  ArrayList<Integer> categoryIds;
+    public  ArrayList<Boolean> categoryChecked;
+    public static ArtistMainFragment newInstance(Artist artist) {
         ArtistMainFragment fragment = new ArtistMainFragment();
-        ArtistMainFragment.id = artistId;
-        Bundle args = new Bundle();
+        fragment.artist = artist;
         return fragment;
     }
 
@@ -49,68 +52,126 @@ TmdbController tmdbController = new TmdbController();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_artist_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_artist_main, container, false);
 
-        name = v.findViewById(R.id.nameid);
-        biography = v.findViewById(R.id.bigraphyid);
-        birhtDate = v.findViewById(R.id.birthdayid);
-        diedIn = v.findViewById(R.id.diedid);
-        placeOfBirth = v.findViewById(R.id.placeofbirthid);
-        viewPager = v.findViewById(R.id.view_pager_id);
-        indicator = v.findViewById(R.id.indicator);
-loadFragment();
-        return v;
+
+        viewPager = view.findViewById(R.id.view_pager_id);
+        indicator = view.findViewById(R.id.indicator);
+        addToCategory = view.findViewById(R.id.add_to_category_id);
+        drawerLayout = view.findViewById(R.id.drawer_layout);
+        addWatchLater = view.findViewById(R.id.add_to_watch_later_id);
+        addFavourite = view.findViewById(R.id.add_to_favourite_id);
+        categoryController = new CategoryController();
+setObjects();
+        return view;
     }
 
     private void setObjects() {
 
-
-        name.setText(artist.getName());
-        birhtDate.setText(artist.getBirthDay());
-        diedIn.setText(artist.getDeathDay());
-        placeOfBirth.setText(artist.getPlaceOfBirth());
-        biography.setText(artist.getBiography());
-
-        loadPosters();
-
-
+        drawerLayout.setOnDragListener(
+                new View.OnDragListener() {
+                    @Override
+                    public boolean onDrag(View v, DragEvent event) {
+                        Functions.closeDrawerLayout(drawerLayout);
+                        return false;
+                    }
+                }
+        );
+        setImages();
+setupOverViewFragment();
+        setUpCategories();
 
 
     }
 
-    private void loadPosters() {
+    private void setupOverViewFragment() {
+        loadFragment(ArtistOverviewFragment.newInstance(artist));
+    }
 
-        if(id != currentImagesId)
-        {
-            tmdbController.getPersonImages(id, new OnArtistDataSuccess() {
-                @Override
-                public void onSuccess(Artist artist) {
-                    images.clear();
-                    images.addAll(artist.getImages());
-                    currentImagesId = id;
-                    setImages();
-                }
-            });
-        }
+    private void loadFragment(Fragment fragment) {
+        MainActivity.loadFragmentNoReturn(R.id.half_frame_layout,fragment);
+    }
+    private void setUpCategories() {
+        loadCategories();
+        addToCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAddToCategory();
+            }
+        });
+
+        addFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAddFavourite();
+            }
+        });
+
+
+        addWatchLater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAddWatchLater();
+            }
+        });
+
+
+    }
+
+    private void loadCategories() {
+        categoryController.getCategories(artist.getId(), 3, new OnSuccess.objects() {
+            @Override
+            public void onSuccess(ArrayList<Object> objects) {
+                categoryIds = (ArrayList<Integer>) objects.get(0);
+                categoryNames = (ArrayList<String>) objects.get(1);
+                categoryChecked = (ArrayList<Boolean>) objects.get(2);
+            }
+        });
+    }
+
+    void setAddToCategory() {
+        if (categoryIds != null)
+            openCategoryAdd(categoryNames, categoryIds, categoryChecked);
         else
-            setImages();
+            loadCategories();
+    }
 
+    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 3, String.valueOf(artist.getId()))).commit();
+    }
+
+
+    void setAddFavourite() {
+        categoryController.addFavourite(String.valueOf(artist.getId()), artist.getMovieImdbId(), categoryController.constants.artist, new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                if (state)
+                {
+                    loadCategories();
+                    Toasts.success(artist.getName() + " has been added to your favourites");
+
+                }
+                else
+                    Toasts.error(artist.getName() + " failed to be added to your favourites");
+
+            }
+        });
+    }
+
+    void setAddWatchLater() {
 
     }
 
     private void setImages() {
-        ArrayList<String> images = new ArrayList<>();
-        images.add(artist.getPosterImage());
-        images.addAll(this.images);
-        mainPosterViewPager = new MainPosterViewPager(images);
+        mainPosterViewPager = new MainPosterViewPager(artist.getImages());
         viewPager.setAdapter(mainPosterViewPager);
         indicator.setViewPager(viewPager);
         Functions functions = new Functions();
 
-        functions.movePoster(viewPager,mainPosterViewPager,1000,2000);
+        mainPosterViewPager.movePoster(viewPager,mainPosterViewPager,3000,4000);
 
     }
-
+/*
     private void loadFragment() {
         if(id != currentId)
         {
@@ -127,6 +188,6 @@ loadFragment();
             setObjects();
 
     }
-
+*/
 
 }

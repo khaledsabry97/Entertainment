@@ -45,7 +45,7 @@ public class CastRecyclerAdapter extends RecyclerView.Adapter<CastRecyclerAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(list.get(position).getArtist().getId(),true));
+                MainActivity.loadFragmentNoReturn(R.id.mainContainer, ArtistNavigationFragment.newInstance(list.get(position).getArtist().getId(),0));
 
 
             }

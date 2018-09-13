@@ -179,8 +179,10 @@ public class MovieMainFragment extends Fragment {
         categoryController.addFavourite(String.valueOf(movie.getId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
-                if (state)
+                if (state) {
+                    loadCategories();
                     Toasts.success(movie.getTitle() + " has been added to your favourites");
+                }
                 else
                     Toasts.error(movie.getTitle() + " failed to be added to your favourites");
 
