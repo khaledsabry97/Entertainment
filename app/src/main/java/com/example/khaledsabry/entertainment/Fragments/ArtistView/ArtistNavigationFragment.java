@@ -25,7 +25,7 @@ import com.felix.bottomnavygation.ItemNav;
 import com.github.ybq.android.spinkit.style.Wave;
 
 
-public class ArtistNavigationFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
+public class ArtistNavigationFragment extends Fragment {
     ProgressBar progressBar;
 
     //to set artist id
@@ -41,6 +41,7 @@ public class ArtistNavigationFragment extends Fragment implements BottomNavigati
 
     //mainArtist get the details
     private Artist mainArtist = null;
+    private Artist artistRoles = null;
 
     //private Movie imagesMovie = null;
     // private ArrayList<Movie> recommendedMovies;
@@ -116,29 +117,6 @@ public class ArtistNavigationFragment extends Fragment implements BottomNavigati
     }
 
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Functions.stopConnectionsAndStartImageGlide();
-/*
-    ArtistNavigationFragment.id = item.getItemId();
-        if (id==backButtonid)
-            getActivity().getSupportFragmentManager().popBackStack();
-         else if (id == mainView)
-            loadFragment(ArtistMainFragment.newInstance(artistId));
-        else if (id == images)
-        loadFragment(ImagesFragment.newInstance(null, null));
-        else if (id == roles)
-           loadFragment(ArtistRolesFragment.newInstance(artistId));
-*/
-        return true;
-    }
-
-
-    @Override
-    public void onNavigationItemReselected(@NonNull MenuItem item) {
-
-    }
-
 
     /**
      * load the movie main view
@@ -165,6 +143,7 @@ public class ArtistNavigationFragment extends Fragment implements BottomNavigati
      * @param index
      */
     private void setNavigationIndex(int index) {
+        progressBar.setVisibility(View.VISIBLE);
         switch (index) {
             case 0:
                 loadArtistMainFragment();
@@ -185,35 +164,17 @@ public class ArtistNavigationFragment extends Fragment implements BottomNavigati
      * if you are already have the two lists then you will load with the third option
      */
     private void loadArtistRolesFragment() {
-        //if the recommendedMovies is null
-        //then you didn't get the movies, and same for similarmovies
-       /* if (recommendedMovies == null) {
-            tmdbController.getRecommendations(movieId, new OnMovieList() {
-                @Override
-                public void onMovieList(ArrayList<Movie> movies) {
-                    recommendedMovies = movies;
-                    if (similarMovies != null)
-                        loadFragment(MovieRecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
-                }
-            });
-        }
-        if (similarMovies == null) {
-            tmdbController.getSimilar(movieId, new OnMovieList() {
-                @Override
-                public void onMovieList(ArrayList<Movie> movies) {
-                    similarMovies = movies;
-                    if (recommendedMovies != null)
-                        loadFragment(MovieRecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
-                }
-            });
-        }
-
-
-        if (similarMovies != null && recommendedMovies != null)
-            loadFragment(MovieRecommendedAndSimilarFragment.newInstance(recommendedMovies, similarMovies));
-
-
-    }
-*/
+       if(artistRoles == null)
+       {
+           tmdbController.getPersonRoles(artistId, new OnArtistDataSuccess() {
+               @Override
+               public void onSuccess(Artist artist) {
+                   artistRoles = artist;
+                   loadFragment(ArtistRolesFragment.newInstance(artistRoles));
+               }
+           });
+       }
+       else
+           loadFragment(ArtistRolesFragment.newInstance(artistRoles));
     }
 }

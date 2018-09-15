@@ -10,16 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapters.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
-import com.example.khaledsabry.entertainment.Controllers.TmdbController;
 import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
-import com.example.khaledsabry.entertainment.Interfaces.OnArtistDataSuccess;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Artist;
 import com.example.khaledsabry.entertainment.R;
@@ -33,19 +30,19 @@ public class ArtistMainFragment extends Fragment {
     ViewPager viewPager;
     MainPosterViewPager mainPosterViewPager;
     CircleIndicator indicator;
-     Artist artist;
+    Artist artist;
     ImageView addToCategory, addFavourite, addWatchLater;
     DrawerLayout drawerLayout;
     CategoryController categoryController = new CategoryController();
-    public  ArrayList<String> categoryNames;
-    public  ArrayList<Integer> categoryIds;
-    public  ArrayList<Boolean> categoryChecked;
+    public ArrayList<String> categoryNames;
+    public ArrayList<Integer> categoryIds;
+    public ArrayList<Boolean> categoryChecked;
+
     public static ArtistMainFragment newInstance(Artist artist) {
         ArtistMainFragment fragment = new ArtistMainFragment();
         fragment.artist = artist;
         return fragment;
     }
-
 
 
     @Override
@@ -62,35 +59,41 @@ public class ArtistMainFragment extends Fragment {
         addWatchLater = view.findViewById(R.id.add_to_watch_later_id);
         addFavourite = view.findViewById(R.id.add_to_favourite_id);
         categoryController = new CategoryController();
-setObjects();
+        setObjects();
         return view;
     }
 
     private void setObjects() {
 
-        drawerLayout.setOnDragListener(
-                new View.OnDragListener() {
-                    @Override
-                    public boolean onDrag(View v, DragEvent event) {
-                        Functions.closeDrawerLayout(drawerLayout);
-                        return false;
-                    }
-                }
-        );
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         setImages();
-setupOverViewFragment();
+        setupOverViewFragment();
         setUpCategories();
 
 
     }
 
+    /**
+     * load the overvier fragment
+     */
     private void setupOverViewFragment() {
         loadFragment(ArtistOverviewFragment.newInstance(artist));
     }
 
+    /**
+     * to load fragments
+     * @param fragment fragment you want to load
+     */
     private void loadFragment(Fragment fragment) {
-        MainActivity.loadFragmentNoReturn(R.id.half_frame_layout,fragment);
+        MainActivity.loadFragmentNoReturn(R.id.half_frame_layout, fragment);
     }
+
+
+
+
+    /**
+     * setup the clicks and get categories
+     */
     private void setUpCategories() {
         loadCategories();
         addToCategory.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +121,9 @@ setupOverViewFragment();
 
     }
 
+    /**
+     * load the categories that this content subscribe to
+     */
     private void loadCategories() {
         categoryController.getCategories(artist.getId(), 3, new OnSuccess.objects() {
             @Override
@@ -129,6 +135,16 @@ setupOverViewFragment();
         });
     }
 
+
+    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 3, String.valueOf(artist.getId()))).commit();
+    }
+
+
+
+    /**
+     * add to category button
+     */
     void setAddToCategory() {
         if (categoryIds != null)
             openCategoryAdd(categoryNames, categoryIds, categoryChecked);
@@ -136,58 +152,43 @@ setupOverViewFragment();
             loadCategories();
     }
 
-    public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 3, String.valueOf(artist.getId()))).commit();
-    }
-
-
+    /**
+     * add to favourite button
+     */
     void setAddFavourite() {
         categoryController.addFavourite(String.valueOf(artist.getId()), artist.getMovieImdbId(), categoryController.constants.artist, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
-                if (state)
-                {
+                if (state) {
                     loadCategories();
                     Toasts.success(artist.getName() + " has been added to your favourites");
 
-                }
-                else
+                } else
                     Toasts.error(artist.getName() + " failed to be added to your favourites");
 
             }
         });
     }
 
+    /**
+     * add to watch later button
+     */
     void setAddWatchLater() {
 
     }
 
+
+
+    /**
+     * set images to the poster
+     */
     private void setImages() {
         mainPosterViewPager = new MainPosterViewPager(artist.getImages());
         viewPager.setAdapter(mainPosterViewPager);
         indicator.setViewPager(viewPager);
-        Functions functions = new Functions();
-
-        mainPosterViewPager.movePoster(viewPager,mainPosterViewPager,3000,4000);
+        mainPosterViewPager.movePoster(viewPager, mainPosterViewPager, 3000, 4000);
 
     }
-/*
-    private void loadFragment() {
-        if(id != currentId)
-        {
-            tmdbController.getPersonDetails(id, new OnArtistDataSuccess() {
-                @Override
-                public void onSuccess(Artist artist) {
-                    ArtistMainFragment.artist = artist;
-                    currentId = id;
-                    setObjects();
-                }
-            });
-        }
-        else
-            setObjects();
 
-    }
-*/
 
 }

@@ -27,10 +27,18 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
     ArrayList<Movie> movies;
     ArrayList<Tv> tvs;
 
-    public RoleRecyclarAdapter(int type, ArrayList<Movie> movies, ArrayList<Tv> tvs) {
+    /**
+     * set the data to recycler view and update info
+     * @param type /type = 0 --> movies          type = 1 --> tv
+     * @param movies movies list
+     * @param tvs tvs list
+     */
+    public void setdata(int type, ArrayList<Movie> movies, ArrayList<Tv> tvs) {
         this.type = type;
         this.movies = movies;
         this.tvs = tvs;
+        setFirstIndex();
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,6 +58,16 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
 
     }
 
+    /**
+     * select the first index
+     */
+    public void setFirstIndex() {
+        if (type == 0)
+            MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, MoviePreviewFragment.newInstance(movies.get(0)));
+        else
+            MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, TvPreviewFragment.newInstance(tvs.get(1)));
+
+    }
     @Override
     public int getItemCount() {
         if (type == 0)
@@ -77,7 +95,10 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
 
         }
 
-
+        /**
+         * update for movies ui
+         * @param movie movie object
+         */
         public void updateUi(final Movie movie) {
             if (movie.getReleaseDate() != null)
                 if (!movie.getReleaseDate().equals("")) {
@@ -94,11 +115,15 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.search_result_frame_id, MoviePreviewFragment.newInstance(movie)).commit();
+                    MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, MoviePreviewFragment.newInstance(movie));
                 }
             });
         }
 
+        /**
+         * update for tv ui
+         * @param tv tv object
+         */
         public void updateUi(final Tv tv) {
             if (tv.getFirstAirDate() != null)
                 if (!tv.getFirstAirDate().equals("")) {
@@ -113,10 +138,12 @@ public class RoleRecyclarAdapter extends RecyclerView.Adapter<RoleRecyclarAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.search_result_frame_id, TvPreviewFragment.newInstance(tv)).commit();
+                    MainActivity.loadFragmentNoReturn(R.id.search_result_frame_id, TvPreviewFragment.newInstance(tv));
                 }
             });
         }
+
+
 
 
     }
