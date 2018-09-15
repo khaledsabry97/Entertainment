@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment.Fragments.TvView;
+package com.example.khaledsabry.entertainment.Fragments.TvViews;
 
 
 import android.os.Bundle;
@@ -12,11 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Adapters.SeasonAdapter;
-import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
-
-import java.util.ArrayList;
 
 public class SeasonRecyclerFragment extends Fragment {
 

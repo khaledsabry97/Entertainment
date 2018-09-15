@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.khaledsabry.entertainment.Fragments.MovieView.MovieMainFragment">
+    tools:context="com.example.khaledsabry.entertainment.Fragments.MovieViews.MovieMainFragment">
 
     <include layout="@layout/view_main_navigation_fragment"></include>
 </FrameLayout>

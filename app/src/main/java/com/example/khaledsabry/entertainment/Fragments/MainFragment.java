@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -30,9 +29,9 @@ import com.example.khaledsabry.entertainment.Controllers.PreferencesController;
 import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Database.UserData;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieViews.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
-import com.example.khaledsabry.entertainment.Fragments.TvView.TvNavigationFragment;
+import com.example.khaledsabry.entertainment.Fragments.TvViews.TvNavigationFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.R;
 
@@ -122,7 +121,7 @@ public class MainFragment extends Fragment {
 
 
         //  MainActivity.loadFragmentNoReturn(R.id.mainContainer, MainMenuFragment.newInstance());
-        MainActivity.loadFragmentNoReturn(R.id.mainContainer, MovieNavigationFragment.newInstance(299536, 0));
+        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(62127, 1));
 
         return view;
     }

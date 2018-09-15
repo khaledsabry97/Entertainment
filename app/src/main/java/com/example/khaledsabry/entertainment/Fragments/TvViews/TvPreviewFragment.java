@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment.Fragments.TvView;
+package com.example.khaledsabry.entertainment.Fragments.TvViews;
 
 
 import android.os.Bundle;

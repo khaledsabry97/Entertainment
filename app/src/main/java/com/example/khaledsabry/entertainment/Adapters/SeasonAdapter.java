@@ -14,7 +14,7 @@ import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Fragments.TvView.TvContentFragment;
+import com.example.khaledsabry.entertainment.Fragments.TvViews.TvContentFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSeasonSuccess;
 import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.R;

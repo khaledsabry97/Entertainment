@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.khaledsabry.entertainment.Fragments.TvView.TvContentFragment;
+import com.example.khaledsabry.entertainment.Fragments.TvViews.TvContentFragment;
 import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.R;
 

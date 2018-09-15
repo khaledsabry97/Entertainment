@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment.Fragments.TvView;
+package com.example.khaledsabry.entertainment.Fragments.TvViews;
 
 
 import android.os.AsyncTask;
@@ -18,7 +18,6 @@ import com.example.khaledsabry.entertainment.Fragments.CastFragment;
 import com.example.khaledsabry.entertainment.Fragments.CrewFragment;
 import com.example.khaledsabry.entertainment.Fragments.ProductionCompanyFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnWebSuccess;
-import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 

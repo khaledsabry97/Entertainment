@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
 import com.example.khaledsabry.entertainment.Controllers.TmdbController;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.MovieNavigationFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieViews.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnMovieDataSuccess;
 import com.example.khaledsabry.entertainment.Items.Classification;
 import com.example.khaledsabry.entertainment.Items.Movie;
@@ -26,8 +26,8 @@ import com.example.khaledsabry.entertainment.R;
 
 public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxOfficeViewHolder> {
 
-  public   Classification classification = new Classification();
-  int size = 0;
+    public Classification classification = new Classification();
+    int size = 0;
 
     public void setData(Classification classification) {
         this.classification = classification;
@@ -37,7 +37,7 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
     public void addData(Classification classification) {
         this.classification.getSearchItems().add(classification.getSearchItems().get(0));
         this.classification.setType(classification.getType());
-       // notifyDataSetChanged();
+        // notifyDataSetChanged();
     }
 
     @NonNull
@@ -85,12 +85,12 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
             layout = itemView.findViewById(R.id.layout);
             noweeks = itemView.findViewById(R.id.weeks);
             totalrevenue = itemView.findViewById(R.id.totalrevenue);
-    //        layout.setVisibility(View.GONE);
+            //        layout.setVisibility(View.GONE);
 
         }
 
         private void updateUi(final Classification classification, final int position) {
-           // layout.setVisibility(View.GONE);
+            // layout.setVisibility(View.GONE);
 
             final SearchItem searchItem = classification.getSearchItems().get(position);
             switch (classification.getType()) {
@@ -194,16 +194,14 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
 
                     break;
                 }
-                case imdbTop250:
-                {
+                case imdbTop250: {
                     MainActivity.getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            setTop250(searchItem.getMovie(),position+1);
+                            setTop250(searchItem.getMovie(), position + 1);
 
                         }
                     });
-
 
 
                     break;
@@ -222,14 +220,12 @@ public class BoxOfficeAdapter extends RecyclerView.Adapter<BoxOfficeAdapter.BoxO
             });
         }
 
-        private void setTop250(Movie movie,int postion) {
+        private void setTop250(Movie movie, int postion) {
             layout.setVisibility(View.VISIBLE);
             title.setText(movie.getTitle());
-            rate.setText( movie.getImdbRate()+"");
-            position.setText(postion+"");
-            ImageController.putImageMidQuality(movie.getPosterImage(),poster);
-
-
+            rate.setText(movie.getImdbRate() + "");
+            position.setText(postion + "");
+            ImageController.putImageMidQuality(movie.getPosterImage(), poster);
 
 
         }

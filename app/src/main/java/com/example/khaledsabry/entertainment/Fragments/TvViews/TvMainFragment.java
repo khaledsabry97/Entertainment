@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment.Fragments.MovieView;
+package com.example.khaledsabry.entertainment.Fragments.TvViews;
 
 
 import android.os.Bundle;
@@ -9,42 +9,43 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapters.MainPosterViewPager;
 import com.example.khaledsabry.entertainment.Controllers.CategoryController;
+import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Fragments.CategoryAddFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieViews.ReviewFragment;
 import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
-import com.example.khaledsabry.entertainment.Items.Movie;
-import com.example.khaledsabry.entertainment.Activities.MainActivity;
+import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
 
+public class TvMainFragment extends Fragment {
 
-public class MovieMainFragment extends Fragment {
-
+    Tv tv;
+    ImageView addToCategory, addFavourite, addWatchLater;
+    TextView reviews, overview;
+    DrawerLayout drawerLayout;
     CircleIndicator indicator;
     ViewPager viewPager;
     MainPosterViewPager viewPagerAdapter;
-    ImageView addToCategory, addFavourite, addWatchLater;
-    Movie movie;
-    TextView reviews, overview;
-    DrawerLayout drawerLayout;
-
+    View v;
 
     CategoryController categoryController = new CategoryController();
-    public  ArrayList<String> categoryNames;
-    public  ArrayList<Integer> categoryIds;
-    public  ArrayList<Boolean> categoryChecked;
-
-    public static MovieMainFragment newInstance(Movie movie) {
-        MovieMainFragment fragment = new MovieMainFragment();
-        fragment.movie = movie;
+    public ArrayList<String> categoryNames;
+    public ArrayList<Integer> categoryIds;
+    public ArrayList<Boolean> categoryChecked;
+    public static TvMainFragment newInstance(Tv tv) {
+        TvMainFragment fragment = new TvMainFragment();
+        fragment.tv = tv;
         return fragment;
     }
 
@@ -52,7 +53,8 @@ public class MovieMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              // Inflate the layout for this fragment
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_movie_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_tv_main, container, false);
+
         viewPager = view.findViewById(R.id.view_pager_id);
         indicator = view.findViewById(R.id.indicator);
         reviews = view.findViewById(R.id.reviews_id);
@@ -62,47 +64,51 @@ public class MovieMainFragment extends Fragment {
         addWatchLater = view.findViewById(R.id.add_to_watch_later_id);
         addFavourite = view.findViewById(R.id.add_to_favourite_id);
         categoryController = new CategoryController();
+        v =view;
 
         setObjects();
         return view;
     }
 
-    /**
-     * set the main poster functionality
-     * get the categories and set it's buttons response
-     * set up the ability to get overview fragment
-     * set up the ability to get review fragment
-     * upload automatically the overview fragment
-     */
+
     private void setObjects() {
 
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         setUpViewPager();
 
         setUpCategories();
 
         setUpOverviewFragment();
-        setUpReviewsFragment();
+       // setUpReviewsFragment();
 
         loadOverviewFragment();
 
+
     }
+
+
+
 
     private void loadOverviewFragment() {
-        loadFragment(MovieOverviewFragment.newInstance(movie));
+        loadFragment(TvOverViewFragment.newInstance(tv));
     }
 
+    /**
+     * @deprecated this is not working for the tv
+     */
     private void setUpReviewsFragment() {
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(ReviewFragment.newInstance(movie));
+                loadFragment(ReviewFragment.newInstance(tv));
             }
         });
     }
 
     void loadFragment(Fragment fragment) {
-        drawerLayout.closeDrawer(GravityCompat.END, true);
-        MainActivity.loadFragmentNoReturn(R.id.half_frame_layout, fragment);
+        Functions.closeDrawerLayout(drawerLayout);
+        if (v != null)
+            MainActivity.loadFragmentNoReturn(R.id.half_frame_layout, fragment);
     }
 
     private void setUpOverviewFragment() {
@@ -142,7 +148,7 @@ public class MovieMainFragment extends Fragment {
     }
 
     private void setUpViewPager() {
-        viewPagerAdapter = new MainPosterViewPager(movie.getPosters());
+        viewPagerAdapter = new MainPosterViewPager(tv.getPosters());
         viewPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(viewPager);
 
@@ -150,9 +156,8 @@ public class MovieMainFragment extends Fragment {
 
     }
 
-
     private void loadCategories() {
-        categoryController.getCategories(movie.getId(), 1, new OnSuccess.objects() {
+        categoryController.getCategories(tv.getId(), 2, new OnSuccess.objects() {
             @Override
             public void onSuccess(ArrayList<Object> objects) {
                 categoryIds = (ArrayList<Integer>) objects.get(0);
@@ -171,20 +176,20 @@ public class MovieMainFragment extends Fragment {
     }
 
     public void openCategoryAdd(ArrayList<String> names, ArrayList<Integer> ids, ArrayList<Boolean> booleans) {
-        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 1, String.valueOf(movie.getId()))).commit();
+        MainActivity.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, CategoryAddFragment.newInstance(names, ids, booleans, 2, String.valueOf(tv.getId()))).commit();
     }
 
 
     void setAddFavourite() {
-        categoryController.addFavourite(String.valueOf(movie.getId()), movie.getMovieImdbId(), categoryController.constants.movie, new OnSuccess.bool() {
+        categoryController.addFavourite(String.valueOf(tv.getId()), null, categoryController.constants.tv, new OnSuccess.bool() {
             @Override
             public void onSuccess(boolean state) {
                 if (state) {
                     loadCategories();
-                    Toasts.success(movie.getTitle() + " has been added to your favourites");
+                    Toasts.success(tv.getTitle() + " has been added to your favourites");
                 }
                 else
-                    Toasts.error(movie.getTitle() + " failed to be added to your favourites");
+                    Toasts.error(tv.getTitle() + " has failed to be added to your favourites");
 
             }
         });
@@ -193,5 +198,6 @@ public class MovieMainFragment extends Fragment {
     void setAddWatchLater() {
 
     }
-
 }
+
+

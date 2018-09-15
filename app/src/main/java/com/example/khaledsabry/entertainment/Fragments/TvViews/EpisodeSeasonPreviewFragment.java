@@ -1,4 +1,4 @@
-package com.example.khaledsabry.entertainment.Fragments.TvView;
+package com.example.khaledsabry.entertainment.Fragments.TvViews;
 
 
 import android.os.Bundle;
@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.ReviewFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieViews.ReviewFragment;
 import com.example.khaledsabry.entertainment.Fragments.TorrentFragment;
 import com.example.khaledsabry.entertainment.Fragments.YoutubeFragment;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
@@ -41,11 +42,14 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
     View nameLayout;
     View rateLayout;
     BottomNav bottomNav;
-     String finalSearchString="";
-    public static EpisodeSeasonPreviewFragment newInstance(Tv tv, Object object) {
+    String finalSearchString = "";
+    OnSuccess.bool listener;
+
+    public static EpisodeSeasonPreviewFragment newInstance(Tv tv, Object object, OnSuccess.bool listener) {
         EpisodeSeasonPreviewFragment fragment = new EpisodeSeasonPreviewFragment();
         fragment.tv = tv;
         fragment.object = object;
+        fragment.listener = listener;
         return fragment;
     }
 
@@ -68,22 +72,21 @@ public class EpisodeSeasonPreviewFragment extends Fragment {
         nameLayout = view.findViewById(R.id.name_layout_id);
         rateLayout = view.findViewById(R.id.rate_layout_id);
         ratetext = view.findViewById(R.id.rate_id);
-bottomNav = view.findViewById(R.id.bottom_navigation_id);
+        bottomNav = view.findViewById(R.id.bottom_navigation_id);
 
         setObjects();
 
-setUpBottomNav();
+        setUpBottomNav();
         return view;
     }
 
-    private void setUpBottomNav()
-    {
-        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube,"Youtube").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.download,"Download").addColorAtive(R.color.white));
-        if(season != null)
-        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_home_black_24dp, "Reviews").addColorAtive(R.color.white));
+    private void setUpBottomNav() {
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube, "Youtube").addColorAtive(R.color.white));
+        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.download, "Download").addColorAtive(R.color.white));
 
-
+        if (season != null)
+            bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.ic_home_black_24dp, "Reviews").addColorAtive(R.color.white));
+        
         bottomNav.setTabSelectedListener(new BottomNav.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int i) {
@@ -97,6 +100,7 @@ setUpBottomNav();
         });
         bottomNav.build();
     }
+
     private void setObjects() {
         if (object instanceof Season) {
             season = (Season) object;
@@ -159,7 +163,7 @@ setUpBottomNav();
         }
 
 
-       finalSearchString  = searchString;
+        finalSearchString = searchString;
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,17 +196,19 @@ setUpBottomNav();
     }
 
     public void setBottomSelectedIndex(int bottomSelectedIndex) {
-        switch (bottomSelectedIndex)
-        {
+        listener.onSuccess(false);
+
+        switch (bottomSelectedIndex) {
             case 0:
-                if(season == null)
-                MainActivity.loadFragmentNoReturn(R.id.season_episode, YoutubeFragment.newInstance(object, YoutubeFragment.Type.episode));
-                else if(season !=null)
+                listener.onSuccess(true);
+                if (season == null)
+                    MainActivity.loadFragmentNoReturn(R.id.season_episode, YoutubeFragment.newInstance(object, YoutubeFragment.Type.episode));
+                else if (season != null)
                     MainActivity.loadFragmentNoReturn(R.id.season_episode, YoutubeFragment.newInstance(object, YoutubeFragment.Type.season));
 
                 break;
             case 1:
-                MainActivity.loadFragmentNoReturn(R.id.season_episode,TorrentFragment.newInstance(finalSearchString));
+                MainActivity.loadFragmentNoReturn(R.id.season_episode, TorrentFragment.newInstance(finalSearchString));
                 break;
             case 2:
                 MainActivity.loadFragmentNoReturn(R.id.season_episode_half, ReviewFragment.newInstance(object));
@@ -213,5 +219,9 @@ setUpBottomNav();
     }
 
 
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        listener.onSuccess(false);
+    }
 }

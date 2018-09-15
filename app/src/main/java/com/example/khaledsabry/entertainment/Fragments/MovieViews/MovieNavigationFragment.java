@@ -1,5 +1,5 @@
 
-package com.example.khaledsabry.entertainment.Fragments.MovieView;
+package com.example.khaledsabry.entertainment.Fragments.MovieViews;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

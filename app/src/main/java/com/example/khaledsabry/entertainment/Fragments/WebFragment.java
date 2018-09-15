@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -56,11 +57,6 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        onDestroy();
-    }
 
     private void setupWepView() {
         webView.setListener(MainActivity.getActivity(), this);
@@ -155,6 +151,11 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
             }
             return BitmapFactory.decodeResource(MainActivity.getActivity().getApplicationContext().getResources(), R.drawable.avengers_infinity_war_back_drop);
 
+        }
+
+        @Override
+        public void onCloseWindow(WebView window) {
+            super.onCloseWindow(window);
         }
 
         public void onHideCustomView() {

@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Controllers.ImageController;
-import com.example.khaledsabry.entertainment.Fragments.MovieView.MoviePreviewFragment;
-import com.example.khaledsabry.entertainment.Fragments.TvView.TvPreviewFragment;
+import com.example.khaledsabry.entertainment.Fragments.MovieViews.MoviePreviewFragment;
+import com.example.khaledsabry.entertainment.Fragments.TvViews.TvPreviewFragment;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;

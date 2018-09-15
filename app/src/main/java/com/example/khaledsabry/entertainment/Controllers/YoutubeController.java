@@ -14,6 +14,8 @@ import org.json.JSONObject;
 public class YoutubeController {
     public enum Type {
         movie_review,
+        season_review,
+        episode_review,
         trailer_review,
         tv_review,
         featurette,
@@ -82,21 +84,56 @@ public class YoutubeController {
     }
 
     private String getAccordingToType(String searchQuery, Type type) {
-        if (type == Type.movie_review)
-            searchQuery += " Movie Review";
-        else if (type == Type.trailer_review)
-            searchQuery += " Trailer Review";
-        else if (type == Type.trailer)
-            searchQuery += " Official Trailer";
-        else if (type == Type.featurette)
-            searchQuery += " featurette";
-        else if (type == Type.behind_the_scenes)
-            searchQuery += " Behind the Scenes";
-        else if (type == Type.soundtrack)
-            searchQuery += " SoundTrack";
-        else if (type == Type.tv_review)
-            searchQuery += " Review";
 
+        switch (type)
+        {
+            case movie_review:
+                searchQuery += " Movie Review";
+
+                break;
+
+            case tv_review:
+                searchQuery += " Review";
+
+                break;
+
+            case season_review:
+
+                break;
+
+            case episode_review:
+                searchQuery += " episode review";
+
+                break;
+
+            case trailer_review:
+
+                searchQuery += " Trailer Review";
+
+                break;
+
+            case trailer:
+                searchQuery += " Official Trailer";
+
+                break;
+
+            case featurette:
+                searchQuery += " featurette";
+
+
+                break;
+
+            case soundtrack:
+
+                searchQuery += " SoundTrack";
+
+                break;
+
+            case behind_the_scenes:
+                searchQuery += " Behind the Scenes";
+
+                break;
+        }
 
         return searchQuery;
     }

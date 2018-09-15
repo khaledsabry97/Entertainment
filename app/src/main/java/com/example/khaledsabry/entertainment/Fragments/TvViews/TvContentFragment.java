@@ -1,22 +1,20 @@
-package com.example.khaledsabry.entertainment.Fragments.TvView;
+package com.example.khaledsabry.entertainment.Fragments.TvViews;
 
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapters.SeasonAdapter;
+import com.example.khaledsabry.entertainment.Interfaces.OnSuccess;
 import com.example.khaledsabry.entertainment.Items.Episode;
-import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
 import com.example.khaledsabry.entertainment.R;
 
@@ -26,7 +24,7 @@ public class TvContentFragment extends Fragment {
 
     static Tv tv;
     RecyclerView recyclerView;
-    DrawerLayout drawerLayout;
+    static DrawerLayout drawerLayout;
 
     public static TvContentFragment newInstance(Tv tv) {
         TvContentFragment fragment = new TvContentFragment();
@@ -69,7 +67,15 @@ public class TvContentFragment extends Fragment {
 
 
     public static void loadSeasonEpisodePreviewFragment(Object object) {
-        MainActivity.loadFragmentNoReturn(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv,object));
+        MainActivity.loadFragmentNoReturn(R.id.previewId, EpisodeSeasonPreviewFragment.newInstance(tv, object, new OnSuccess.bool() {
+            @Override
+            public void onSuccess(boolean state) {
+                if(state)
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                else
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            }
+        }));
 
     }
 

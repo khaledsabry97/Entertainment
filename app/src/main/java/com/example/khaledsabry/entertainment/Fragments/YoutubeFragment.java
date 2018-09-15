@@ -17,6 +17,7 @@ import com.example.khaledsabry.entertainment.Adapters.YoutubeOptionAdapter;
 import com.example.khaledsabry.entertainment.Adapters.YoutubeVideoAdapter;
 import com.example.khaledsabry.entertainment.Controllers.YoutubeController;
 import com.example.khaledsabry.entertainment.Items.Artist;
+import com.example.khaledsabry.entertainment.Items.Episode;
 import com.example.khaledsabry.entertainment.Items.Movie;
 import com.example.khaledsabry.entertainment.Items.Season;
 import com.example.khaledsabry.entertainment.Items.Tv;
@@ -93,7 +94,42 @@ public class YoutubeFragment extends Fragment {
             case season:
                 loadSeason();
                 break;
+            case episode:
+                loadEpisode();
+                break;
         }
+    }
+
+
+    private void loadEpisode() {
+        Episode  episode = (Episode) object;
+        ArrayList<YoutubeController.Type> types;
+        ArrayList<String> titles;
+        types = new ArrayList<>();
+        titles = new ArrayList<>();
+
+        types.add(YoutubeController.Type.trailer);
+        types.add(YoutubeController.Type.episode_review);
+        types.add(YoutubeController.Type.featurette);
+        types.add(YoutubeController.Type.behind_the_scenes);
+
+
+        titles.add("Trailer");
+        titles.add("Reviews");
+        titles.add("Featurette");
+        titles.add("Behind the Scenes");
+
+        String seasons = " S";
+        if (episode.getSeasonNumber() < 10)
+            seasons += "0";
+        seasons += episode.getSeasonNumber();
+
+        String episodes = "E";
+        if (episode.getEpisodeNumber() < 10)
+            episodes += "0";
+        episodes += episode.getEpisodeNumber();
+        optionAdapter = new YoutubeOptionAdapter(this,webFragment, types, titles, episode.getTvTitle()+ seasons + episodes, "");
+        options.setAdapter(optionAdapter);
     }
 
     private void loadSeason() {
@@ -104,20 +140,22 @@ public class YoutubeFragment extends Fragment {
         titles = new ArrayList<>();
 
         types.add(YoutubeController.Type.trailer);
-        types.add(YoutubeController.Type.movie_review);
+        types.add(YoutubeController.Type.tv_review);
         types.add(YoutubeController.Type.featurette);
         types.add(YoutubeController.Type.behind_the_scenes);
-        types.add(YoutubeController.Type.soundtrack);
 
 
         titles.add("Trailer");
         titles.add("Reviews");
         titles.add("Featurette");
         titles.add("Behind the Scenes");
-        titles.add("SoundTrack");
 
+        String seasons = " S";
+        if (season.getSeasonNumber() < 10)
+            seasons += "0";
+        seasons += season.getSeasonNumber();
 
-        optionAdapter = new YoutubeOptionAdapter(this,webFragment, types, titles, season.getTvTitle()+ " "+ season.getSeasonNumber(), "");
+        optionAdapter = new YoutubeOptionAdapter(this,webFragment, types, titles, season.getTvTitle()+ seasons, "");
         options.setAdapter(optionAdapter);
     }
 
@@ -222,5 +260,12 @@ public class YoutubeFragment extends Fragment {
         videos.setAdapter(adapter);
         drawerLayout.openDrawer(GravityCompat.END, true);
 
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        webFragment.onDestroy();
     }
 }
