@@ -25,7 +25,7 @@ public class YoutubeController {
 
     }
 
-    private String url = Constants.youtubeConnectionBaseUrl;
+    private String url = Constants.youtubeConnectionSearchBaseUrl;
     private ApiConnections connection;
     private YoutubeJson youtubeJson;
 
@@ -136,5 +136,33 @@ public class YoutubeController {
         }
 
         return searchQuery;
+    }
+
+
+
+
+    public void  getLatestTrailers( final OnYoutubeSuccess listener) {
+
+        setBaseUrl(Constants.youtubeConnectionPlaylistBaseUrl);
+        addPlaylist(Constants.latestTrailersPlaylist);
+        execute(new OnSuccess.Json() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                listener.onSuccess(youtubeJson.getVideos(jsonObject));
+
+            }
+        });
+
+
+    }
+
+    private void addPlaylist(String id)
+    {
+        url += "&playlistId="+id;
+    }
+
+    private void setBaseUrl(String baseUrl)
+    {
+        url = baseUrl;
     }
 }

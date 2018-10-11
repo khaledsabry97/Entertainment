@@ -28,6 +28,7 @@ import com.example.khaledsabry.entertainment.Controllers.Functions;
 import com.example.khaledsabry.entertainment.Controllers.PreferencesController;
 import com.example.khaledsabry.entertainment.Controllers.Toasts;
 import com.example.khaledsabry.entertainment.Database.UserData;
+import com.example.khaledsabry.entertainment.Fragments.MainMenu.CustomMainMenu;
 import com.example.khaledsabry.entertainment.Fragments.MainMenu.MainMenuFragment;
 import com.example.khaledsabry.entertainment.Fragments.MovieViews.MovieNavigationFragment;
 import com.example.khaledsabry.entertainment.Fragments.Search.SearchFragment;
@@ -120,8 +121,8 @@ public class MainFragment extends Fragment {
         });
 
 
-        //  MainActivity.loadFragmentNoReturn(R.id.mainContainer, MainMenuFragment.newInstance());
-        MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(62127, 1));
+         MainActivity.loadFragmentNoReturn(R.id.mainContainer, CustomMainMenu.newInstance());
+      //  MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(62127, 1));
 
         return view;
     }

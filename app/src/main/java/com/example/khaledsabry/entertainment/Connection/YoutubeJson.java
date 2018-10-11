@@ -36,49 +36,47 @@ public class YoutubeJson {
      * @param jsonObject a json object that sent by youtubeController
      * @return returns a list of youtube videos
      */
-    public ArrayList<Youtube> getVideos(JSONObject jsonObject)
-{
-    ArrayList<Youtube> youtubes = new ArrayList<>();
-    int i = 0 ;
-    try {
-        JSONArray jsonArray = jsonObject.getJSONArray(items);
+    public ArrayList<Youtube> getVideos(JSONObject jsonObject) {
+        ArrayList<Youtube> youtubes = new ArrayList<>();
+        int i = 0;
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray(items);
 
-        while (!jsonArray.isNull(i))
-        {
-            Youtube youtube = new Youtube();
-            JSONObject object = jsonArray.getJSONObject(i);
-            JSONObject id = object.getJSONObject(this.id);
-            String videoId = id.getString(this.videoId);
-            JSONObject snippet = object.getJSONObject(this.snippet);
-            String title = snippet.getString(this.title);
-            String description = snippet.getString(this.description);
-            JSONObject thumbnail = snippet.getJSONObject(this.thumbnails);
-            JSONObject img;
-            if(thumbnail.isNull(this.maxres))
-              img = thumbnail.getJSONObject(this.high);
-            else
-                img = thumbnail.getJSONObject(this.maxres);
-          String url = img.getString(this.url);
+            while (!jsonArray.isNull(i)) {
+                Youtube youtube = new Youtube();
+                JSONObject object = jsonArray.getJSONObject(i);
+                JSONObject id = object.getJSONObject(this.id);
+                String videoId = id.getString(this.videoId);
+                JSONObject snippet = object.getJSONObject(this.snippet);
+                String title = snippet.getString(this.title);
+                String description = snippet.getString(this.description);
+                JSONObject thumbnail = snippet.getJSONObject(this.thumbnails);
+                JSONObject img;
+                if (thumbnail.isNull(this.maxres))
+                    img = thumbnail.getJSONObject(this.high);
+                else
+                    img = thumbnail.getJSONObject(this.maxres);
+                String url = img.getString(this.url);
 
 
-          youtube.setTitle(title);
-          youtube.setDescription(description);
-          youtube.setId(videoId);
-          youtube.setPosterUrl(url);
+                youtube.setTitle(title);
+                youtube.setDescription(description);
+                youtube.setId(videoId);
+                youtube.setPosterUrl(url);
 
-          youtubes.add(youtube);
-            i++;
+                if (!description.equals("This video is private."))
+                    youtubes.add(youtube);
+                i++;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
 
-
-    } catch (JSONException e) {
-        e.printStackTrace();
+        return youtubes;
     }
-
-
-    return youtubes;
-}
 
 
 }

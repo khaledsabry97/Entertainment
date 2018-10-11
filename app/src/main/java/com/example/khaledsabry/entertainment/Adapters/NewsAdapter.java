@@ -38,7 +38,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_news,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_news, parent, false);
         return new NewsViewHolder(view);
     }
 
@@ -52,13 +52,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public int getItemCount() {
-        if(news == null)
+        if (news == null)
             return 0;
         return news.size();
     }
 
-    protected class NewsViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class NewsViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private TextView content;
         private TextView time;
@@ -67,36 +66,33 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         private TextView viewSource;
         private ImageView poster;
 
-                public NewsViewHolder(View itemView) {
+        public NewsViewHolder(View itemView) {
             super(itemView);
 
 
-
             title = itemView.findViewById(R.id.title);
-                    content = itemView.findViewById(R.id.content);
-                    time = itemView.findViewById(R.id.date);
-                    source = itemView.findViewById(R.id.source);
-                    writtenBy = itemView.findViewById(R.id.genres_id);
-                    viewSource = itemView.findViewById(R.id.viewfull);
-                    poster = itemView.findViewById(R.id.poster);
+            content = itemView.findViewById(R.id.content);
+            time = itemView.findViewById(R.id.date);
+            source = itemView.findViewById(R.id.source);
+            writtenBy = itemView.findViewById(R.id.genres_id);
+            viewSource = itemView.findViewById(R.id.viewfull);
+            poster = itemView.findViewById(R.id.poster);
 
-                }
+        }
 
 
-
-        void updateUi(final News news)
-        {
+        void updateUi(final News news) {
             poster.setVisibility(View.VISIBLE);
             title.setText(news.getTitle());
             content.setText(news.getContent());
             time.setText(news.getTime());
-            source.setText(" |  "+ news.getSource());
-            writtenBy.setText(" |  "+ news.getWrittenBy());
+            source.setText(" |  " + news.getSource());
+            writtenBy.setText(" |  " + news.getWrittenBy());
             viewSource.setText("See full article at " + news.getSource());
-            if(news.getImage() == null)
+            if (news.getImage() == null)
                 poster.setVisibility(View.GONE);
             else
-            ImageController.putImageToImageView(news.getImage(),poster);
+                ImageController.putImageToImageView(news.getImage(), poster);
 
             viewSource.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,9 +100,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                     try {
                         NewsFragment.fragment.loadWebView(news.getUrl());
 
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
 
                     }
                 }

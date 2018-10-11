@@ -1172,7 +1172,7 @@ String seasonText;
                             //get the 3 chars from that index that will be the rating
                             String imdbRating = descriptionHtml.substring(imdbRatingId + 13, imdbRatingId + 16);
                             //set the rating to movie
-                            movie.setImdbRate(Float.parseFloat(imdbRating));
+                          //  movie.setImdbRate(Float.parseFloat(imdbRating));
                             //search to get all the info you want about the movie by its name and year to faster the search
                             tmdbController.getSearchOneMovie(movieName, year, new OnMovieDataSuccess() {
                                 @Override

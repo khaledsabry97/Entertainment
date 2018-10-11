@@ -16,8 +16,10 @@ public class Constants {
     private boolean isTablet = false;
     public static  final String YoutubeApiKey = "AIzaSyDyMlMX1NEZJUggZdxiFErwuocJSYm7Wp4";
     public static final String TmdbApiKey = "3628f9974c19710b3a434cf958458799";
-    public static final String youtubeConnectionBaseUrl = "https://www.googleapis.com/youtube/v3/search?key="+YoutubeApiKey+"&part=snippet";
+    public static final String youtubeConnectionSearchBaseUrl = "https://www.googleapis.com/youtube/v3/search?key="+YoutubeApiKey+"&part=snippet";
+    public static final String youtubeConnectionPlaylistBaseUrl = "https://www.googleapis.com/youtube/v3/playlistItems?key="+YoutubeApiKey+"&part=snippet";
     public static final String tmdbBaseUrl = "https://api.themoviedb.org/3/";
+    public static final String latestTrailersPlaylist = "PLScC8g4bqD47c-qHlsfhGH3j6Bg7jzFy-";
 
     public String getTmdbBaseUrl() {
         return tmdbBaseUrl;
