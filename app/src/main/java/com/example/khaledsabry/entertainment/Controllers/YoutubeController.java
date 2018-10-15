@@ -11,6 +11,10 @@ import org.json.JSONObject;
  * Created by KhALeD SaBrY on 24-Jul-18.
  */
 
+/**
+ * youtube controller class is responsible for adjusting the search and the playlist videos
+ * so you can get it and also have multiple of functions that is used to form the youtube api link
+ */
 public class YoutubeController {
     public enum Type {
         movie_review,
@@ -39,7 +43,7 @@ public class YoutubeController {
         if (num == null)
             url += String.valueOf(50);
         else
-            url += String.valueOf(50);
+            url += String.valueOf(num);
 
     }
 
@@ -67,7 +71,7 @@ public class YoutubeController {
         execute(new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                listener.onSuccess(youtubeJson.getVideos(jsonObject));
+                listener.onSuccess(youtubeJson.getSearchVideos(jsonObject));
 
             }
         });
@@ -144,11 +148,12 @@ public class YoutubeController {
     public void  getLatestTrailers( final OnYoutubeSuccess listener) {
 
         setBaseUrl(Constants.youtubeConnectionPlaylistBaseUrl);
+        addNoResults(10);
         addPlaylist(Constants.latestTrailersPlaylist);
         execute(new OnSuccess.Json() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
-                listener.onSuccess(youtubeJson.getVideos(jsonObject));
+                listener.onSuccess(youtubeJson.getPlaylistVideos(jsonObject));
 
             }
         });

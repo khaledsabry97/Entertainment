@@ -135,7 +135,7 @@ youtubeController.getLatestTrailers(new OnYoutubeSuccess() {
     private void setupViewPager() {
         mainContentAdapter = new MainContentAdapter();
         viewPager.setAdapter(mainContentAdapter);
-        mainContentAdapter.moveView(viewPager,mainContentAdapter,500,2000);
+  //      mainContentAdapter.moveView(viewPager,mainContentAdapter,500,2000);
     }
 
     private void setupmenuRecycler() {

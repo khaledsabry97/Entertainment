@@ -79,6 +79,7 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
                 }
             });
         }
+
     }
 
 
@@ -97,6 +98,8 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
     public void loadUrl(String url) {
         webView.loadUrl(url);
     }
+
+
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
@@ -182,4 +185,10 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(webView != null)
+        webView.loadUrl(null);
+    }
 }

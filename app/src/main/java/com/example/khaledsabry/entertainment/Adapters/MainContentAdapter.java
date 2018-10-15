@@ -97,11 +97,12 @@ public class MainContentAdapter extends PagerAdapter {
     }
 
     private View getViewYoutube(String object) {
+
         WebFragment webFragment = WebFragment.newInstance(WebFragment.Type.youtube);
-        webFragment.loadYoutubeVideoId(object);
+       View view = webFragment.onCreateView(LayoutInflater.from(container.getContext()),container,null);
+       webFragment.loadYoutubeVideoId(object);
 
-
-        return webFragment.getView();
+        return view;
     }
 
     private View getViewMovieNowPlaying(final Movie movie) {
