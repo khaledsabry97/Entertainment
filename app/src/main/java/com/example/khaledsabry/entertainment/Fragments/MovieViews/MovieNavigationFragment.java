@@ -98,7 +98,7 @@ public class MovieNavigationFragment extends Fragment implements OnBottomNavigat
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.images, "Images").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.download, "Download").addColorAtive(R.color.white));
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube, "Youtube").addColorAtive(R.color.white));
-        bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube, R.drawable.download).isProfileItem().addProfileColorAtive(R.color.white).addProfileColorInative(R.color.blue));
+        //bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.youtube, R.drawable.download).isProfileItem().addProfileColorAtive(R.color.white).addProfileColorInative(R.color.blue));
 
 
         bottomNav.setTabSelectedListener(new BottomNav.OnTabSelectedListener() {

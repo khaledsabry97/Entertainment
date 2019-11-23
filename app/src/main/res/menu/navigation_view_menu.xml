@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group >
+    <group>
         <item
             android:id="@+id/home"
             android:title="Home" />
 
-        <item android:id="@+id/searchid"
+        <item
+            android:id="@+id/searchid"
             android:title="Search"></item>
         <item
-android:id="@+id/category"
-            android:title="Lists"
-            ></item>
+            android:id="@+id/category"
+            android:title="Lists"></item>
 
-    </group>
-
-
-
-    <item android:title="hello">
-        <menu>
-            <item
-                android:id="@+id/b"
-                android:title="Item" />
 
             <item
                 android:id="@+id/boxofficeid"
@@ -33,10 +24,8 @@ android:id="@+id/category"
                 android:id="@+id/topgross"
                 android:title="Top Movies Earnings"></item>
             <item
-android:id="@+id/news"
-                android:title="News"
-                ></item>
+                android:id="@+id/news"
+                android:title="News"></item>
 
-        </menu>
-    </item>
+   </group>
 </menu>

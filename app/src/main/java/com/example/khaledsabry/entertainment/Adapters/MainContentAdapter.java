@@ -106,7 +106,7 @@ public class MainContentAdapter extends PagerAdapter {
     }
 
     private View getViewMovieNowPlaying(final Movie movie) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.cardview_watch_so_much, container, false);
+        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.cardview_recommendations_similar, container, false);
         ImageView backDropImage = view.findViewById(R.id.backdrop_image);
         CircleImageView posterImage = view.findViewById(R.id.poster_image);
         TextView title = view.findViewById(R.id.title);
@@ -131,7 +131,7 @@ public class MainContentAdapter extends PagerAdapter {
     }
 
     private View getViewWachSoMuch(final Movie movie) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.cardview_watch_so_much, container, false);
+        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.cardview_recommendations_similar, container, false);
         ImageView backDropImage = view.findViewById(R.id.backdrop_image);
         CircleImageView posterImage = view.findViewById(R.id.poster_image);
         TextView title = view.findViewById(R.id.title);

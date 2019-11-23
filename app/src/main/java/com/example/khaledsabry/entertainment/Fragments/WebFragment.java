@@ -57,6 +57,14 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        webFragment = this;
+        webView.resumeTimers();
+        webView.onResume();
+        setupWepView();
+    }
 
     private void setupWepView() {
         webView.setListener(MainActivity.getActivity(), this);
@@ -182,13 +190,20 @@ public class WebFragment extends Fragment implements AdvancedWebView.Listener {
             ((FrameLayout) webFragment.getActivity().getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
          //   MainActivity.getActivity().getWindow().getDecorView().setSystemUiVisibility(3846);
         }
-    }
 
+
+    }
 
     @Override
     public void onPause() {
+        webView.onPause();
+        webView.pauseTimers();
         super.onPause();
-        if(webView != null)
-        webView.loadUrl(null);
     }
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        if(webView != null)
+//        webView.loadUrl(null);
+//    }
 }

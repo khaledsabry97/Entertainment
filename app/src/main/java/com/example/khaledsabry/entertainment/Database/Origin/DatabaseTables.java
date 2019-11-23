@@ -55,10 +55,6 @@ public class DatabaseTables {
         public final  String type = "`type`";
         public final  String createdDate = "`created_date`";
 
-
-
-
-
     }
 
     public static class categoryItem

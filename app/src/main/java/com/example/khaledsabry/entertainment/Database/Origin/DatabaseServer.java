@@ -33,7 +33,7 @@ import java.util.Map;
 public class DatabaseServer {
 
     //base url to the server
-    public final String baseUrl = "https://water-gas-oil.000webhostapp.com/";
+    public final String baseUrl = "http://192.168.0.103/movita/";
     //and these are the files on the server
     private final String inserting = "inserting.php";
     private final String selecting = "selecting.php";

@@ -66,19 +66,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         objects.add(object);
         itemsId.add(itemId);
         types.add(type);
-        if(object instanceof Movie)
+        if (object instanceof Movie)
             movies.add((Movie) object);
-        else if(object instanceof Tv)
+        else if (object instanceof Tv)
             tvs.add((Tv) object);
-        else if(object instanceof Artist)
+        else if (object instanceof Artist)
             artists.add((Artist) object);
 
         notifyItemChanged(position);
     }
 
 
-    public void clearData()
-    {
+    public void clearData() {
         objects.clear();
         itemsId.clear();
         types.clear();
@@ -142,7 +141,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     class CategoryViewHolder extends RecyclerView.ViewHolder {
         TmdbController controller;
 
-        TextView title, rate, date,genres,overview;
+        TextView title, rate, date, genres, overview;
         ImageView poster;
         ImageView remove;
 
@@ -156,8 +155,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             poster = itemView.findViewById(R.id.poster);
             remove = itemView.findViewById(R.id.delete);
             genres = itemView.findViewById(R.id.genres_id);
-overview =itemView.findViewById(R.id.overview_id);
-itemView.findViewById(R.id.overview_layout_id).setVisibility(View.VISIBLE);
+            overview = itemView.findViewById(R.id.overview_id);
+            itemView.findViewById(R.id.overview_layout_id).setVisibility(View.VISIBLE);
             itemView.findViewById(R.id.weeks).setVisibility(View.GONE);
             itemView.findViewById(R.id.revenue).setVisibility(View.GONE);
             itemView.findViewById(R.id.totalrevenue).setVisibility(View.GONE);
@@ -176,21 +175,21 @@ itemView.findViewById(R.id.overview_layout_id).setVisibility(View.VISIBLE);
                     if (objects.get(postion) instanceof Movie) {
                         Movie movie = (Movie) objects.get(postion);
 
-                        setObjects(movie.getTitle(),movie.getOverView(), movie.getTmdbRate(), movie.getReleaseDate(), movie.getPosterImage(),movie.getGenreList(), categoryItemId, 1, movie.getId());
+                        setObjects(movie.getTitle(), movie.getOverView(), movie.getTmdbRate(), movie.getReleaseDate(), movie.getPosterImage(), movie.getGenreList(), categoryItemId, 1, movie.getId());
                     } else if (objects.get(postion) instanceof Tv) {
                         Tv tv = (Tv) objects.get(postion);
-                        setObjects(tv.getTitle(),tv.getOverView(), (float) tv.getRateTmdb(), tv.getFirstAirDate(), tv.getPosterImage(),tv.getGenreList(), categoryItemId, 2, tv.getId());
+                        setObjects(tv.getTitle(), tv.getOverView(), (float) tv.getRateTmdb(), tv.getFirstAirDate(), tv.getPosterImage(), tv.getGenreList(), categoryItemId, 2, tv.getId());
                     } else if (objects.get(postion) instanceof Artist) {
                         //TODO set artist
                     }
                     break;
                 case 1:
                     Movie movie = movies.get(postion);
-                    setObjects(movie.getTitle(),movie.getOverView(), movie.getTmdbRate(), movie.getReleaseDate(), movie.getPosterImage(),movie.getGenreList(), categoryItemId, 1, movie.getId());
+                    setObjects(movie.getTitle(), movie.getOverView(), movie.getTmdbRate(), movie.getReleaseDate(), movie.getPosterImage(), movie.getGenreList(), categoryItemId, 1, movie.getId());
                     break;
                 case 2:
                     Tv tv = tvs.get(postion);
-                    setObjects(tv.getTitle(),tv.getOverView(), (float) tv.getRateTmdb(), tv.getFirstAirDate(), tv.getPosterImage(),tv.getGenreList(), categoryItemId, 2, tv.getId());
+                    setObjects(tv.getTitle(), tv.getOverView(), (float) tv.getRateTmdb(), tv.getFirstAirDate(), tv.getPosterImage(), tv.getGenreList(), categoryItemId, 2, tv.getId());
                     break;
                 case 3:
                     break;
@@ -201,7 +200,7 @@ itemView.findViewById(R.id.overview_layout_id).setVisibility(View.VISIBLE);
         }
 
 
-        private void setObjects(final String title,String overview, float rate, String date, String posterUrl,String genres, final int removeItemId, final int type, final int contentId) {
+        private void setObjects(final String title, String overview, float rate, String date, String posterUrl, String genres, final int removeItemId, final int type, final int contentId) {
             this.title.setText(title);
             this.rate.setText(String.valueOf(rate));
             this.date.setText(date);

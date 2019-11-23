@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-
+            android:id="@+id/image_hover_id"
             android:background="@drawable/view_shadow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,14 +41,14 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/TextHeader"
+            style="@style/TextCategory"
             android:layout_width="0dp"
-            android:layout_height="23dp"
-android:textAlignment="textStart"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
             android:layout_marginEnd="8dp"
+            android:textSize="@dimen/_10sdp"
 
             android:layout_marginStart="8dp"
-
             app:layout_constraintBottom_toTopOf="@+id/poster_image"
             app:layout_constraintEnd_toStartOf="@+id/genres_id"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,11 +59,12 @@ android:textAlignment="textStart"
             style="@style/TextCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textSize="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginBottom="@dimen/_4sdp"
-            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_5sdp"
             app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
-
+app:layout_constraintTop_toTopOf="@id/title"
             app:layout_constraintRight_toRightOf="parent"
             tools:text="Action, Adventure, Fantasy" />
 

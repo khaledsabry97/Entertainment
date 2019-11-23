@@ -121,7 +121,7 @@ public class MainFragment extends Fragment {
         });
 
 
-         MainActivity.loadFragmentNoReturn(R.id.mainContainer, CustomMainMenu.newInstance());
+         MainActivity.loadFragmentNoReturn(R.id.mainContainer, MainMenuFragment.newInstance());
       //  MainActivity.loadFragmentNoReturn(R.id.mainContainer, TvNavigationFragment.newInstance(62127, 1));
 
         return view;

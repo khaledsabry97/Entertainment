@@ -842,7 +842,7 @@ public class WebApi {
                                     Element name = review.getElementsByClass("unstyled bold articleLink").get(0);
                                     Element image = review.getElementsByClass("critic_thumb fullWidth").get(0);
                                     Elements reviewText = review.getElementsByClass("the_review");
-                                    Elements date = review.getElementsByClass("review_date subtle small");
+                                    Elements date = review.getElementsByClass("review-date subtle small");
                                     Elements reviewIcons = review.getElementsByClass("col-xs-16 review_container");
                                     Elements reviewIconss = reviewIcons.get(0).children();
 

@@ -14,7 +14,7 @@ public class Constants {
     private int width;
     private int height;
     private boolean isTablet = false;
-    public static  final String YoutubeApiKey = "AIzaSyDyMlMX1NEZJUggZdxiFErwuocJSYm7Wp4";
+    public static  final String YoutubeApiKey = "AIzaSyDKkRa54f_6sidlzY6PSD4ySKbrH1jVfWE";
     public static final String TmdbApiKey = "3628f9974c19710b3a434cf958458799";
     public static final String youtubeConnectionSearchBaseUrl = "https://www.googleapis.com/youtube/v3/search?key="+YoutubeApiKey+"&part=snippet";
     public static final String youtubeConnectionPlaylistBaseUrl = "https://www.googleapis.com/youtube/v3/playlistItems?key="+YoutubeApiKey+"&part=snippet";

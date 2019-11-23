@@ -78,9 +78,9 @@ public class ArtistNavigationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_artist_navigation, container, false);
 
         bottomNav = view.findViewById(R.id.bottom_navigation_id);
+        progressBar = view.findViewById(R.id.progress_bar_id);
 
         setUpBottomNav();
-        progressBar = view.findViewById(R.id.progress_bar_id);
         progressBar.setIndeterminateDrawable(new Wave());
         return view;
     }
