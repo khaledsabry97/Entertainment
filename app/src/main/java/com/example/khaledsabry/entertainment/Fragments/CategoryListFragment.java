@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
 import com.example.khaledsabry.entertainment.Adapters.CategoryAdapter;
@@ -362,8 +363,10 @@ public class CategoryListFragment extends Fragment {
      * delete current category
      */
     private void deleteCategory() {
-        if(currentCategoryName.toLowerCase().equals("favourite"))
+        if(currentCategoryName.toLowerCase().equals("favourite") || currentCategoryName.toLowerCase().equals("history")) {
+            Toasts.info(currentCategoryName.toLowerCase().toString() + " can't be deleted!");
             return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         builder.setTitle("Do you want to delete this category ( " + currentCategoryName + " ) ?");

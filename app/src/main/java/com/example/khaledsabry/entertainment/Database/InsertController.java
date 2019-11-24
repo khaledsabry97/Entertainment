@@ -170,7 +170,7 @@ public class InsertController extends DatabaseController {
     //to update the database with image
     public void userUploadImage(int userId, String imageName, String image64, OnDatabaseSuccess.bool listener) {
 
-        server.uploadImage(userId, addqoutes(imageName), addqoutes(image64), listener);
+        server.uploadImage(userId, imageName, image64, listener);
 
     }
 

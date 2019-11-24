@@ -33,7 +33,7 @@ import java.util.Map;
 public class DatabaseServer {
 
     //base url to the server
-    public final String baseUrl = "http://192.168.0.103/movita/";
+    public final String baseUrl = "http://movita97.000webhostapp.com/Movita/";
     //and these are the files on the server
     private final String inserting = "inserting.php";
     private final String selecting = "selecting.php";
@@ -83,6 +83,7 @@ public class DatabaseServer {
                 20000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setShouldCache(false);
 
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
     }
@@ -121,7 +122,6 @@ public class DatabaseServer {
                 Map<String, String> params = new HashMap<>();
                 params.put("user_id", String.valueOf(userId));
                 params.put("image_base64",imageBase64);
-
                 params.put("image_name",imageName);
 
                 return params;
@@ -133,6 +133,7 @@ public class DatabaseServer {
                 600000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setShouldCache(false);
 
         Volley.newRequestQueue(MainActivity.getActivity().getApplicationContext()).add(stringRequest);
     }

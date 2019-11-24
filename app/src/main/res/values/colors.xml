@@ -10,8 +10,9 @@
     <color name="white">#ffffff</color>
     <color name="gray">#bcbcbc</color>
     <drawable name="MainBackground">@drawable/background3</drawable>
+    <drawable name="search_background">@drawable/bl</drawable>
     <drawable name="ContentTitle">@drawable/red6</drawable>
     <drawable name="poster_loading_image">@drawable/blue</drawable>
     <drawable name="bottom_navigation_background">@color/red</drawable>
-
+    <color name="navigation_drawer">#a6000000</color>
 </resources>

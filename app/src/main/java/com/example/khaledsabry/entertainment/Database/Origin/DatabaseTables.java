@@ -41,8 +41,8 @@ public class DatabaseTables {
         public final  String age = "`age`";
         public final  String phone = "`phone`";
         public final  String id = "id";
-        public final  String profileImage = "`profile_image`";
-        public final  String backdropImage = "`backdrop_image`";
+        public final  String profileImage = "profile_image";
+        public final  String backdropImage = "backdrop_image";
     }
 
     public static class category
