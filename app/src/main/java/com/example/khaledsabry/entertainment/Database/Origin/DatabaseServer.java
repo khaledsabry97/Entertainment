@@ -66,7 +66,7 @@ public class DatabaseServer {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.toString();
+                error.printStackTrace();
                 Toast.makeText(MainActivity.getActivity().getApplicationContext(),"Failed to connect to the server!",Toast.LENGTH_SHORT).show();
             }
         }) {

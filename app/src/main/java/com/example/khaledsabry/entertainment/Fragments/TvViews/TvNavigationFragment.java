@@ -123,7 +123,7 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
     }
 
     void loadFragment(Fragment fragment) {
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
 
         MainActivity.loadFragmentNoReturn(R.id.moviedetailid, fragment);
     }

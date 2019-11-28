@@ -242,7 +242,7 @@ public class MovieNavigationFragment extends Fragment implements OnBottomNavigat
      * @param fragment the fragment you want to show it
      */
     void loadFragment(Fragment fragment) {
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, fragment).commit();
     }
 

@@ -65,7 +65,7 @@ public class SignInFragment extends Fragment {
             }
         });
 
-signIn();
+//signIn();
         return view;
     }
 
@@ -76,8 +76,8 @@ signIn();
      if(!allChecked())
          return;
 */
-        username.setText("khaled");
-        password.setText("4234324");
+        //username.setText("khaled");
+        //password.setText("4234324");
      controller.signIn(username.getText().toString(), password.getText().toString(), new OnSuccess.bool() {
          @Override
          public void onSuccess(boolean state) {
