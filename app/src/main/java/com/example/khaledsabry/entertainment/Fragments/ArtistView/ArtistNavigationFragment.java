@@ -89,7 +89,7 @@ public class ArtistNavigationFragment extends Fragment {
     private void setUpBottomNav() {
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.commentaccountoutline, "Info").addColorAtive(R.color.blue));
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.bookopenpagevariant, "Roles").addColorAtive(R.color.blue));
-
+        bottomNav.bringToFront();
 
         bottomNav.setTabSelectedListener(new BottomNav.OnTabSelectedListener() {
             @Override
@@ -112,7 +112,7 @@ public class ArtistNavigationFragment extends Fragment {
      * @param fragment the fragment you want to show it
      */
     void loadFragment(Fragment fragment) {
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
         MainActivity.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moviedetailid, fragment).commit();
     }
 
@@ -143,7 +143,7 @@ public class ArtistNavigationFragment extends Fragment {
      * @param index
      */
     private void setNavigationIndex(int index) {
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         switch (index) {
             case 0:
                 loadArtistMainFragment();

@@ -87,6 +87,7 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
     private void setUpBottomNavigation() {
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         isFirstTime = true;
+        bottomNavigationView.bringToFront();
 
         setNavigationIndex(index);
         bottomNavigationView.setSelectedItemId(navigationId);
@@ -134,7 +135,7 @@ public class TvNavigationFragment extends Fragment implements BottomNavigationVi
         if (navigationId == item.getItemId() && !isFirstTime) {
             return false;
         }
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         isFirstTime = false;
         navigationId = item.getItemId();
         switch (navigationId) {
