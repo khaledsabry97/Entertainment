@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.khaledsabry.entertainment.Activities.MainActivity;
@@ -42,6 +43,7 @@ public class ArtistNavigationFragment extends Fragment {
     //mainArtist get the details
     private Artist mainArtist = null;
     private Artist artistRoles = null;
+    private Button button; //to be delete it later
 
     //private Movie imagesMovie = null;
     // private ArrayList<Movie> recommendedMovies;
@@ -79,6 +81,7 @@ public class ArtistNavigationFragment extends Fragment {
 
         bottomNav = view.findViewById(R.id.bottom_navigation_id);
         progressBar = view.findViewById(R.id.progress_bar_id);
+        button = view.findViewById(R.id.button);
 
         setUpBottomNav();
         progressBar.setIndeterminateDrawable(new Wave());
@@ -90,6 +93,14 @@ public class ArtistNavigationFragment extends Fragment {
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.commentaccountoutline, "Info").addColorAtive(R.color.blue));
         bottomNav.addItemNav(new ItemNav(getContext(), R.drawable.bookopenpagevariant, "Roles").addColorAtive(R.color.blue));
         bottomNav.bringToFront();
+        button.bringToFront();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomNav.selectTab(1);
+
+            }
+        });
 
         bottomNav.setTabSelectedListener(new BottomNav.OnTabSelectedListener() {
             @Override
