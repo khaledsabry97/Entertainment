@@ -50,7 +50,7 @@
 <command appium="true" appiumName="WaitForElementPresence(Element, Timeout)" enable="true" name="WaitForElement(Zone, Element, Index, Timeout)">
 <parameters>
 <parameter appium="false" defaultValue="NATIVE" description="Select Zone" name="Zone" pattern="(.+)" type="zone"/>
-<parameter appium="true" defaultValue="xpath=//*[@text='Search']" description="Select Element to Wait For" name="Element" pattern="(.+)" type="string"/>
+<parameter appium="true" defaultValue="xpath=//*[@text='Box Office']" description="Select Element to Wait For" name="Element" pattern="(.+)" type="string"/>
 <parameter appium="false" defaultValue="0" description="Element Order" name="Index" pattern="(\d+)" type="integer"/>
 <parameter appium="true" defaultValue="30000" description="Waiting Timeout in MiliSec" name="Timeout" pattern="(\d+)" type="integer"/>
 </parameters>
@@ -58,49 +58,34 @@
 <command appium="true" appiumName="FindElement and Click(Element)" enable="true" name="Click(Zone, Element, Index, ClickCount)">
 <parameters>
 <parameter appium="false" defaultValue="NATIVE" description="Select Zone" name="Zone" pattern="(.+)" type="zone"/>
-<parameter appium="true" defaultValue="xpath=//*[@text='Search']" description="Select Element" name="Element" pattern="(.+)" type="string"/>
+<parameter appium="true" defaultValue="xpath=//*[@text='Lists']" description="Select Element" name="Element" pattern="(.+)" type="string"/>
 <parameter appium="false" defaultValue="0" description="Element Order" name="Index" pattern="(\d+)" type="integer"/>
 <parameter appium="false" defaultValue="1" description="Number of Clicks" name="Click Count" pattern="(\d+)" type="integer"/>
 </parameters>
 </command>
-<command appium="true" appiumName="WaitForElementPresence(Element, Timeout)" enable="true" name="WaitForElement(Zone, Element, Index, Timeout)">
+<command appium="true" appiumName="Swipe(startx, starty, endx, endy, time)" enable="true" name="DragCoordinates(X1, Y1, X2, Y2, Time)">
 <parameters>
-<parameter appium="false" defaultValue="NATIVE" description="Select Zone" name="Zone" pattern="(.+)" type="zone"/>
-<parameter appium="true" defaultValue="xpath=//*[@text='Search']" description="Select Element to Wait For" name="Element" pattern="(.+)" type="string"/>
-<parameter appium="false" defaultValue="0" description="Element Order" name="Index" pattern="(\d+)" type="integer"/>
-<parameter appium="true" defaultValue="30000" description="Waiting Timeout in MiliSec" name="Timeout" pattern="(\d+)" type="integer"/>
-</parameters>
-</command>
-<command appium="true" appiumName="FindElement and SendKeys(Element, Text)" enable="true" name="ElementSendText(Zone, Element, Index, Text)">
-<parameters>
-<parameter appium="false" defaultValue="NATIVE" description="Select Zone" name="Zone" pattern="(.+)" type="zone_no_ocr"/>
-<parameter appium="true" defaultValue="xpath=//*[@hint='type movie, tv series or artist name....']" description="Select Element" name="Element" pattern="(.+)" type="string"/>
-<parameter appium="false" defaultValue="0" description="Element index" name="Index" pattern="(\d+)" type="integer"/>
-<parameter appium="true" defaultValue="Game Of Thrones" description="Text to Send" name="Text" pattern="(.*)" type="string"/>
+<parameter appium="true" defaultValue="1902" description="First point X" name="X1" pattern="" type="integer"/>
+<parameter appium="true" defaultValue="531" description="First point Y" name="Y1" pattern="" type="integer"/>
+<parameter appium="true" defaultValue="477" description="Second point X" name="X2" pattern="" type="integer"/>
+<parameter appium="true" defaultValue="562" description="Second point Y" name="Y2" pattern="" type="integer"/>
+<parameter appium="true" defaultValue="1608" description="Drag time (ms)" name="time" pattern="" type="integer"/>
 </parameters>
 </command>
 <command appium="true" appiumName="WaitForElementPresence(Element, Timeout)" enable="true" name="WaitForElement(Zone, Element, Index, Timeout)">
 <parameters>
 <parameter appium="false" defaultValue="NATIVE" description="Select Zone" name="Zone" pattern="(.+)" type="zone"/>
-<parameter appium="true" defaultValue="xpath=//*[@text='Game Of Thrones']" description="Select Element to Wait For" name="Element" pattern="(.+)" type="string"/>
+<parameter appium="true" defaultValue="xpath=//*[@text='Favourite']" description="Select Element to Wait For" name="Element" pattern="(.+)" type="string"/>
 <parameter appium="false" defaultValue="0" description="Element Order" name="Index" pattern="(\d+)" type="integer"/>
-<parameter appium="true" defaultValue="30000" description="Waiting Timeout in MiliSec" name="Timeout" pattern="(\d+)" type="integer"/>
+<parameter appium="true" defaultValue="3000" description="Waiting Timeout in MiliSec" name="Timeout" pattern="(\d+)" type="integer"/>
 </parameters>
 </command>
 <command appium="true" appiumName="FindElement and Click(Element)" enable="true" name="Click(Zone, Element, Index, ClickCount)">
 <parameters>
 <parameter appium="false" defaultValue="NATIVE" description="Select Zone" name="Zone" pattern="(.+)" type="zone"/>
-<parameter appium="true" defaultValue="xpath=//*[@id='title_id']" description="Select Element" name="Element" pattern="(.+)" type="string"/>
+<parameter appium="true" defaultValue="xpath=//*[@text='Favourite']" description="Select Element" name="Element" pattern="(.+)" type="string"/>
 <parameter appium="false" defaultValue="0" description="Element Order" name="Index" pattern="(\d+)" type="integer"/>
 <parameter appium="false" defaultValue="1" description="Number of Clicks" name="Click Count" pattern="(\d+)" type="integer"/>
-</parameters>
-</command>
-<command appium="true" appiumName="WaitForElementPresence(Element, Timeout)" enable="true" name="WaitForElement(Zone, Element, Index, Timeout)">
-<parameters>
-<parameter appium="false" defaultValue="NATIVE" description="Select Zone" name="Zone" pattern="(.+)" type="zone"/>
-<parameter appium="true" defaultValue="xpath=//*[@text='Game of Thrones']" description="Select Element to Wait For" name="Element" pattern="(.+)" type="string"/>
-<parameter appium="false" defaultValue="0" description="Element Order" name="Index" pattern="(\d+)" type="integer"/>
-<parameter appium="true" defaultValue="30000" description="Waiting Timeout in MiliSec" name="Timeout" pattern="(\d+)" type="integer"/>
 </parameters>
 </command>
 </commands>
